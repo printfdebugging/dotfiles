@@ -1,7 +1,7 @@
 - name: write git config file to .gitconfig
   copy:
     content: "{{ git_config_file }}"
-    dest: "{{ lookup('env', 'HOME') }}/.gitconfig"
+    dest: "/home/{{ ansible_user }}/.gitconfig"
     group: "{{ ansible_user }}"
     owner: "{{ ansible_user }}"
     mode: "0644"
