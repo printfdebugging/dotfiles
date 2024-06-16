@@ -1,0 +1,23 @@
+- name: install xorg-server and surrounding packages
+  community.general.pacman:
+    name:
+      - xorg-server
+      - xorg-xinit
+      - xorg-xrandr
+      - xorg-setxkbmap
+      - xorg-xset
+
+      - xcompmgr
+      - xwallpaper
+      - xclip
+      - xsel
+    state: latest
+
+- name: copy .xinitrc file
+  tags: ["xorg", "files"]
+  ansible.builtin.copy:
+    src: .xinitrc
+    dest: /home/{{ ansible_user }}/.xinitrc
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0644

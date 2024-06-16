@@ -1,0 +1,738 @@
+#+TITLE: Emacs Configuration
+#+AUTHOR: Printf Debugging
+
+* GENERAL EMACS
+** HIDE "*" FOR HEADINGS
+
+#+BEGIN_SRC emacs-lisp
+(defun me-org-mode-remove-stars ()
+  (font-lock-add-keywords
+   nil
+   '(("^\\*+ "
+      (0
+       (prog1 nil
+         (put-text-property (match-beginning 0) (match-end 0)
+                            'invisible t)))))))
+
+(add-hook 'org-mode-hook #'me-org-mode-remove-stars)
+#+END_SRC
+
+** EVIL MODE
+
+#+begin_src emacs-lisp
+(use-package evil
+  :ensure t
+  :config
+  (evil-set-undo-system 'undo-redo)
+  :init
+  (evil-mode 1)
+  ) 
+(setq-default fill-column 90)
+#+end_src
+
+** DOOM THEMES
+
+#+BEGIN_SRC emacs-lisp
+;; (use-package doom-themes
+;;   :ensure t
+;;   :config
+;;   ;; Global settings (defaults)
+;;   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+;;         doom-themes-enable-italic t) ; if nil, italics is universally disabled
+;;   (load-theme 'doom-palenight t)
+
+;;   ;; Enable flashing mode-line on errors
+;;   (doom-themes-visual-bell-config)
+;;   ;; Enable custom neotree theme (all-the-icons must be installed!)
+;;   ;; (doom-themes-neotree-config)
+;;   ;; or for treemacs users
+;;   ;; (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
+;;   ;; (doom-themes-treemacs-config)
+;;   ;; Corrects (and improves) org-mode's native fontification.
+;;   (doom-themes-org-config))
+(use-package catppuccin-theme
+  :ensure t)
+(setq catppuccin-flavor 'frappe) ;; or 'latte, 'macchiato, or 'mocha
+(catppuccin-set-color 'base "#000104") ;; change base to #000000 for the currently active flavor
+(catppuccin-set-color 'crust "#222222" 'frappe) ;; change crust to #222222 for frappe
+(add-hook 'server-after-make-frame-hook #'catppuccin-reload)
+(catppuccin-reload)
+#+END_SRC
+
+** DOOM MODELINE
+
+#+begin_src emacs-lisp
+(use-package doom-modeline
+  :ensure t
+  :hook (after-init . doom-modeline-mode))
+    (setq doom-modeline-height 35)
+    ;; (setq my/default-modeline-active "#181818")
+    ;; (setq my/default-modeline-inactive "#000404")
+;;    (set-face-attribute 'mode-line-inactive nil :font "JetBrainsMono Nerd Font" :height 127 :background my/default-modeline-inactive)
+ ;;   (set-face-attribute 'mode-line-active nil :font "JetBrainsMono Nerd Font" :height 127 :background  my/default-modeline-active)
+
+(use-package nerd-icons
+  :ensure t)
+#+end_src
+
+** HIDE SOURCE BLOCK MARKERS
+
+#+BEGIN_SRC emacs-lisp
+(add-hook 'org-mode-hook
+          '(lambda ()
+             (set-face-attribute 'org-block nil 
+                                 :inherit 'default
+                                 :foreground nil
+                                 :inherit 'fixed-pitch
+                                 :background "#232635")
+             (set-face-attribute 'org-block-begin-line nil
+                                 :inherit 'default
+                                 :foreground "#232635"
+                                 :inherit 'fixed-pitch
+                                 :background "#232635")
+             (set-face-attribute 'org-block-end-line nil
+                                 :foreground "#232635"
+                                 :inherit 'fixed-pitch
+                                 :background "#232635")))
+#+END_SRC
+
+** UI ENHANCEMENTS
+
+#+begin_src emacs-lisp
+(setq scroll-conservatively 100)
+(setq ring-bell-function 'ignore)
+(when window-system (global-hl-line-mode t))
+(when window-system (global-prettify-symbols-mode t))
+(tool-bar-mode -1)
+(menu-bar-mode -1)
+(scroll-bar-mode -1)
+(setq-default mode-line-format nil)
+;; (setq initial-scratch-message "")
+(setq inhibit-startup-message t)
+(setq standard-indent 2)
+(global-hl-line-mode -1)
+(setq minibuffer-eldoc-mode nil)
+(fringe-mode 2)
+(setq inhibit-startup-message t)
+
+(set-face-background 'vertical-border "#44423A")
+(set-face-foreground 'vertical-border (face-background 'vertical-border))
+
+(defun display-startup-echo-area-message ()
+  (message ""))
+
+
+
+(defun efs/relative-line-numbers ()
+  (setq
+   display-line-numbers-type                 'visual
+   display-line-numbers-current-absolute     t
+   display-line-numbers-widen                nil
+   display-line-numbers-width                4
+   org-image-actual-width                    nil
+   org-image-actual-width                    (list 650))
+  (org-babel-result-hide-all)
+  (display-line-numbers-mode))
+
+;; (defun my-function-before-entering-buffer ()
+;;   "Your custom function to be executed before entering each new buffer."
+;;   (efs/relative-line-numbers))
+
+;; (add-hook 'find-file-hook 'my-function-before-entering-buffer)
+;; (add-hook 'switch-to-buffer-hook 'my-function-before-entering-buffer)
+
+(add-hook 'org-mode-hook (lambda () (variable-pitch-mode)))
+(add-hook 'prog-mode-hook (lambda () (efs/relative-line-numbers)))
+;; (add-hook 'org-mode-hook (lambda () (efs/relative-line-numbers)))
+;; (add-hook 'text-mode-hook (lambda () (efs/relative-line-numbers)))
+(setq make-backup-files nil) ; stop creating ~ files
+#+end_src
+
+** ORG APPEAR
+
+#+BEGIN_SRC emacs-lisp
+(use-package org-appear
+  :ensure t
+  :config
+  (setq org-hide-emphasis-markers t))
+#+END_SRC
+
+** VISUAL FILL COLUMN
+
+#+BEGIN_SRC emacs-lisp
+(use-package visual-fill-column
+  :ensure t)
+;; Configure fill width
+
+(defun my/org-present-start ()
+  ;; Center the presentation and wrap lines
+(setq visual-fill-column-width 110
+  visual-fill-column-center-text t)
+  (visual-fill-column-mode 1)
+  (visual-line-mode 1))
+
+;; Register hooks with org-present
+(add-hook 'org-mode-hook 'my/org-present-start)
+(add-hook 'eww-mode-hook 'my/org-present-start)
+#+END_SRC
+
+** FONT CONFIGURATION
+
+#+begin_src emacs-lisp
+(set-face-attribute 'variable-pitch nil :family "JetBrainsMono Nerd Font" :height 145 :weight 'Regular)
+(set-face-attribute 'default nil :family "JetBrainsMono Nerd Font" :height 145 :weight 'Regular)
+(set-face-attribute 'fixed-pitch nil :family "JetBrainsMono Nerd Font" :height 145 :weight 'Regular)
+
+(setq my/variable-width-font "Iosevka Aile")
+(dolist (face '((org-level-1 . 1.3)
+                (org-level-2 . 1.2)
+                (org-level-3 . 1.2)
+                (org-level-4 . 1.0)
+                (org-level-5 . 1.0)
+                (org-level-6 . 1.0)
+                (org-level-7 . 1.0)
+                (org-level-8 . 1.0)))
+  (set-face-attribute (car face) nil :font my/variable-width-font :weight 'medium :height (cdr face)))
+
+;; Make the document title a bit bigger
+(set-face-attribute 'org-document-title nil :font my/variable-width-font :weight 'bold :height 1.4)
+
+;; Make sure certain org faces use the fixed-pitch face when variable-pitch-mode is on
+(set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
+(set-face-attribute 'org-table nil :inherit 'fixed-pitch)
+(set-face-attribute 'org-formula nil :inherit 'fixed-pitch)
+(set-face-attribute 'org-code nil :inherit '(shadow fixed-pitch))
+(set-face-attribute 'org-verbatim nil :inherit '(shadow variable-pitch) :foreground "#A8DAB5" :background "#232635")
+(set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
+(set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+(set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)
+(set-face-attribute 'org-level-1 nil :foreground "#fab387" :weight 'Bold)
+(set-face-attribute 'org-level-2 nil :foreground "#7F669D" :weight 'Bold)
+(set-face-attribute 'org-level-4 nil :weight 'Bold)
+(set-face-attribute 'org-level-3 nil :weight 'Bold :font "JetBrainsMono Nerd Font" :height 145)
+(set-face-attribute 'org-link nil :underline nil :foreground "#7DBBF7" :weight 'medium :height 1.0) 
+#+end_src
+
+** KEYBINDINGS
+
+#+begin_src emacs-lisp
+
+(defun efs/split-vertically()
+  (interactive)
+  (select-window (split-window-vertically)))
+
+(defun efs/split-horizontally()
+  (interactive)
+  (select-window (split-window-horizontally)))
+
+(defun efs/toggle-vterm ()
+  "Toggle the visibility of the *vterm* buffer."
+  (interactive)
+  (if (get-buffer-window "*vterm*")
+      ;; If *vterm* buffer is already visible, delete its window
+      (delete-window (get-buffer-window "*vterm*"))
+    ;; Otherwise, show *vterm* buffer in a new window
+    (select-window (split-window-vertically -14))
+    (vterm)
+    (text-scale-set 0.3)))
+
+(use-package evil-leader
+  :ensure t
+  :config
+  (global-evil-leader-mode)
+  (evil-leader/set-leader "<SPC>")
+  (evil-leader/set-key
+   "w" 'save-buffer
+   "W" 'evil-write-all
+   "mm" 'bookmark-set
+   "." 'find-file
+   "q" 'evil-quit
+   "ot" 'org-roam-buffer-toggle
+   "oo" 'org-open-at-point-global
+   "x" 'org-babel-execute-src-block
+   "t" 'execute-current-file-program
+   "r" 'org-babel-remove-result
+   "bk" 'kill-buffer
+
+   ;; Git-Gutter keybindings
+   "gn" 'git-gutter:next-hunk
+   "gp" 'git-gutter:previous-hunk
+   "gx" 'git-gutter:revert-hunk
+   "gt" 'git-gutter:popup-diff
+
+   "ff" 'consult-find
+   "fs" 'consult-grep
+
+   "ls" 'switch-to-buffer
+   "mf" 'make-frame
+   "ub" 'eww-back-url
+   "un" 'eww-next-url
+   "be" 'sudo-edit
+   "of" 'org-roam-node-find
+   "oi" 'org-roam-node-insert
+   "or" 'org-babel-remove-result-one-or-many
+   "sh" (lambda () (interactive) (efs/split-vertically))
+   "sv" (lambda () (interactive) (efs/split-horizontally))
+   "z" (lambda () (interactive) (efs/toggle-vterm))
+   ;; "sh" 'evil-window-split
+   ;; "sv" 'evil-window-vsplit
+   "e" 'treemacs
+   "1" (lambda () (interactive) (jump-to-nth-bookmark 1))
+   "2" (lambda () (interactive) (jump-to-nth-bookmark 2))
+   "3" (lambda () (interactive) (jump-to-nth-bookmark 3))
+   "4" (lambda () (interactive) (jump-to-nth-bookmark 4))
+   "5" (lambda () (interactive) (jump-to-nth-bookmark 5)))
+  )
+
+(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+(add-hook 'org-mode-hook (lambda ()
+                           (evil-define-key 'normal org-mode-map (kbd "TAB") 'org-cycle)))
+(setq-default tab-width 4)
+(add-hook 'evil-insert-state-entry-hook
+          (lambda ()
+            (define-key evil-insert-state-map (kbd "TAB") 'tab-to-tab-stop)))
+
+(evil-define-key 'normal global-map (kbd "C-h") 'evil-window-left)
+(evil-define-key 'normal global-map (kbd "C-j") 'evil-window-down)
+(evil-define-key 'normal global-map (kbd "C-k") 'evil-window-up)
+(evil-define-key 'normal global-map (kbd "C-l") 'evil-window-right)
+#+end_src
+
+#+RESULTS:
+#
+** ORG ROAM (wiki)
+
+#+begin_src emacs-lisp
+(use-package org-roam
+  :ensure t
+  :init
+    (setq org-roam-v2-ack t)
+  :custom
+    (org-roam-directory "~/repos/github/files/RoamNotes")
+    (org-roam-completion-everywhere t)
+  :config
+    (org-roam-db-autosync-mode))
+(setq org-hide-block-startup t
+      org-startup-folded "fold")
+#+end_src
+
+When the cursor is on an org-roam link, and enter is pressed, then it should open the link's buffer. Kinda similar
+to how webbrowser replaces the current webpage with a new webpage, when some hyperlink is clicked. This would
+be my first professional emacs-lisp function.
+
+#+BEGIN_SRC  emacs-lisp
+
+#+END_SRC
+
+** EVIL COMMENTRY (comment with gc)
+
+#+begin_src emacs-lisp
+(use-package evil-commentary
+  :ensure t
+  :config
+  (evil-commentary-mode))
+(define-key evil-visual-state-map "gc" 'evil-commentary)
+#+end_src
+
+** AUTOPAIR
+
+#+begin_src emacs-lisp
+(electric-pair-mode 1)
+(setq auto-save-default nil)
+#+end_src
+
+** LIGATURES
+
+#+BEGIN_SRC emacs-lisp
+;; This assumes you've installed the package via MELPA.
+(use-package ligature
+  :ensure t
+  :config
+  ;; Enable the "www" ligature in every possible major mode
+  (ligature-set-ligatures 't '("www"))
+  ;; Enable traditional ligature support in eww-mode, if the
+  ;; `variable-pitch' face supports it
+  (ligature-set-ligatures 'eww-mode '("ff" "fi" "ffi"))
+  ;; Enable all Cascadia Code ligatures in programming modes
+  (ligature-set-ligatures 't         '("|||>" "<|||" "<==>" "<!--" "####" "~~>" "***" "||=" "||>"
+                                       ":::" "::=" "=:=" "===" "==>" "=!=" "=>>" "=<<" "=/=" "!=="
+                                       "!!." ">=>" ">>=" ">>>" ">>-" ">->" "->>" "-->" "---" "-<<"
+                                       "<~~" "<~>" "<*>" "<||" "<|>" "<$>" "<==" "<=>" "<=<" "<->"
+                                       "<--" "<-<" "<<=" "<<-" "<<<" "<+>" "</>" "###" "#_(" "..<"
+                                       "..." "+++" "/==" "///" "_|_" "www" "&&" "^=" "~~" "~@" "~="
+                                       "~>" "~-" "**" "*>" "*/" "||" "|}" "|]" "|=" "|>" "|-" "{|"
+                                       "[|" "]#" "::" ":=" ":>" ":<" "$>" "==" "=>" "!=" "!!" ">:"
+                                       ">=" ">>" ">-" "-~" "-|" "->" "--" "-<" "<~" "<*" "<|" "<:"
+                                       "<$" "<=" "<>" "<-" "<<" "<+" "</" "#{" "#[" "#:" "#=" "#!"
+                                       "##" "#(" "#?" "#_" "%%" ".=" ".-" ".." ".?" "+>" "++" "?:"
+                                       "?=" "?." "??" ";;" "/*" "/=" "/>" "//" "__" "~~" "(*" "*)"
+                                       "\\\\" "://"))
+  ;; Enables ligature checks globally in all buffers. You can also do it
+  ;; per mode with `ligature-mode'.
+  (global-ligature-mode t))
+#+END_SRC
+
+** BOOKMARKING
+
+#+begin_src emacs-lisp
+(require 'bookmark)
+(defun jump-to-nth-bookmark (n)
+  "Jump to the nth bookmark in the bookmarks list."
+  (bookmark-maybe-load-default-file)
+  (let ((bookmark-names (bookmark-all-names)))
+    (when (and bookmark-names
+               (<= n (length bookmark-names)))  ;; >
+      (bookmark-jump (nth (1- n) bookmark-names)))))
+
+;; (evil-define-key 'normal global-map
+;; (kbd "SPC t") (lambda () (interactive) (jump-to-nth-bookmark 1)) ; Bind "Space t" to jump to the first bookmark
+;; (kbd "SPC m") (lambda () (interactive) (jump-to-nth-bookmark 2)) ; Bind "Space m" to jump to the second bookmark
+
+;; (kbd "t") (lambda () (interactive) (jump-to-nth-bookmark 1)) ; Bind "Space t" to jump to the first bookmark
+;; (kbd "m") (lambda () (interactive) (jump-to-nth-bookmark 2)) ; Bind "Space m" to jump to the second bookmark
+;; )
+#+end_src
+
+** RAINBOW MODE
+
+#+begin_src emacs-lisp
+(use-package rainbow-mode
+  :ensure t)
+(rainbow-mode t)
+#+end_src
+
+** BLOCK CURSOR
+
+#+BEGIN_SRC emacs-lisp
+;; keep the cursor as a block in evil insert mode
+(setq evil-insert-state-cursor 'box)
+;; reload function
+(defun revert-buffer-no-confirm ()
+  "Revert buffer without confirmation."
+  (interactive)
+  (revert-buffer :ignore-auto :noconfirm))
+#+END_SRC
+
+** SUDO EDIT
+
+#+BEGIN_SRC emacs-lisp :results output
+(use-package sudo-edit
+  :ensure t)
+(evil-define-key 'normal global-map (kbd "C-b e") 'sudo-edit)
+(evil-define-key 'normal global-map (kbd "C-b k") 'kill-buffer)
+#+END_SRC
+
+** TRANSPARENCY
+
+#+BEGIN_SRC emacs-lisp :results output
+(set-frame-parameter nil 'alpha-background 85) ; For current frame
+(add-to-list 'default-frame-alist '(alpha-background . 85)) ; For all new frames henceforth
+(setq-default fill-column 90)
+;;;; disable the emacsclient message
+(setq server-client-instructions nil)
+#+END_SRC
+
+#+RESULTS:
+
+** LIST GLYPH
+
+#+BEGIN_SRC emacs-lisp
+(font-lock-add-keywords 'org-mode
+                          '(("^ *\\([-]\\) "
+                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+#+END_SRC
+
+** INDENTATION SOURCE BLOCKS
+
+#+BEGIN_SRC emacs-lisp
+(setq org-src-preserve-indentation t)
+(setq org-src-tab-acts-natively nil)
+(setq tab-width 4)
+(setq-default indent-tabs-mode nil)
+(setq indent-tabs-mode nil)
+#+end_src
+
+** VERTICO Mode
+
+#+BEGIN_SRC emacs-lisp :results output
+;; Enable vertico
+(use-package vertico
+  :ensure t
+  :init
+  (vertico-mode)
+  (setq vertico-count 10)
+  (setq vertico-resize nil)
+  (setq vertico-cycle t))
+
+;; Persist history over Emacs restarts. Vertico sorts by history position.
+(use-package savehist
+  :init
+  (savehist-mode))
+
+;; A few more useful configurations...
+(use-package emacs
+  :init
+  ;; Add prompt indicator to `completing-read-multiple'.
+  ;; We display [CRM<separator>], e.g., [CRM,] if the separator is a comma.
+  (defun crm-indicator (args)
+    (cons (format "[CRM%s] %s"
+                  (replace-regexp-in-string
+                   "\\`\\[.*?]\\*\\|\\[.*?]\\*\\'" ""
+                   crm-separator)
+                  (car args))
+          (cdr args)))
+  (advice-add #'completing-read-multiple :filter-args #'crm-indicator)
+
+  ;; Do not allow the cursor in the minibuffer prompt
+  (setq minibuffer-prompt-properties
+        '(read-only t cursor-intangible t face minibuffer-prompt))
+  (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
+
+  ;; Support opening new minibuffers from inside existing minibuffers.
+  (setq enable-recursive-minibuffers t)
+
+  ;; Emacs 28 and newer: Hide commands in M-x which do not work in the current
+  ;; mode.  Vertico commands are hidden in normal buffers. This setting is
+  ;; useful beyond Vertico.
+  (setq read-extended-command-predicate #'command-completion-default-include-p))
+#+END_SRC
+
+** ORDERLESS
+
+#+BEGIN_SRC emacs-lisp
+(use-package orderless
+  :ensure t
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles basic partial-completion)))))
+#+END_SRC
+
+** DIRED ICONS
+
+#+BEGIN_SRC emacs-lisp
+(use-package nerd-icons-dired
+  :ensure t
+  :hook
+  (dired-mode . nerd-icons-dired-mode))
+#+END_SRC
+
+** TREEMACS
+
+#+BEGIN_SRC emacs-lisp
+(use-package treemacs
+  :ensure t)
+(setf treemacs-follow-mode nil)
+#+END_SRC
+
+** MU4E
+
+#+BEGIN_SRC  emacs-lisp
+;; some other day, but I am going to get started with emacs-lisp
+#+END_SRC
+
+* DEVELOPEMENT
+** CORFU
+
+#+BEGIN_SRC emacs-lisp
+(use-package corfu
+  :ensure t
+  ;; Optional customizations
+  :custom
+  (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
+  (corfu-auto t)                 ;; Enable auto completion
+  (corfu-separator "")          ;; Orderless field separator
+  (corfu-auto-delay  0) ;; TOO SMALL - NOT RECOMMENDED
+  (corfu-auto-prefix 1) ;; TOO SMALL - NOT RECOMMENDED
+  (corfu-quit-at-boundary 'separator)   ;; Never quit at completion boundary
+  (completion-styles '(flex))
+  (corfu-quit-no-match t)      ;; Never quit, even if there is no match
+  (corfu-preview-current nil)    ;; Disable current candidate preview
+  (corfu-preselect 'directory)      ;; Preselect the prompt
+  (corfu-on-exact-match nil)     ;; Configure handling of exact matches
+  (corfu-scroll-margin 2)        ;; Use scroll margin
+
+  ;; Enable Corfu only for certain modes.
+  :hook ((prog-mode . corfu-mode)
+        (shell-mode . corfu-mode)
+        ;; (eshell-mode . corfu-mode)
+        )
+
+  :bind
+   (:map corfu-map
+         ;; Option 1: Unbind RET completely
+         ("TAB" . corfu-complete)
+         ([tab] . corfu-complete)
+         ("S-TAB" . corfu-previous)
+         ([backtab] . corfu-previous)
+         ("RET" . nil))
+         ;; Option 2: Use RET only in shell modes
+         ;; ("RET" . (menu-item "" nil :filter corfu-insert-shell-filter)))
+  ;; Recommended: Enable Corfu globally.  This is recommended since Dabbrev can
+  ;; be used globally (M-/).  See also the customization variable
+  ;; `global-corfu-modes' to exclude certain modes.
+  :init
+  (global-corfu-mode))
+
+;; A few more useful configurations...
+(use-package emacs
+  :init
+  ;; TAB cycle if there are only few candidates
+  ;; (setq completion-cycle-threshold 3)
+
+  ;; Enable indentation+completion using the TAB key.
+  ;; `completion-at-point' is often bound to M-TAB.
+  (setq tab-always-indent 'complete)
+
+  ;; Emacs 30 and newer: Disable Ispell completion function. As an alternative,
+  ;; try `cape-dict'.
+  (setq text-mode-ispell-word-completion nil)
+
+  ;; Emacs 28 and newer: Hide commands in M-x which do not apply to the current
+  ;; mode.  Corfu commands are hidden, since they are not used via M-x. This
+  ;; setting is useful beyond Corfu.
+  (setq read-extended-command-predicate #'command-completion-default-include-p))
+#+END_SRC
+
+#+RESULTS:
+
+** HIGHLIGHT INDENT GUIDES
+
+#+BEGIN_SRC emacs-lisp
+(use-package highlight-indent-guides
+  :ensure t)
+(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+(setq highlight-indent-guides-method 'character)
+(setq  highlight-indent-guides-character ?│)
+;; (set-face-background 'highlight-indent-guides-odd-face "#676E95")
+;; (set-face-background 'highlight-indent-guides-even-face "#676E95")
+(set-face-foreground 'highlight-indent-guides-character-face "#676E95")
+(set-face-attribute 'highlight-indent-guides-character-face nil
+                    :inherit 'font-lock-comment-face)
+#+END_SRC
+
+#+RESULTS:
+
+** CORFU LSP CONFIG
+
+#+BEGIN_SRC emacs-lisp
+(use-package orderless
+  :ensure t
+  :init
+  ;; Tune the global completion style settings to your liking!
+  ;; This affects the minibuffer and non-lsp completion at point.
+  (setq completion-styles '(orderless partial-completion flex)
+        completion-category-defaults nil
+        completion-category-overrides nil))
+
+(use-package lsp-mode
+  :ensure t
+  :custom
+  (lsp-completion-provider :none) ;; we use Corfu!
+  :init
+  (defun my/lsp-mode-setup-completion ()
+    (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
+          '(orderless))) ;; Configure orderless
+  :hook
+  (lsp-completion-mode . my/lsp-mode-setup-completion))
+#+END_SRC
+
+** VERTICO MINIBUFFER
+
+#+BEGIN_SRC emacs-lisp
+;; (define-key evil-normal-state-map (kbd ":") 'execute-extended-command)
+(global-auto-revert-mode)
+;; refresh on external change
+#+END_SRC
+
+** LSP MODE
+
+#+BEGIN_SRC emacs-lisp
+(use-package lsp-mode
+  :init
+  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+  (setq lsp-keymap-prefix "C-c l")
+  :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
+         (c-mode . lsp-deferred)
+         (c++-mode . lsp-deferred)
+         (go-mode . lsp-deferred)
+         (lua-mode . lsp-deferred)
+         ;; if you want which-key integration
+         (lsp-mode . lsp-enable-which-key-integration))
+    :commands (lsp lsp-deferred))
+
+;; optionally
+(use-package lsp-ui
+ :ensure t
+ :commands lsp-ui-mode)
+#+END_SRC
+
+** C++
+
+#+BEGIN_SRC emacs-lisp
+(defun my-c-mode-common-hook ()
+ ;; my customizations for all of c-mode, c++-mode, objc-mode, java-mode
+ (c-set-offset 'substatement-open 0)
+ ;; other customizations can go here
+
+ (setq c++-tab-always-indent t)
+ (setq c-basic-offset 4)                  ;; Default is 2
+ (setq c-indent-level 4)                  ;; Default is 2
+
+ (setq tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60))
+ (setq tab-width 4)
+ (setq indent-tabs-mode t)  ; use spaces only if nil
+)
+
+(add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
+#+END_SRC
+
+** TREESITTER
+
+#+BEGIN_SRC  emacs-lisp
+(use-package tree-sitter
+  :ensure t)
+;; I think this one is slowing down the startup time
+;; (use-package tree-sitter-langs
+;;   :ensure t)
+
+(global-tree-sitter-mode)
+(add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
+#+END_SRC
+
+** LEETCODE
+
+#+BEGIN_SRC emacs-lisp
+(setq leetcode-prefer-language "cpp")
+(setq leetcode-prefer-sql "mysql")
+(setq leetcode-save-solutions t)
+(setq leetcode-directory "~/leetcode")
+#+END_SRC
+
+** AUTO FORMAT
+
+#+BEGIN_SRC emacs-lisp
+
+#+END_SRC
+
+** CONSULT
+
+#+BEGIN_SRC emacs-lisp
+(use-package consult
+  :ensure t)
+#+END_SRC
+
+** LANGUAGE MODES
+
+#+BEGIN_SRC  emacs-lisp
+(use-package lua-mode
+  :ensure t)
+
+(use-package go-mode
+  :ensure t)
+#+END_SRC
+
+** SNIPPET ENGINE
+
+#+BEGIN_SRC emacs-lisp
+
+#+END_SRC

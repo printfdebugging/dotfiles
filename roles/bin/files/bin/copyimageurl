@@ -1,0 +1,21 @@
+#!/bin/bash
+
+number_file="/home/$USER/.local/bin/image_number.txt"
+images_dir="/home/$USER/repos/notes/attachments/"
+config_file="/home/$USER/.config/flameshot/flameshot.ini"
+
+# Read the number from image_number.txt
+image_number=$(cat $number_file)
+
+# Increment the number
+((image_number++))
+
+# Run flameshot GUI with the specified configuration file and save the file with the incremented number
+flameshot gui -p $images_dir/$image_number.png
+
+# Copy the image file's path in markdown format to clipboard
+# 1000 for obsidian
+echo "![imagename|700](./attachments/$image_number.png)" | xclip -selection clipboard
+
+# Update image_number.txt with the new incremented value
+echo $image_number > $number_file

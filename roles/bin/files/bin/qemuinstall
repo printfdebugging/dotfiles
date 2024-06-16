@@ -1,0 +1,70 @@
+#!/bin/bash
+# basically make it in a way that it becomes a command line tool to install qemu on various distros
+
+distro="archBTW"
+# need to make it work with debian and fedora also
+# make it compatible with other init systems also
+
+
+packageManager=yay
+flags="-S --noconfirm"
+dependencies=(
+    "virt-manager"
+    "qemu"
+    "vde2"
+    "ebtables"
+    "dnsmasq"
+    "bridge-utils"
+    "openbsd-netcat"
+)
+
+
+
+if commnad -v figlet > /dev/null
+then
+    figlet QEMU
+fi
+
+
+########## checking whether virtualization is enabled or not ###############
+
+[ -n "$(LC_ALL=C lscpu | grep Virtualization | grep -E "VT-x|AMD-v")" ] && figlet Virtualization OK || figlet Virtualization NOT OK
+zgrep CONFIG_KVM /proc/config.gz
+
+########## installing packages and dependencies using pacman ###############
+
+
+# install the packages here
+for package in "${dependencies[@]}"
+do
+    $packageManager $flags $package
+done
+
+########## initialising services #############
+
+systemctl enable libvirtd.service
+systemctl start libvirtd.service
+
+########## init system specific command ##########
+
+sudo usermod -a -G libvirt $(whoami)
+# newgrp libvirt
+systemctl restart libvirtd.service
+# ######### init system specific command ########
+#
+#
+# ####### for nested virtual machines  #########
+sudo modprobe -r kvm_amd
+sudo modprobe kvm_amd nested=1# 
+echo "options kvm-amd nested=1" | sudo tee /etc/modprobe.d/kvm-intel.conf
+#
+#
+#
+# # init system specific command 
+#
+# sudo nvim /etc/libvirt/libvirtd.conf
+printf "%s\n%s" "unix_sock_group = \"libvirt\"" "unix_sock_rw_perms = \"0770\"" | sudo tee -a /etc/libvirt/libvirtd.conf
+# # set networkdefault to autostart && start
+#
+notify-send "qemu installed" "Restart Computer"
+#

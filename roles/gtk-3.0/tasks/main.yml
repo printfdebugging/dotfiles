@@ -1,0 +1,16 @@
+- name: ensure config directory exists
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/.config/gtk-3.0"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0755"
+  become: true
+
+- name: copy gtkrc to .config
+  ansible.builtin.copy:
+    src: settings.ini
+    dest: /home/{{ ansible_user }}/.config/gtk-3.0/settings.ini
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755

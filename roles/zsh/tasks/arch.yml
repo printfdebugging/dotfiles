@@ -1,0 +1,29 @@
+- name: Install ZSH and Additional Packages
+  community.general.pacman:
+    name:
+      - zsh
+      - zsh-syntax-highlighting
+      - zsh-completions
+      - zsh-autosuggestions
+    state: latest
+  # become: true
+
+- name: Setup ZSH as system shell
+  ansible.builtin.user:
+    name: "{{ item }}"
+    shell: /usr/bin/zsh
+  become: true
+  loop:
+    - root
+    - sahil
+
+- name: Copy ZSH Config Files
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: /home/sahil/{{ item }}
+    group: sahil
+    owner: sahil
+    mode: 0644
+  loop:
+    - .zshrc
+    - .zprofile

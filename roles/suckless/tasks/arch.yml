@@ -1,0 +1,41 @@
+- name: install suckless dependencies
+  community.general.pacman:
+    name:
+      - base-devel
+      - libx11
+      - libxft
+      - libxinerama
+      - freetype2
+      - ttf-jetbrains-mono-nerd
+    state: latest
+
+- name: Ensure source directory exists
+  become: true
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/.local/src"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0755"
+
+- name: copy source files to ~/.local/src
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: /home/{{ ansible_user }}/.local/src
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+  loop:
+    - dwm
+    - st
+    - dmenu
+
+- name: compile suckless software
+  become: true
+  shell: "make clean install"
+  args:
+    chdir: "/home/{{ ansible_user }}/.local/src/{{ item }}"
+  loop:
+    - dwm
+    - st
+    - dmenu

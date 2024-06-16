@@ -1,0 +1,17 @@
+#!/bin/bash
+# I need to learn xclip xdotool ... (maybe at my job)
+
+icondir="/home/$USER/.local/share/icons/"
+bookmarkFile="/home/$USER/.local/share/bookmarks.md"
+bookmarkIcon="$icondir/bookmark64.png"
+
+[ -f $bookmarkFile ] && true || notify-send -i $bookmarkIcon "Bookmarks" "file not found"
+
+cat $bookmarkFile | dmenu -i -l 20 -vi | xclip -selection -clipboard
+selection=$(xclip -o)
+result=$(echo "$selection" | awk -F'[()]' '{print $(NF-1)}')
+notify-send -i $bookmarkIcon "$result"
+echo "$result" | xclip -selection clipboard
+echo "$result" | xclip -selection primary
+# open only if some bookmark is selected
+[ -n "$selection" ] && brave $result

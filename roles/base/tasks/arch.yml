@@ -1,0 +1,62 @@
+- name: install user packages
+  community.general.pacman:
+    name:
+      - thunderbird
+      - firefox
+      - chromium
+      - qtcreator
+      - lua
+      - cmake # need to learn it
+      - ansible
+      - neofetch
+      - man-db
+      - btop
+      - vim
+      - obsidian
+      - pasystray
+    state: latest
+
+- name: install brave browser on archlinux
+  tags: ["brave", "aur"]
+  ansible.builtin.git:
+    repo: https://aur.archlinux.org/brave-bin.git
+    dest: /tmp/brave-bin
+    update: true
+  become: false
+
+- name: run makepkg -si in the brave-bin directory
+  tags: ["brave", "aur"]
+  vars:
+    ansible_become_pass: "{{ ansible_password }}"
+  ansible.builtin.shell:
+    chdir: /tmp/brave-bin
+    cmd: makepkg -si --noconfirm
+  become: false
+
+# Colored font setup
+- name: clone ttf-twemoji font from aur
+  tags: ["font", "aur"]
+  ansible.builtin.git:
+    repo: https://aur.archlinux.org/ttf-twemoji.git
+    dest: /tmp/ttf-twemoji
+    update: true
+  become: false
+
+- name: run makepkg -si in ttf-twemoji directory
+  tags: ["font", "aur"]
+  vars:
+    ansible_become_pass: "{{ ansible_password }}"
+  ansible.builtin.shell:
+    chdir: /tmp/ttf-twemoji
+    cmd: makepkg -si --noconfirm
+  become: false
+
+- name: copy fontconfig to /etc/fonts/conf.d/
+  tags: ["font", "aur"]
+  ansible.builtin.copy:
+    src: /usr/share/fontconfig/conf.avail/75-twemoji.conf
+    dest: /etc/fonts/conf.d/75-twemoji.conf
+    owner: root
+    group: root
+    mode: 0644
+  become: true

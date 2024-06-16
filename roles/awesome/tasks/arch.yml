@@ -1,0 +1,12 @@
+- name: install awesomewm on Archlinux
+  community.general.pacman:
+    name: awesome
+    state: latest
+
+- name: copy the config files
+  ansible.builtin.copy:
+    src: awesome
+    dest: /home/{{ ansible_user }}/.config
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755

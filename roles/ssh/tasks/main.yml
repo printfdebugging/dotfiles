@@ -1,0 +1,31 @@
+- name: ensure .ssh directory exists
+  file:
+    dest: "/home/{{ ansible_user }}/.ssh"
+    state: directory
+    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user }}"
+    mode: "0755"
+
+- name: copy public SSH key
+  copy:
+    content: "{{ public_ssh_key_file }}"
+    dest: "/home/{{ ansible_user }}/.ssh/id_ed25519.pub"
+    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user }}"
+    mode: "0644"
+
+- name: write encrypted private SSH key to file
+  copy:
+    content: "{{ private_ssh_key_file }}"
+    dest: "/home/{{ ansible_user }}/.ssh/id_ed25519"
+    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user }}"
+    mode: "0600"
+
+- name: write encrypted SSH config to file
+  copy:
+    content: "{{ ssh_config_file }}"
+    dest: "/home/{{ ansible_user }}/.ssh/config"
+    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user }}"
+    mode: "0644"

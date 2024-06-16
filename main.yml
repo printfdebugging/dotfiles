@@ -1,0 +1,33 @@
+---
+- hosts: all
+  become: true
+  pre_tasks:
+    - name: "Update Cache"
+      ansible.builtin.package:
+        update_cache: true
+
+- hosts: xorg
+  roles:
+    - ssh
+    - git
+    - base
+    - alacritty
+    - awesome
+    - bin
+    - dunst
+    - emacs
+    - flameshot
+    - git
+    - gtk-3.0
+    - mpv
+    - neovim
+    - suckless
+    - tmux
+    - wallpapers
+    - xorg
+    - yt-dlp
+    - zsh
+  vars_prompt:
+    - name: "ansible_password"
+      prompt: "Enter the become password "
+      private: yes

@@ -1,0 +1,11 @@
+- name: write git config file to .gitconfig
+  copy:
+    content: "{{ git_config_file }}"
+    dest: "{{ lookup('env', 'HOME') }}/.gitconfig"
+    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user }}"
+    mode: "0644"
+
+- name: clone my git repositories in ~/repos/
+  ansible.builtin.import_tasks: arch-repos.yml
+  when: ansible_os_family == "Archlinux"

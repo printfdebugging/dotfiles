@@ -1,0 +1,43 @@
+#!/bin/bash
+
+icondir="/home/$USER/.local/share/icons/"
+batteryIcon="-i $icondir/battery64.png"
+
+# kill all similarly named processes except this one
+for pid in $(pgrep -f $0); do
+    if [ $pid != $$ ]; then
+        kill $pid
+    fi 
+done
+
+i=1
+time=4000 # time in ms (milliseconds)
+once=0
+
+while true
+do
+    percentage=$(cat /sys/class/power_supply/BAT0/capacity)
+    charging=$(cat /sys/class/power_supply/BAT0/status | grep "Charging")
+
+    # notify me
+    alaram
+
+    if [ -z $charging ]
+    then
+        # if the battery is not charging 
+        #  -u critical -t $time
+        [ $percentage -le 25 ] && notify-send -u critical -r 1234543 "Battery" "$percentage%" \
+             $batteryIcon && \
+            i=0
+    else
+        # if the battery is charging
+        [ $i -eq 0 ] && notify-send -r 1234543 "Battery" "$percentage%" \
+            $batteryIcon && \
+            i=1
+
+        [ $percentage -ge 90 ] && notify-send -r 1234543 "Unplug Charger" "$percentage%" \
+            $batteryIcon
+    fi
+
+    sleep $(( $time / 1000 ))
+done

@@ -1,0 +1,23 @@
+- name: install dunst on Archlinux
+  community.general.pacman:
+    name:
+      - libnotify
+      - dunst
+    state: latest
+
+- name: ensure config directory exists
+  become: true
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/.config/dunst"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0755"
+
+- name: copy the config files
+  ansible.builtin.copy:
+    src: dunstrc
+    dest: /home/{{ ansible_user }}/.config/dunst/dunstrc
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755

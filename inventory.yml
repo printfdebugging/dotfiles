@@ -1,0 +1,7 @@
+---
+xorg:
+  hosts:
+    Laptop:
+      ansible_user: printf
+      ansible_host: localhost
+      ansible_connection: local

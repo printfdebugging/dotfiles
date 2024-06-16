@@ -1,0 +1,16 @@
+- name: ensure config directory exists
+  become: true
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/.config/yt-dlp"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+
+- name: copy config files to ~/.config/yt-dlp
+  ansible.builtin.copy:
+    src: config
+    dest: /home/{{ ansible_user }}/.config/yt-dlp/config
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if ! pgrep -x "emacs" >/dev/null; then
+    emacs --daemon
+fi
+
+if [ $# -ne 0 ]; then
+    emacsclient -nc ${@}
+else
+    emacsclient -nc
+fi
+

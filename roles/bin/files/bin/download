@@ -1,0 +1,33 @@
+#!/bin/bash
+
+#-----------------------------------------------------------------------------------
+
+icondir="/home/$USER/.local/share/icons"
+downloadImage="$icondir/download-folder.png"
+downloadDirectory="/home/$USER/repos/media/yt-dlp"
+clipboardOutput=$(xclip -o -selection clipboard)
+# clear the clipboard
+# xsel -cb
+
+downloadFunction() {
+    notify-send -i $downloadImage -r 12105342 "Downloading video" "$1"
+    yt-dlp -P $downloadDirectory "$1" 1>/dev/null 2>&1 & 
+}
+
+
+if [ -n "$1" ] 
+then
+    downloadFunction "$1"
+else
+    if [ -n "$clipboardOutput" ]
+    then
+        downloadFunction "$clipboardOutput"
+    else
+        notify-send -i $downloadImage "Downloading Video" "url = NILL"
+    fi
+fi
+
+#-----------------------------------------------------------------------------------
+
+# add another function that if brave or firefox is open, then download using
+# the url in the url bar, which you can grab using xdotool
