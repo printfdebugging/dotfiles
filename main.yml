@@ -27,7 +27,3 @@
     - xorg
     - yt-dlp
     - zsh
-  vars_prompt:
-    - name: "ansible_password"
-      prompt: "Enter the become password "
-      private: yes
