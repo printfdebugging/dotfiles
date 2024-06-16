@@ -8,6 +8,7 @@
       - freetype2
       - ttf-jetbrains-mono-nerd
     state: latest
+    extra_args: "--nodeps --noconfirm --overwrite '*'"
 
 - name: Ensure source directory exists
   become: true

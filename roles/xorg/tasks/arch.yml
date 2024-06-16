@@ -12,6 +12,7 @@
       - xclip
       - xsel
     state: latest
+    extra_args: "--nodeps --noconfirm --overwrite '*'"
 
 - name: copy .xinitrc file
   tags: ["xorg", "files"]

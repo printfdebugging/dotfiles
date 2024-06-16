@@ -15,6 +15,7 @@
       - obsidian
       - pasystray
     state: latest
+    extra_args: "--nodeps --noconfirm --overwrite '*'"
 
 - name: install brave browser on archlinux
   tags: ["brave", "aur"]

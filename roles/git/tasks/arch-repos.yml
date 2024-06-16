@@ -2,10 +2,20 @@
   community.general.pacman:
     name: git
     state: latest
+    extra_args: "--nodeps --noconfirm --overwrite '*'"
 
-- name: ensure ~/repos repository
+- name: ensure ~/repos exists
   ansible.builtin.file:
     path: /home/{{ ansible_user }}/repos
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+  become: true
+
+- name: ensure ~/downloads exists
+  ansible.builtin.file:
+    path: /home/{{ ansible_user }}/downloads
     state: directory
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"

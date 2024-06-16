@@ -2,6 +2,7 @@
   community.general.pacman:
     name: awesome
     state: latest
+    extra_args: "--nodeps --noconfirm --overwrite '*'"
 
 - name: copy the config files
   ansible.builtin.copy:

@@ -2,6 +2,7 @@
   community.general.pacman:
     name: tmux
     state: latest
+    extra_args: "--nodeps --noconfirm --overwrite '*'"
 
 - name: Ensure the tmux configuration directory exists
   file:

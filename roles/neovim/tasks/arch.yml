@@ -6,7 +6,7 @@
       - git
       - npm
     state: latest
-  become: true
+    extra_args: "--nodeps --noconfirm --overwrite '*'"
 
 - name: copy config files to ~/.config
   tags: ["neovim", "files"]

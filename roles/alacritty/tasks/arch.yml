@@ -2,6 +2,7 @@
   community.general.pacman:
     name: alacritty
     state: latest
+    extra_args: "--nodeps --noconfirm --overwrite '*'"
 
 - name: ensure config directory exists
   become: true
