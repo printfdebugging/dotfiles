@@ -30,3 +30,10 @@ sudo pacman -S ansible
 
 look into tags if they are usefull. I think they are, considering that they are used to
 run groups of tasks, tagged similarly
+
+## Another lesson learnt
+
+If it's not a problem, then it's considered wise to create an ansible user to do all the deeds,
+and leave the system users. So for things like installing packages and so on, the ansible user
+is used, so that it doesn't ask for passwords. And for copying config files, and other similar
+tasks, the ssh user is used.

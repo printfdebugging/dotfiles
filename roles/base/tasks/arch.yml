@@ -15,8 +15,22 @@
       - obsidian
       - pasystray
       - unzip
+      - network-manager-applet
+      - python-pexpect
     state: latest
     extra_args: "--nodeps --noconfirm --overwrite '*'"
+
+# Works nicely, but Dangerous though.
+# Or do this at the starting, and remove at the end as a handler task ??
+- name: Allow the `{{ ansible_user }}` user to run without passwords, like a king.
+  tags: ["aur", "brave"]
+  become: yes
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers.d/00_{{ ansible_user }}
+    line: "{{ ansible_user }} ALL=(ALL) NOPASSWD: ALL"
+    create: yes
+    mode: 0644
+    validate: "visudo -cf %s"
 
 - name: install brave browser on archlinux
   tags: ["brave", "aur"]
@@ -28,8 +42,6 @@
 
 - name: run makepkg -si in the brave-bin directory
   tags: ["brave", "aur"]
-  vars:
-    ansible_become_pass: "{{ ansible_password }}"
   ansible.builtin.shell:
     chdir: /tmp/brave-bin
     cmd: makepkg -si --noconfirm
@@ -46,8 +58,6 @@
 
 - name: run makepkg -si in ttf-twemoji directory
   tags: ["font", "aur"]
-  vars:
-    ansible_become_pass: "{{ ansible_password }}"
   ansible.builtin.shell:
     chdir: /tmp/ttf-twemoji
     cmd: makepkg -si --noconfirm

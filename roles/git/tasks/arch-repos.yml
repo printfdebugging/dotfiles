@@ -1,10 +1,12 @@
 - name: make sure git is installed
+  tags: ["git"]
   community.general.pacman:
     name: git
     state: latest
     extra_args: "--nodeps --noconfirm --overwrite '*'"
 
 - name: ensure ~/repos exists
+  tags: ["git"]
   ansible.builtin.file:
     path: /home/{{ ansible_user }}/repos
     state: directory
@@ -20,15 +22,17 @@
     group: "{{ ansible_user }}"
     mode: 0755
 
-- name: copy the known_hosts file
-  ansible.builtin.copy:
-    src: known_hosts
+- name: ensure github.com is a known host
+  tags: ["git"]
+  ansible.builtin.lineinfile:
     dest: /home/{{ ansible_user }}/.ssh/known_hosts
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
-    mode: 0755
+    create: yes
+    state: present
+    line: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
+    regexp: "^github\\.com"
 
 - name: clone git repositories
+  tags: ["git"]
   ansible.builtin.git:
     repo: "{{ item.repo }}"
     dest: "{{ item.path }}"
