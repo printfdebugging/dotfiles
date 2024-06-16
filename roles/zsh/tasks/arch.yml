@@ -1,4 +1,5 @@
 - name: Install ZSH and Additional Packages
+  tags: ["zsh", "packages"]
   community.general.pacman:
     name:
       - zsh
@@ -10,20 +11,22 @@
   # become: true
 
 - name: Setup ZSH as system shell
+  tags: ["zsh", "setup"]
   ansible.builtin.user:
     name: "{{ item }}"
     shell: /usr/bin/zsh
   become: true
   loop:
     - root
-    - sahil
+    - "{{ ansible_user }}"
 
 - name: Copy ZSH Config Files
+  tags: ["zsh", "files"]
   ansible.builtin.copy:
     src: "{{ item }}"
-    dest: /home/sahil/{{ item }}
-    group: sahil
-    owner: sahil
+    dest: /home/{{ ansible_user }}/{{ item }}
+    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user }}"
     mode: 0644
   loop:
     - .zshrc
