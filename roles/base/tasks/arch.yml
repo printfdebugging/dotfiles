@@ -1,4 +1,5 @@
 - name: install user packages
+  tags: ["base", "packages"]
   community.general.pacman:
     name:
       - thunderbird
@@ -27,7 +28,7 @@
 # Works nicely, but Dangerous though.
 # Or do this at the starting, and remove at the end as a handler task ??
 - name: Allow the `{{ ansible_user }}` user to run without passwords, like a king.
-  tags: ["aur", "brave"]
+  tags: ["brave", "aur"]
   become: yes
   ansible.builtin.lineinfile:
     path: /etc/sudoers.d/00_{{ ansible_user }}

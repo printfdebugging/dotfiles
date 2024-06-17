@@ -1,24 +1,38 @@
 - name: install tmux
+  tags:
+    - tmux
+    - packages
   community.general.pacman:
     name: tmux
     state: latest
     extra_args: "--nodeps --noconfirm --overwrite '*'"
 
 - name: Ensure the tmux configuration directory exists
+  become: false
+  tags:
+    - tmux
+    - files
   file:
     path: /home/{{ ansible_user }}/.config/tmux
     state: directory
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
     mode: 0755
-  become: yes
 
 - name: install tpm package manager
+  become: false
+  tags:
+    - tmux
+    - files
   ansible.builtin.git:
     repo: https://github.com/tmux-plugins/tpm
     dest: /home/{{ ansible_user }}/.tmux/plugins/tpm
 
 - name: copy the config file to ~/.config/tmux
+  become: false
+  tags:
+    - tmux
+    - files
   ansible.builtin.copy:
     src: tmux.conf
     dest: /home/{{ ansible_user }}/.config/tmux/tmux.conf

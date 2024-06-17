@@ -1,12 +1,17 @@
 - name: make sure git is installed
-  tags: ["git"]
+  tags:
+    - git
+    - packages
   community.general.pacman:
     name: git
     state: latest
     extra_args: "--nodeps --noconfirm --overwrite '*'"
 
 - name: ensure ~/repos exists
-  tags: ["git"]
+  become: false
+  tags:
+    - git
+    - files
   ansible.builtin.file:
     path: /home/{{ ansible_user }}/repos
     state: directory
@@ -15,6 +20,10 @@
     mode: 0755
 
 - name: ensure ~/downloads exists
+  become: false
+  tags:
+    - git
+    - files
   ansible.builtin.file:
     path: /home/{{ ansible_user }}/downloads
     state: directory
@@ -23,7 +32,10 @@
     mode: 0755
 
 - name: ensure github.com is a known host
-  tags: ["git"]
+  become: false
+  tags:
+    - git
+    - files
   ansible.builtin.lineinfile:
     dest: /home/{{ ansible_user }}/.ssh/known_hosts
     create: yes
@@ -32,12 +44,14 @@
     regexp: "^github\\.com"
 
 - name: clone git repositories
-  tags: ["git"]
+  become: false
+  tags:
+    - git
+    - files
   ansible.builtin.git:
     repo: "{{ item.repo }}"
     dest: "{{ item.path }}"
     update: no
-  become: false ## maybe it was executing as root otherwise
   loop:
     [
       {

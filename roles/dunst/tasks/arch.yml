@@ -1,4 +1,7 @@
 - name: install dunst on Archlinux
+  tags:
+    - dunst
+    - packages
   community.general.pacman:
     name:
       - libnotify
@@ -7,7 +10,10 @@
     extra_args: "--nodeps --noconfirm --overwrite '*'"
 
 - name: ensure config directory exists
-  become: true
+  become: false
+  tags:
+    - dunst
+    - files
   ansible.builtin.file:
     path: "/home/{{ ansible_user }}/.config/dunst"
     state: directory
@@ -16,6 +22,10 @@
     mode: "0755"
 
 - name: copy the config files
+  become: false
+  tags:
+    - dunst
+    - files
   ansible.builtin.copy:
     src: dunstrc
     dest: /home/{{ ansible_user }}/.config/dunst/dunstrc

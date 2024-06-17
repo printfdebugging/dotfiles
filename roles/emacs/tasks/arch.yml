@@ -1,11 +1,17 @@
 - name: install emacs-nativecomp on archlinux
+  tags:
+    - emacs
+    - packages
   community.general.pacman:
     name: emacs-nativecomp
     state: latest
     extra_args: "--nodeps --noconfirm --overwrite '*'"
 
 - name: ensure config directory exists
-  become: true
+  become: false
+  tags:
+    - emacs
+    - files
   ansible.builtin.file:
     path: "/home/{{ ansible_user }}/.config/emacs"
     state: directory
@@ -14,6 +20,10 @@
     mode: "0755"
 
 - name: copy emacs config files
+  become: false
+  tags:
+    - emacs
+    - files
   ansible.builtin.copy:
     src: "{{ item }}"
     dest: /home/{{ ansible_user }}/.config/emacs/{{ item }}

@@ -1,4 +1,7 @@
 - name: install suckless dependencies
+  tags:
+    - suckless
+    - packages
   community.general.pacman:
     name:
       - base-devel
@@ -11,7 +14,10 @@
     extra_args: "--nodeps --noconfirm --overwrite '*'"
 
 - name: Ensure source directory exists
-  become: true
+  become: false
+  tags:
+    - suckless
+    - packages
   ansible.builtin.file:
     path: "/home/{{ ansible_user }}/.local/src"
     state: directory
@@ -20,6 +26,10 @@
     mode: "0755"
 
 - name: copy source files to ~/.local/src
+  become: false
+  tags:
+    - suckless
+    - packages
   ansible.builtin.copy:
     src: "{{ item }}"
     dest: /home/{{ ansible_user }}/.local/src
@@ -33,6 +43,9 @@
 
 - name: compile suckless software
   become: true
+  tags:
+    - suckless
+    - packages
   shell: "make clean install"
   args:
     chdir: "/home/{{ ansible_user }}/.local/src/{{ item }}"

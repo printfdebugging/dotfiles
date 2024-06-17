@@ -1,10 +1,14 @@
 - name: write git config file to .gitconfig
+  tags:
+    - git
+    - files
   copy:
     content: "{{ git_config_file }}"
     dest: "/home/{{ ansible_user }}/.gitconfig"
     group: "{{ ansible_user }}"
     owner: "{{ ansible_user }}"
     mode: "0644"
+  become: false
 
 - name: clone my git repositories in ~/repos/
   ansible.builtin.import_tasks: arch-repos.yml

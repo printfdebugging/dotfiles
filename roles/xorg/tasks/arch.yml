@@ -1,4 +1,7 @@
 - name: install xorg-server and surrounding packages
+  tags:
+    - xorg
+    - packages
   community.general.pacman:
     name:
       - xorg-server
@@ -15,7 +18,10 @@
     extra_args: "--nodeps --noconfirm --overwrite '*'"
 
 - name: copy .xinitrc file
-  tags: ["xorg", "files"]
+  become: false
+  tags:
+    - xorg
+    - files
   ansible.builtin.copy:
     src: .xinitrc
     dest: /home/{{ ansible_user }}/.xinitrc

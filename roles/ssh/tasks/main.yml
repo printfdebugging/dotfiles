@@ -1,4 +1,8 @@
 - name: ensure .ssh directory exists
+  become: false
+  tags:
+    - ssh
+    - files
   ansible.builtin.file:
     dest: "/home/{{ ansible_user }}/.ssh"
     state: directory
@@ -7,6 +11,10 @@
     mode: "0755"
 
 - name: copy public SSH key
+  become: false
+  tags:
+    - ssh
+    - files
   ansible.builtin.copy:
     content: "{{ public_ssh_key_file }}"
     dest: "/home/{{ ansible_user }}/.ssh/id_ed25519.pub"
@@ -15,6 +23,10 @@
     mode: "0644"
 
 - name: write encrypted private SSH key to file
+  become: false
+  tags:
+    - ssh
+    - files
   ansible.builtin.copy:
     content: "{{ private_ssh_key_file }}"
     dest: "/home/{{ ansible_user }}/.ssh/id_ed25519"
@@ -23,6 +35,10 @@
     mode: "0600"
 
 - name: write encrypted SSH config to file
+  become: false
+  tags:
+    - ssh
+    - files
   ansible.builtin.copy:
     content: "{{ ssh_config_file }}"
     dest: "/home/{{ ansible_user }}/.ssh/config"

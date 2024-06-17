@@ -1,10 +1,17 @@
 - name: install awesomewm on Archlinux
+  tags:
+    - awesome
+    - packages
   community.general.pacman:
     name: awesome
     state: latest
     extra_args: "--nodeps --noconfirm --overwrite '*'"
 
 - name: copy the config files
+  become: false
+  tags:
+    - awesome
+    - packages
   ansible.builtin.copy:
     src: awesome
     dest: /home/{{ ansible_user }}/.config

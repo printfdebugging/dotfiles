@@ -1,5 +1,7 @@
 - name: install neovim and dependencies
-  tags: ["neovim", "packages"]
+  tags:
+    - neovim
+    - packages
   community.general.pacman:
     name:
       - neovim
@@ -9,7 +11,10 @@
     extra_args: "--nodeps --noconfirm --overwrite '*'"
 
 - name: copy config files to ~/.config
-  tags: ["neovim", "files"]
+  become: false
+  tags:
+    - neovim
+    - files
   copy:
     src: nvim
     dest: /home/{{ ansible_user }}/.config

@@ -1,5 +1,6 @@
 - name: install build dependencies
-  tags: ["libreoffice"]
+  tags:
+    - libreoffice
   community.general.pacman:
     state: latest
     name:
@@ -93,41 +94,53 @@
       - zxing-cpp
       - abseil-cpp
 
+- name: setup ccache with cache size of 150G
+  become: false
+  tags:
+    - libreoffice
+  ansible.builtin.shell:
+    cmd: ccache --max-size 150G
+
 - name: clone the core repository
-  tags: ["libreoffice"]
+  become: false
+  tags:
+    - libreoffice
   ansible.builtin.git:
     repo: https://gerrit.libreoffice.org/core
     dest: /home/{{ ansible_user }}/repos/libreoffice
     update: false
-  become: false
 
 - name: copy autogen.input to core repo
-  tags: ["libreoffice"]
+  become: false
+  tags:
+    - libreoffice
   ansible.builtin.copy:
     src: autogen.input
     dest: /home/{{ ansible_user }}/repos/libreoffice/autogen.input
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
     mode: 0755
-  become: false
 
 - name: build libreoffice
-  tags: ["libreoffice"]
+  become: false
+  tags:
+    - libreoffice
   ansible.builtin.shell:
     chdir: /home/{{ ansible_user }}/repos/libreoffice
     cmd: ./autogen.sh && make
-  become: false
 
 - name: setup neovim as editor
-  tags: ["libreoffice"]
+  become: false
+  tags:
+    - libreoffice
   ansible.builtin.shell:
     chdir: /home/{{ ansible_user }}/repos/libreoffice
     cmd: make vim-ide-integration
-  become: false
 
 - name: setup qtcreator as debugger
-  tags: ["libreoffice"]
+  become: false
+  tags:
+    - libreoffice
   ansible.builtin.shell:
     chdir: /home/{{ ansible_user }}/repos/libreoffice
     cmd: make qtcreator-ide-integration
-  become: false

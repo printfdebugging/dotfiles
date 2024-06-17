@@ -1,19 +1,30 @@
 - name: install alacritty on Archlinux
+  tags:
+    - alacritty
+    - packages
   community.general.pacman:
     name: alacritty
     state: latest
     extra_args: "--nodeps --noconfirm --overwrite '*'"
 
 - name: ensure config directory exists
-  become: true
+  become: false
+  tags:
+    - alacritty
+    - files
   ansible.builtin.file:
     path: "/home/{{ ansible_user }}/.config/alacritty"
     state: directory
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
     mode: "0755"
+  become: false
 
 - name: copy the config files
+  become: false
+  tags:
+    - alacritty
+    - files
   ansible.builtin.copy:
     src: alacritty.toml
     dest: /home/{{ ansible_user }}/.config/alacritty/alacritty.toml

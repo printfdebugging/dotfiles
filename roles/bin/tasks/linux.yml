@@ -1,4 +1,8 @@
 - name: copy scripts to the ~/.local/bin folder
+  become: false
+  tags:
+    - bin
+    - files
   ansible.builtin.copy:
     src: bin
     dest: /home/{{ ansible_user }}/.local
