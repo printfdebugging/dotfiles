@@ -47,7 +47,7 @@ dap.configurations.cpp = {
 		request = "launch",
 		program = function()
 			if string.find(vim.fn.expand("%:p"), "libreoffice") then
-				return "/home/printf/repos/libreoffice/instdir/program/soffice.bin"
+				return "/home/printfdebugging/repos/libreoffice/instdir/program/soffice.bin"
 			end
 			-- return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
 		end,

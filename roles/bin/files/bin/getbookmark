@@ -2,7 +2,7 @@
 # I need to learn xclip xdotool ... (maybe at my job)
 
 icondir="/home/$USER/.local/share/icons/"
-bookmarkFile="/home/$USER/.local/share/bookmarks.md"
+bookmarkFile="/home/$USER/repos/files/bookmarks.md"
 bookmarkIcon="$icondir/bookmark64.png"
 
 [ -f $bookmarkFile ] && true || notify-send -i $bookmarkIcon "Bookmarks" "file not found"

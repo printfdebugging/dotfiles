@@ -263,7 +263,7 @@ require("lazy").setup({
 
 	{
 		name = "myplugin",
-		dir = "/home/printf/repos/github/myplugin",
+		dir = "/home/printfdebugging/repos/myplugin", -- if at all
 	},
 	{
 		"alvarosevilla95/luatab.nvim",

@@ -3,7 +3,7 @@
 # ATM, awesome window manager is managing the wallpaper, and therefore no need for all this
 status=$(xrandr -q | grep "^DP-1 connected")
 
-wallpaper="/home/$USER/.local/share/wallpapers/second.jpg"
+wallpaper="/home/printfdebugging/.dotfiles/.local/share/wallpapers/second.jpg"
 
 if [ -z $status ]
 then
@@ -24,7 +24,7 @@ fi
 
 # status=$(xrandr -q | grep "^DP-1 connected")
 #
-# wallpaper="/home/$USER/.dotfiles/.local/share/wallpapers/second.jpg"
+# wallpaper="/home/printfdebugging/.dotfiles/.local/share/wallpapers/second.jpg"
 #
 # if [ -z $status ]
 # then

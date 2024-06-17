@@ -7,7 +7,7 @@ function saveToReadmeFile()
 	-- end
 	local sourceFile = vim.fn.expand("%") -- full file path
 	local tailFilename = vim.fn.expand("%:t")
-	local readmeFile = "/home/printf/repos/files/sourcecode.md"
+	local readmeFile = "/home/printfdebugging/repos/files/sourcecode.md"
 	--[[ string.gsub(sourceFile, tailFilename, "readme.md") ]]
 	vim.cmd("!echo '```" .. file_extension .. "' >> " .. readmeFile)
 	vim.cmd("!cat " .. sourceFile .. " >> " .. readmeFile)
