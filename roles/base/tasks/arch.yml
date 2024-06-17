@@ -18,6 +18,9 @@
       - network-manager-applet
       - python-pexpect
       - ripgrep
+      - thunar
+      - breeze-icons
+      - ocean-sound-theme
     state: latest
     extra_args: "--nodeps --noconfirm --overwrite '*'"
 
