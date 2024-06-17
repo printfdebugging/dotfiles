@@ -127,8 +127,4 @@ zstyle ':vcs_info:git:*' formats '%b '
 setopt PROMPT_SUBST
 export GPG_AGENT_INFO="$(gpgconf --list-dirs agent-socket)/S.gpg-agent:0:1"
 
-eval "$(direnv hook zsh)" # direnv
 export GOPATH=$HOME/.go
-
-
-if [ -e /home/printf/.nix-profile/etc/profile.d/nix.sh ]; then . /home/printf/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
