@@ -3,7 +3,9 @@
     - git
     - packages
   community.general.pacman:
-    name: git
+    name: 
+      - git
+      - openssh
     state: latest
     extra_args: "--nodeps --noconfirm --overwrite '*'"
 
@@ -32,7 +34,6 @@
     mode: 0755
 
 - name: ensure github.com is a known host
-  become: false
   tags:
     - git
     - files

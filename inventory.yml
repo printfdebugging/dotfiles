@@ -1,14 +1,14 @@
 ---
-# linux-machines:
-#   hosts:
-#     laptop:
-#       ansible_user: printfdebugging
-#       ansible_host: localhost
-#       ansible_connection: local
-
 linux-machines:
   hosts:
     laptop:
       ansible_user: printfdebugging
       ansible_host: localhost
       ansible_connection: local
+
+# linux-machines:
+#   hosts:
+#     laptop:
+#       ansible_user: printfdebugging
+#       ansible_host: localhost
+#       ansible_connection: local
