@@ -1,0 +1,7 @@
+--enable-debug
+--enable-dbgutil
+--without-java
+--without-help
+--without-doxygen
+--enable-kf5
+

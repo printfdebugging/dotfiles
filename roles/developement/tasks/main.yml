@@ -1,0 +1,4 @@
+# Libreoffice
+- name: setup libreoffice-dev on archlinux
+  ansible.builtin.import_tasks: libreoffice-arch.yml
+  when: ansible_os_family == "Archlinux"

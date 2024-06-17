@@ -1,7 +1,10 @@
 ---
-xorg:
+linux-machines:
   hosts:
-    Laptop:
-      ansible_user: printf
+    laptop:
+      ansible_user: printfdebugging
       ansible_host: localhost
       ansible_connection: local
+
+developement-machines:
+  hosts:
