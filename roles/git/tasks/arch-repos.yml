@@ -3,7 +3,7 @@
     - git
     - packages
   community.general.pacman:
-    name: 
+    name:
       - git
       - openssh
     state: latest
@@ -34,6 +34,7 @@
     mode: 0755
 
 - name: ensure github.com is a known host
+  become: false
   tags:
     - git
     - files
