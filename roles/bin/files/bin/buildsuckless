@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd ~/repos/github || exit
+cd ~/repos/dotfiles/roles/suckless/files/ || exit
 echo $(pwd)
 
 cd dwm && sudo make clean install && cd ..

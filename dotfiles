@@ -71,7 +71,7 @@ function repos_status() {
         
         cd "$repo" || continue
         
-        git fetch & disown # fetch in the background
+        git fetch > /dev/null & disown # fetch in the background
         # Check if it's a Git repository
         if ! git rev-parse --is-inside-work-tree &> /dev/null; then
             echo -e "${BOLD}${COLOR_RED}Not a Git repository${COLOR_RESET}"
@@ -106,6 +106,7 @@ case "$1" in
     "files") ansible-playbook "$dotfiles_playbook" --tags files -i localhost, \
         --connection=local --user=printfdebugging \
         --extra-vars ansible_user=printfdebugging \
+        --become --ask-become-pass \
         --extra-vars ansiblecfg='{"defaults": {"stdout_callback": "beautiful_output", "bin_ansible_callbacks": true}}' \
         --ask-vault-pass;;
 
@@ -126,6 +127,8 @@ case "$1" in
     "*") ansible-playbook "$dotfiles_playbook" --tags "$1" -i localhost, \
         --connection=local --user=printfdebugging \
         --extra-vars ansible_user=printfdebugging \
+        --become --ask-become-pass \
         --extra-vars ansiblecfg='{"defaults": {"stdout_callback": "beautiful_output", "bin_ansible_callbacks": true}}' \
+        --tags "${@}"
         --ask-vault-pass;;
 esac
