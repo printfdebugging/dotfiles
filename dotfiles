@@ -1,0 +1,97 @@
+#!/bin/bash
+
+# don't touch the inventory file for local changes.
+# ansible-playbook  -i localhost,  --connection=local  --user=$(whoami)
+
+function help() {
+    printf "Usage:
+dotfiles
+    files           sync all the files
+    packages        sync all the packages
+    full            full system configuration
+    status          git repositories status from /home/printfdebugging/repos/*
+    init            install essential packages like ansible, python-watchdog..
+"
+}
+
+function repos_status() {
+    repos=$(ls /home/printfdebugging/repos)
+
+    COLOR_BLUE='\e[34m'
+    COLOR_GREEN='\e[32m'
+    COLOR_RED='\e[31m'
+    COLOR_RESET='\e[0m'
+    BOLD='\e[1m'
+
+    # Directory containing repositories
+    repo_dir="/home/printfdebugging/repos/"
+
+    # Check if the directory exists
+    if [ ! -d "$repo_dir" ]; then
+        echo "Directory $repo_dir does not exist."
+        exit 1
+    fi
+
+    # Change to the repository directory
+    cd "$repo_dir" || exit
+
+    # Loop through each repository
+    for repo in */; do
+        # Print repository name with bold blue color
+        printf "${BOLD}${COLOR_BLUE}Repo:${COLOR_RESET} %-30s" "${repo}"
+        
+        cd "$repo" || continue
+        
+        # Check if it's a Git repository
+        if ! git rev-parse --is-inside-work-tree &> /dev/null; then
+            echo -e "${BOLD}${COLOR_RED}Not a Git repository${COLOR_RESET}"
+            cd ..  # Move back to parent directory
+            continue
+        fi
+        
+        # Get the Git status
+        git_status=$(git status --porcelain)
+        
+        # Print status with colors
+        if [[ -n "$git_status" ]]; then
+            printf "${BOLD}${COLOR_RED}Changes detected:${COLOR_RESET} $(echo "$git_status" | head -n 1)"
+            echo -e "${BOLD}${COLOR_RED} ... and more${COLOR_RESET}"
+        else
+            echo -e "${BOLD}${COLOR_GREEN}No changes${COLOR_RESET}"
+        fi
+        
+        cd ..  # Move back to parent directory
+    done
+}
+
+if [ $# -eq 0 ] || [ $# -gt 1 ]; then
+    echo "specify action in arguments"
+    help
+    exit 1
+fi
+
+dotfiles_playbook="/home/printfdebugging/repos/dotfiles/main.yml"
+
+case "$1" in 
+    "files") ansible-playbook "$dotfiles_playbook" --tags files -i localhost, \
+        --connection=local --user=printfdebugging \
+        --extra-vars ansible_user=printfdebugging \
+        --ask-vault-pass;;
+
+    "packages") ansible-playbook "$dotfiles_playbook" --tags packages -i localhost, \
+        --extra-vars ansible_user=printfdebugging \
+        --connection=local --user=printfdebugging --become --ask-become-pass;;
+
+    "full") ansible-playbook "$dotfiles_playbook" -i localhost, \
+        --connection=local --user=printfdebugging --become --ask-become-pass \
+        --extra-vars ansible_user=printfdebugging \
+        --ask-vault-pass;;
+
+    "status") repos_status;;
+    "init") sudo pacman -S ansible python-watchdog neovim openssh ;;
+
+    "*") ansible-playbook "$dotfiles_playbook" --tags "$1" -i localhost, \
+        --connection=local --user=printfdebugging \
+        --extra-vars ansible_user=printfdebugging \
+        --ask-vault-pass;;
+esac

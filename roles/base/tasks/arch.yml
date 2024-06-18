@@ -25,6 +25,7 @@
       - go
       - xdotool
       - netcat
+      - python-watchdog
     state: latest
     extra_args: "--nodeps --noconfirm --overwrite '*'"
 
