@@ -27,6 +27,7 @@
       - netcat
       - python-watchdog
       - libreoffice-fresh
+      - loupe
     state: latest
     extra_args: "--nodeps --noconfirm --overwrite '*'"
 
