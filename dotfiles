@@ -71,7 +71,7 @@ function repos_status() {
         
         cd "$repo" || continue
         
-        git fetch > /dev/null & disown # fetch in the background
+        git fetch > /dev/null 2>&1 & disown # fetch in the background
         # Check if it's a Git repository
         if ! git rev-parse --is-inside-work-tree &> /dev/null; then
             echo -e "${BOLD}${COLOR_RED}Not a Git repository${COLOR_RESET}"

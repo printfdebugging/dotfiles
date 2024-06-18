@@ -120,11 +120,11 @@ alias n='cd ~/repos/github/notes/content/ && nvim _index.md'
 alias c="cd /home/$USER/"
 alias l="cd /home/$USER/repos/libreoffice/"
 alias dif="git diff HEAD~ HEAD | delta"
-alias e="[ -f '/home/printf/repos/libreoffice/instdir/program/libcurl.so.4' ] \
-    && rm /home/printf/repos/libreoffice/instdir/program/libcurl.so.4; \
-    SAL_USE_VCLPLUGIN=kf5 /home/printf/repos/libreoffice/instdir/program/soffice"
+alias e="[ -f '/home/printfdebugging/repos/libreoffice/instdir/program/libcurl.so.4' ] \
+    && rm /home/printfdebugging/repos/libreoffice/instdir/program/libcurl.so.4; \
+    SAL_USE_VCLPLUGIN=kf5 /home/printfdebugging/repos/libreoffice/instdir/program/soffice"
 
-alias ee="/home/printf/repos/libreoffice/instdir/program/soffice"
+alias ee="/home/printfdebugging/repos/libreoffice/instdir/program/soffice"
 
 alias cr="cd ~/repos/"
 alias cm="cd ~/repos/media/"
