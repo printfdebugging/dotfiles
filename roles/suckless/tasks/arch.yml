@@ -53,3 +53,15 @@
     - dwm
     - st
     - dmenu
+
+- name: copy the .desktop file to /usr/share/applications/
+  become: true
+  tags:
+    - suckless
+    - files
+  ansible.builtin.copy:
+    src: dwm.desktop
+    dest: /usr/share/applications/dwm.desktop
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0644"
