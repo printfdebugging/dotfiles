@@ -26,6 +26,7 @@
       - xdotool
       - netcat
       - python-watchdog
+      - libreoffice-fresh
     state: latest
     extra_args: "--nodeps --noconfirm --overwrite '*'"
 
