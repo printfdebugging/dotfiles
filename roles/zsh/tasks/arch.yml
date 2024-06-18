@@ -37,3 +37,26 @@
   loop:
     - .zshrc
     - .zprofile
+
+- name: ensure .cache directory exists
+  become: false
+  tags:
+    - zsh
+    - files
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/.cache/zsh"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0755"
+
+- name: create the cache file for zsh
+  become: false
+  tags:
+    - zsh
+    - file
+  ansible.builtin.file:
+    path: /home/{{ ansible_user }}/.cache/zsh/history
+    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user }}"
+    mode: 0755
