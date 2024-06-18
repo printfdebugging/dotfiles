@@ -11,7 +11,7 @@
   become: false
   tags:
     - awesome
-    - packages
+    - files
   ansible.builtin.copy:
     src: awesome
     dest: /home/{{ ansible_user }}/.config

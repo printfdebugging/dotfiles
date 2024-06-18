@@ -17,7 +17,7 @@
   become: false
   tags:
     - suckless
-    - packages
+    - files
   ansible.builtin.file:
     path: "/home/{{ ansible_user }}/.local/src"
     state: directory
@@ -29,7 +29,7 @@
   become: false
   tags:
     - suckless
-    - packages
+    - files
   ansible.builtin.copy:
     src: "{{ item }}"
     dest: /home/{{ ansible_user }}/.local/src
@@ -45,7 +45,7 @@
   become: true
   tags:
     - suckless
-    - packages
+    - files
   shell: "make clean install"
   args:
     chdir: "/home/{{ ansible_user }}/.local/src/{{ item }}"

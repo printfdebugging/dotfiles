@@ -1,4 +1,4 @@
-- name: make sure git is installed
+- name: install git and openssh
   tags:
     - git
     - packages
