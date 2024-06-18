@@ -4,4 +4,4 @@
 --without-help
 --without-doxygen
 --enable-kf5
-
+--with-system-libxml=no 
