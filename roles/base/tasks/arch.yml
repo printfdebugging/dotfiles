@@ -14,6 +14,7 @@
       - btop
       - vim
       - pasystray
+      - pavucontrol
       - unzip
       - network-manager-applet
       - python-pexpect
