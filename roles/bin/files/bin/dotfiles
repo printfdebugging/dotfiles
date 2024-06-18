@@ -9,7 +9,36 @@ dotfiles
     files           sync all the files
     packages        sync all the packages
     full            full system configuration
+    status          git repositories status from /home/printfdebugging/repos/*
+    init            install essential packages like ansible, python-watchdog..
 "
+}
+
+extract_commits() {
+    local pattern="$1"
+    local message="$2"
+
+    if [[ $message =~ $pattern ]]; then
+        echo "${BASH_REMATCH[1]}"
+    else
+        echo "0"
+    fi
+}
+
+function git_push_test() {
+    status_message=$(git status | head --lines 2 | tail --lines 1)
+    ahead=$(echo "$status_message" | grep -e "ahead")
+    behind=$(echo "$status_message" | grep -e "behind")
+
+    if ! [[ "$ahead" ]] && ! [[ "$behind" ]]; then 
+        echo -e "${BOLD}${COLOR_GREEN}No changes${COLOR_RESET}"
+        return
+    fi
+
+    status_message=$(git status | head -n2 | tail -n1)
+    ahead_count=$(extract_commits ".*ahead .* ([0-9]+) commit.*" "$status_message")
+    behind_count=$(extract_commits ".*behind .* ([0-9]+) commit.*" "$status_message")
+    echo -e "${BOLD}${COLOR_RED}Out of sync:${COLOR_RESET} ${ahead_count} ahead and ${behind_count} behind"
 }
 
 function repos_status() {
@@ -17,6 +46,7 @@ function repos_status() {
 
     COLOR_BLUE='\e[34m'
     COLOR_GREEN='\e[32m'
+    COLOR_ORANGE='\e[38;5;208m'
     COLOR_RED='\e[31m'
     COLOR_RESET='\e[0m'
     BOLD='\e[1m'
@@ -35,11 +65,13 @@ function repos_status() {
 
     # Loop through each repository
     for repo in */; do
+        # echo "$( cd $repo && git status | head -n2 | tail -n1)"
         # Print repository name with bold blue color
         printf "${BOLD}${COLOR_BLUE}Repo:${COLOR_RESET} %-30s" "${repo}"
         
         cd "$repo" || continue
         
+        git fetch & disown # fetch in the background
         # Check if it's a Git repository
         if ! git rev-parse --is-inside-work-tree &> /dev/null; then
             echo -e "${BOLD}${COLOR_RED}Not a Git repository${COLOR_RESET}"
@@ -55,7 +87,7 @@ function repos_status() {
             printf "${BOLD}${COLOR_RED}Changes detected:${COLOR_RESET} $(echo "$git_status" | head -n 1)"
             echo -e "${BOLD}${COLOR_RED} ... and more${COLOR_RESET}"
         else
-            echo -e "${BOLD}${COLOR_GREEN}No changes${COLOR_RESET}"
+            git_push_test $repo
         fi
         
         cd ..  # Move back to parent directory
@@ -74,20 +106,26 @@ case "$1" in
     "files") ansible-playbook "$dotfiles_playbook" --tags files -i localhost, \
         --connection=local --user=printfdebugging \
         --extra-vars ansible_user=printfdebugging \
+        --extra-vars ansiblecfg='{"defaults": {"stdout_callback": "beautiful_output", "bin_ansible_callbacks": true}}' \
         --ask-vault-pass;;
 
     "packages") ansible-playbook "$dotfiles_playbook" --tags packages -i localhost, \
         --extra-vars ansible_user=printfdebugging \
+        --extra-vars ansiblecfg='{"defaults": {"stdout_callback": "beautiful_output", "bin_ansible_callbacks": true}}' \
         --connection=local --user=printfdebugging --become --ask-become-pass;;
 
     "full") ansible-playbook "$dotfiles_playbook" -i localhost, \
         --connection=local --user=printfdebugging --become --ask-become-pass \
+        --extra-vars ansiblecfg='{"defaults": {"stdout_callback": "beautiful_output", "bin_ansible_callbacks": true}}' \
         --extra-vars ansible_user=printfdebugging \
         --ask-vault-pass;;
 
-    "status") repos_status ;;
+    "status") repos_status;;
+    "init") sudo pacman -S ansible python-watchdog neovim openssh ;;
+
     "*") ansible-playbook "$dotfiles_playbook" --tags "$1" -i localhost, \
         --connection=local --user=printfdebugging \
         --extra-vars ansible_user=printfdebugging \
+        --extra-vars ansiblecfg='{"defaults": {"stdout_callback": "beautiful_output", "bin_ansible_callbacks": true}}' \
         --ask-vault-pass;;
 esac
