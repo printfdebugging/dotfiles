@@ -27,6 +27,7 @@
   ansible.builtin.git:
     repo: https://github.com/tmux-plugins/tpm
     dest: /home/{{ ansible_user }}/.tmux/plugins/tpm
+    update: false
 
 - name: copy the config file to ~/.config/tmux
   become: false

@@ -5,5 +5,6 @@ setupscript &
 flameshot &
 pasystray &
 nm-applet &
+thunderbird &
 xcompmgr &
 exec dwm

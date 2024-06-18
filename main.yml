@@ -6,7 +6,7 @@
       ansible.builtin.package:
         update_cache: true
 
-- hosts: linux-machines
+- hosts: all
   roles:
     - ssh
     - git
@@ -27,7 +27,4 @@
     - xorg
     - yt-dlp
     - zsh
-
-- hosts: developement-machines
-  roles:
     - developement
