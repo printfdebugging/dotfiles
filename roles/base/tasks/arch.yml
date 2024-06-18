@@ -81,3 +81,22 @@
     group: root
     mode: 0644
   become: true
+
+- name: remove the 00_{{ ansible_user }} file from before
+  tags:
+    - brave
+    - aur
+  ansible.builtin.file:
+    path: /etc/sudoers.d/00_{{ ansible_user }}
+    state: absent
+
+# correct the mistake committed before
+- name: Allow the `{{ ansible_user }}` user to run without passwords, like a king.
+  tags: ["brave", "aur"]
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers.d/00_{{ ansible_user }}
+    line: "{{ ansible_user }} ALL=(ALL) ALL"
+    create: yes
+    mode: 0644
+    validate: "visudo -cf %s"
