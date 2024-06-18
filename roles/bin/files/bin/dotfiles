@@ -107,17 +107,17 @@ case "$1" in
         --connection=local --user=printfdebugging \
         --extra-vars ansible_user=printfdebugging \
         --become --ask-become-pass \
-        --extra-vars ansiblecfg='{"defaults": {"stdout_callback": "beautiful_output", "bin_ansible_callbacks": true}}' \
+        --extra-vars ansiblecfg='{"defaults": {"stdout_callback": "beautiful_output", "bin_ansible_callbacks": true, "ansible_python_interpreter"="/usr/bin/python"}}' \
         --ask-vault-pass;;
 
     "packages") ansible-playbook "$dotfiles_playbook" --tags packages -i localhost, \
         --extra-vars ansible_user=printfdebugging \
-        --extra-vars ansiblecfg='{"defaults": {"stdout_callback": "beautiful_output", "bin_ansible_callbacks": true}}' \
+        --extra-vars ansiblecfg='{"defaults": {"stdout_callback": "beautiful_output", "bin_ansible_callbacks": true, "ansible_python_interpreter"="/usr/bin/python"}}' \
         --connection=local --user=printfdebugging --become --ask-become-pass;;
 
     "full") ansible-playbook "$dotfiles_playbook" -i localhost, \
         --connection=local --user=printfdebugging --become --ask-become-pass \
-        --extra-vars ansiblecfg='{"defaults": {"stdout_callback": "beautiful_output", "bin_ansible_callbacks": true}}' \
+        --extra-vars ansiblecfg='{"defaults": {"stdout_callback": "beautiful_output", "bin_ansible_callbacks": true, "ansible_python_interpreter"="/usr/bin/python"}}' \
         --extra-vars ansible_user=printfdebugging \
         --ask-vault-pass;;
 
@@ -128,7 +128,7 @@ case "$1" in
         --connection=local --user=printfdebugging \
         --extra-vars ansible_user=printfdebugging \
         --become --ask-become-pass \
-        --extra-vars ansiblecfg='{"defaults": {"stdout_callback": "beautiful_output", "bin_ansible_callbacks": true}}' \
+        --extra-vars ansiblecfg='{"defaults": {"stdout_callback": "beautiful_output", "bin_ansible_callbacks": true, "ansible_python_interpreter"="/usr/bin/python"}}' \
         --tags "${@}"
         --ask-vault-pass;;
 esac
