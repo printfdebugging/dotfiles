@@ -28,6 +28,7 @@
       - python-watchdog
       - libreoffice-fresh
       - loupe
+      - bear
     state: latest
     extra_args: "--nodeps --noconfirm --overwrite '*'"
 
