@@ -124,7 +124,7 @@ case "$1" in
     "status") repos_status;;
     "init") sudo pacman -S ansible python-watchdog neovim openssh ;;
 
-    "*") ansible-playbook "$dotfiles_playbook" --tags "$1" -i localhost, \
+    *) ansible-playbook "$dotfiles_playbook" --tags "$1" -i localhost, \
         --connection=local --user=printfdebugging \
         --extra-vars ansible_user=printfdebugging \
         --become --ask-become-pass \
