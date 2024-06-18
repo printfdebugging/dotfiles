@@ -65,66 +65,82 @@ bindkey -s '^o' 'lfcd\n'
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
-# Load aliases and shortcuts if existent.
-[ -f "$HOME/.config/shortcutrc" ] && source "$HOME/.config/shortcutrc"
-[ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
-
 # Load zsh-syntax-highlighting; should be last.
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
-
-
-
-alias ls='ls --color=auto'
-alias ll='ls -al --color=auto'
-alias grep='grep --color=auto'
 
 # keyboard settings
 xset r rate 300 50
 setxkbmap -option caps:swapescape
 setxkbmap -option ctrl:swap_ralt_rctl
 
-alias cr="cd ~/repos/"
-alias cm="cd ~/repos/media/"
-alias cr="cd ~/repos/"
-alias msu="sudo make clean install"
-alias md="cd ~/.local/src/dwm/ && msu"
-alias ssha='eval $(ssh-agent) && ssh-add'
-alias list="nvim /home/$USER/.local/share/bookmarks.md"
-alias bin="nvim /home/$USER/repos/github/bin"
-
-# GIT
-alias tr="git log --all --oneline --graph --decorate"
-alias stat="git status"
-alias br="git branch"
-alias gca="git commit --amend"
-alias hss="hugo serve -D"
-
-# NOTES
-# alias s="cd /home/$USER/repos/website/content/ && nvim ."
-
-# GENERAL TRAVEL AND TRANSACTIONS
-alias t='tmux'
-alias v='nvim'
-alias n='cd ~/repos/github/notes/content/ && nvim _index.md'
-alias c="cd /home/$USER/"
-alias l="cd /home/$USER/repos/libreoffice/"
-alias dif="git diff HEAD~ HEAD | delta"
-alias e="[ -f '/home/printf/repos/libreoffice/instdir/program/libcurl.so.4' ] && rm /home/printf/repos/libreoffice/instdir/program/libcurl.so.4; SAL_USE_VCLPLUGIN=kf5 /home/printf/repos/libreoffice/instdir/program/soffice"
-alias ee="/home/printf/repos/libreoffice/instdir/program/soffice"
 
 if type rg &> /dev/null; then
   export FZF_DEFAULT_COMMAND='rg --files'
   export FZF_DEFAULT_OPTS='-m'
 fi
 
-# for libreoffice debugging.
-export SAL_NO_MOUSEGRABS=T
 
 autoload -Uz vcs_info
 precmd() { vcs_info }
-
 zstyle ':vcs_info:git:*' formats '%b '
 setopt PROMPT_SUBST
-export GPG_AGENT_INFO="$(gpgconf --list-dirs agent-socket)/S.gpg-agent:0:1"
 
+
+##############
+#   EXPORTS  #
+##############
+export GPG_AGENT_INFO="$(gpgconf --list-dirs agent-socket)/S.gpg-agent:0:1"
+export SAL_NO_MOUSEGRABS=T
+export PATH="/home/$USER/.local/bin:$PATH"
+export EDITOR=nvim
+export GTK_THEME=Adwaita:dark
+export GPG_AGENT_INFO="$(gpgconf --list-dirs agent-socket)/S.gpg-agent:0:1"
 export GOPATH=$HOME/.go
+export GOHOME=$HOME/.go
+export GOPATH="/home/$USER/.local/go"
+export PATH="${PATH}:${GOPATH}/bin"
+export GO_TABWIDTH=4
+
+export XDG_DESKTOP_DIR="$HOME/downloads"
+export XDG_DOCUMENTS_DIR="$HOME/downloads"
+export XDG_DOWNLOAD_DIR="$HOME/downloads"
+export XDG_MUSIC_DIR="$HOME/downloads"
+export XDG_PICTURES_DIR="$HOME/downloads"
+export XDG_PUBLICSHARE_DIR="$HOME/downloads"
+export XDG_TEMPLATES_DIR="$HOME/downloads"
+export XDG_VIDEOS_DIR="$HOME/downloads"
+
+
+##############
+#   ALIASES  #
+##############
+alias t='tmux'
+alias v='nvim'
+alias n='cd ~/repos/github/notes/content/ && nvim _index.md'
+alias c="cd /home/$USER/"
+alias l="cd /home/$USER/repos/libreoffice/"
+alias dif="git diff HEAD~ HEAD | delta"
+alias e="[ -f '/home/printf/repos/libreoffice/instdir/program/libcurl.so.4' ] \
+    && rm /home/printf/repos/libreoffice/instdir/program/libcurl.so.4; \
+    SAL_USE_VCLPLUGIN=kf5 /home/printf/repos/libreoffice/instdir/program/soffice"
+
+alias ee="/home/printf/repos/libreoffice/instdir/program/soffice"
+
+alias cr="cd ~/repos/"
+alias cm="cd ~/repos/media/"
+alias cr="cd ~/repos/"
+alias msu="sudo make clean install"
+alias ssha='eval $(ssh-agent) && ssh-add'
+alias list="nvim /home/$USER/repos/files/bookmarks.md"
+alias bin="nvim /home/$USER/.local/bin"
+
+alias ls='ls --color=auto'
+alias ll='ls -al --color=auto'
+alias grep='grep --color=auto'
+
+## GIT
+alias tr="git log --all --oneline --graph --decorate"
+alias stat="git status"
+alias br="git branch"
+alias gca="git commit --amend"
+alias hss="hugo serve -D"

@@ -6,6 +6,7 @@ require("mason-lspconfig").setup({
 		"ansiblels",
 		"rust_analyzer",
 		"clangd",
+		"gopls",
 		"tsserver",
 		"marksman",
 		"bashls",

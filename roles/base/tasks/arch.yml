@@ -22,6 +22,9 @@
       - thunar
       - breeze-icons
       - ocean-sound-theme
+      - go
+      - xdotool
+      - netcat
     state: latest
     extra_args: "--nodeps --noconfirm --overwrite '*'"
 
