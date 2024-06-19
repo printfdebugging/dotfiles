@@ -92,4 +92,8 @@
         repo: "{{ my_github_handle }}/thunderbird.git",
         path: "/home/{{ ansible_user }}/.thunderbird",
       },
+      {
+        repo: "{{ my_github_handle }}/website.git",
+        path: "/home/{{ ansible_user }}/repos/website",
+      },
     ]
