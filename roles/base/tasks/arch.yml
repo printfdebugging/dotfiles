@@ -86,3 +86,12 @@
     group: root
     mode: 0644
   become: true
+
+- name: Remove NOPASSWD entry for {{ ansible_user }}
+  tags: ["brave", "aur"]
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers.d/00_{{ ansible_user }}
+    line: "{{ ansible_user }} ALL=(ALL) NOPASSWD: ALL"
+    state: absent
+    validate: "visudo -cf %s"

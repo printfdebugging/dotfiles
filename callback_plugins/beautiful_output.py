@@ -88,6 +88,10 @@ from os.path import basename, isdir
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler, EVENT_TYPE_CREATED
 
+import sys
+
+sys.dont_write_bytecode = True
+
 _symbol = {
     "success": to_text("✔"),
     "warning": to_text("⚠"),

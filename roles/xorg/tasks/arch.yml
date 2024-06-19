@@ -3,19 +3,19 @@
     - xorg
     - packages
   community.general.pacman:
-    name:
-      - xorg-server
-      - xorg-xinit
-      - xorg-xrandr
-      - xorg-setxkbmap
-      - xorg-xset
-
-      - xcompmgr
-      - xwallpaper
-      - xclip
-      - xsel
+    name: "{{ item }}"
     state: latest
     extra_args: "--nodeps --noconfirm --overwrite '*'"
+  loop:
+    - xorg-server
+    - xorg-xinit
+    - xorg-xrandr
+    - xorg-setxkbmap
+    - xorg-xset
+    - xcompmgr
+    - xwallpaper
+    - xclip
+    - xsel
 
 - name: copy .xinitrc file
   become: false
@@ -35,8 +35,8 @@
     - xorg
     - files
   ansible.builtin.copy:
-    src: .xinitrc
-    dest: /home/{{ ansible_user }}/.xinitrc
+    src: 30-touchpad.conf
+    dest: /etc/X11/xorg.conf.d/30-touchpad.conf
     owner: "root"
     group: "root"
     mode: 0644
