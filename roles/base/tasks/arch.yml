@@ -1,36 +1,37 @@
 - name: install user packages
   tags: ["base", "packages"]
   community.general.pacman:
-    name:
-      - thunderbird
-      - firefox
-      - chromium
-      - qtcreator
-      - lua
-      - cmake # need to learn it
-      - ansible
-      - neofetch
-      - man-db
-      - btop
-      - vim
-      - pasystray
-      - pavucontrol
-      - unzip
-      - network-manager-applet
-      - python-pexpect
-      - ripgrep
-      - thunar
-      - breeze-icons
-      - ocean-sound-theme
-      - go
-      - xdotool
-      - netcat
-      - python-watchdog
-      - libreoffice-fresh
-      - loupe
-      - bear
+    name: "{{ item }}"
     state: latest
     extra_args: "--nodeps --noconfirm --overwrite '*'"
+  loop:
+    - thunderbird
+    - firefox
+    - chromium
+    - qtcreator
+    - lua
+    - cmake # need to learn it
+    - ansible
+    - neofetch
+    - man-db
+    - btop
+    - vim
+    - pasystray
+    - pavucontrol
+    - unzip
+    - network-manager-applet
+    - python-pexpect
+    - ripgrep
+    - thunar
+    - breeze-icons
+    - ocean-sound-theme
+    - go
+    - xdotool
+    - netcat
+    - python-watchdog
+    - libreoffice-fresh
+    - loupe
+    - bear
 
 # Works nicely, but Dangerous though.
 # Or do this at the starting, and remove at the end as a handler task ??
@@ -84,22 +85,3 @@
     group: root
     mode: 0644
   become: true
-
-- name: remove the 00_{{ ansible_user }} file from before
-  tags:
-    - brave
-    - aur
-  ansible.builtin.file:
-    path: /etc/sudoers.d/00_{{ ansible_user }}
-    state: absent
-
-# correct the mistake committed before
-- name: Allow the `{{ ansible_user }}` user to run without passwords, like a king.
-  tags: ["brave", "aur"]
-  become: true
-  ansible.builtin.lineinfile:
-    path: /etc/sudoers.d/00_{{ ansible_user }}
-    line: "{{ ansible_user }} ALL=(ALL) ALL"
-    create: yes
-    mode: 0644
-    validate: "visudo -cf %s"

@@ -100,7 +100,8 @@ if [ $# -eq 0 ] || [ $# -gt 1 ]; then
     exit 1
 fi
 
-dotfiles_playbook="/home/printfdebugging/repos/dotfiles/main.yml"
+[ -f  "/home/printfdebugging/dotfiles/main.yml" ] &&  dotfiles_playbook="/home/printfdebugging/dotfiles/main.yml" \
+    || dotfiles_playbook="/home/printfdebugging/repos/dotfiles/main.yml"
 
 case "$1" in 
     "files") ansible-playbook "$dotfiles_playbook" --tags files -i localhost, \

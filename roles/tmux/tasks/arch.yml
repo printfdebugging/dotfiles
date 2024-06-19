@@ -19,7 +19,7 @@
     group: "{{ ansible_user }}"
     mode: 0755
 
-- name: install tpm package manager
+- name: clone tpm package manager
   become: false
   tags:
     - tmux

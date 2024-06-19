@@ -3,11 +3,12 @@
     - dunst
     - packages
   community.general.pacman:
-    name:
-      - libnotify
-      - dunst
+    name: "{{ item }}"
     state: latest
     extra_args: "--nodeps --noconfirm --overwrite '*'"
+  loop:
+    - libnotify
+    - dunst
 
 - name: ensure config directory exists
   become: false
