@@ -54,14 +54,14 @@
     - st
     - dmenu
 
-- name: copy the .desktop file to /usr/share/applications/
+- name: copy the .desktop file to /usr/share/xsessions/ as root
   become: true
   tags:
     - suckless
     - files
   ansible.builtin.copy:
     src: dwm.desktop
-    dest: /usr/share/applications/dwm.desktop
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
+    dest: /usr/share/xsessions/dwm.desktop
+    owner: "root"
+    group: "root"
     mode: "0644"
