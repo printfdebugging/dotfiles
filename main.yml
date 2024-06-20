@@ -28,3 +28,9 @@
     - yt-dlp
     - zsh
     # - developement
+
+- hosts: devops
+  roles:
+    - qemu-kvm
+    # - docker
+    # - proxmox

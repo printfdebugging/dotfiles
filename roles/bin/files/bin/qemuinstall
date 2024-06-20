@@ -6,7 +6,7 @@ distro="archBTW"
 # make it compatible with other init systems also
 
 
-packageManager=yay
+packageManager=pacman
 flags="-S --noconfirm"
 dependencies=(
     "virt-manager"
