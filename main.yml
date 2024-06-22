@@ -27,6 +27,7 @@
     - xorg
     - yt-dlp
     - zsh
+    # - qemu-kvm
     # - developement
 
 - hosts: devops

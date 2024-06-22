@@ -35,6 +35,7 @@
     - zola
     - mtpfs
     - gvfs-mtp
+    - mpv
 
 # Works nicely, but Dangerous though.
 # Or do this at the starting, and remove at the end as a handler task ??

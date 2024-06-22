@@ -1,1 +1,82 @@
-# empty comment
+- name: install essential packages
+  tags:
+    - qemu
+    - packages
+  community.general.pacman:
+    name: "{{ item }}"
+    state: latest
+    extra_args: "--nodeps --noconfirm --overwrite '*' --force"
+  loop:
+    - virt-manager
+    - qemu
+    - vde2
+    - ebtables
+    - dnsmasq
+    - bridge-utils
+    - openbsd-netcat
+
+- name: enable and start libvirtd.service
+  tags:
+    - qemu
+    - system
+  ansible.builtin.service:
+    name: libvirtd
+    enabled: true
+    state: started
+
+- name: enable nested virtualization
+  become: false
+  tags:
+    - qemu
+    - system
+  ansible.builtin.shell:
+    cmd: |
+      sudo modprobe -r kvm_amd
+      sudo modprobe kvm_amd nested=1#
+      echo "options kvm-amd nested=1" | sudo tee /etc/modprobe.d/kvm-amd.conf
+
+- name: Ensure unix_sock_group is set correctly
+  tags:
+    - qemu
+    - file
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/libvirt/libvirtd.conf
+    regexp: "^unix_sock_group.*=.*"
+    line: 'unix_sock_group = "libvirt"'
+    state: present
+
+- name: Ensure unix_sock_rw_perms is set correctly
+  tags:
+    - qemu
+    - file
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/libvirt/libvirtd.conf
+    regexp: "^unix_sock_rw_perms.*=.*"
+    line: 'unix_sock_rw_perms = "0770"'
+    state: present
+
+- name: create a libvirt group
+  ansible.builtin.group:
+    name: libvirt
+    state: present
+
+- name: add user to the libvirt group
+  tags:
+    - qemu
+    - system
+  ansible.builtin.user:
+    name: "{{ ansible_user }}"
+    shell: /bin/zsh
+    groups: libvirt
+    append: yes
+
+- name: ensure default network starts automatically
+  tags:
+    - qemu
+    - system
+  ansible.builtin.shell:
+    cmd: |
+      sudo virsh net-autostart default
+      # sudo virsh net-start default
