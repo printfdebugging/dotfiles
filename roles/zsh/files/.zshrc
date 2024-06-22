@@ -119,6 +119,7 @@ alias v='nvim'
 alias n='cd ~/repos/website/content/notes/ && nvim WORKPLAN.md'
 alias c="cd /home/$USER/"
 alias l="cd /home/$USER/repos/libreoffice/"
+alias x="clear"
 alias dif="git diff HEAD~ HEAD | delta"
 alias e="[ -f '/home/printfdebugging/repos/libreoffice/instdir/program/libcurl.so.4' ] \
     && rm /home/printfdebugging/repos/libreoffice/instdir/program/libcurl.so.4; \

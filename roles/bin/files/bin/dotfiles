@@ -8,8 +8,8 @@ function help() {
 dotfiles
     files           sync all the files
     packages        sync all the packages
-    full            full system configuration
-    status          git repositories status from /home/printfdebugging/repos/*
+    full            start full system setup
+    status          show pretty git status from /home/printfdebugging/repos/*
     init            install essential packages like ansible, python-watchdog..
 "
 }
