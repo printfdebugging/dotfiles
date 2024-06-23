@@ -7,10 +7,10 @@
     state: latest
     extra_args: "--nodeps --noconfirm --overwrite '*'"
   loop:
-    # - thunderbird
-    # - firefox
-    # - chromium
-    # - qtcreator
+    - thunderbird
+    - firefox
+    - chromium
+    - qtcreator
     - lua
     - cmake # need to learn it
     - ansible
