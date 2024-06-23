@@ -1,5 +1,7 @@
 - name: install user packages
-  tags: ["base", "packages"]
+  tags:
+    - base
+    - packages
   community.general.pacman:
     name: "{{ item }}"
     state: latest
@@ -40,7 +42,9 @@
 # Works nicely, but Dangerous though.
 # Or do this at the starting, and remove at the end as a handler task ??
 - name: Allow the `{{ ansible_user }}` user to run without passwords, like a king.
-  tags: ["brave", "aur"]
+  tags:
+    - brave
+    - aur
   become: yes
   ansible.builtin.lineinfile:
     path: /etc/sudoers.d/00_{{ ansible_user }}
@@ -50,49 +54,80 @@
     validate: "visudo -cf %s"
 
 - name: install brave browser on archlinux
-  tags: ["brave", "aur"]
+  become: false
+  tags:
+    - brave
+    - aur
   ansible.builtin.git:
     repo: https://aur.archlinux.org/brave-bin.git
     dest: /tmp/brave-bin
     update: true
-  become: false
 
 - name: run makepkg -si in the brave-bin directory
-  tags: ["brave", "aur"]
+  become: false
+  tags:
+    - aur
+    - brave
   ansible.builtin.shell:
     chdir: /tmp/brave-bin
     cmd: makepkg -si --noconfirm
+
+- name: install vscode on archlinux
   become: false
+  tags:
+    - vscode
+    - aur
+  ansible.builtin.git:
+    repo: https://aur.archlinux.org/visual-studio-code-bin.git
+    dest: /tmp/vscode
+    update: true
+
+- name: run makepkg -si in the vscode directory
+  become: false
+  tags:
+    - vscode
+    - aur
+  ansible.builtin.shell:
+    chdir: /tmp/vscode
+    cmd: makepkg -si --noconfirm
 
 # Colored font setup
 - name: clone ttf-twemoji font from aur
-  tags: ["font", "aur"]
+  become: false
+  tags:
+    - aur
+    - fonts
   ansible.builtin.git:
     repo: https://aur.archlinux.org/ttf-twemoji.git
     dest: /tmp/ttf-twemoji
     update: true
-  become: false
 
 - name: run makepkg -si in ttf-twemoji directory
-  tags: ["font", "aur"]
+  become: false
+  tags:
+    - fonts
+    - aur
   ansible.builtin.shell:
     chdir: /tmp/ttf-twemoji
     cmd: makepkg -si --noconfirm
-  become: false
 
 - name: copy fontconfig to /etc/fonts/conf.d/
-  tags: ["font", "aur"]
+  become: true
+  tags:
+    - fonts
+    - aur
   ansible.builtin.copy:
     src: /usr/share/fontconfig/conf.avail/75-twemoji.conf
     dest: /etc/fonts/conf.d/75-twemoji.conf
     owner: root
     group: root
     mode: 0644
-  become: true
 
 - name: Remove NOPASSWD entry for {{ ansible_user }}
-  tags: ["brave", "aur"]
   become: true
+  tags:
+    - brave
+    - aur
   ansible.builtin.lineinfile:
     path: /etc/sudoers.d/00_{{ ansible_user }}
     line: "{{ ansible_user }} ALL=(ALL) NOPASSWD: ALL"

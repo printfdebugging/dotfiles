@@ -54,7 +54,7 @@
   become: false
   tags:
     - zsh
-    - file
+    - files
   ansible.builtin.file:
     path: /home/{{ ansible_user }}/.cache/zsh/history
     group: "{{ ansible_user }}"
