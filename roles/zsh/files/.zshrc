@@ -116,7 +116,7 @@ export XDG_VIDEOS_DIR="$HOME/downloads"
 ##############
 alias t='tmux'
 alias v='nvim'
-alias n='cd ~/repos/website/content/notes/ && nvim WORKPLAN.md'
+alias n='cd ~/repos/website/content/notes/ && nvim TABULO.md'
 alias c="cd /home/$USER/"
 alias l="cd /home/$USER/repos/libreoffice/"
 alias x="clear"

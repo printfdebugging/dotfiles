@@ -75,12 +75,12 @@ local function open_terminal_in_first_tab()
 end
 
 -- Set up an autocmd to ensure the first tab is always a terminal
-vim.api.nvim_create_autocmd("VimEnter", {
-	callback = open_terminal_in_first_tab,
-})
-vim.cmd([[
-  augroup Terminal
-    autocmd!
-    autocmd TermOpen "terminal" setlocal nonumber norelativenumber
-  augroup END
-]])
+-- vim.api.nvim_create_autocmd("VimEnter", {
+-- 	callback = open_terminal_in_first_tab,
+-- })
+-- vim.cmd([[
+--   augroup Terminal
+--     autocmd!
+--     autocmd TermOpen "terminal" setlocal nonumber norelativenumber
+--   augroup END
+-- ]])
