@@ -38,7 +38,7 @@ require("lazy").setup({
 		commit = "29be0919b91fb59eca9e90690d76014233392bef",
 		config = function()
 			require("ibl").setup({
-				indent = { char = "┆" },
+				indent = { char = "│" },
 				whitespace = {
 					remove_blankline_trail = false,
 				},
