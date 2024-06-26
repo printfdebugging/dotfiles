@@ -33,30 +33,23 @@
 ** DOOM THEMES
 
 #+BEGIN_SRC emacs-lisp
-;; (use-package doom-themes
-;;   :ensure t
-;;   :config
-;;   ;; Global settings (defaults)
-;;   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-;;         doom-themes-enable-italic t) ; if nil, italics is universally disabled
-;;   (load-theme 'doom-palenight t)
+(use-package doom-themes
+  :ensure t
+  :config
+  ;; Global settings (defaults)
+  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  (load-theme 'doom-palenight t)
 
-;;   ;; Enable flashing mode-line on errors
-;;   (doom-themes-visual-bell-config)
-;;   ;; Enable custom neotree theme (all-the-icons must be installed!)
-;;   ;; (doom-themes-neotree-config)
-;;   ;; or for treemacs users
-;;   ;; (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
-;;   ;; (doom-themes-treemacs-config)
-;;   ;; Corrects (and improves) org-mode's native fontification.
-;;   (doom-themes-org-config))
-(use-package catppuccin-theme
-  :ensure t)
-(setq catppuccin-flavor 'frappe) ;; or 'latte, 'macchiato, or 'mocha
-(catppuccin-set-color 'base "#000104") ;; change base to #000000 for the currently active flavor
-(catppuccin-set-color 'crust "#222222" 'frappe) ;; change crust to #222222 for frappe
-(add-hook 'server-after-make-frame-hook #'catppuccin-reload)
-(catppuccin-reload)
+  ;; Enable flashing mode-line on errors
+  (doom-themes-visual-bell-config)
+  ;; Enable custom neotree theme (all-the-icons must be installed!)
+  ;; (doom-themes-neotree-config)
+  ;; or for treemacs users
+  ;; (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
+  ;; (doom-themes-treemacs-config)
+  ;; Corrects (and improves) org-mode's native fontification.
+  (doom-themes-org-config))
 #+END_SRC
 
 ** DOOM MODELINE
@@ -65,7 +58,7 @@
 (use-package doom-modeline
   :ensure t
   :hook (after-init . doom-modeline-mode))
-    (setq doom-modeline-height 35)
+    (setq doom-modeline-height 26)
     ;; (setq my/default-modeline-active "#181818")
     ;; (setq my/default-modeline-inactive "#000404")
 ;;    (set-face-attribute 'mode-line-inactive nil :font "JetBrainsMono Nerd Font" :height 127 :background my/default-modeline-inactive)
@@ -74,6 +67,8 @@
 (use-package nerd-icons
   :ensure t)
 #+end_src
+
+#+RESULTS:
 
 ** HIDE SOURCE BLOCK MARKERS
 
@@ -179,11 +174,11 @@
 ** FONT CONFIGURATION
 
 #+begin_src emacs-lisp
-(set-face-attribute 'variable-pitch nil :family "JetBrainsMono Nerd Font" :height 145 :weight 'Regular)
-(set-face-attribute 'default nil :family "JetBrainsMono Nerd Font" :height 145 :weight 'Regular)
-(set-face-attribute 'fixed-pitch nil :family "JetBrainsMono Nerd Font" :height 145 :weight 'Regular)
+(set-face-attribute 'variable-pitch nil :family "JetBrainsMono Nerd Font" :height 125 :weight 'Regular)
+(set-face-attribute 'default nil :family "JetBrainsMono Nerd Font" :height 125 :weight 'Regular)
+(set-face-attribute 'fixed-pitch nil :family "JetBrainsMono Nerd Font" :height 125 :weight 'Regular)
 
-(setq my/variable-width-font "Iosevka Aile")
+(setq my/variable-width-font "JetBrainsMono Nerd Font")
 (dolist (face '((org-level-1 . 1.3)
                 (org-level-2 . 1.2)
                 (org-level-3 . 1.2)
@@ -276,7 +271,6 @@
    "z" (lambda () (interactive) (efs/toggle-vterm))
    ;; "sh" 'evil-window-split
    ;; "sv" 'evil-window-vsplit
-   "e" 'treemacs
    "1" (lambda () (interactive) (jump-to-nth-bookmark 1))
    "2" (lambda () (interactive) (jump-to-nth-bookmark 2))
    "3" (lambda () (interactive) (jump-to-nth-bookmark 3))
@@ -303,17 +297,17 @@
 ** ORG ROAM (wiki)
 
 #+begin_src emacs-lisp
-(use-package org-roam
-  :ensure t
-  :init
-    (setq org-roam-v2-ack t)
-  :custom
-    (org-roam-directory "~/repos/github/files/RoamNotes")
-    (org-roam-completion-everywhere t)
-  :config
-    (org-roam-db-autosync-mode))
-(setq org-hide-block-startup t
-      org-startup-folded "fold")
+;; (use-package org-roam
+;;   :ensure t
+;;   :init
+;;     (setq org-roam-v2-ack t)
+;;   :custom
+;;     (org-roam-directory "~/repos/github/files/RoamNotes")
+;;     (org-roam-completion-everywhere t)
+;;   :config
+;;     (org-roam-db-autosync-mode))
+;; (setq org-hide-block-startup t
+;;       org-startup-folded "fold")
 #+end_src
 
 When the cursor is on an org-roam link, and enter is pressed, then it should open the link's buffer. Kinda similar
@@ -516,13 +510,6 @@ be my first professional emacs-lisp function.
   (dired-mode . nerd-icons-dired-mode))
 #+END_SRC
 
-** TREEMACS
-
-#+BEGIN_SRC emacs-lisp
-(use-package treemacs
-  :ensure t)
-(setf treemacs-follow-mode nil)
-#+END_SRC
 
 ** MU4E
 

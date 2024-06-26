@@ -85,6 +85,10 @@
         path: "/home/{{ ansible_user }}/repos/ray-tracing-in-one-weekend",
       },
       {
+        repo: "{{ my_github_handle }}/lee.git",
+        path: "/home/{{ ansible_user }}/repos/lee",
+      },
+      {
         repo: "{{ my_github_handle }}/brave.git",
         path: "/home/{{ ansible_user }}/.config/BraveSoftware/Brave-Browser",
       },

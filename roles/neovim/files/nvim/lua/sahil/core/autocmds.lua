@@ -29,28 +29,29 @@ vim.cmd([[
 
 -- format all the c/cpp files with clang-format except for the files
 -- which have "/home/printf/repos/libreoffice/" in the path
-local cpp_formating_group = vim.api.nvim_create_augroup("CppFormatingWithClangd", { clear = true })
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "c", "cpp" },
-	group = cpp_formating_group,
-	callback = function(args)
-		vim.api.nvim_create_autocmd("BufWritePre", {
-			buffer = args.buf,
-			group = cpp_formating_group,
-			callback = function()
-				if not string.find(vim.fn.expand("%:p"), "/home/printfdebugging/repos/libreoffice/") then
-					vim.lsp.buf.format({ async = false, bufnr = args.buf })
-				end
-			end,
-		})
-	end,
-})
+-- local cpp_formating_group = vim.api.nvim_create_augroup("CppFormatingWithClangd", { clear = true })
+-- vim.api.nvim_create_autocmd("FileType", {
+-- 	pattern = { "c", "cpp" },
+-- 	group = cpp_formating_group,
+-- 	callback = function(args)
+-- 		vim.api.nvim_create_autocmd("BufWritePre", {
+-- 			buffer = args.buf,
+-- 			group = cpp_formating_group,
+-- 			callback = function()
+-- 				if not string.find(vim.fn.expand("%:p"), "/home/printfdebugging/repos/libreoffice/") then
+-- 					vim.lsp.buf.format({ async = false, bufnr = args.buf })
+-- 				end
+-- 			end,
+-- 		})
+-- 	end,
+-- })
 
 -- " Define an autocommand group to avoid duplication
 vim.cmd([[
   augroup MatchParenHighlight
     autocmd!
     autocmd BufEnter * hi MatchParen guifg=NONE guibg=NONE
+    autocmd BufWinEnter * set relativenumber number signcolumn=yes
   augroup END
 ]])
 
