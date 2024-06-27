@@ -22,9 +22,6 @@ require("lazy").setup({
 		priority = 1000,
 		config = true,
 	},
-	{
-		"NTBBloodbath/doom-one.nvim",
-	},
 
 	{
 		"nvim-treesitter/nvim-treesitter",

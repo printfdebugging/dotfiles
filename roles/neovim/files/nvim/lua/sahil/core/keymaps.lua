@@ -125,8 +125,7 @@ end
 
 -- Key mappings
 vim.keymap.set("n", "<C-t>", ":tabnew<CR>")
-vim.keymap.set("n", "<C-q>", "<C-w>", { noremap = true })
-vim.keymap.set("n", "<C-w>", custom_tabclose, { noremap = true, silent = true, nowait = true })
+vim.keymap.set("n", "<C-q>", custom_tabclose, { noremap = true, silent = true, nowait = true })
 
 for i = 1, 9 do
 	vim.api.nvim_set_keymap("n", "<C-" .. i .. ">", i .. "gt", { noremap = true, silent = true })
