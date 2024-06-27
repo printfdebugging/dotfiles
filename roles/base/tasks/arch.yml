@@ -11,6 +11,7 @@
     - firefox
     - chromium
     - qtcreator
+    - obsidian
     - lua
     - cmake # need to learn it
     - ansible
