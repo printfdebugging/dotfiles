@@ -27,6 +27,6 @@
     - xorg
     - yt-dlp
     - zsh
-
+    # these are for when I have super fast internet
     # - qemu-kvm
     # - developement

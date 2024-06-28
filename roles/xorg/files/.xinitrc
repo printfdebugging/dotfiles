@@ -6,5 +6,6 @@ flameshot &
 pasystray &
 nm-applet &
 thunderbird &
+obsidian &
 xcompmgr &
 exec dwm
