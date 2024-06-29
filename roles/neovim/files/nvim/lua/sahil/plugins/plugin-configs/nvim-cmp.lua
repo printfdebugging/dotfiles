@@ -97,8 +97,8 @@ local on_attach = function(client, bufnr)
 	keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", opts) -- show documentation for what is under cursor
 	keymap.set("n", "<leader>o", "<cmd>LSoutlineToggle<CR>", opts) -- see outline on right hand side
 	keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-	vim.keymap.set("n", "<M-n>", ":cnext<CR>")
-	vim.keymap.set("n", "<M-p>", ":cprev<CR>")
+	vim.keymap.set("n", "<C-n>", ":cnext<CR>")
+	vim.keymap.set("n", "<C-p>", ":cprev<CR>")
 end
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
