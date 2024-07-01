@@ -58,7 +58,7 @@
 (use-package doom-modeline
   :ensure t
   :hook (after-init . doom-modeline-mode))
-    (setq doom-modeline-height 26)
+    (setq doom-modeline-height 34)
     ;; (setq my/default-modeline-active "#181818")
     ;; (setq my/default-modeline-inactive "#000404")
 ;;    (set-face-attribute 'mode-line-inactive nil :font "JetBrainsMono Nerd Font" :height 127 :background my/default-modeline-inactive)
@@ -67,8 +67,6 @@
 (use-package nerd-icons
   :ensure t)
 #+end_src
-
-#+RESULTS:
 
 ** HIDE SOURCE BLOCK MARKERS
 
@@ -129,12 +127,12 @@
   (org-babel-result-hide-all)
   (display-line-numbers-mode))
 
-;; (defun my-function-before-entering-buffer ()
-;;   "Your custom function to be executed before entering each new buffer."
-;;   (efs/relative-line-numbers))
+(defun my-function-before-entering-buffer ()
+  "Your custom function to be executed before entering each new buffer."
+  (efs/relative-line-numbers))
 
-;; (add-hook 'find-file-hook 'my-function-before-entering-buffer)
-;; (add-hook 'switch-to-buffer-hook 'my-function-before-entering-buffer)
+(add-hook 'find-file-hook 'my-function-before-entering-buffer)
+(add-hook 'switch-to-buffer-hook 'my-function-before-entering-buffer)
 
 (add-hook 'org-mode-hook (lambda () (variable-pitch-mode)))
 (add-hook 'prog-mode-hook (lambda () (efs/relative-line-numbers)))
@@ -161,10 +159,11 @@
 
 (defun my/org-present-start ()
   ;; Center the presentation and wrap lines
-(setq visual-fill-column-width 110
-  visual-fill-column-center-text t)
-  (visual-fill-column-mode 1)
-  (visual-line-mode 1))
+;; (setq visual-fill-column-width 110
+;;   visual-fill-column-center-text t)
+;;   (visual-fill-column-mode 1)
+  ;; (visual-line-mode 1)
+  )
 
 ;; Register hooks with org-present
 (add-hook 'org-mode-hook 'my/org-present-start)
@@ -174,12 +173,12 @@
 ** FONT CONFIGURATION
 
 #+begin_src emacs-lisp
-(set-face-attribute 'variable-pitch nil :family "JetBrainsMono Nerd Font" :height 125 :weight 'Regular)
-(set-face-attribute 'default nil :family "JetBrainsMono Nerd Font" :height 125 :weight 'Regular)
-(set-face-attribute 'fixed-pitch nil :family "JetBrainsMono Nerd Font" :height 125 :weight 'Regular)
+(set-face-attribute 'variable-pitch nil :family "JetBrainsMono Nerd Font" :height 145 :weight 'Regular)
+(set-face-attribute 'default nil :family "JetBrainsMono Nerd Font" :height 145 :weight 'Regular)
+(set-face-attribute 'fixed-pitch nil :family "JetBrainsMono Nerd Font" :height 145 :weight 'Regular)
 
 (setq my/variable-width-font "JetBrainsMono Nerd Font")
-(dolist (face '((org-level-1 . 1.3)
+(dolist (face '((org-level-1 . 1.4)
                 (org-level-2 . 1.2)
                 (org-level-3 . 1.2)
                 (org-level-4 . 1.0)
@@ -419,14 +418,12 @@ be my first professional emacs-lisp function.
 ** TRANSPARENCY
 
 #+BEGIN_SRC emacs-lisp :results output
-(set-frame-parameter nil 'alpha-background 85) ; For current frame
-(add-to-list 'default-frame-alist '(alpha-background . 85)) ; For all new frames henceforth
-(setq-default fill-column 90)
-;;;; disable the emacsclient message
-(setq server-client-instructions nil)
+;; (set-frame-parameter nil 'alpha-background 85) ; For current frame
+;; (add-to-list 'default-frame-alist '(alpha-background . 85)) ; For all new frames henceforth
+;; (setq-default fill-column 90)
+;; disable the emacsclient message
+;; (setq server-client-instructions nil)
 #+END_SRC
-
-#+RESULTS:
 
 ** LIST GLYPH
 
