@@ -1,20 +1,19 @@
 #+TITLE: Emacs Configuration
-#+AUTHOR: Printf Debugging
+#+AUTHOR: Sahil Gautam
 
 * GENERAL EMACS
 ** HIDE "*" FOR HEADINGS
 
 #+BEGIN_SRC emacs-lisp
-(defun me-org-mode-remove-stars ()
-  (font-lock-add-keywords
-   nil
-   '(("^\\*+ "
-      (0
-       (prog1 nil
-         (put-text-property (match-beginning 0) (match-end 0)
-                            'invisible t)))))))
-
-(add-hook 'org-mode-hook #'me-org-mode-remove-stars)
+;; (defun me-org-mode-remove-stars ()
+;;   (font-lock-add-keywords
+;;    nil
+;;    '(("^\\*+ "
+;;       (0
+;;        (prog1 nil
+;;          (put-text-property (match-beginning 0) (match-end 0)
+;;                             'invisible t)))))))
+;; (add-hook 'org-mode-hook #'me-org-mode-remove-stars)
 #+END_SRC
 
 ** EVIL MODE
@@ -25,8 +24,7 @@
   :config
   (evil-set-undo-system 'undo-redo)
   :init
-  (evil-mode 1)
-  ) 
+  (evil-mode 1)) 
 (setq-default fill-column 90)
 #+end_src
 
@@ -39,7 +37,7 @@
   ;; Global settings (defaults)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  (load-theme 'doom-palenight t)
+  (load-theme 'doom-one t)
 
   ;; Enable flashing mode-line on errors
   (doom-themes-visual-bell-config)
@@ -58,11 +56,7 @@
 (use-package doom-modeline
   :ensure t
   :hook (after-init . doom-modeline-mode))
-    (setq doom-modeline-height 34)
-    ;; (setq my/default-modeline-active "#181818")
-    ;; (setq my/default-modeline-inactive "#000404")
-;;    (set-face-attribute 'mode-line-inactive nil :font "JetBrainsMono Nerd Font" :height 127 :background my/default-modeline-inactive)
- ;;   (set-face-attribute 'mode-line-active nil :font "JetBrainsMono Nerd Font" :height 127 :background  my/default-modeline-active)
+    (setq doom-modeline-height 24)
 
 (use-package nerd-icons
   :ensure t)
@@ -71,22 +65,22 @@
 ** HIDE SOURCE BLOCK MARKERS
 
 #+BEGIN_SRC emacs-lisp
-(add-hook 'org-mode-hook
-          '(lambda ()
-             (set-face-attribute 'org-block nil 
-                                 :inherit 'default
-                                 :foreground nil
-                                 :inherit 'fixed-pitch
-                                 :background "#232635")
-             (set-face-attribute 'org-block-begin-line nil
-                                 :inherit 'default
-                                 :foreground "#232635"
-                                 :inherit 'fixed-pitch
-                                 :background "#232635")
-             (set-face-attribute 'org-block-end-line nil
-                                 :foreground "#232635"
-                                 :inherit 'fixed-pitch
-                                 :background "#232635")))
+;; (add-hook 'org-mode-hook
+;;           '(lambda ()
+;;              (set-face-attribute 'org-block nil 
+;;                                  :inherit 'default
+;;                                  :foreground nil
+;;                                  :inherit 'fixed-pitch
+;;                                  :background "#232635")
+;;              (set-face-attribute 'org-block-begin-line nil
+;;                                  :inherit 'default
+;;                                  :foreground "#232635"
+;;                                  :inherit 'fixed-pitch
+;;                                  :background "#232635")
+;;              (set-face-attribute 'org-block-end-line nil
+;;                                  :foreground "#232635"
+;;                                  :inherit 'fixed-pitch
+;;                                  :background "#232635")))
 #+END_SRC
 
 ** UI ENHANCEMENTS
@@ -94,7 +88,7 @@
 #+begin_src emacs-lisp
 (setq scroll-conservatively 100)
 (setq ring-bell-function 'ignore)
-(when window-system (global-hl-line-mode t))
+;; (when window-system (global-hl-line-mode t))
 (when window-system (global-prettify-symbols-mode t))
 (tool-bar-mode -1)
 (menu-bar-mode -1)
@@ -103,7 +97,7 @@
 ;; (setq initial-scratch-message "")
 (setq inhibit-startup-message t)
 (setq standard-indent 2)
-(global-hl-line-mode -1)
+(global-hl-line-mode 1)
 (setq minibuffer-eldoc-mode nil)
 (fringe-mode 2)
 (setq inhibit-startup-message t)
@@ -135,11 +129,14 @@
 (add-hook 'switch-to-buffer-hook 'my-function-before-entering-buffer)
 
 (add-hook 'org-mode-hook (lambda () (variable-pitch-mode)))
+(add-hook 'org-mode-hook (lambda () (org-indent-mode)))
 (add-hook 'prog-mode-hook (lambda () (efs/relative-line-numbers)))
 ;; (add-hook 'org-mode-hook (lambda () (efs/relative-line-numbers)))
 ;; (add-hook 'text-mode-hook (lambda () (efs/relative-line-numbers)))
 (setq make-backup-files nil) ; stop creating ~ files
 #+end_src
+
+#+RESULTS:
 
 ** ORG APPEAR
 
@@ -173,23 +170,31 @@
 ** FONT CONFIGURATION
 
 #+begin_src emacs-lisp
-(set-face-attribute 'variable-pitch nil :family "JetBrainsMono Nerd Font" :height 145 :weight 'Regular)
-(set-face-attribute 'default nil :family "JetBrainsMono Nerd Font" :height 145 :weight 'Regular)
-(set-face-attribute 'fixed-pitch nil :family "JetBrainsMono Nerd Font" :height 145 :weight 'Regular)
+(set-face-attribute 'variable-pitch nil :family "JetBrainsMono Nerd Font" :height 100 :weight 'Regular)
+(set-face-attribute 'default nil :family "JetBrainsMono Nerd Font" :height 100 :weight 'Regular)
+(set-face-attribute 'fixed-pitch nil :family "JetBrainsMono Nerd Font" :height 100 :weight 'Regular)
 
 (setq my/variable-width-font "JetBrainsMono Nerd Font")
-(dolist (face '((org-level-1 . 1.4)
-                (org-level-2 . 1.2)
-                (org-level-3 . 1.2)
-                (org-level-4 . 1.0)
-                (org-level-5 . 1.0)
-                (org-level-6 . 1.0)
-                (org-level-7 . 1.0)
-                (org-level-8 . 1.0)))
-  (set-face-attribute (car face) nil :font my/variable-width-font :weight 'medium :height (cdr face)))
+
+;; (dolist (face '((org-level-1 . "#000000")
+;;                 (org-level-2 . "#000000")
+;;                 (org-level-3 . "#000000")
+;;                 (org-level-4 . "#000000")
+;;                 (org-level-5 . "#000000")
+;;                 (org-level-6 . "#000000")
+;;                 (org-level-7 . "#000000")
+;;                 (org-level-8 . "#000000")))
+;;   (set-face-attribute (car face) nil
+;;                       :font my/variable-width-font
+;;                       :weight 'bold
+;;                       :foreground (cdr face)))
 
 ;; Make the document title a bit bigger
-(set-face-attribute 'org-document-title nil :font my/variable-width-font :weight 'bold :height 1.4)
+(set-face-attribute 'org-document-title nil
+                        :font my/variable-width-font
+                        :weight 'bold
+                        :height 1.2
+                        :foreground "#51afef")
 
 ;; Make sure certain org faces use the fixed-pitch face when variable-pitch-mode is on
 (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
@@ -200,11 +205,11 @@
 (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
 (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
 (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)
-(set-face-attribute 'org-level-1 nil :foreground "#fab387" :weight 'Bold)
-(set-face-attribute 'org-level-2 nil :foreground "#7F669D" :weight 'Bold)
-(set-face-attribute 'org-level-4 nil :weight 'Bold)
-(set-face-attribute 'org-level-3 nil :weight 'Bold :font "JetBrainsMono Nerd Font" :height 145)
-(set-face-attribute 'org-link nil :underline nil :foreground "#7DBBF7" :weight 'medium :height 1.0) 
+;; (set-face-attribute 'org-level-1 nil :foreground "#fab387" :weight 'Bold)
+;; (set-face-attribute 'org-level-2 nil :foreground "#7F669D" :weight 'Bold)
+;; (set-face-attribute 'org-level-4 nil :weight 'Bold)
+;; (set-face-attribute 'org-level-3 nil :weight 'Bold :font "JetBrainsMono Nerd Font" :height 145)
+;; (set-face-attribute 'org-link nil :underline nil :foreground "#7DBBF7" :weight 'medium :height 1.0) 
 #+end_src
 
 ** KEYBINDINGS
@@ -296,17 +301,17 @@
 ** ORG ROAM (wiki)
 
 #+begin_src emacs-lisp
-;; (use-package org-roam
-;;   :ensure t
-;;   :init
-;;     (setq org-roam-v2-ack t)
-;;   :custom
-;;     (org-roam-directory "~/repos/github/files/RoamNotes")
-;;     (org-roam-completion-everywhere t)
-;;   :config
-;;     (org-roam-db-autosync-mode))
-;; (setq org-hide-block-startup t
-;;       org-startup-folded "fold")
+(use-package org-roam
+  :ensure t
+  :init
+    (setq org-roam-v2-ack t)
+  :custom
+    (org-roam-directory "~/repos/notes")
+    (org-roam-completion-everywhere t)
+  :config
+    (org-roam-db-autosync-mode))
+(setq org-hide-block-startup t
+      org-startup-folded "fold")
 #+end_src
 
 When the cursor is on an org-roam link, and enter is pressed, then it should open the link's buffer. Kinda similar
@@ -428,9 +433,9 @@ be my first professional emacs-lisp function.
 ** LIST GLYPH
 
 #+BEGIN_SRC emacs-lisp
-(font-lock-add-keywords 'org-mode
-                          '(("^ *\\([-]\\) "
-                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+;; (font-lock-add-keywords 'org-mode
+;;                           '(("^ *\\([-]\\) "
+;;                              (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
 #+END_SRC
 
 ** INDENTATION SOURCE BLOCKS
@@ -438,7 +443,7 @@ be my first professional emacs-lisp function.
 #+BEGIN_SRC emacs-lisp
 (setq org-src-preserve-indentation t)
 (setq org-src-tab-acts-natively nil)
-(setq tab-width 4)
+(setq tab-width 2)
 (setq-default indent-tabs-mode nil)
 (setq indent-tabs-mode nil)
 #+end_src
@@ -504,9 +509,19 @@ be my first professional emacs-lisp function.
 (use-package nerd-icons-dired
   :ensure t
   :hook
-  (dired-mode . nerd-icons-dired-mode))
+  (dired-mode . nerd-icons-dired-mode)
+  (dired-mode . diredfl-mode))
 #+END_SRC
 
+** Org bullets
+
+#+BEGIN_SRC emacs-lisp
+(use-package org-bullets
+  :ensure t
+  :hook (org-mode . org-bullets-mode)
+  :config
+  (setq org-bullets-bullet-list '( "◉" "✸" "⁖" "✿" )))
+#+END_SRC
 
 ** MU4E
 

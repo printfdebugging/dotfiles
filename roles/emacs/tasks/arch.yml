@@ -7,43 +7,29 @@
     state: latest
     extra_args: "--nodeps --noconfirm --overwrite '*'"
 
-# - name: ensure config directory exists
-#   become: false
-#   tags:
-#     - emacs
-#     - files
-#   ansible.builtin.file:
-#     path: "/home/{{ ansible_user }}/.config/emacs"
-#     state: directory
-#     owner: "{{ ansible_user }}"
-#     group: "{{ ansible_user }}"
-#     mode: "0755"
+- name: ensure config directory exists
+  become: false
+  tags:
+    - emacs
+    - files
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/.config/emacs"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0755"
 
-# - name: copy emacs config files
-#   become: false
-#   tags:
-#     - emacs
-#     - files
-#   ansible.builtin.copy:
-#     src: "{{ item }}"
-#     dest: /home/{{ ansible_user }}/.config/emacs/{{ item }}
-#     owner: "{{ ansible_user }}"
-#     group: "{{ ansible_user }}"
-#     mode: 0755
-#   loop:
-#     - init.el
-#     - config.org
-
-- name: copy doom emacs configuration
+- name: copy emacs config files
   become: false
   tags:
     - emacs
     - files
   ansible.builtin.copy:
-    src: doom
-    dest: /home/{{ ansible_user }}/.config
+    src: "{{ item }}"
+    dest: /home/{{ ansible_user }}/.config/emacs/{{ item }}
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
     mode: 0755
-# for  the time being, I will install doom emacs manually, and will
-# decide later on what to do
+  loop:
+    - init.el
+    - config.org
