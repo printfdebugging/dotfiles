@@ -5,7 +5,8 @@ setupscript &
 flameshot &
 pasystray &
 nm-applet &
+ema &
 thunderbird &
 xcompmgr &
 
-exec dwm
+exec awesome

@@ -6,7 +6,5 @@ then
     # If Emacs is running, open a new client
     emacsclient -nc "$@"
 else
-    # If Emacs is not running, start the daemon and open a client
     emacs --daemon
-    emacsclient -nc
 fi
