@@ -65,8 +65,8 @@
         path: "/home/{{ ansible_user }}/repos/files",
       },
       {
-        repo: "{{ my_github_handle }}/website.git",
-        path: "/home/{{ ansible_user }}/repos/website",
+        repo: "{{ my_github_handle }}/notes.git",
+        path: "/home/{{ ansible_user }}/repos/notes",
       },
       {
         repo: "{{ my_github_handle }}/brave.git",
