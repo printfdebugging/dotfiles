@@ -1,0 +1,45 @@
+#
+# #!/bin/bash
+#
+# # Get the audio sink index
+# sink_index=$(pactl list sinks | grep 'Sink #' | awk -F'#' '{print $2}' | tr -d ' ')
+#
+# # Get the volume and mute status using pactl
+# volume_info=$(pactl list sinks | grep 'Volume:' | awk -v si="$sink_index" 'NR==si+1 {print $5}')
+# mute_status=$(pactl list sinks | grep 'Mute:' | awk -v si="$sink_index" 'NR==si+1 {print $2}')
+#
+# # Emoji icons
+# volume_icon="🔊"
+# mute_icon="🔇"
+#
+# # Check if the audio is muted
+# if [[ "$mute_status" == "yes" ]]; then
+#     echo "[$mute_icon Muted]"
+# else
+#     echo "[$volume_icon $volume_info]"
+# fi
+#
+#
+#!/bin/bash
+
+# Get the sink index with the highest priority
+sink_index=$(pactl list sinks | grep 'Sink #' | awk -F'#' '{print $2}' | tr -d ' ')
+default_sink_index=$(pactl info | grep 'Default Sink' | awk '{print $3}')
+if [ -n "$default_sink_index" ]; then
+    sink_index="$default_sink_index"
+fi
+
+# Get the volume and mute status using pactl
+volume_info=$(pactl list sinks | grep 'Volume:' | awk -v si="$sink_index" 'NR==si+1 {print $5}')
+mute_status=$(pactl list sinks | grep 'Mute:' | awk -v si="$sink_index" 'NR==si+1 {print $2}')
+
+# Emoji icons
+volume_icon="🔊"
+mute_icon="🔇"
+
+# Check if the audio is muted
+if [[ "$mute_status" == "yes" ]]; then
+    echo " ($mute_icon Muted) "
+else
+    echo "  $volume_icon $volume_info  "
+fi

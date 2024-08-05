@@ -1,0 +1,35 @@
+- name: ensure config directory exists
+  become: false
+  tags:
+    - gtk
+    - files
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/.config/gtk-3.0"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0755"
+
+- name: copy gtkrc to .config
+  become: false
+  tags:
+    - gtk
+    - files
+  ansible.builtin.copy:
+    src: settings.ini
+    dest: /home/{{ ansible_user }}/.config/gtk-3.0/settings.ini
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+
+- name: copy back flameshot config from ~/.config/gtk-3.0
+  become: false
+  tags:
+    - save
+    - save-gtk
+  ansible.builtin.copy:
+    src: /home/{{ ansible_user }}/.config/gtk-3.0/settings.ini
+    dest: /home/{{ ansible_user }}/repos/dotfiles/roles/gtk-3.0/files/settings.ini
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0644

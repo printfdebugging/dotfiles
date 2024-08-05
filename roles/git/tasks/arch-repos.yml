@@ -1,0 +1,79 @@
+- name: install git and openssh
+  tags:
+    - git
+    - packages
+  community.general.pacman:
+    name:
+      - git
+      - openssh
+    state: latest
+    extra_args: "--nodeps --noconfirm --overwrite '*'"
+
+- name: ensure ~/repos exists
+  become: false
+  tags:
+    - git
+    - files
+  ansible.builtin.file:
+    path: /home/{{ ansible_user }}/repos
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+
+- name: ensure ~/downloads exists
+  become: false
+  tags:
+    - git
+    - files
+  ansible.builtin.file:
+    path: /home/{{ ansible_user }}/downloads
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+
+- name: ensure github.com is a known host
+  become: false
+  tags:
+    - git
+    - files
+  ansible.builtin.lineinfile:
+    dest: /home/{{ ansible_user }}/.ssh/known_hosts
+    create: yes
+    state: present
+    line: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
+    regexp: "^github\\.com"
+
+- name: clone git repositories
+  become: false
+  tags:
+    - git
+    - files
+  ansible.builtin.git:
+    repo: "{{ item.repo }}"
+    dest: "{{ item.path }}"
+    update: no
+  loop:
+    [
+      {
+        repo: "{{ my_github_handle }}/dotfiles.git",
+        path: "/home/{{ ansible_user }}/repos/dotfiles",
+      },
+      {
+        repo: "{{ my_github_handle }}/files.git",
+        path: "/home/{{ ansible_user }}/repos/files",
+      },
+      {
+        repo: "{{ my_github_handle }}/website.git",
+        path: "/home/{{ ansible_user }}/repos/website",
+      },
+      {
+        repo: "{{ my_github_handle }}/brave.git",
+        path: "/home/{{ ansible_user }}/.config/BraveSoftware/Brave-Browser",
+      },
+      {
+        repo: "{{ my_github_handle }}/thunderbird.git",
+        path: "/home/{{ ansible_user }}/.thunderbird",
+      },
+    ]

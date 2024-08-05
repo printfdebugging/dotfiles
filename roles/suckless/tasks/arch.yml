@@ -1,0 +1,72 @@
+- name: install suckless dependencies
+  tags:
+    - suckless
+    - packages
+  community.general.pacman:
+    name:
+      - base-devel
+      - libx11
+      - libxft
+      - libxinerama
+      - freetype2
+      - ttf-jetbrains-mono-nerd
+      - ttf-iosevka-nerd
+    state: latest
+    extra_args: "--nodeps --noconfirm --overwrite '*'"
+
+- name: Ensure source directory exists
+  become: false
+  tags:
+    - suckless
+    - files
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/.local/src"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0755"
+
+- name: copy source files to ~/.local/src
+  become: false
+  tags:
+    - suckless
+    - files
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: /home/{{ ansible_user }}/.local/src
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+  loop:
+    - dwm
+    - st
+    - dmenu
+
+- name: compile suckless software
+  become: true
+  tags:
+    - suckless
+    - files
+  shell: "make clean install"
+  args:
+    chdir: "/home/{{ ansible_user }}/.local/src/{{ item }}"
+  loop:
+    - dwm
+    - st
+    - dmenu
+
+- name: copy the .desktop file to /usr/share/xsessions/ as root
+  become: true
+  tags:
+    - suckless
+    - files
+  ansible.builtin.copy:
+    src: dwm.desktop
+    dest: /usr/share/xsessions/dwm.desktop
+    owner: "root"
+    group: "root"
+    mode: "0644"
+
+
+# no need to copy back suckless files, as I change the dotfiles directly
+# also I am moving to awesomewm, so no need for dwm.

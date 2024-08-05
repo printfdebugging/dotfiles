@@ -1,0 +1,57 @@
+- name: install neovim and dependencies
+  tags:
+    - neovim
+    - packages
+  community.general.pacman:
+    name:
+      - neovim
+      - git
+      - npm
+    state: latest
+    extra_args: "--nodeps --noconfirm --overwrite '*'"
+
+- name: copy config files to ~/.config
+  become: false
+  tags:
+    - neovim
+    - files
+  ansible.builtin.copy:
+    src: nvim
+    dest: /home/{{ ansible_user }}/.config
+    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user }}"
+    mode: 0755
+
+- name: copy back the config files from ~/.config/nvim
+  become: false
+  tags:
+    - save
+    - save-neovim
+  ansible.builtin.copy:
+    src: /home/{{ ansible_user }}/.config/nvim
+    dest: /home/{{ ansible_user }}/repos/dotfiles/roles/neovim/files
+    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user }}"
+    mode: 0755
+
+- name: clone par from aur
+  become: false
+  tags:
+    - aur
+    - packages
+    - neovim
+  ansible.builtin.git:
+    repo: https://aur.archlinux.org/par.git
+    dest: /tmp/par
+    update: true
+
+
+- name: run makepkg -si in par directory
+  become: false
+  tags:
+    - neovim
+    - packages
+    - aur
+  ansible.builtin.shell:
+    chdir: /tmp/par
+    cmd: makepkg -si --noconfirm

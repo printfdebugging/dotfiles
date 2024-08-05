@@ -1,0 +1,44 @@
+- name: install flameshot on archlinux
+  tags:
+    - flameshot
+    - packages
+  community.general.pacman:
+    name: flameshot
+    state: latest
+    extra_args: "--nodeps --noconfirm --overwrite '*'"
+
+- name: ensure config directory exists
+  become: false
+  tags:
+    - flameshot
+    - files
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/.config/flameshot"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0755"
+
+- name: copy config files to ~/.config/flameshot
+  become: false
+  tags:
+    - flameshot
+    - files
+  ansible.builtin.copy:
+    src: flameshot.ini
+    dest: /home/{{ ansible_user }}/.config/flameshot/flameshot.ini
+    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user }}"
+    mode: 0755
+
+- name: copy back flameshot config from ~/.config/flameshot
+  become: false
+  tags:
+    - save
+    - save-flameshot
+  ansible.builtin.copy:
+    src: /home/{{ ansible_user }}/.config/flameshot/flameshot.ini
+    dest: /home/{{ ansible_user }}/repos/dotfiles/roles/flameshot/files/flameshot.ini
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0644

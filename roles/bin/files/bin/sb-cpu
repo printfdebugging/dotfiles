@@ -1,0 +1,6 @@
+#!/bin/sh
+
+
+result=$(sensors | awk '/Tctl:/ {print "🌡" $2}')
+echo "  $result  "
+# echo "[$result]"

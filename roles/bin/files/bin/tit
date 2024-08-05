@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# Check if xdotool is installed
+command -v xdotool >/dev/null 2>&1 || { echo >&2 "xdotool is required but not installed. Aborting."; exit 1; }
+
+# Check if a file is provided as an argument
+# if [ "$#" -ne 1 ]; then
+#     echo "Usage: $0 <text_file>"
+#     exit 1
+# fi
+
+# text_file="$1"
+text_file="/home/$USER/code.java";
+[ -f "$text_file" ] && true || notify-send "TypeiT" "File not found"
+
+# Check if the file exists
+if [ ! -f "$text_file" ]; then
+    echo "File not found: $text_file"
+    exit 1
+fi
+
+# Read the content of the file line by line and simulate keyboard input
+while IFS= read -r line; do
+    # Simulate typing the line
+    xdotool type "$line"
+    
+    # Simulate pressing Enter
+    xdotool key Return
+
+    # Adjust sleep duration if needed
+    # sleep 0.06
+done < "$text_file"
+
+echo "Simulation complete"

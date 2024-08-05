@@ -1,0 +1,27 @@
+---
+- hosts: all
+  become: true
+  pre_tasks:
+    - name: "Update Cache"
+      ansible.builtin.package:
+        update_cache: true
+
+- hosts: all
+  roles:
+    - ssh
+    - base
+    - awesome
+    - bin
+    - dunst
+    - flameshot
+    - git
+    - gtk-3.0
+    - mpv
+    - neovim
+    - suckless
+    - tmux
+    - wallpapers
+    - xorg
+    - yt-dlp
+    - zsh
+    - kitty

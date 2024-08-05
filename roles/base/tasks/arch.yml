@@ -1,0 +1,153 @@
+- name: install user packages
+  tags:
+    - base
+    - packages
+  community.general.pacman:
+    name: "{{ item }}"
+    state: latest
+    extra_args: "--nodeps --noconfirm --overwrite '*'"
+  loop:
+    - thunderbird
+    - firefox
+    - chromium
+    - qtcreator
+    - lua
+    - cmake # need to learn it
+    - ansible
+    - neofetch
+    - man-db
+    - btop
+    - vim
+    - pasystray
+    - pavucontrol
+    - unzip
+    - network-manager-applet
+    - python-pexpect
+    - ripgrep
+    - thunar
+    - breeze-icons
+    - ocean-sound-theme
+    - go
+    - xdotool
+    - netcat
+    - python-watchdog
+    - libreoffice-fresh
+    - loupe
+    - bear
+    - zola
+    - mtpfs
+    - gvfs-mtp
+    - mpv
+    - python-pip
+    - evince
+    - okular
+    - sfml
+    - gdb
+    - ntfs-3g
+    - obs-studio
+    - glade
+    - kitty
+
+# Works nicely, but Dangerous though.
+# Or do this at the starting, and remove at the end as a handler task ??
+- name: Allow the `{{ ansible_user }}` user to run without passwords, like a king.
+  tags:
+    - brave
+    - packages
+    - aur
+  become: yes
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers.d/00_{{ ansible_user }}
+    line: "{{ ansible_user }} ALL=(ALL) NOPASSWD: ALL"
+    create: yes
+    mode: 0644
+    validate: "visudo -cf %s"
+
+- name: install brave browser on archlinux
+  become: false
+  tags:
+    - brave
+    - packages
+    - aur
+  ansible.builtin.git:
+    repo: https://aur.archlinux.org/brave-bin.git
+    dest: /tmp/brave-bin
+    update: true
+
+- name: run makepkg -si in the brave-bin directory
+  become: false
+  tags:
+    - aur
+    - packages
+    - brave
+  ansible.builtin.shell:
+    chdir: /tmp/brave-bin
+    cmd: makepkg -si --noconfirm
+
+- name: install vscode on archlinux
+  become: false
+  tags:
+    - vscode
+    - packages
+    - aur
+  ansible.builtin.git:
+    repo: https://aur.archlinux.org/visual-studio-code-bin.git
+    dest: /tmp/vscode
+    update: true
+
+- name: run makepkg -si in the vscode directory
+  become: false
+  tags:
+    - vscode
+    - packages
+    - aur
+  ansible.builtin.shell:
+    chdir: /tmp/vscode
+    cmd: makepkg -si --noconfirm
+
+# Colored font setup
+- name: clone ttf-twemoji font from aur
+  become: false
+  tags:
+    - aur
+    - packages
+    - fonts
+  ansible.builtin.git:
+    repo: https://aur.archlinux.org/ttf-twemoji.git
+    dest: /tmp/ttf-twemoji
+    update: true
+
+- name: run makepkg -si in ttf-twemoji directory
+  become: false
+  tags:
+    - fonts
+    - packages
+    - aur
+  ansible.builtin.shell:
+    chdir: /tmp/ttf-twemoji
+    cmd: makepkg -si --noconfirm
+
+- name: copy fontconfig to /etc/fonts/conf.d/
+  become: true
+  tags:
+    - fonts
+    - packages
+    - aur
+  ansible.builtin.copy:
+    src: /usr/share/fontconfig/conf.avail/75-twemoji.conf
+    dest: /etc/fonts/conf.d/75-twemoji.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Remove NOPASSWD entry for {{ ansible_user }}
+  become: true
+  tags:
+    - brave
+    - packages
+    - aur
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers.d/00_{{ ansible_user }}
+    line: "{{ ansible_user }} ALL=(ALL) NOPASSWD: ALL"
+    state: absent
+    validate: "visudo -cf %s"

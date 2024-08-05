@@ -1,0 +1,7 @@
+- name: setup neovim on archlinux
+  ansible.builtin.import_tasks: arch.yml
+  when: ansible_os_family == "Archlinux"
+
+- name: setup neovim on debian
+  ansible.builtin.import_tasks: debian.yml
+  when: ansible_os_family == "Debian"
