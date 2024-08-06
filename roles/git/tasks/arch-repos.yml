@@ -69,6 +69,14 @@
         path: "/home/{{ ansible_user }}/repos/notes",
       },
       {
+        repo: "{{ my_github_handle }}/awesome.git",
+        path: "/home/{{ ansible_user }}/repos/awesome",
+      },
+      {
+        repo: "{{ my_github_handle }}/sfml-game-development.git",
+        path: "/home/{{ ansible_user }}/repos/sfml-game-development",
+      },
+      {
         repo: "{{ my_github_handle }}/brave.git",
         path: "/home/{{ ansible_user }}/.config/BraveSoftware/Brave-Browser",
       },

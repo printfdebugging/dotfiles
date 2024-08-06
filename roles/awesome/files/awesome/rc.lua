@@ -69,8 +69,8 @@ modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
-	awful.layout.suit.tile,
 	awful.layout.suit.floating,
+	awful.layout.suit.tile,
 	-- awful.layout.suit.tile.left,
 	-- awful.layout.suit.tile.bottom,
 	-- awful.layout.suit.tile.top,
@@ -228,7 +228,7 @@ awful.screen.connect_for_each_screen(function(s)
 
 	-- Create the wibox
 	s.mywibox = awful.wibar({
-		position = "bottom",
+		position = "top",
 		screen = s,
 		widget = {
 			layout = wibox.layout.align.horizontal,
@@ -262,8 +262,8 @@ awful.screen.connect_for_each_screen(function(s)
 		{ -- Right widgets
 			layout = wibox.layout.fixed.horizontal,
 			-- mykeyboardlayout,
-			wibox.widget.systray(),
 			-- mytextclock,
+			wibox.widget.systray(),
 			s.mylayoutbox,
 		},
 	})
@@ -301,10 +301,10 @@ globalkeys = gears.table.join(
 	awful.key({ modkey, "Shift" }, "k", function()
 		awful.client.swap.byidx(-1)
 	end, { description = "swap with previous client by index", group = "client" }),
-	awful.key({ modkey, "Control" }, "j", function()
+	awful.key({ modkey }, ".", function()
 		awful.screen.focus_relative(1)
 	end, { description = "focus the next screen", group = "screen" }),
-	awful.key({ modkey, "Control" }, "k", function()
+	awful.key({ modkey }, ",", function()
 		awful.screen.focus_relative(-1)
 	end, { description = "focus the previous screen", group = "screen" }),
 	awful.key({ modkey }, "u", awful.client.urgent.jumpto, { description = "jump to urgent client", group = "client" }),
@@ -403,7 +403,10 @@ clientkeys = gears.table.join(
 	awful.key({ modkey, "Control" }, "Return", function(c)
 		c:swap(awful.client.getmaster())
 	end, { description = "move to master", group = "client" }),
-	awful.key({ modkey }, "o", function(c)
+	awful.key({ modkey, "Shift" }, ".", function(c)
+		c:move_to_screen()
+	end, { description = "move to screen", group = "client" }),
+	awful.key({ modkey, "Shift" }, ",", function(c)
 		c:move_to_screen()
 	end, { description = "move to screen", group = "client" }),
 	awful.key({ modkey }, "t", function(c)
@@ -582,7 +585,7 @@ client.connect_signal("request::titlebars", function(c)
 		end)
 	)
 
-	awful.titlebar(c, { size = 25 }):setup({
+	awful.titlebar(c, { size = 20 }):setup({
 		{ -- Left
 			awful.titlebar.widget.iconwidget(c),
 			buttons = buttons,

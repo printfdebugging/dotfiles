@@ -7,7 +7,7 @@
  */
 static char *font =
     "Iosevka Nerd "
-    "Font:pixelsize=18:style=Regular:antialias=true:autohint=true";
+    "Font:pixelsize=16:style=Regular:antialias=true:autohint=true";
 static int borderpx = 0;
 
 /*
@@ -132,7 +132,7 @@ const char *colorname[] = {
     [15] = "#dfdfdf", /* white   (base8) */
 
     /* special colors */
-    [256] = "#1f1f1f", /* background */
+    [256] = "#282c34", /* background */
     [257] = "#d8dee9", /* foreground */
     [258] = "#d8dee9", /* cursor */
 };

@@ -12,7 +12,7 @@
     - xorg-xrandr
     - xorg-setxkbmap
     - xorg-xset
-    - xcompmgr
+    - picom
     - xwallpaper
     - xclip
     - xsel

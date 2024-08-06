@@ -94,6 +94,7 @@ vim.keymap.set("n", "<leader>gt", ":Gitsigns toggle_deleted<CR>")
 vim.keymap.set("n", "<leader>gn", ":Gitsigns next_hunk<CR>")
 vim.keymap.set("n", "<leader>gp", ":Gitsigns prev_hunk<CR>")
 vim.keymap.set("n", "<leader>gx", ":Gitsigns reset_hunk<CR>")
+vim.keymap.set("n", "<leader>n", ":Neorg workspace notes<CR>")
 
 -- PERSONAL CONVINIENCE
 keymap.set("n", "<leader>x", ":lua ExecuteCurrentFileProgram()<CR>", { noremap = true, silent = true })

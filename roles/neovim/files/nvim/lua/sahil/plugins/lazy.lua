@@ -36,6 +36,7 @@ require("lazy").setup({
 		config = function()
 			require("ibl").setup({
 				indent = { char = "│" },
+				exclude = { filetypes = { "norg" } },
 				whitespace = {
 					remove_blankline_trail = false,
 				},
@@ -275,18 +276,6 @@ require("lazy").setup({
 		"nvim-treesitter/playground",
 	},
 	{
-		"HakonHarnes/img-clip.nvim",
-		event = "VeryLazy",
-		opts = {
-			-- add options here
-			-- or leave it empty to use the default settings
-		},
-		keys = {
-			-- suggested keymap
-			{ "<leader>p", "<cmd>PasteImage<cr>", desc = "Paste image from system clipboard" },
-		},
-	},
-	{
 		"vhyrro/luarocks.nvim",
 		priority = 1001, -- this plugin needs to run before anything else
 		opts = {
@@ -294,36 +283,27 @@ require("lazy").setup({
 		},
 	},
 	{
-		"3rd/image.nvim",
+		"nvim-neorg/neorg",
+		lazy = false,
+		version = "*",
 		config = function()
-			require("image").setup({
-				backend = "kitty",
-				integrations = {
-					markdown = {
-						enabled = true,
-						clear_in_insert_mode = false,
-						download_remote_images = true,
-						only_render_image_at_cursor = false,
-						filetypes = { "markdown", "vimwiki" }, -- markdown extensions (ie. quarto) can go here
-					},
-					html = {
-						enabled = false,
-					},
-					css = {
-						enabled = false,
+			require("neorg").setup({
+				load = {
+					["core.defaults"] = {},
+					["core.concealer"] = {},
+					["core.dirman"] = {
+						config = {
+							workspaces = {
+								notes = "~/repos/notes",
+							},
+							default_workspace = "notes",
+						},
 					},
 				},
-				max_width = nil,
-				max_height = nil,
-				max_width_window_percentage = nil,
-				max_height_window_percentage = 50,
-				window_overlap_clear_enabled = false, -- toggles images when windows are overlapped
-				window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
-				editor_only_render_when_focused = false, -- auto show/hide images when the editor gains/looses focus
-				tmux_show_only_in_active_window = true, -- auto show/hide images in the correct Tmux window (needs visual-activity off)
-				hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp", "*.avif" }, -- render image files as images when opened
 			})
-			--
+
+			vim.wo.foldlevel = 99
+			vim.wo.conceallevel = 2
 		end,
 	},
 })

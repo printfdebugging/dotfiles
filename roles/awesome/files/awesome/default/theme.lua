@@ -12,10 +12,10 @@ local themes_path = "/home/printfdebugging/.config/awesome/"
 
 local theme = {}
 
-theme.font = "JetBrainsMono Nerd Font Regular 9"
+theme.font = "SF Pro Bold 9"
 
-theme.bg_normal = "#222222"
-theme.bg_focus = "#535d6c"
+theme.bg_normal = "#141617"
+theme.bg_focus = "#30393D"
 theme.bg_urgent = "#ff0000"
 theme.bg_minimize = "#444444"
 theme.bg_systray = theme.bg_normal
@@ -68,8 +68,10 @@ theme.menu_width = dpi(100)
 --theme.bg_widget = "#cc0000"
 
 -- Define the image to load
-theme.titlebar_close_button_normal = themes_path .. "default/titlebar/close_normal.png"
-theme.titlebar_close_button_focus = themes_path .. "default/titlebar/close_focus.png"
+theme.titlebar_close_button_normal = "/home/printfdebugging/grey.png"
+theme.titlebar_close_button_focus = "/home/printfdebugging/red.png"
+-- the image is created in gimp with 400 x 400 dimention, the circle layer has
+-- 250x250 dimention with 75x75 offset
 
 theme.titlebar_minimize_button_normal = themes_path .. "default/titlebar/minimize_normal.png"
 theme.titlebar_minimize_button_focus = themes_path .. "default/titlebar/minimize_focus.png"
@@ -94,7 +96,8 @@ theme.titlebar_maximized_button_focus_inactive = themes_path .. "default/titleba
 theme.titlebar_maximized_button_normal_active = themes_path .. "default/titlebar/maximized_normal_active.png"
 theme.titlebar_maximized_button_focus_active = themes_path .. "default/titlebar/maximized_focus_active.png"
 
-theme.wallpaper = themes_path .. "default/second.jpg"
+-- theme.wallpaper = themes_path .. "default/2.png"
+theme.wallpaper = "/home/printfdebugging/.local/share/wallpapers/mountain.jpg"
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = themes_path .. "default/layouts/fairhw.png"
