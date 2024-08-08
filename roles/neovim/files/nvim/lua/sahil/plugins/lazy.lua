@@ -290,7 +290,18 @@ require("lazy").setup({
 			require("neorg").setup({
 				load = {
 					["core.defaults"] = {},
-					["core.concealer"] = {},
+					["core.export"] = {},
+					["core.concealer"] = {
+						config = {
+							icons = {
+								code_block = {
+									content_only = false, -- Highlight the whole code block, not just content.
+									width = "content",
+									min_width = 122,
+								},
+							},
+						},
+					},
 					["core.dirman"] = {
 						config = {
 							workspaces = {

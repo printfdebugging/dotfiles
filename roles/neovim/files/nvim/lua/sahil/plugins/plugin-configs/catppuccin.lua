@@ -91,14 +91,21 @@ require("catppuccin").setup({
 				["@neorg.tags.ranged_verbatim.code_block"] = { bg = "#23272e" },
 				["@neorg.links.file"] = { fg = "#51afef", style = { "bold", "underline" } },
 
+				["@neorg.tags.ranged_verbatim.parameters"] = { fg = "#23272e" },
+				["@neorg.tags.ranged_verbatim.parameters.word"] = { fg = "#23272e" },
+				["@neorg.tags.ranged_verbatim.begin"] = { fg = "#23272e" },
+				["@neorg.tags.ranged_verbatim.end"] = { fg = "#23272e" },
+				["@neorg.tags.ranged_verbatim.name"] = { fg = "#23272e" },
+				["@neorg.tags.ranged_verbatim.name.word"] = { fg = "#23272e" },
+
 				--
-				-- ["@markup.heading.1.markdown"] = { fg = mocha.blue, style = { "bold" } },
-				-- ["@markup.heading.2.markdown"] = { fg = "#A9A1E1", style = { "bold" } },
-				-- ["@markup.heading.3.markdown"] = { fg = "#A9A1E1", style = { "bold" } },
-				-- ["@markup.heading.4.markdown"] = { fg = "#A9A1E1", style = { "bold" } },
-				-- ["@markup.heading.5.markdown"] = { fg = "#A9A1E1", style = { "bold" } },
-				-- ["@markup.heading.6.markdown"] = { fg = "#A9A1E1", style = { "bold" } },
-				-- ["@markup.link.label"] = { fg = mocha.blue, style = { "bold", "underline" } },
+				["@markup.heading.1.markdown"] = { fg = mocha.blue, style = { "bold" } },
+				["@markup.heading.2.markdown"] = { fg = "#A9A1E1", style = { "bold" } },
+				["@markup.heading.3.markdown"] = { fg = "#A9A1E1", style = { "bold" } },
+				["@markup.heading.4.markdown"] = { fg = "#A9A1E1", style = { "bold" } },
+				["@markup.heading.5.markdown"] = { fg = "#A9A1E1", style = { "bold" } },
+				["@markup.heading.6.markdown"] = { fg = "#A9A1E1", style = { "bold" } },
+				["@markup.link.label"] = { fg = mocha.blue, style = { "bold", "underline" } },
 			}
 		end,
 	},

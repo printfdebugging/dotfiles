@@ -6,6 +6,6 @@ flameshot &
 pasystray &
 nm-applet &
 thunderbird &
-picom &
+xcompmgr &
 
-exec awesome
+exec dwm

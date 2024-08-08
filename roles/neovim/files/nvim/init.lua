@@ -21,6 +21,5 @@ require("sahil.plugins.plugin-configs.nvim-dap-virt-text")
 -- Although image previewing works, it works only in kitty, and the text
 -- blurring in kitty is just unacceptable. I am switching back to st.
 require("sahil.plugins.plugin-configs.nvim-dap-go")
-
 require("sahil.core.keymaps")
 require("sahil.core.autocmds")

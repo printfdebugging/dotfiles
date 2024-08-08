@@ -55,6 +55,11 @@ vim.cmd([[
   augroup END
 ]])
 
+vim.api.nvim_create_autocmd("TermOpen", {
+	pattern = "*",
+	command = "setlocal nonumber norelativenumber",
+})
+
 -- Function to open a terminal in the first tab
 local function open_terminal_in_first_tab()
 	if vim.fn.tabpagenr("$") == 1 and vim.bo.filetype ~= "terminal" then

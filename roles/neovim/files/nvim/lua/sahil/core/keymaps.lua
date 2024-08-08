@@ -29,6 +29,8 @@ keymap.set("n", "<leader>rs", ":LspRestart<CR>") -- mapping to restart lsp if ne
 keymap.set("n", "<leader>oe", ":lua vim.diagnostic.open_float()<CR>") -- mapping to restart lsp if necessary
 keymap.set("n", "<leader>oo", ":FeMaco<CR>") -- mapping to restart lsp if necessary
 keymap.set("n", "<leader>gh", ':lua require("neogit").open()<CR>')
+keymap.set("n", "<", ":-tabmove<CR>") -- mapping to restart lsp if necessary
+keymap.set("n", ">", ":+tabmove<CR>") -- mapping to restart lsp if necessary
 
 -- NVIM-DAP
 keymap.set("n", "<F5>", function()
