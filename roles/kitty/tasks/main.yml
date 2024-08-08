@@ -1,0 +1,39 @@
+- name: ensure config directory exists
+  become: false
+  tags:
+    - kitty
+    - files
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/.config/kitty"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+
+- name: copy config files to ~/.config/kitty
+  become: false
+  tags:
+    - kitty
+    - files
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: /home/{{ ansible_user }}/.config/kitty/{{ item }}
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+  loop:
+    - kitty.conf
+
+- name: copy back kitty config from ~/.config/mpv
+  become: false
+  tags:
+    - save
+    - save-kitty
+  ansible.builtin.copy:
+    src: /home/{{ ansible_user }}/.config/kitty/{{ item }}
+    dest: /home/{{ ansible_user }}/repos/dotfiles/roles/kitty/files/{{ item }}
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0644
+  loop:
+    - kitty.conf
