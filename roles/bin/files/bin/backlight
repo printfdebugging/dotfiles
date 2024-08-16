@@ -1,0 +1,4 @@
+#!/bin/bash
+
+[ $1 = "up" ] && light -A 5 || light -U 5
+kill -38 $(pidof dwmblocks)

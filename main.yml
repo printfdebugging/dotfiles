@@ -1,0 +1,32 @@
+---
+- hosts: all
+  become: true
+  tags:
+    - full
+  tasks:
+    - name: update cache
+      ansible.builtin.package:
+        update_cache: true
+
+- hosts: all
+  roles:
+    - ssh
+    - base
+    - awesome
+    - bin
+    - flameshot
+    - git
+    - gtk-3.0
+    - mpv
+    - neovim
+    - suckless
+    - tmux
+    - wallpapers
+    - xorg
+    - yt-dlp
+    - zsh
+    - kitty
+    - picom
+    # - dunst
+    #
+    # add okular rc to it as well

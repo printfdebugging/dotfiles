@@ -1,0 +1,112 @@
+- name: Allow the `{{ ansible_user }}` user to run without passwords, like a king.
+  tags:
+    - aur
+    - packages
+  become: yes
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers.d/00_{{ ansible_user }}
+    line: "{{ ansible_user }} ALL=(ALL) NOPASSWD: ALL"
+    create: yes
+    mode: 0644
+    validate: "visudo -cf %s"
+
+- name: install aur helper on the system
+  become: false
+  tags:
+    - aur
+    - packages
+  ansible.builtin.shell:
+    cmd: |
+      cd /tmp
+      git clone https://aur.archlinux.org/yay-bin
+      cd yay-bin
+      makepkg -si --noconfirm
+
+- name: install packages using aur helper
+  become: false
+  tags:
+    - aur
+    - packages
+  ansible.builtin.shell:
+    cmd: |
+      /usr/bin/yay -S {{ item }} --noconfirm
+  loop:
+    - brave-bin
+    - visual-studio-code-bin
+    - ttf-twemoji
+    - par
+    - thunderbird
+    - firefox
+    - chromium
+    - qtcreator
+    - lua
+    - cmake # need to learn it
+    - ansible
+    - neofetch
+    - man-db
+    - btop
+    - vim
+    - pasystray
+    - pavucontrol
+    - unzip
+    - network-manager-applet
+    - python-pexpect
+    - ripgrep
+    - thunar
+    - breeze-icons
+    - ocean-sound-theme
+    - go
+    - xdotool
+    - netcat
+    - python-watchdog
+    - libreoffice-fresh
+    - loupe
+    - bear
+    - zola
+    - mtpfs
+    - gvfs-mtp
+    - mpv
+    - python-pip
+    - evince
+    - okular
+    - sfml
+    - gdb
+    - ntfs-3g
+    - obs-studio
+    - glade
+    - kitty
+    - luarocks
+    - imagemagick
+    - dunst
+    - xcompmgr
+    - apple-fonts
+    - discord
+    - picom
+    - qemu-desktop
+    - quickemu
+    - qt5-styleplugins
+    - qt5ct
+    - glfw
+
+- name: copy fontconfig to /etc/fonts/conf.d/
+  become: true
+  tags:
+    - aur
+    - packages
+  ansible.builtin.copy:
+    src: /usr/share/fontconfig/conf.avail/75-twemoji.conf
+    dest: /etc/fonts/conf.d/75-twemoji.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Remove NOPASSWD entry for {{ ansible_user }}
+  become: true
+  tags:
+    - aur
+    - packages
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers.d/00_{{ ansible_user }}
+    line: "{{ ansible_user }} ALL=(ALL) NOPASSWD: ALL"
+    state: absent
+    validate: "visudo -cf %s"

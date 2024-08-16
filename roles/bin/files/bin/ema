@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Check if Emacs daemon is running
+if pgrep -x "emacs" > /dev/null
+then
+    # If Emacs is running, open a new client
+    emacsclient -nc "$@"
+else
+    emacs --daemon
+fi

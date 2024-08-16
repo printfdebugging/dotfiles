@@ -1,0 +1,23 @@
+- name: copy scripts to the ~/.local/bin folder
+  become: false
+  tags:
+    - bin
+    - files
+  ansible.builtin.copy:
+    src: bin
+    dest: /home/{{ ansible_user }}/.local
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+
+- name: copy back config files from ~/.local/bin
+  become: false
+  tags:
+    - save
+    - save-bin
+  ansible.builtin.copy:
+    src: /home/{{ ansible_user }}/.local/bin
+    dest: "/home/{{ ansible_user }}/repos/dotfiles/roles/bin/files/"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755

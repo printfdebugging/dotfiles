@@ -1,0 +1,41 @@
+- name: ensure config directory exists
+  become: false
+  tags:
+    - mpv
+    - files
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/.config/mpv"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+
+- name: copy config files to ~/.config/mpv
+  become: false
+  tags:
+    - mpv
+    - files
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: /home/{{ ansible_user }}/.config/mpv/{{ item }}
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+  loop:
+    - input.conf
+    - mpv.conf
+
+- name: copy back mpv config from ~/.config/mpv
+  become: false
+  tags:
+    - save
+    - save-mpv
+  ansible.builtin.copy:
+    src: /home/{{ ansible_user }}/.config/mpv/{{ item }}
+    dest: /home/{{ ansible_user }}/repos/dotfiles/roles/mpv/files/{{ item }}
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0644
+  loop:
+    - input.conf
+    - mpv.conf

@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# Directory for storing bookmark files
+bookmarks_file="/home/$USER/repos/notes/bookmarks.md"
+icondir="/home/$USER/.local/share/icons/"
+
+# Check if the bookmarks directory and files exist
+[ -f "$bookmarks_file" ] && true || touch "$bookmarks_file"
+
+bookmarkImage="-i $icondir/bookmark64.png"
+
+# Get the focused tile info (is browser?)
+focused_window_id=$(xdotool getwindowfocus)
+window_title=$(xprop -id "$focused_window_id" | awk -F '"' '/^WM_NAME/{$2=$2; print $2}')
+window_class=$(xprop -id "$focused_window_id" | grep "WM_CLASS" | awk '{print $4}')
+
+# Check if the window is identified as a browser
+isBrave=$(echo "$window_class" | grep -iE "brave-browser") # check case insensitively
+isFirefox=$(echo "$window_class" | grep -iE "firefox")
+isChromium=$(echo "$window_class" | grep -iE "chromium")
+
+# Display debug information via notify-send
+# notify-send "Window Title: $window_title" "Window Class: $window_class"
+
+if [ -n "$isBrave" ]; then
+    browser_name="Brave"
+elif [ -n "$isFirefox" ]; then
+    browser_name="Firefox"
+elif [ -n "$isChromium" ]; then
+    browser_name="Chromium"
+else
+    browser_name=""
+fi
+
+if [ -n "$browser_name" ]; then
+    # Run the xdotool commands
+    /usr/bin/xdotool key --clearmodifiers ctrl+l key ctrl+c key Escape 
+
+    # Since we ran the xdotool commands, there has to be something on the clipboard
+    clipboard=$(xclip -sel clipboard -o)
+
+    echo "- [$window_title]($clipboard)" >> "$bookmarks_file" && \
+        notify-send -r 123455 -t 800 $bookmarkImage "Bookmarks" "$window_title\n\n$clipboard"
+
+    # Copy to primary and clipboard selections
+    echo "[[$clipboard][$window_title]]" | xclip -selection clipboard
+    echo "[[$clipboard][$window_title]]" | xclip -selection primary
+fi
+
