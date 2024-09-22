@@ -20,7 +20,7 @@ local options = {
 	splitright = true,
 	splitbelow = true,
 	pumheight = 12,
-	conceallevel = 2,
+	conceallevel = 3,
 	-- guicursor = "a:block",
 	hlsearch = true,
 	incsearch = true,
@@ -28,7 +28,7 @@ local options = {
 	updatetime = 50,
 	scroll = 4,
 	showtabline = 2,
-	-- concealcursor = "n",
+	concealcursor = "nvic",
 	-- mouse = "",
 	formatprg = "par jw122",
 }
@@ -78,6 +78,13 @@ vim.fn.sign_define(
 	{ text = "", texthl = "DapLogPoint", linehl = "DapLogPoint", numhl = "DapLogPoint" }
 )
 vim.fn.sign_define("DapStopped", { text = "", texthl = "DapStopped", linehl = "DapStopped", numhl = "DapStopped" })
+
+vim.api.nvim_create_augroup("MarkdownKeymap", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+	group = "MarkdownKeymap",
+	pattern = "markdown",
+	command = "setlocal keymap=accents",
+})
 
 -- vim.g.markdown_folding = 1
 -- opt.guicursor =

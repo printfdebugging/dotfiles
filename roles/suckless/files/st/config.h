@@ -7,7 +7,7 @@
  */
 static char *font =
     "Iosevka Nerd "
-    "Font:pixelsize=16:style=Regular:antialias=true:autohint=true";
+    "Font:pixelsize=20:style=Regular:antialias=true:autohint=true";
 static int borderpx = 0;
 
 /*
@@ -112,24 +112,23 @@ float alpha = 1.0;
 const char *colorname[] = {
 
     /* 8 normal colors */
-    [0] = "#1B2229", /* black   (base0) */
-    [1] = "#ff6c6b", /* red     */
+    [0] = "#1B2229", /* black   */
+    [1] = "#ac4242", /* red     */
     [2] = "#98be65", /* green   */
-    [3] = "#ECBE7B", /* yellow  */
+    [3] = "#f4bf75", /* yellow  */
     [4] = "#51afef", /* blue    */
-    [5] = "#c678dd", /* magenta */
-    [6] = "#46D9FF", /* cyan    */
-    [7] = "#DFDFDF", /* white   (base8) */
-
+    [5] = "#aa759f", /* magenta */
+    [6] = "#51afef", /* cyan    */
+    [7] = "#d8dee9", /* white   */
     /* 8 bright colors */
-    [8] = "#3f444a",  /* black   (base4) */
-    [9] = "#ff6655",  /* red     */
-    [10] = "#99bb66", /* green   */
-    [11] = "#ECBE7B", /* yellow  (same as normal) */
-    [12] = "#51afef", /* blue    (same as normal) */
-    [13] = "#c678dd", /* magenta (same as normal) */
-    [14] = "#46D9FF", /* cyan    (same as normal) */
-    [15] = "#dfdfdf", /* white   (base8) */
+    [8] = "#6b6b6b",  /* black   */
+    [9] = "#c55555",  /* red     */
+    [10] = "#98be65", /* green   */
+    [11] = "#feca88", /* yellow  */
+    [12] = "#51afef", /* blue    */
+    [13] = "#c28cb8", /* magenta */
+    [14] = "#51afef", /* cyan    */
+    [15] = "#eeffff", /* white   */
 
     /* special colors */
     [256] = "#282c34", /* background */

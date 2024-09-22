@@ -36,9 +36,6 @@
     - ttf-twemoji
     - par
     - thunderbird
-    - firefox
-    - chromium
-    - qtcreator
     - lua
     - cmake # need to learn it
     - ansible
@@ -69,7 +66,6 @@
     - python-pip
     - evince
     - okular
-    - sfml
     - gdb
     - ntfs-3g
     - obs-studio
@@ -79,14 +75,26 @@
     - imagemagick
     - dunst
     - xcompmgr
-    - apple-fonts
     - discord
     - picom
     - qemu-desktop
     - quickemu
     - qt5-styleplugins
     - qt5ct
+    - apple-fonts
+    - ruff
+    - ruff-lsp
+    - i3lock-fancy-multimonitor
+    - sfml
     - glfw
+    - vulkan-radeon
+    - vulkan-devel
+    - glm
+    - shaderc
+    - element-desktop-nightly
+    - gimp
+    - xf86-video-amdgpu
+    - xf86-video-ati
 
 - name: copy fontconfig to /etc/fonts/conf.d/
   become: true

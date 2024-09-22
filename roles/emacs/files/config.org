@@ -1,7 +1,6 @@
 #+TITLE: Emacs Configuration
 #+AUTHOR: Sahil Gautam
 
-
 * Evil Mode
 
 #+BEGIN_SRC emacs-lisp
@@ -25,7 +24,7 @@
 
 #+BEGIN_SRC emacs-lisp
 (setq scroll-conservatively 100)
-(setq-default fill-column 138)
+(setq-default fill-column 140)
 (setq hscroll-step 1)
 (setq-default truncate-lines t)
 #+END_SRC
@@ -57,6 +56,8 @@
   :config
   (unless (directory-files (expand-file-name "elpa" user-emacs-directory) t "^all-the-icons-nerd-fonts")
     (nerd-icons-install-fonts t)))
+
+(setq org-startup-with-inline-images t)
 #+END_SRC
 
 * UI ENHANCEMENTS
@@ -96,12 +97,12 @@
 #+end_src
 
 #+BEGIN_SRC emacs-lisp
-(add-hook 'org-mode-hook (lambda () (variable-pitch-mode)))
-(add-hook 'org-mode-hook (lambda ()
-                    ;; (org-indent-mode)
-                    (display-line-numbers-mode 0)))
+;; (add-hook 'org-mode-hook (lambda () (variable-pitch-mode)))
+;; (add-hook 'org-mode-hook (lambda ()
+;;                     (org-indent-mode)
+;;                     (display-line-numbers-mode 0)))
 ;; (add-hook 'find-file-hook (lambda () (efs/relative-line-numbers)))
-(add-hook 'prog-mode-hook (lambda () (efs/relative-line-numbers)))
+;; (add-hook 'prog-mode-hook (lambda () (efs/relative-line-numbers)))
 ;; (add-hook 'text-mode-hook (lambda () (efs/relative-line-numbers)))
 #+END_SRC
 
@@ -115,44 +116,46 @@
 * Font Configuration
 
 #+begin_src emacs-lisp
- (set-face-attribute 'variable-pitch nil
-                     :family "Iosevka Nerd Font"
-                     :foreground "#d8dee9"
-                     :height 145
-                     :weight 'Regular)
- (set-face-attribute 'default nil
-                     :family "Iosevka Nerd Font"
-                     :foreground "#d8dee9"
-                     :height 145
-                     :weight 'Regular)
- (set-face-attribute 'fixed-pitch nil
-                     :family "Iosevka Nerd Font"
-                     :height 145
-                     :foreground "#d8dee9"
-                     :weight 'Regular)
- (set-face-attribute 'org-document-title nil
-                     :family "Iosevka Nerd Font"
-                     :height 245
-                     :weight 'Bold
-                     :foreground "#bbc2cf")
- (set-face-attribute 'org-level-1 nil
-                     :family "Iosevka Nerd Font"
-                     :height 215
+(set-face-attribute 'variable-pitch nil
+                    :family "Iosevka Nerd Font"
+                    :foreground "#d8dee9"
+                    :height 150
+                    :weight 'Regular)
+(set-face-attribute 'default nil
+                    :family "Iosevka Nerd Font"
+                    :height 150
+                    :weight 'Regular)
+(set-face-attribute 'fixed-pitch nil
+                    :family "Iosevka Nerd Font"
+                    :height 150
+                    :foreground "#d8dee9"
+                    :weight 'Regular)
+(set-face-attribute 'org-document-title nil
+                    :family "Iosevka Nerd Font"
+                    :height 290
+                    :weight 'Bold
+                    :foreground "#bbc2cf")
+(set-face-attribute 'org-level-1 nil
+                    :family "Iosevka Nerd Font"
+                    :height 250
+                    :weight 'Bold)
+(set-face-attribute 'org-level-2 nil
+                    :family "Iosevka Nerd Font"
+                    :height 200
+                    :weight 'Bold
+                    :foreground "#A9A1E1")
+(set-face-attribute 'org-level-3 nil
+                    :family "Iosevka Nerd Font"
+                    :height 180
+                    :weight 'Bold
+                    :foreground "#A9A1E1")
+(set-face-attribute 'org-level-4 nil
+                    :family "Iosevka Nerd Font"
+                     :height 160
                      :weight 'Bold)
- (set-face-attribute 'org-level-2 nil
-                     :family "Iosevka Nerd Font"
-                     :height 195
-                     :weight 'Bold
-                     :foreground "#A9A1E1")
- (set-face-attribute 'org-level-3 nil
-                     :family "Iosevka Nerd Font"
-                     :height 175
-                     :weight 'Bold
-                     :foreground "#A9A1E1")
- (set-face-attribute 'org-level-4 nil
-                     :family "Iosevka Nerd Font"
-                     :height 145
-                     :weight 'Bold)
+
+(set-face-attribute 'org-block-begin-line nil
+        :foreground "#23272e")
 #+end_src
 
 * Keybindings
@@ -339,9 +342,8 @@
 
 * Sudo Edit
 
-This is one  of the most useful package when  used with tramp, when it comes  to editing remote
-files, or even local  files. It allows editing files as root with  just a keybinding, therefore
-preventing the hassle to exit and reopen as sudo.
+This is one of the most useful package when used with tramp, when it comes to editing remote files, or even local files. It allows editing
+files as root with just a keybinding, therefore preventing the hassle to exit and reopen as sudo.
 
 #+BEGIN_SRC emacs-lisp :results output
 (use-package sudo-edit
@@ -374,7 +376,6 @@ preventing the hassle to exit and reopen as sudo.
 
 (use-package consult-lsp
   :ensure t)
-;; not sure about languages and lsp yet, but let's see later
 #+END_SRC
 
 * Dired
@@ -409,6 +410,8 @@ preventing the hassle to exit and reopen as sudo.
         delete-by-moving-to-trash t)
 
   (add-hook 'dired-mode-hook #'dw/dired-mode-hook))
+  (add-hook 'dired-mode-hook 'auto-revert-mode)
+
 #+END_SRC
 
 * EVIL COMMENTRY (comment with gc)
@@ -420,12 +423,6 @@ preventing the hassle to exit and reopen as sudo.
   (evil-commentary-mode))
 (define-key evil-visual-state-map "gc" 'evil-commentary)
 #+end_src
-
-* TODO Language Modes
-
-#+BEGIN_SRC emacs-lisp
-
-#+END_SRC
 
 * Orderless
 
@@ -446,28 +443,18 @@ preventing the hassle to exit and reopen as sudo.
   :ensure t)
 #+END_SRC
 
-* Hide source block markers
-
-#+BEGIN_SRC emacs-lisp
-(set-face-attribute 'org-block-begin-line nil
-        :foreground "#23272e")
-#+END_SRC
-
-#+RESULTS:
-
 * Org Babel
 
 Add more languages to it as required. Do note that this requires =ob-lang= installed, where lang can be anything like go, cpp etc.
 
 For executing the source blocks with sudo previliges, add =:dir "/sudo::"= to the source block's header.  To execute some source block against
-some host/server, use the following in the header =:dir /ssh:user@host:/home/printfdebugging/repos= for example. One thing to note is that for
-this to work, sshd should be up and running.
+some host/server, use  the following in the header =:dir  /ssh:user@host:/home/printfdebugging/repos= for example.  One thing to  note is that
+for this to work, sshd should be up and running.
 
 Also with the =:dir  /sudo::=, one can also provide the  directory path to execute the script  on, =:dir /sudo::/home/printfdebugging/repos= for
-example.  This doesn't involve sshd, and runs commands with sudo previliges.
-
-=:result <type>= is used  to determine the format of the source-block  output/result. By default it's a table, but there  are other options as
-well like =verbatim=, =drawer=, =raw= etc. Out of these, I find raw to be the most annoying, as it's just text and not a part of =#+RESULT:=.
+example.  This  doesn't involve  sshd, and  runs commands  with sudo  previliges.  =:result <type>=  is used  to determine  the format  of the
+source-block output/result.  By default it's a  table, but there are other options as well like =verbatim=, =drawer=,  =raw= etc.  Out of these, I
+find raw to be the most annoying, as it's just text and not a part of =#+RESULT:=.
 
 #+BEGIN_SRC emacs-lisp
 ;; don't ask before executing source block
@@ -475,6 +462,7 @@ well like =verbatim=, =drawer=, =raw= etc. Out of these, I find raw to be the mo
 (org-babel-do-load-languages
     'org-babel-load-languages
     '((emacs-lisp . t)
+      (python     . t)
       (shell      . t)))
 #+END_SRC
 
@@ -510,6 +498,12 @@ To execute source blocks asynchronously, add =:async= to the source block's head
     (org-roam-db-autosync-mode))
 ;; (setq org-hide-block-startup t
 ;;       org-startup-folded "fold")
+
+(setq org-roam-capture-templates
+      '(("d" "default" plain
+         "%?"
+         :target (file+head "${slug}.org"
+                            "#+TITLE: ${title}\n#+AUTHOR: Sahil Gautam\n#+HTML_HEAD: <link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\"/>\n#+EXCLUDE_TAGS: noexport\n#+STATE: draft\n"))))
 #+end_src
 
 * Org Bullets
@@ -519,7 +513,7 @@ To execute source blocks asynchronously, add =:async= to the source block's head
   :ensure t
   :hook (org-mode . org-bullets-mode)
   :config
-  (setq org-bullets-bullet-list '( "◉" "⁖" "⁖" "⁖" "⁖" )))
+  (setq org-bullets-bullet-list '( "◉" "○" "✸" "⁖" "⁖" "⁖" "⁖" )))
 #+END_SRC
 
 * Indentation Source Blocks
@@ -532,7 +526,11 @@ To execute source blocks asynchronously, add =:async= to the source block's head
 (setq indent-tabs-mode nil)
 #+end_src
 
-* Org Agenda
+* TODO Org Agenda
+
+#+BEGIN_SRC emacs-lisp
+
+#+END_SRC
 
 * Org Roam follow Link with Enter
 
@@ -562,7 +560,7 @@ To execute source blocks asynchronously, add =:async= to the source block's head
           (if buffer
               (switch-to-buffer buffer)
             (message "No buffer found for ID: %s" id)))
-      (message "Failed to extract ID from link at point."))))
+      (message "FNerd Fontd to extract ID from link at point."))))
 ;; this one needs to change as well (something only for org mode)
 (evil-define-key 'normal org-mode-map (kbd "RET") 'goto-org-roam-node-at-point)
 #+END_SRC
@@ -580,93 +578,100 @@ To execute source blocks asynchronously, add =:async= to the source block's head
   :ensure t)
 #+END_SRC
 
-* Emacs Dashboard
+* TODO Development
+** TODO Language Modes
 
 #+BEGIN_SRC emacs-lisp
-;; use-package with package.el:
-(use-package dashboard
-  :ensure t
-  :init
-    (setq dashboard-banner-logo-title "")
-    (setq dashboard-startup-banner "/home/printfdebugging/.config/emacs/townhall.webp")
-    (setq dashboard-center-content t)
-    (setq dashboard-vertically-center-content t)
-    (setq dashboard-show-shortcuts t)
-    (setq dashboard-items '((recents   . 5)
-                            (projects  . 5)
-                            (agenda    . 5)))
-    (setq dashboard-icon-type 'nerd-icons)  ; use `all-the-icons' package
-    (setq dashboard-display-icons-p t)
-    (setq dashboard-set-heading-icons t)
-    (setq dashboard-set-file-icons t)
-  :config
-    (setq initial-buffer-choice (lambda () (get-buffer-create dashboard-buffer-name)))
-    (dashboard-setup-startup-hook))
+(use-package go-mode :ensure t)
+(use-package yaml-mode :ensure t)
+(use-package lua-mode :ensure t)
+(use-package lsp-java :ensure t)
+(use-package css-mode :ensure t)
+(use-package js2-mode :ensure t)
 #+END_SRC
 
-* TODO Configuring emacs for cpp and game development
-
-Still a lot of things like the code action stuff, and the error reporting things are left.
+** LSP Mode
 
 #+BEGIN_SRC emacs-lisp
-;; installing lsp mode and the language mode
 (use-package lsp-mode
   :init
-    (setq lsp-headerline-arrow "➤")
-    (setq lsp-enable-symbol-highlighting nil)
-    (setq lsp-eldoc-enable-hover nil)
-  :hook
-    ((c++-mode . lsp-deferred)
-     (c-mode . lsp-deferred)))
+  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+  (setq lsp-keymap-prefix "C-c l")
+  :hook ((go-mode . lsp-deferred)
+         (c++-mode . lsp-deferred)
+         (java-mode . lsp-deferred)
+         (lua-mode . lsp-deferred)
+         (c-mode . lsp-deferred))
+  :commands lsp)
 
+(setq lsp-signature-render-documentation nil)
+(setq lsp-signature-auto-activate nil)
+#+END_SRC
+
+*** Golang
+
+#+BEGIN_SRC emacs-lisp
+(use-package go-mode
+  :ensure t)
+
+(add-hook 'go-mode-hook (lambda ()
+    (setq tab-width 4)))
+
+(add-hook 'before-save-hook 'gofmt-before-save)
+(add-hook 'go-mode-hook (lambda ()
+                          (setq tab-width 4)
+                          ;; (flycheck-add-next-checker 'lsp 'go-vet)
+                          ;; (flycheck-add-next-checker 'lsp 'go-staticcheck)
+                          ))
+;; If using go-mode, then install godef using the command below, and not using the package manager.
+;;  go install github.com/jjuliano/godef@latest
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(with-eval-after-load "eglot"
+  (add-to-list 'eglot-stay-out-of 'eldoc))
+#+END_SRC
+
+*** C/C++
+
+#+BEGIN_SRC emacs-lisp
+(defun my-c++-mode-hook ()
+  (setq c-basic-offset 4)
+  (c-set-offset 'substatement-open 0))
+(add-hook 'c++-mode-hook 'my-c++-mode-hook)
+
+#+END_SRC
+
+** Flycheck Mode
+
+#+BEGIN_SRC emacs-lisp
+;; (use-package flycheck
+;;   :ensure t
+;;   :config
+;;   (add-hook 'after-init-hook #'global-flycheck-mode))
+#+END_SRC
+
+** TODO Tree-Sitter
+
+#+BEGIN_SRC emacs-lisp
 (use-package tree-sitter
   :ensure t)
-
 (use-package tree-sitter-langs
   :ensure t)
-
-(use-package lsp-treemacs
-  :ensure t)
-
-(require 'tree-sitter)
-(require 'tree-sitter-langs)
-(require 'tree-sitter-hl)
-(require 'tree-sitter-langs)
-(require 'tree-sitter-query)
 
 (global-tree-sitter-mode)
 (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
 #+END_SRC
 
+** TODO GDB setup
+
 #+BEGIN_SRC emacs-lisp
-(defun my-c++-mode-hook ()
-  (setq c-basic-offset 4)
-  (setq tab-width 4)
-  (c-set-offset 'substatement-open 0))
-
-(setq-default indent-tabs-mode nil)
-(add-hook 'c++-mode-hook 'my-c++-mode-hook)
-
-(defun my-tab-behavior ()
-  "Insert a tab or complete at point based on cursor position."
-  (interactive)
-  (let ((col (current-column)))
-    (if (or (= col 0)
-            (member (char-before) '(?\s ?\t)))
-        (insert-tab)
-      (completion-at-point))))
-
-;; Bind the TAB key to the custom function
-(define-key evil-insert-state-map (kbd "TAB") 'my-tab-behavior)
-
-
-(use-package flycheck
-  :ensure t
-  :config
-  (add-hook 'after-init-hook #'global-flycheck-mode))
+(setq
+ gdb-many-windows t
+ gdb-show-main t)
 #+END_SRC
 
-* TODO Yasnippet
+** TODO Yasnippet
 
 https://joaotavora.github.io/yasnippet/index.html
 
@@ -681,39 +686,40 @@ from $1 to $0 and back to $1, having them selected for change in the process.
   :init
   (yas-global-mode 1)
   (define-key yas-minor-mode-map (kbd "SPC") yas-maybe-expand))
+(define-key yas-keymap (kbd "TAB") 'yas-next-field-or-maybe-expand)
+
 #+END_SRC
+
+** Tab-completion and Tab-to-tabstop
+
+#+BEGIN_SRC emacs-lisp
+(defun my-tab-behavior ()
+  "Insert a tab or complete at point based on cursor position."
+  (interactive)
+  (let ((col (current-column)))
+    (if (or (= col 0)
+            (member (char-before) '(?\s ?\t)))
+        (insert-tab)
+      (completion-at-point))))
+
+;; Bind the TAB key to the custom function
+(define-key evil-insert-state-map (kbd "TAB") 'my-tab-behavior)
+#+END_SRC
+
+** Eglot
+
+#+BEGIN_SRC emacs-lisp
+
+#+END_SRC
+
 
 * TODO ERC (Emacs Irc Client)
 
-ERC is a really cool and minimal emacs IRC client. I want to keep it low from now on, no distractions here and there, so I want to keep to
-a few chosen groups. I want ERC to authenticate me, and jon all the channels on startup.
-
 #+BEGIN_SRC emacs-lisp
 
 #+END_SRC
 
-* TODO Mu4e
-
-It's not easy to setup Mu4e in  emacs, and that's why I will make this section into a tutorial on how  to setup mu4e correctly on emacs. I
-am on arch linux, and so will be using =pacman= as the package manager.
-
-#+BEGIN_SRC emacs-lisp
-(setq send-mail-function 'message-send-mail-with-sendmail
-      message-send-mail-function 'message-send-mail-with-sendmail)
-#+END_SRC
-
-* TODO Tab Overloading
-
-So if the character before the cursor is a space, or start of the line, then =[TAB]= acts as =tab-to-tabstop=, else if there is some character
-before it, then it acts as the completion engine. I want a way to add my custom yasnippets to the completion engine such that pressing tab
-on the shortword shows the custom snippets on the vertico minibuffer.
-
-#+BEGIN_SRC emacs-lisp
-
-#+END_SRC
-
-* TODO Configure GDB for C++ Debugging
-
+* TODO Mu4e (Mail in Emacs)
 * Smooth Scrolling 
 
 #+BEGIN_SRC emacs-lisp
@@ -744,7 +750,7 @@ on the shortword shows the custom snippets on the vertico minibuffer.
 #+BEGIN_SRC emacs-lisp
 (use-package org-download
   :ensure t)
-(setq-default org-download-image-dir "~/downloads")
+(setq-default org-download-image-dir "~/repos/notes/assets")
 (require 'org-download)
 
 ;; Drag-and-drop to `dired`
@@ -752,7 +758,16 @@ on the shortword shows the custom snippets on the vertico minibuffer.
 
 #+END_SRC
 
-* The Infinite Dreams
+
+#+BEGIN_SRC emacs-lisp
+(font-lock-add-keywords
+ 'org-mode
+ '(("^[[:space:]]*\\(-\\) "
+        (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "-"))))))
+(setq-default org-list-indent-offset 2)
+#+END_SRC
+
+* Clean Org Mode
 
 #+BEGIN_SRC emacs-lisp
 (defun me-org-mode-remove-stars ()
@@ -764,7 +779,6 @@ on the shortword shows the custom snippets on the vertico minibuffer.
          (put-text-property (match-beginning 0) (match-end 0)
                             'invisible t)))))))
 (add-hook 'org-mode-hook #'me-org-mode-remove-stars)
-
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -783,3 +797,22 @@ on the shortword shows the custom snippets on the vertico minibuffer.
 
 (add-hook 'org-mode-hook 'my/org-present-start)
 #+END_SRC
+
+* Smooth scrolling
+
+#+BEGIN_SRC emacs-lisp
+(use-package good-scroll
+  :ensure t)
+(good-scroll-mode)
+#+END_SRC
+
+* Org Tidy
+
+#+BEGIN_SRC emacs-lisp
+(use-package org-tidy
+  :ensure t
+  :hook
+  (org-mode . org-tidy-mode))
+#+END_SRC
+
+

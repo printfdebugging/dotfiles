@@ -42,6 +42,7 @@ echo "--enable-dbgutil
 --enable-kf5
 --enable-kf6
 --enable-compiler-plugins
+--with-help=html
 --with-system-libxml=no 
 CC=clang
 CXX=clang++

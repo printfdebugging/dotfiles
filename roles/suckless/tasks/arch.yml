@@ -14,6 +14,15 @@
     state: latest
     extra_args: "--nodeps --noconfirm --overwrite '*'"
 
+- name: remove ~/.local/src directory
+  become: false
+  tags:
+    - suckless
+    - files
+  ansible.builtin.file:
+    path: /home/{{ ansible_user }}/.local/src
+    state: absent
+
 - name: Ensure source directory exists
   become: false
   tags:
@@ -39,8 +48,8 @@
     mode: 0755
   loop:
     - dwm
-    - st
     - dmenu
+    - st
 
 - name: compile suckless software
   become: true
@@ -52,19 +61,5 @@
     chdir: "/home/{{ ansible_user }}/.local/src/{{ item }}"
   loop:
     - dwm
-    - st
     - dmenu
-
-- name: copy the .desktop file to /usr/share/xsessions/ as root
-  become: true
-  tags:
-    - suckless
-    - files
-  ansible.builtin.copy:
-    src: dwm.desktop
-    dest: /usr/share/xsessions/dwm.desktop
-    owner: "root"
-    group: "root"
-    mode: "0644"
-# no need to copy back suckless files, as I change the dotfiles directly
-# also I am moving to awesomewm, so no need for dwm.
+    - st

@@ -25,20 +25,8 @@
     - flameshot
     - files
   ansible.builtin.copy:
-    src: flameshot.ini
+    content: "{{ flameshot_config_file }}"
     dest: /home/{{ ansible_user }}/.config/flameshot/flameshot.ini
     group: "{{ ansible_user }}"
     owner: "{{ ansible_user }}"
     mode: 0755
-
-- name: copy back flameshot config from ~/.config/flameshot
-  become: false
-  tags:
-    - save
-    - save-flameshot
-  ansible.builtin.copy:
-    src: /home/{{ ansible_user }}/.config/flameshot/flameshot.ini
-    dest: /home/{{ ansible_user }}/repos/dotfiles/roles/flameshot/files/flameshot.ini
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
-    mode: 0644

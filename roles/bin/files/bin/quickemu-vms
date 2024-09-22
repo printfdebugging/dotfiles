@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ ! -d "$HOME/Public" ]; then
+    mkdir -p ~/Public
+fi
+
+option=$(ls $HOME/repos/media/vms | dmenu -i -l 15 -vi)
+
+if [ $option != "" ]; then
+    quickemu --vm "$HOME/media/vms/$option/$option.conf"
+fi
+

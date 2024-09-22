@@ -33,7 +33,7 @@
     group: "{{ ansible_user }}"
     mode: 0755
 
-- name: ensure gitlab.com is a known host
+- name: ensure github.com is a known host
   become: false
   tags:
     - git
@@ -42,8 +42,8 @@
     dest: /home/{{ ansible_user }}/.ssh/known_hosts
     create: yes
     state: present
-    line: "{{ lookup('pipe', 'ssh-keyscan -t rsa gitlab.com') }}"
-    regexp: "^gitlab\\.com"
+    line: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
+    regexp: "^github\\.com"
 
 - name: clone git repositories
   become: false
@@ -56,20 +56,16 @@
     update: no
   loop:
     [
-      {
-        repo: "{{ my_gitlab_handle }}/dotfiles.git",
-        path: "/home/{{ ansible_user }}/repos/dotfiles",
-      },
-      {
-        repo: "{{ my_gitlab_handle }}/notes.git",
-        path: "/home/{{ ansible_user }}/repos/notes",
-      },
-      {
-        repo: "{{ my_gitlab_handle }}/brave.git",
-        path: "/home/{{ ansible_user }}/.config/BraveSoftware/Brave-Browser",
-      },
-      {
-        repo: "{{ my_gitlab_handle }}/thunderbird.git",
-        path: "/home/{{ ansible_user }}/.thunderbird",
-      },
+      { repo: "{{ my_github_handle }}/dotfiles.git",                              path: "/home/{{ ansible_user }}/repos/dotfiles", },
+      { repo: "{{ my_github_handle }}/files.git",                                 path: "/home/{{ ansible_user }}/repos/files", },
+      { repo: "{{ my_github_handle }}/brave.git",                                 path: "/home/{{ ansible_user }}/.config/BraveSoftware/Brave-Browser", },
+      { repo: "{{ my_github_handle }}/thunderbird.git",                           path: "/home/{{ ansible_user }}/.thunderbird", },
+      { repo: "{{ my_github_handle }}/printfdebugging.git",                       path: "/home/{{ ansible_user }}/repos/printfdebugging", },
+      { repo: "{{ my_github_handle }}/printfdebugging.github.io.git",             path: "/home/{{ ansible_user }}/repos/website", },
+
+      # projects
+      { repo: "{{ my_github_handle }}/introduction-to-vulkan.git",                path: "/home/{{ ansible_user }}/repos/introduction-to-vulkan", },
+      { repo: "{{ my_github_handle }}/bouncing-shapes.git",                       path: "/home/{{ ansible_user }}/repos/bouncing-shapes", },
+      { repo: "{{ my_github_handle }}/geometry-wars.git",                         path: "/home/{{ ansible_user }}/repos/geometry-wars", },
+      { repo: "{{ my_github_handle }}/icecream-parlour-management-system.git",    path: "/home/{{ ansible_user }}/repos/icecream-parlour-management-system", },
     ]

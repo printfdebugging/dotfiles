@@ -113,13 +113,14 @@ alias c="cd /home/$USER/"
 alias l="cd /home/$USER/repos/libreoffice/"
 alias x="clear"
 alias dif="git diff HEAD~ HEAD | delta"
+
 alias e="[ -f '/home/printfdebugging/repos/libreoffice/instdir/program/libcurl.so.4' ] \
     && rm /home/printfdebugging/repos/libreoffice/instdir/program/libcurl.so.4; \
-    SAL_USE_VCLPLUGIN=kf5 /home/printfdebugging/repos/libreoffice/instdir/program/scalc"
+    SAL_USE_VCLPLUGIN=kf5 /home/printfdebugging/repos/libreoffice/instdir/program/soffice"
 
 alias f="[ -f '/home/printfdebugging/repos/libreoffice/instdir/program/libcurl.so.4' ] \
     && rm /home/printfdebugging/repos/libreoffice/instdir/program/libcurl.so.4; \
-    SAL_USE_VCLPLUGIN=kf6 /home/printfdebugging/repos/libreoffice/instdir/program/scalc"
+    SAL_USE_VCLPLUGIN=kf6 /home/printfdebugging/repos/libreoffice/instdir/program/soffice"
 
 alias g="SAL_USE_VCLPLUGIN=gtk3 /home/printfdebugging/repos/libreoffice/instdir/program/soffice"
 
@@ -128,24 +129,21 @@ alias cm="cd ~/repos/media/"
 alias cr="cd ~/repos/"
 alias msu="sudo make clean install"
 alias ssha='eval $(ssh-agent) && ssh-add'
-alias list="nvim /home/$USER/repos/files/bookmarks.md"
+alias list="nvim /home/$USER/repos/notes/bookmarks.md"
 alias bin="nvim /home/$USER/.local/bin"
+alias hss="zola serve"
 
 alias ls='ls --color=auto'
 alias ll='ls -al --color=auto'
 alias grep='grep --color=auto'
+alias n="cd ~/repos/notes && nvim README.md"
 
 ## GIT
 alias tr="git log --all --oneline --graph --decorate"
 alias stat="git status"
 alias br="git branch"
 alias gca="git commit --amend"
-alias hss="zola serve"
-alias n="cd /home/printfdebugging/repos/notes/website/content/blog/ && nvim README.md"
 
-if [[ $KDE_FULL_SESSION ]]; then
-    export QT_QPA_PLATFORMTHEME=qt6
-else
-    # use gtk theme for qt application
-    export QT_QPA_PLATFORMTHEME=gtk3
-fi
+# export QT_QPA_PLATFORMTHEME=gtk3
+export LOCOREPATH=/home/printfdebugging/repos/libreoffice
+export COOL_SERVE_FROM_FS=1

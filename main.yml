@@ -12,11 +12,10 @@
   roles:
     - ssh
     - base
-    - awesome
     - bin
     - flameshot
     - git
-    - gtk-3.0
+    - gtk
     - mpv
     - neovim
     - suckless
@@ -25,8 +24,5 @@
     - xorg
     - yt-dlp
     - zsh
-    - kitty
-    - picom
-    # - dunst
-    #
-    # add okular rc to it as well
+    - awesome
+    - dunst

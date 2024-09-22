@@ -9,6 +9,7 @@
   loop:
     - emacs-nativecomp
     - ttf-iosevka-nerd
+    - ttf-iosevka-aile
 
 - name: ensure config directory exists
   become: false
@@ -36,7 +37,6 @@
   loop:
     - init.el
     - config.org
-    - townhall.webp
 
 - name: copy emacs snippets
   become: false

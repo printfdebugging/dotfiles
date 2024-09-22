@@ -17,7 +17,7 @@ require("catppuccin").setup({
 	no_bold = false,
 	no_underline = false,
 	styles = {
-		comments = { "italic" },
+		comments = {},
 		conditionals = {},
 		loops = {},
 		functions = {},
@@ -78,27 +78,9 @@ require("catppuccin").setup({
 				-- ["@constant"] = { fg = mocha.peach },
 				-- ["@operator"] = { fg = mocha.blue },
 				-- ["@keyword.type"] = { fg = mocha.blue },
-				-- ["@comment"] = { fg = "#6A9955" },
+				["@comment"] = { fg = "#5B6268" },
 				-- ["@string"] = { fg = "#CE9178" },
 
-				-- Neorg custom highlighting
-				["@neorg.headings.1.title"] = { fg = "#51afef", style = { "bold" } },
-				["@neorg.headings.1.prefix"] = { fg = "#51afef", style = { "bold" } },
-				["@neorg.headings.2.title"] = { fg = "#A9A1E1", style = { "bold" } },
-				["@neorg.headings.2.prefix"] = { fg = "#A9A1E1", style = { "bold" } },
-				["@neorg.headings.3.title"] = { fg = "#A9A1E1", style = { "bold" } },
-				["@neorg.headings.3.prefix"] = { fg = "#A9A1E1", style = { "bold" } },
-				["@neorg.tags.ranged_verbatim.code_block"] = { bg = "#23272e" },
-				["@neorg.links.file"] = { fg = "#51afef", style = { "bold", "underline" } },
-
-				["@neorg.tags.ranged_verbatim.parameters"] = { fg = "#23272e" },
-				["@neorg.tags.ranged_verbatim.parameters.word"] = { fg = "#23272e" },
-				["@neorg.tags.ranged_verbatim.begin"] = { fg = "#23272e" },
-				["@neorg.tags.ranged_verbatim.end"] = { fg = "#23272e" },
-				["@neorg.tags.ranged_verbatim.name"] = { fg = "#23272e" },
-				["@neorg.tags.ranged_verbatim.name.word"] = { fg = "#23272e" },
-
-				--
 				["@markup.heading.1.markdown"] = { fg = mocha.blue, style = { "bold" } },
 				["@markup.heading.2.markdown"] = { fg = "#A9A1E1", style = { "bold" } },
 				["@markup.heading.3.markdown"] = { fg = "#A9A1E1", style = { "bold" } },
@@ -106,15 +88,15 @@ require("catppuccin").setup({
 				["@markup.heading.5.markdown"] = { fg = "#A9A1E1", style = { "bold" } },
 				["@markup.heading.6.markdown"] = { fg = "#A9A1E1", style = { "bold" } },
 				["@markup.link.label"] = { fg = mocha.blue, style = { "bold", "underline" } },
-				RenderMarkdownCode = { bg = "#23272e" },
-				RenderMarkdownCodeInline = { bg = "#23272e", fg = mocha.text },
 
-				RenderMarkdownH1Bg = { bg = "#282c34" },
-				RenderMarkdownH2Bg = { bg = "#282c34" },
-				RenderMarkdownH3Bg = { bg = "#282c34" },
-				RenderMarkdownH4Bg = { bg = "#282c34" },
-				RenderMarkdownH5Bg = { bg = "#282c34" },
-				RenderMarkdownH6Bg = { bg = "#282c34" },
+				RenderMarkdownH1Bg = { fg = mocha.blue, bg = "#282c34", style = { "bold" } },
+				RenderMarkdownH2Bg = { fg = "#A9A1E1", bg = "#282c34", style = { "bold" } },
+				RenderMarkdownH3Bg = { fg = "#A9A1E1", bg = "#282c34", style = { "bold" } },
+				RenderMarkdownH4Bg = { fg = "#A9A1E1", bg = "#282c34", style = { "bold" } },
+				RenderMarkdownH5Bg = { fg = "#A9A1E1", bg = "#282c34", style = { "bold" } },
+				RenderMarkdownH6Bg = { fg = "#A9A1E1", bg = "#282c34", style = { "bold" } },
+				RenderMarkdownCode = { bg = "#21242b" },
+				RenderMarkdownCodeInline = { bg = "#21242b" },
 			}
 		end,
 	},
@@ -141,5 +123,4 @@ vim.cmd([[
     highlight CursorLine    guibg=#21242b
     highlight CursorLineNr  guibg=#21242b
 ]])
-
 vim.cmd([[highlight! link CursorLineSign CursorLine]])

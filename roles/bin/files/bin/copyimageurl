@@ -1,7 +1,7 @@
 #!/bin/bash
 
 number_file="/home/$USER/.local/bin/image_number.txt"
-images_dir="/home/$USER/repos/notes/attachments/"
+images_dir="/home/$USER/repos/files/attachments/"
 config_file="/home/$USER/.config/flameshot/flameshot.ini"
 
 # Read the number from image_number.txt

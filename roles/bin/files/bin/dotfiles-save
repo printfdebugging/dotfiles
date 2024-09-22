@@ -1,0 +1,16 @@
+#!/bin/bash
+
+
+
+
+if [ ! -d "$HOME/repos/dotfiles" ]; then
+    notify-send "dotfiles not found" && exit
+fi
+
+selection=$(ls ~/repos/dotfiles/roles | dmenu -i -l 15 -vi -p "Save Dotfiles: ")
+
+if [ "$selection" != "" ]; then
+    dotfiles "save-$selection" && notify-send "$selection saved" || notify-send "failed to save $selection"
+else
+    notify-send "save cancelled"
+fi

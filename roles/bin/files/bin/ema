@@ -7,4 +7,5 @@ then
     emacsclient -nc "$@"
 else
     emacs --daemon
+    ema
 fi

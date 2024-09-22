@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # run this script as root
-su root
 pacman -S qemu virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat ebtables iptables libguestfs
 
 printf "
@@ -9,5 +8,8 @@ unix_sock_group = \"libvirt\"
 unix_sock_rw_perms = \"0770\"
 " >> /etc/libvirt/libvirtd.conf
 
-usermod -a -G libvirt $(whoami)
+sudo usermod -a -G libvirt $(whoami)
 newgrp libvirt
+
+systemctl enable libvirtd
+systemctl start libvirtd

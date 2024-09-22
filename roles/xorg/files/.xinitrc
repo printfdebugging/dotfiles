@@ -1,9 +1,10 @@
 gpg-agent --daemon &
 dispscript
-setupscript &
 flameshot &
 nm-applet &
+pasystray &
 thunderbird &
-picom &
+xcompmgr &
+dunst &
 
-exec awesome
+exec dwm
