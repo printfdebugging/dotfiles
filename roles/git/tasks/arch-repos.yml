@@ -65,6 +65,7 @@
 
       # projects
       { repo: "{{ my_github_handle }}/introduction-to-vulkan.git",                path: "/home/{{ ansible_user }}/repos/introduction-to-vulkan", },
+      { repo: "{{ my_github_handle }}/interpreters.git",                          path: "/home/{{ ansible_user }}/repos/interpreters", },
       { repo: "{{ my_github_handle }}/bouncing-shapes.git",                       path: "/home/{{ ansible_user }}/repos/bouncing-shapes", },
       { repo: "{{ my_github_handle }}/geometry-wars.git",                         path: "/home/{{ ansible_user }}/repos/geometry-wars", },
       { repo: "{{ my_github_handle }}/icecream-parlour-management-system.git",    path: "/home/{{ ansible_user }}/repos/icecream-parlour-management-system", },

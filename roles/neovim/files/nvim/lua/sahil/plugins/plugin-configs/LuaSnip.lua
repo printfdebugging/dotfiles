@@ -22,5 +22,17 @@ ls.add_snippets("markdown", {
 			{ i(1), i(2), i(0) }
 		)
 	),
+
+	s(
+		"para",
+		fmt(
+			[[
+<div align="justify"> 
+{}
+</div>
+        ]],
+			{ i(0) }
+		)
+	),
 	-- the sequence starts from 1 - 2 - then last 0
 })

@@ -6,7 +6,7 @@ local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 null_ls.setup({
 	sources = {
-		formatting.prettier.with({ disabled_filetypes = { "cpp", "c" } }), -- (see null-ls docs)
+		-- formatting.prettier.with({ disabled_filetypes = { "cpp", "c" } }), -- (see null-ls docs)
 		-- formatting.prettier,
 		formatting.stylua,
 		formatting.black,
@@ -29,7 +29,7 @@ null_ls.setup({
 				group = augroup,
 				buffer = bufnr,
 				callback = function()
-					local included_filetypes = { "markdown", "python", "lua", "go" }
+					local included_filetypes = { "python", "lua", "go" }
 					local filetype = vim.bo.filetype
 					if vim.tbl_contains(included_filetypes, filetype) then
 						vim.lsp.buf.format({
