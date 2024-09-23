@@ -27,6 +27,7 @@
 (setq-default fill-column 140)
 (setq hscroll-step 1)
 (setq-default truncate-lines t)
+(setq frame-resize-pixelwise t) ;; respect tiling window managers
 #+END_SRC
 
 * Doom One
@@ -67,7 +68,7 @@
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
-(fringe-mode 2)
+(fringe-mode 0)
 (setq initial-scratch-message ""
     inhibit-startup-message t
     standard-indent 2
@@ -92,7 +93,7 @@
       org-image-actual-width                    nil
       org-image-actual-width                    (list 650))
   (org-babel-result-hide-all)
-  (global-hl-line-mode)
+  ;; (global-hl-line-mode)
   (display-line-numbers-mode))
 #+end_src
 
@@ -565,16 +566,10 @@ To execute source blocks asynchronously, add =:async= to the source block's head
 (evil-define-key 'normal org-mode-map (kbd "RET") 'goto-org-roam-node-at-point)
 #+END_SRC
 
-* Magit and Git-Gutter
+* Magit
 
 #+BEGIN_SRC emacs-lisp
 (use-package magit
-  :ensure t)
-
-(use-package git-gutter
-  :ensure t)
-
-(use-package git-gutter-fringe
   :ensure t)
 #+END_SRC
 
@@ -607,6 +602,7 @@ To execute source blocks asynchronously, add =:async= to the source block's head
 (setq lsp-signature-render-documentation nil)
 (setq lsp-signature-auto-activate nil)
 (setq lsp-headerline-arrow "•")
+(setq lsp-prefer-flymake nil)
 #+END_SRC
 
 *** Golang
@@ -819,94 +815,94 @@ from $1 to $0 and back to $1, having them selected for change in the process.
 * Custom TreeSitter Faces
 
 #+BEGIN_SRC emacs-lisp
-(dolist (face '(tree-sitter-hl-face:doc
-                tree-sitter-hl-face:tag
-                tree-sitter-hl-face:type
-                tree-sitter-hl-face:label
-                tree-sitter-hl-face:escape
-                tree-sitter-hl-face:method
-                tree-sitter-hl-face:number
-                tree-sitter-hl-face:string
-                tree-sitter-hl-face:comment
-                tree-sitter-hl-face:keyword
-                tree-sitter-hl-face:constant
-                tree-sitter-hl-face:embedded
-                tree-sitter-hl-face:function
-                tree-sitter-hl-face:operator
-                tree-sitter-hl-face:property
-                tree-sitter-hl-face:variable
-                tree-sitter-hl-face:attribute
-                tree-sitter-hl-face:type.super
-                tree-sitter-hl-face:constructor
-                tree-sitter-hl-face:method.call
-                tree-sitter-hl-face:punctuation
-                tree-sitter-hl-face:type.builtin
-                tree-sitter-hl-face:function.call
-                tree-sitter-hl-face:type.argument
-                tree-sitter-hl-face:function.macro
-                tree-sitter-hl-face:string.special
-                tree-sitter-hl-face:type.parameter
-                tree-sitter-hl-face:constant.builtin
-                tree-sitter-hl-face:function.builtin
-                tree-sitter-hl-face:function.special
-                tree-sitter-hl-face:variable.builtin
-                tree-sitter-hl-face:variable.special
-                tree-sitter-hl-face:variable.parameter
-                tree-sitter-hl-face:property.definition
-                tree-sitter-hl-face:punctuation.bracket
-                tree-sitter-hl-face:punctuation.special
-                tree-sitter-hl-face:punctuation.delimiter))
-  (set-face-attribute face nil
-                      :weight 'normal
-                      :slant 'normal
-                      :underline nil))
+(defun my-customize-faces ()
+  "Customize faces for tree-sitter and LSP."
+  (dolist (face '(tree-sitter-hl-face:doc
+                  tree-sitter-hl-face:tag
+                  tree-sitter-hl-face:type
+                  tree-sitter-hl-face:label
+                  tree-sitter-hl-face:escape
+                  tree-sitter-hl-face:method
+                  tree-sitter-hl-face:number
+                  tree-sitter-hl-face:string
+                  tree-sitter-hl-face:comment
+                  tree-sitter-hl-face:keyword
+                  tree-sitter-hl-face:constant
+                  tree-sitter-hl-face:embedded
+                  tree-sitter-hl-face:function
+                  tree-sitter-hl-face:operator
+                  tree-sitter-hl-face:property
+                  tree-sitter-hl-face:variable
+                  tree-sitter-hl-face:attribute
+                  tree-sitter-hl-face:type.super
+                  tree-sitter-hl-face:constructor
+                  tree-sitter-hl-face:method.call
+                  tree-sitter-hl-face:punctuation
+                  tree-sitter-hl-face:type.builtin
+                  tree-sitter-hl-face:function.call
+                  tree-sitter-hl-face:type.argument
+                  tree-sitter-hl-face:function.macro
+                  tree-sitter-hl-face:string.special
+                  tree-sitter-hl-face:type.parameter
+                  tree-sitter-hl-face:constant.builtin
+                  tree-sitter-hl-face:function.builtin
+                  tree-sitter-hl-face:function.special
+                  tree-sitter-hl-face:variable.builtin
+                  tree-sitter-hl-face:variable.special
+                  tree-sitter-hl-face:variable.parameter
+                  tree-sitter-hl-face:property.definition
+                  tree-sitter-hl-face:punctuation.bracket
+                  tree-sitter-hl-face:punctuation.special
+                  tree-sitter-hl-face:punctuation.delimiter))
+    (set-face-attribute face nil
+                        :weight 'normal
+                        :slant 'normal
+                        :underline nil))
 
-;; the yellow color types
-(dolist (face '(tree-sitter-hl-face:type.builtin
-                tree-sitter-hl-face:constant.builtin
-                tree-sitter-hl-face:function.builtin
-                tree-sitter-hl-face:constructor
-                tree-sitter-hl-face:variable.builtin))
-  (set-face-attribute face nil
-                      :weight 'normal
-                      :foreground "#ECBE7B"
-                      :slant 'normal
-                      :underline nil))
+  (dolist (face '(tree-sitter-hl-face:type.builtin
+                  tree-sitter-hl-face:constant.builtin
+                  tree-sitter-hl-face:function.builtin
+                  tree-sitter-hl-face:constructor
+                  tree-sitter-hl-face:variable.builtin))
+    (set-face-attribute face nil
+                        :weight 'normal
+                        :foreground "#ECBE7B"
+                        :slant 'normal
+                        :underline nil))
 
+  (dolist (face '(tree-sitter-hl-face:function
+                  tree-sitter-hl-face:function.call
+                  tree-sitter-hl-face:function.macro
+                  tree-sitter-hl-face:function.builtin
+                  tree-sitter-hl-face:function.special
+                  tree-sitter-hl-face:method.call))
+    (set-face-attribute face nil
+                        :weight 'normal
+                        :foreground "#51afef"
+                        :slant 'normal
+                        :underline nil))
 
-(dolist (face '(tree-sitter-hl-face:function
-                tree-sitter-hl-face:function.call
-                tree-sitter-hl-face:function.macro
-                tree-sitter-hl-face:function.builtin
-                tree-sitter-hl-face:function.special
-                tree-sitter-hl-face:method.call))
-  (set-face-attribute face nil
-                      :weight 'normal
-                      :foreground "#51afef"
-                      :slant 'normal
-                      :underline nil))
+  (dolist (face '(flymake-warning
+                  flymake-note
+                  flymake-error
+                  lsp-headerline-breadcrumb-separator-face                 
+                  lsp-headerline-breadcrumb-path-face                      
+                  lsp-headerline-breadcrumb-symbols-face                   
+                  lsp-headerline-breadcrumb-path-hint-face                 
+                  lsp-headerline-breadcrumb-path-info-face                 
+                  lsp-headerline-breadcrumb-deprecated-face                
+                  lsp-headerline-breadcrumb-path-error-face                
+                  lsp-headerline-breadcrumb-path-warning-face              
+                  lsp-headerline-breadcrumb-symbols-hint-face              
+                  lsp-headerline-breadcrumb-symbols-info-face              
+                  lsp-headerline-breadcrumb-symbols-error-face             
+                  lsp-headerline-breadcrumb-project-prefix-face            
+                  lsp-headerline-breadcrumb-symbols-warning-face           
+                  lsp-headerline-breadcrumb-unknown-project-prefix-face))
+    (set-face-attribute face nil
+                        :weight 'normal
+                        :slant 'normal
+                        :underline nil)))
 
-(dolist (face '(flymake-warning
-                flymake-note
-                flymake-error
-                lsp-headerline-breadcrumb-separator-face                 
-                lsp-headerline-breadcrumb-path-face                      
-                lsp-headerline-breadcrumb-symbols-face                   
-                lsp-headerline-breadcrumb-path-hint-face                 
-                lsp-headerline-breadcrumb-path-info-face                 
-                lsp-headerline-breadcrumb-deprecated-face                
-                lsp-headerline-breadcrumb-path-error-face                
-                lsp-headerline-breadcrumb-path-warning-face              
-                lsp-headerline-breadcrumb-symbols-hint-face              
-                lsp-headerline-breadcrumb-symbols-info-face              
-                lsp-headerline-breadcrumb-symbols-error-face             
-                lsp-headerline-breadcrumb-project-prefix-face            
-                lsp-headerline-breadcrumb-symbols-warning-face           
-                lsp-headerline-breadcrumb-unknown-project-prefix-face))
-  (set-face-attribute face nil
-                      :weight 'normal
-                      :slant 'normal
-                      :underline nil))
+(add-hook 'lsp-after-initialize-hook 'my-customize-faces)
 #+END_SRC
-
-
