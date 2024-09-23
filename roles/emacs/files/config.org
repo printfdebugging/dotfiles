@@ -98,12 +98,12 @@
 
 #+BEGIN_SRC emacs-lisp
 ;; (add-hook 'org-mode-hook (lambda () (variable-pitch-mode)))
-;; (add-hook 'org-mode-hook (lambda ()
-;;                     (org-indent-mode)
-;;                     (display-line-numbers-mode 0)))
+(add-hook 'org-mode-hook (lambda ()
+                    ;; (org-indent-mode)
+                    (display-line-numbers-mode 0)))
 ;; (add-hook 'find-file-hook (lambda () (efs/relative-line-numbers)))
-;; (add-hook 'prog-mode-hook (lambda () (efs/relative-line-numbers)))
-;; (add-hook 'text-mode-hook (lambda () (efs/relative-line-numbers)))
+(add-hook 'prog-mode-hook (lambda () (efs/relative-line-numbers)))
+(add-hook 'text-mode-hook (lambda () (efs/relative-line-numbers)))
 #+END_SRC
 
 * Autopair
@@ -815,4 +815,74 @@ from $1 to $0 and back to $1, having them selected for change in the process.
   (org-mode . org-tidy-mode))
 #+END_SRC
 
+* Custom TreeSitter Faces
 
+#+BEGIN_SRC emacs-lisp
+(dolist (face '(tree-sitter-hl-face:doc
+                tree-sitter-hl-face:tag
+                tree-sitter-hl-face:type
+                tree-sitter-hl-face:label
+                tree-sitter-hl-face:escape
+                tree-sitter-hl-face:method
+                tree-sitter-hl-face:number
+                tree-sitter-hl-face:string
+                tree-sitter-hl-face:comment
+                tree-sitter-hl-face:keyword
+                tree-sitter-hl-face:constant
+                tree-sitter-hl-face:embedded
+                tree-sitter-hl-face:function
+                tree-sitter-hl-face:operator
+                tree-sitter-hl-face:property
+                tree-sitter-hl-face:variable
+                tree-sitter-hl-face:attribute
+                tree-sitter-hl-face:type.super
+                tree-sitter-hl-face:constructor
+                tree-sitter-hl-face:method.call
+                tree-sitter-hl-face:punctuation
+                tree-sitter-hl-face:type.builtin
+                tree-sitter-hl-face:function.call
+                tree-sitter-hl-face:type.argument
+                tree-sitter-hl-face:function.macro
+                tree-sitter-hl-face:string.special
+                tree-sitter-hl-face:type.parameter
+                tree-sitter-hl-face:constant.builtin
+                tree-sitter-hl-face:function.builtin
+                tree-sitter-hl-face:function.special
+                tree-sitter-hl-face:variable.builtin
+                tree-sitter-hl-face:variable.special
+                tree-sitter-hl-face:variable.parameter
+                tree-sitter-hl-face:property.definition
+                tree-sitter-hl-face:punctuation.bracket
+                tree-sitter-hl-face:punctuation.special
+                tree-sitter-hl-face:punctuation.delimiter))
+  (set-face-attribute face nil
+                      :weight 'normal
+                      :slant 'normal
+                      :underline nil))
+
+;; the yellow color types
+(dolist (face '(tree-sitter-hl-face:type.builtin
+                tree-sitter-hl-face:constant.builtin
+                tree-sitter-hl-face:function.builtin
+                tree-sitter-hl-face:constructor
+                tree-sitter-hl-face:variable.builtin))
+  (set-face-attribute face nil
+                      :weight 'normal
+                      :foreground "#ECBE7B"
+                      :slant 'normal
+                      :underline nil))
+
+
+(dolist (face '(tree-sitter-hl-face:function
+                tree-sitter-hl-face:function.call
+                tree-sitter-hl-face:function.macro
+                tree-sitter-hl-face:function.builtin
+                tree-sitter-hl-face:function.special
+                tree-sitter-hl-face:method.call))
+  (set-face-attribute face nil
+                      :weight 'normal
+                      :foreground "#51afef"
+                      :slant 'normal
+                      :underline nil))
+
+#+END_SRC
