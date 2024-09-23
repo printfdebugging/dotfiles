@@ -606,6 +606,7 @@ To execute source blocks asynchronously, add =:async= to the source block's head
 
 (setq lsp-signature-render-documentation nil)
 (setq lsp-signature-auto-activate nil)
+(setq lsp-headerline-arrow "•")
 #+END_SRC
 
 *** Golang
