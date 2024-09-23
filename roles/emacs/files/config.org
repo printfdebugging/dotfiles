@@ -886,4 +886,27 @@ from $1 to $0 and back to $1, having them selected for change in the process.
                       :slant 'normal
                       :underline nil))
 
+(dolist (face '(flymake-warning
+                flymake-note
+                flymake-error
+                lsp-headerline-breadcrumb-separator-face                 
+                lsp-headerline-breadcrumb-path-face                      
+                lsp-headerline-breadcrumb-symbols-face                   
+                lsp-headerline-breadcrumb-path-hint-face                 
+                lsp-headerline-breadcrumb-path-info-face                 
+                lsp-headerline-breadcrumb-deprecated-face                
+                lsp-headerline-breadcrumb-path-error-face                
+                lsp-headerline-breadcrumb-path-warning-face              
+                lsp-headerline-breadcrumb-symbols-hint-face              
+                lsp-headerline-breadcrumb-symbols-info-face              
+                lsp-headerline-breadcrumb-symbols-error-face             
+                lsp-headerline-breadcrumb-project-prefix-face            
+                lsp-headerline-breadcrumb-symbols-warning-face           
+                lsp-headerline-breadcrumb-unknown-project-prefix-face))
+  (set-face-attribute face nil
+                      :weight 'normal
+                      :slant 'normal
+                      :underline nil))
 #+END_SRC
+
+

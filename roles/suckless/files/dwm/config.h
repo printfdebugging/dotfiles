@@ -41,7 +41,7 @@ static const Rule rules[] = {
 	{ "Firefox",        NULL,     NULL,           1 << 8,    0,          0,          -1,        -1 },
 	{ "Brave-browser",  NULL,     NULL,           1 << 3,    0,          0,          -1,        -1 },
 	{ "thunderbird",    NULL,     NULL,           1 << 8,    0,          0,          -1,        1 },
-	{ "Emacs",          NULL,     NULL,           1 << 1,    0,          0,          -1,        -1 },
+	// { "Emacs",          NULL,     NULL,           1 << 1,    0,          0,          -1,        -1 },
 	{ "st-256color",    NULL,     NULL,           0,         0,          1,           0,        -1 },
   { "libreofficedev", NULL,     NULL,           0,         1,          0,           0,        -1 },
   { "soffice.bin",    NULL,     NULL,           0,         1,          0,           0,        -1 },
