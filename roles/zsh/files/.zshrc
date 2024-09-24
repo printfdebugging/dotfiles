@@ -137,6 +137,7 @@ alias ls='ls --color=auto'
 alias ll='ls -al --color=auto'
 alias grep='grep --color=auto'
 alias n="cd ~/repos/notes && nvim README.md"
+alias b="cmake -B build && cd build && make && ./application && cd .."
 
 ## GIT
 alias tr="git log --all --oneline --graph --decorate"
@@ -147,3 +148,5 @@ alias gca="git commit --amend"
 # export QT_QPA_PLATFORMTHEME=gtk3
 export LOCOREPATH=/home/printfdebugging/repos/libreoffice
 export COOL_SERVE_FROM_FS=1
+
+if [ -e /home/printfdebugging/.nix-profile/etc/profile.d/nix.sh ]; then . /home/printfdebugging/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer

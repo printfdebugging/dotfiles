@@ -68,7 +68,7 @@
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
-(fringe-mode 0)
+(fringe-mode 2)
 (setq initial-scratch-message ""
     inhibit-startup-message t
     standard-indent 2
@@ -583,6 +583,9 @@ To execute source blocks asynchronously, add =:async= to the source block's head
 (use-package lsp-java :ensure t)
 (use-package css-mode :ensure t)
 (use-package js2-mode :ensure t)
+(use-package cmake-mode :ensure t)
+(use-package cmake-project :ensure t)
+(use-package cmake-font-lock :ensure t)
 #+END_SRC
 
 ** LSP Mode
@@ -596,6 +599,7 @@ To execute source blocks asynchronously, add =:async= to the source block's head
          (c++-mode . lsp-deferred)
          (java-mode . lsp-deferred)
          (lua-mode . lsp-deferred)
+         (cmake-mode . lsp-deferred)
          (c-mode . lsp-deferred))
   :commands lsp)
 
@@ -708,7 +712,6 @@ from $1 to $0 and back to $1, having them selected for change in the process.
 #+BEGIN_SRC emacs-lisp
 
 #+END_SRC
-
 
 * TODO ERC (Emacs Irc Client)
 
@@ -905,4 +908,13 @@ from $1 to $0 and back to $1, having them selected for change in the process.
                         :underline nil)))
 
 (add-hook 'lsp-after-initialize-hook 'my-customize-faces)
+(set-face-attribute 'line-number-current-line nil
+                        :background "#00000000")
+
+(set-face-attribute 'button nil
+                        :weight 'normal
+                        :foreground "#98be65")
+
+;; (custom-set-faces
+;;  '(header-line ((t (:background "98be65" )))))
 #+END_SRC
