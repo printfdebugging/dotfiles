@@ -18,6 +18,7 @@ package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/shar
 require("lazy").setup({
 	{
 		"catppuccin/nvim",
+		commit = "18bab5ec4c782cdf7d7525dbe89c60bfa02fc195",
 		name = "catppuccin",
 		priority = 1000,
 		config = true,
