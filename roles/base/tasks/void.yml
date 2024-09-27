@@ -56,6 +56,7 @@
     - gimp
     - xf86-video-amdgpu
     - xf86-video-ati
+    - xf86-input-libinput
 
 
 # - ttf-twemoji
