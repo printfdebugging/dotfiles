@@ -57,7 +57,7 @@
   loop:
     [
       { repo: "{{ my_gitlab_handle }}/dotfiles.git",                              path: "/home/{{ ansible_user }}/repos/dotfiles", },
-      { repo: "{{ my_gitlab_handle }}/brave.git",                                 path: "/home/{{ ansible_user }}/.config/BraveSoftware/Brave-Browser", },
+      { repo: "{{ my_gitlab_handle }}/chromium.git",                              path: "/home/{{ ansible_user }}/.config/chromium", },
       { repo: "{{ my_gitlab_handle }}/thunderbird.git",                           path: "/home/{{ ansible_user }}/.thunderbird", },
 
       # projects

@@ -31,7 +31,7 @@
     cmd: |
       /usr/bin/yay -S {{ item }} --noconfirm
   loop:
-    - brave-bin
+    - chromium
     - visual-studio-code-bin
     - ttf-twemoji
     - par
