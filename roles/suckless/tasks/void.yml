@@ -12,7 +12,6 @@
     - libXinerama-devel
     - harfbuzz-devel
     - freetype
-    - curl
 
 # - name: setup ttf-iosevka-nerd on voidlinux
 #   become: true
