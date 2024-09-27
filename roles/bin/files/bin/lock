@@ -1,3 +1,3 @@
 #!/bin/bash
 
-i3lock-fancy-multimonitor -n -p
+i3lock-fancy -n -p

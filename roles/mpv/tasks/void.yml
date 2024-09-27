@@ -1,0 +1,9 @@
+- name: install zsh and additional packages
+  tags:
+    - zsh
+    - packages
+  community.general.xbps:
+    name:
+      - mpv
+    state: latest
+

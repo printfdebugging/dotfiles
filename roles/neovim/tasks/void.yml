@@ -1,0 +1,34 @@
+- name: install neovim and dependencies
+  tags:
+    - neovim
+    - packages
+  community.general.xbps:
+    name:
+      - neovim
+      - git
+      - nodejs
+    state: latest
+
+- name: copy config files to ~/.config
+  become: false
+  tags:
+    - neovim
+    - files
+  ansible.builtin.copy:
+    src: nvim
+    dest: /home/{{ ansible_user }}/.config
+    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user }}"
+    mode: 0755
+
+- name: copy back the config files from ~/.config/nvim
+  become: false
+  tags:
+    - save
+    - save-neovim
+  ansible.builtin.copy:
+    src: /home/{{ ansible_user }}/.config/nvim
+    dest: /home/{{ ansible_user }}/repos/dotfiles/roles/neovim/files
+    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user }}"
+    mode: 0755

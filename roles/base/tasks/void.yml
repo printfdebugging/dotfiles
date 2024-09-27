@@ -1,0 +1,72 @@
+- name: install packages
+  tags:
+    - base
+    - packages
+  community.general.xbps:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - chromium
+    - vscode
+    - par
+    - thunderbird
+    - lua
+    - cmake
+    - ansible
+    - neofetch
+    - man-db
+    - btop
+    - vim
+    - pasystray
+    - pavucontrol
+    - unzip
+    - network-manager-applet
+    - ripgrep
+    - Thunar
+    - breeze-icons
+    - go
+    - xdotool
+    - netcat
+    - python3-watchdog
+    - libreoffice
+    - loupe
+    - Bear
+    - zola
+    - mtpfs
+    - gvfs-mtp
+    - mpv
+    - python-pip
+    - evince
+    - okular
+    - gdb
+    - ntfs-3g
+    - obs
+    - glade3
+    - luarocks
+    - ImageMagick
+    - qt5-styleplugins
+    - qt5ct
+    - ruff
+    - i3lock-fancy
+    - SFML
+    - glfw
+    - mesa-vulkan-radeon
+    - glm
+    - shaderc
+    - gimp
+    - xf86-video-amdgpu
+    - xf86-video-ati
+
+
+# - ttf-twemoji
+# - name: copy fontconfig to /etc/fonts/conf.d/
+#   become: true
+#   tags:
+#     - aur
+#     - packages
+#   ansible.builtin.copy:
+#     src: /usr/share/fontconfig/conf.avail/75-twemoji.conf
+#     dest: /etc/fonts/conf.d/75-twemoji.conf
+#     owner: root
+#     group: root
+#     mode: 0644

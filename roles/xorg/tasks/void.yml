@@ -1,0 +1,76 @@
+- name: install xorg-server and surrounding packages
+  tags:
+    - xorg
+    - packages
+  community.general.xbps:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - xorg-server
+    - xinit
+    - xrandr
+    - setxkbmap
+    - xset
+    - xcompmgr
+    - xwallpaper
+    - xclip
+    - xsel
+
+- name: copy .xinitrc file
+  become: false
+  tags:
+    - xorg
+    - files
+  ansible.builtin.copy:
+    src: .xinitrc
+    dest: /home/{{ ansible_user }}/.xinitrc
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0644
+
+- name: ensure xorg.conf.d/ directory exists
+  become: true
+  tags:
+    - xorg
+    - files
+  ansible.builtin.file:
+    path: "/etc/X11/xorg.conf.d"
+    state: directory
+    owner: "root"
+    group: "root"
+
+- name: copy 30-touchpad.conf file
+  become: true
+  tags:
+    - xorg
+    - files
+  ansible.builtin.copy:
+    src: 30-touchpad.conf
+    dest: /etc/X11/xorg.conf.d/30-touchpad.conf
+    owner: "root"
+    group: "root"
+    mode: 0644
+
+- name: copy 00-keyboard.conf file
+  become: true
+  tags:
+    - xorg
+    - files
+  ansible.builtin.copy:
+    src: 00-keyboard.conf
+    dest: /etc/X11/xorg.conf.d/00-keyboard.conf
+    owner: "root"
+    group: "root"
+    mode: 0644
+
+- name: copy back .xinitrc from ~/.xinitrc
+  become: false
+  tags:
+    - save
+    - save-xorg
+  ansible.builtin.copy:
+    src: /home/{{ ansible_user }}/.xinitrc
+    dest: /home/{{ ansible_user }}/repos/dotfiles/roles/xorg/files/.xinitrc
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0644

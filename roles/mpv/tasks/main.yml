@@ -1,3 +1,11 @@
+- name: setup zsh on archlinux
+  ansible.builtin.import_tasks: arch.yml
+  when: ansible_os_family == "Archlinux"
+
+- name: setup zsh on voidlinux
+  ansible.builtin.import_tasks: void.yml
+  when: ansible_os_family == "Void"
+
 - name: ensure config directory exists
   become: false
   tags:

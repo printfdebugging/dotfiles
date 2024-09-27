@@ -1,2 +1,2 @@
-- name: setup binaries on archlinux
+- name: setup scripts
   ansible.builtin.import_tasks: linux.yml

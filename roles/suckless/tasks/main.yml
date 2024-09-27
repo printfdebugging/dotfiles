@@ -1,3 +1,7 @@
 - name: setup suckless dwm on arch based systems
   ansible.builtin.import_tasks: arch.yml
   when: ansible_os_family == "Archlinux"
+
+- name: setup suckless dwm on void linux
+  ansible.builtin.import_tasks: void.yml
+  when: ansible_os_family == "Void"

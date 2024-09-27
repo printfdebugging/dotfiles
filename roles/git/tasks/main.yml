@@ -11,5 +11,9 @@
   become: false
 
 - name: clone my git repositories in ~/repos/
-  ansible.builtin.import_tasks: arch-repos.yml
+  ansible.builtin.import_tasks: arch.yml
   when: ansible_os_family == "Archlinux"
+
+- name: clone my git repositories in ~/repos/
+  ansible.builtin.import_tasks: void.yml
+  when: ansible_os_family == "Void"

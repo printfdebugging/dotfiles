@@ -1,0 +1,45 @@
+- name: install dunst
+  tags:
+    - dunst
+    - packages
+  community.general.xbps:
+    name:
+      - dunst
+    state: latest
+
+- name: ensure config directory exists
+  become: false
+  tags:
+    - dunst
+    - files
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/.config/dunst"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0755"
+
+- name: copy dunstrc to .config
+  become: false
+  tags:
+    - dunst
+    - files
+  ansible.builtin.copy:
+    src: dunstrc
+    dest: /home/{{ ansible_user }}/.config/dunst/dunstrc
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+
+- name: copy back flameshot config from ~/.config/dunst
+  become: false
+  tags:
+    - save
+    - save-dunst
+  ansible.builtin.copy:
+    src: /home/{{ ansible_user }}/.config/dunst/dunstrc
+    dest: /home/{{ ansible_user }}/repos/dotfiles/roles/dunst/files/dunstrc
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0644
+

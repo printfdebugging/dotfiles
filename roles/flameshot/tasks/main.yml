@@ -1,3 +1,7 @@
 - name: setup flameshot on archlinux
   ansible.builtin.import_tasks: arch.yml
   when: ansible_os_family == "Archlinux"
+
+- name: setup flameshot on void 
+  ansible.builtin.import_tasks: void.yml
+  when: ansible_os_family == "Void"
