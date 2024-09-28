@@ -10,7 +10,7 @@ function init_voidlinux() {
     cp /usr/share/xbps.d/00-repository-main.conf /etc/xbps.d/00-repository-main.conf
 
     # install the required packages
-    sudo xbps-install -Su git openssl ansible python3-watchdog neovim
+    sudo xbps-install -Syu git openssl ansible python3-watchdog neovim
 }
 
 function init() {
@@ -22,13 +22,22 @@ function init() {
     esac
 }
 
+function clone_dotfiles() {
+    mkdir -p /home/printfdebugging/repos && cd /home/printfdebugging/repos
+    [ ! -d "/home/printfdebugging/repos/dotfiles" ] && git clone https://gitlab.com/printfdebugging/dotfiles.git /home/printfdebugging/repos/dotfiles
+    cd /home/printfdebugging/repos/dotfiles
+}
+
 function run_ansible_tasks_with_tag() {
     if ! command -v ansible-playbook; then
         init
     fi
 
+    # setup dotfiles repository
+    clone_dotfiles
+
     # run the ansible-playbook command
-    ansible-playbook "$HOME/repos/dotfiles/main.yml" \
+    ansible-playbook main.yml \
         --tags "${@}" \
         --become --ask-become-pass \
         --ask-vault-pass
