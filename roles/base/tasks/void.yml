@@ -64,6 +64,7 @@
     - yarn
     - wget
     - curl
+    - fontconfig
 
 - name: (base@voidlinux) install ttf-iosevka-nerd 
   become: true
