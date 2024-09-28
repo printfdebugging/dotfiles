@@ -1,5 +1,6 @@
 - name: (emacs) include archlinux tasks
   tags:
+    - emacs
     - include
   ansible.builtin.include_tasks:
     file: arch.yml
@@ -7,6 +8,7 @@
 
 - name: (emacs) include voidlinux tasks
   tags:
+    - emacs
     - include
   ansible.builtin.include_tasks:
     file: void.yml

@@ -1,5 +1,6 @@
 - name: (mpv) include archlinux tasks
   tags:
+    - mpv
     - include
   ansible.builtin.include_tasks:
     file: arch.yml
@@ -7,6 +8,7 @@
 
 - name: (mpv) include voidlinux tasks
   tags:
+    - mpv
     - include
   ansible.builtin.include_tasks:
     file: void.yml

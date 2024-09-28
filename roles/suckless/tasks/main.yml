@@ -1,5 +1,6 @@
 - name: (suckless) include archlinux tasks
   tags:
+    - suckless
     - include
   ansible.builtin.include_tasks:
     file: arch.yml
@@ -7,6 +8,7 @@
 
 - name: (suckless) include voidlinux tasks
   tags:
+    - suckless
     - include
   ansible.builtin.include_tasks:
     file: void.yml

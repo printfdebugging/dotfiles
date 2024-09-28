@@ -1,5 +1,6 @@
 - name: (dunst) include archlinux tasks
   tags:
+    - dunst
     - include
   ansible.builtin.include_tasks:
     file: arch.yml
@@ -7,6 +8,7 @@
 
 - name: (dunst) include voidlinux tasks
   tags:
+    - dunst
     - include
   ansible.builtin.include_tasks:
     file: void.yml

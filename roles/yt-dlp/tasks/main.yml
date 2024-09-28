@@ -1,5 +1,6 @@
 - name: (yt-dlp) include archlinux tasks
   tags:
+    - yt-dlp
     - include
   ansible.builtin.include_tasks:
     file: arch.yml
@@ -7,6 +8,7 @@
 
 - name: (yt-dlp) include voidlinux tasks
   tags:
+    - yt-dlp
     - include
   ansible.builtin.include_tasks:
     file: void.yml

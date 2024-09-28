@@ -1,5 +1,6 @@
 - name: (git) include archlinux tasks
   tags:
+    - git
     - include
   ansible.builtin.include_tasks:
     file: arch.yml
@@ -7,6 +8,7 @@
 
 - name: (git) include voidlinux tasks
   tags:
+    - git
     - include
   ansible.builtin.include_tasks:
     file: void.yml

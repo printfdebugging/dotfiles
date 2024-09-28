@@ -1,5 +1,6 @@
 - name: (flameshot) include archlinux tasks
   tags:
+    - flameshot
     - include
   ansible.builtin.include_tasks:
     file: arch.yml
@@ -7,6 +8,7 @@
 
 - name: (flameshot) include voidlinux tasks
   tags:
+    - flameshot
     - include
   ansible.builtin.include_tasks:
     file: void.yml

@@ -1,5 +1,6 @@
 - name: (zsh) include archlinux tasks
   tags:
+    - zsh
     - include
   ansible.builtin.include_tasks:
     file: arch.yml
@@ -7,6 +8,7 @@
 
 - name: (zsh) include voidlinux tasks
   tags:
+    - zsh
     - include
   ansible.builtin.include_tasks:
     file: void.yml

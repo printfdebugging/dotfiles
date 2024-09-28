@@ -88,7 +88,7 @@ function git_push_test() {
     status_message=$(git status | head -n2 | tail -n1)
     ahead_count=$(extract_commits ".*ahead .* ([0-9]+) commit.*" "$status_message")
     behind_count=$(extract_commits ".*behind .* ([0-9]+) commit.*" "$status_message")
-    echo -e "${BOLD}${COLOR_RED}Out of sync:${COLOR_RESET} ${ahead_count} ahead and ${behind_count} behind"
+make: *** No rule to make target 'run'.  Stop.
 }
 
 function repos_status() {
@@ -158,7 +158,7 @@ case "$1" in
         --connection=local --user=printfdebugging
         --become --ask-become-pass;;
 
-    "full") ansible-playbook "$dotfiles_playbook" --tags "files,system,packages" -i localhost, \
+    "full") ansible-playbook "$dotfiles_playbook" --tags "files,include,system,packages" -i localhost, \
         --connection=local --user=printfdebugging \
         --extra-vars ansiblecfg='{"defaults": {"stdout_callback": "beautiful_output", "bin_ansible_callbacks": true, "ansible_python_interpreter"="/usr/bin/python"}}' \
         --extra-vars ansible_user=printfdebugging \

@@ -1,5 +1,6 @@
 - name: (xorg) include archlinux roles
   tags:
+    - xorg
     - include
   ansible.builtin.include_tasks:
     file: arch.yml
@@ -7,6 +8,7 @@
 
 - name: (xorg) include voidlinux roles
   tags:
+    - xorg
     - include
   ansible.builtin.include_tasks:
     file: void.yml

@@ -1,5 +1,6 @@
 - name: (neovim) include archlinux tasks
   tags:
+    - neovim
     - include
   ansible.builtin.include_tasks:
     file: arch.yml
@@ -7,6 +8,7 @@
 
 - name: (neovim) include voidlinux tasks
   tags:
+    - neovim
     - include
   ansible.builtin.include_tasks:
     file: void.yml

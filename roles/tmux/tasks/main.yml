@@ -1,5 +1,6 @@
 - name: (tmux) include archlinux tasks
   tags:
+    - tmux
     - include
   ansible.builtin.include_tasks:
     file: arch.yml
@@ -7,6 +8,7 @@
 
 - name: (tmux) include voidlinux tasks
   tags:
+    - tmux
     - include
   ansible.builtin.include_tasks:
     file: void.yml
