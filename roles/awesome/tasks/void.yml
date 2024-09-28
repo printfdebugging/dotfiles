@@ -2,7 +2,7 @@
   tags:
     - awesome
     - packages
-  community.general.pacman:
+  community.general.xbps:
     name: "{{ item }}"
     state: latest
   loop:
