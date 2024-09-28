@@ -1,4 +1,4 @@
-- name: (suckless) install packages
+- name: (suckless@voidlinux) install packages
   tags:
     - suckless
     - packages
