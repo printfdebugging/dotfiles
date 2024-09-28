@@ -6,6 +6,5 @@
     name:
       - "{{ item }}"
     state: latest
-    upgrade: true
   loop:
     - dunst
