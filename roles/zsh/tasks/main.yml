@@ -1,7 +1,13 @@
-- name: setup zsh on archlinux
-  ansible.builtin.import_tasks: arch.yml
+- name: include arch.yml
+  tags:
+    - include
+  ansible.builtin.include_tasks:
+    file: arch.yml
   when: ansible_os_family == "Archlinux"
 
-- name: setup zsh on voidlinux
-  ansible.builtin.import_tasks: void.yml
+- name: include void.yml
+  tags:
+    - include
+  ansible.builtin.include_tasks:
+    file: void.yml
   when: ansible_os_family == "Void"

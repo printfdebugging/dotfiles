@@ -1,7 +1,7 @@
 ---
 linux-machines:
   hosts:
-    laptop:
+    system:
       ansible_user: printfdebugging
       ansible_host: localhost
       ansible_connection: local

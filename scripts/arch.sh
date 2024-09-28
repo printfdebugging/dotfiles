@@ -8,8 +8,8 @@ mkdir -p ~/repos && cd ~/repos
 git clone https://gitlab.com/printfdebugging/dotfiles.git && cd dotfiles
 
 # ansible-playbook
-ansible-playbook main.yml \
-    --tags "files,packages,custom,system" \
+ansible-playbook ~/repos/dotfiles/main.yml \
+    --tags "include,files,packages,custom,system" \
     --become --ask-become-pass \
     --ask-vault-pass
 

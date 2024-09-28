@@ -62,6 +62,31 @@
     - wget
     - curl
 
+- name: setup ttf-iosevka-nerd on voidlinux
+  become: true
+  tags:
+    - suckless
+    - custom
+    - packages
+  ansible.builtin.shell:
+    cmd: |
+      cd /tmp
+      curl -LO https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/Iosevka.zip
+      unzip Iosevka.zip -d Iosevka
+      cp -r Iosevka /usr/share/fonts
+
+- name: setup ttf-jetbrains-mono-nerd on voidlinux
+  become: true
+  tags:
+    - suckless
+    - custom
+    - packages
+  ansible.builtin.shell:
+    cmd: |
+      cd /tmp
+      curl -LO https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/JetBrainsMono.zip
+      unzip JetBrainsMono.zip -d JetBrainsMono
+      cp -r JetBrainsMono /usr/share/fonts
 
 # - ttf-twemoji
 # - name: copy fontconfig to /etc/fonts/conf.d/

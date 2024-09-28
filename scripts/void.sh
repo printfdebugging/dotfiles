@@ -14,6 +14,6 @@ cd dotfiles
 
 # ansible-playbook
 ansible-playbook ~/repos/dotfiles/main.yml \
-    --tags "files,packages,custom,system" \
+    --tags "include,files,packages,custom,system" \
     --become --ask-become-pass \
     --ask-vault-pass
