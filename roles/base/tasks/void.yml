@@ -111,3 +111,15 @@
     owner: root
     group: root
     mode: 0644
+
+- name: (base@voidlinux) add user to network group
+  ansible.builtin.user:
+    name: "{{ ansible_user }}"
+    groups: network
+    append: true
+
+- name: (base@voidlinux) enable NetworkManager
+  ansible.builtin.service:
+    name: NetworkManager
+    enabled: true
+    started: true
