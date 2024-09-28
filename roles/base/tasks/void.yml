@@ -48,9 +48,10 @@
     - qt5ct
     - ruff
     - i3lock-fancy
-    - SFML
-    - glfw
+    - glfw-devel
     - mesa-vulkan-radeon
+    - vulkan-loader-devel
+    - libXxf86vm-devel
     - glm
     - shaderc
     - gimp

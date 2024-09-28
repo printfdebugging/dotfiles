@@ -144,6 +144,7 @@ alias tr="git log --all --oneline --graph --decorate"
 alias stat="git status"
 alias br="git branch"
 alias gca="git commit --amend"
+alias xi="sudo xbps-install"
 
 # export QT_QPA_PLATFORMTHEME=gtk3
 export LOCOREPATH=/home/printfdebugging/repos/libreoffice
