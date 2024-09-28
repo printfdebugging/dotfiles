@@ -65,8 +65,7 @@
 - name: setup ttf-iosevka-nerd on voidlinux
   become: true
   tags:
-    - suckless
-    - custom
+    - base
     - packages
   ansible.builtin.shell:
     cmd: |
@@ -78,8 +77,7 @@
 - name: setup ttf-jetbrains-mono-nerd on voidlinux
   become: true
   tags:
-    - suckless
-    - custom
+    - base
     - packages
   ansible.builtin.shell:
     cmd: |
@@ -91,7 +89,8 @@
 - name: copy twemoji font file
   become: true
   tags:
-    - files
+    - base
+    - packages
   ansible.builtin.copy:
     src: twemoji
     dest: /usr/share/fonts
@@ -102,7 +101,8 @@
 - name: copy twemoji fontconfig 
   become: true
   tags:
-    - files
+    - base
+    - packages
   ansible.builtin.copy:
     src: 75-twemoji.conf
     dest: /etc/fonts/conf.d/75-twemoji.conf
