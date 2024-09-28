@@ -5,7 +5,6 @@
   community.general.xbps:
     name: "{{ item }}"
     state: latest
-    upgrade: true
   loop:
     - chromium
     - vscode
@@ -117,5 +116,12 @@
     owner: root
     group: root
     mode: 0644
+
+- name: (base@voidlinux) upgrade distribution
+  tags:
+    - base
+    - packages
+  community.general.xbps:
+    upgrade: true
 
 # enable essential services

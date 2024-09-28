@@ -5,7 +5,6 @@
   community.general.xbps:
     name: "{{ item }}"
     state: latest
-    upgrade: true
   loop:
     - git
     - openssh
