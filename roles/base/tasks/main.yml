@@ -1,11 +1,11 @@
-- name: include arch.yml
+- name: (base) include archlinux tasks
   tags:
     - include
   ansible.builtin.include_tasks:
     file: arch.yml
   when: ansible_os_family == "Archlinux"
 
-- name: include void.yml
+- name: (base) include voidlinux tasks
   tags:
     - include
   ansible.builtin.include_tasks:

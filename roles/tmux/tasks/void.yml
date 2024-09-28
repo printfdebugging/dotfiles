@@ -1,4 +1,4 @@
-- name: install tmux
+- name: (tmux@voidlinux) install packages
   tags:
     - tmux
     - packages

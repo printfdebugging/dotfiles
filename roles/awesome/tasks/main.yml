@@ -1,18 +1,18 @@
-- name: include arch.yml
+- name: (awesome) include archlinux tasks
   tags:
     - include
   ansible.builtin.include_tasks:
     file: arch.yml
   when: ansible_os_family == "Archlinux"
 
-- name: include void.yml
+- name: (awesome) include voidlinux tasks
   tags:
     - include
   ansible.builtin.include_tasks:
     file: void.yml
   when: ansible_os_family == "Void"
 
-- name: copy awesome config files
+- name: (awesome) copy config files
   become: false
   tags:
     - awesome
@@ -24,7 +24,7 @@
     group: "{{ ansible_user }}"
     mode: 0755
 
-- name: save awesome config files
+- name: (awesome) save config files
   become: false
   tags:
     - save

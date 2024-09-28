@@ -1,4 +1,4 @@
-- name: install emacs packages
+- name: (emacs@archlinux) install packages
   tags:
     - emacs
     - packages

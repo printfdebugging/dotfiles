@@ -1,18 +1,18 @@
-- name: include arch.yml
+- name: (zsh) include archlinux tasks
   tags:
     - include
   ansible.builtin.include_tasks:
     file: arch.yml
   when: ansible_os_family == "Archlinux"
 
-- name: include void.yml
+- name: (zsh) include voidlinux tasks
   tags:
     - include
   ansible.builtin.include_tasks:
     file: void.yml
   when: ansible_os_family == "Void"
 
-- name: setup ZSH as system shell
+- name: (zsh) setup zsh shell
   tags:
     - zsh
     - system
@@ -24,7 +24,7 @@
     - root
     - "{{ ansible_user }}"
 
-- name: copy zsh config files
+- name: (zsh) copy config files
   become: false
   tags:
     - zsh
@@ -39,8 +39,7 @@
     - .zshrc
     - .zprofile
 
-# this one still fails.
-- name: ensure .cache directory exists
+- name: (zsh) create cache directory
   become: false
   tags:
     - zsh
@@ -52,7 +51,7 @@
     group: "{{ ansible_user }}"
     mode: "0755"
 
-- name: create the cache file for zsh
+- name: (zsh) create history file
   become: false
   tags:
     - zsh
@@ -64,7 +63,7 @@
     owner: "{{ ansible_user }}"
     mode: 0755
 
-- name: copy back zsh config files
+- name: (zsh) save config files
   become: false
   tags:
     - save

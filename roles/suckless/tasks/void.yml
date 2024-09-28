@@ -1,4 +1,4 @@
-- name: install suckless dependencies
+- name: (suckless) install packages
   tags:
     - suckless
     - packages

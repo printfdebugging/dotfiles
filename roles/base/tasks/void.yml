@@ -1,4 +1,4 @@
-- name: install packages
+- name: (base@voidlinux) install packages
   tags:
     - base
     - packages
@@ -62,7 +62,7 @@
     - wget
     - curl
 
-- name: setup ttf-iosevka-nerd on voidlinux
+- name: (base@voidlinux) install ttf-iosevka-nerd 
   become: true
   tags:
     - base
@@ -74,7 +74,7 @@
       unzip Iosevka.zip -d Iosevka
       cp -r Iosevka /usr/share/fonts
 
-- name: setup ttf-jetbrains-mono-nerd on voidlinux
+- name: (base@voidlinux) install ttf-jetbrainsmono-nerd
   become: true
   tags:
     - base
@@ -86,7 +86,7 @@
       unzip JetBrainsMono.zip -d JetBrainsMono
       cp -r JetBrainsMono /usr/share/fonts
 
-- name: copy twemoji font file
+- name: (base@voidlinux) copy twemoji font file
   become: true
   tags:
     - base
@@ -98,7 +98,7 @@
     group: root
     mode: 0644
 
-- name: copy twemoji fontconfig 
+- name: (base@voidlinux) copy twemoji fontconfig
   become: true
   tags:
     - base

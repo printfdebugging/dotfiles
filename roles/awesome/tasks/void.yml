@@ -1,4 +1,4 @@
-- name: install awesome on void
+- name: (awesome@voidlinux) install awesome
   tags:
     - awesome
     - packages

@@ -1,4 +1,4 @@
-- name: install zsh and additional packages
+- name: (mpv@voidlinux) install packages
   tags:
     - zsh
     - packages

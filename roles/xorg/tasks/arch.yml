@@ -1,4 +1,4 @@
-- name: install xorg-server and surrounding packages
+- name: (xorg@archlinux) install packages
   tags:
     - xorg
     - packages

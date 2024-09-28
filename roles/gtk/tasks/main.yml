@@ -1,4 +1,4 @@
-- name: ensure config directory exists
+- name: (gtk) create config directory
   become: false
   tags:
     - gtk
@@ -10,7 +10,7 @@
     group: "{{ ansible_user }}"
     mode: "0755"
 
-- name: copy gtkrc to .config
+- name: (gtk) copy config file
   become: false
   tags:
     - gtk
@@ -22,7 +22,7 @@
     group: "{{ ansible_user }}"
     mode: 0755
 
-- name: copy back flameshot config from ~/.config/gtk-3.0
+- name: (gtk) copy back config file
   become: false
   tags:
     - save

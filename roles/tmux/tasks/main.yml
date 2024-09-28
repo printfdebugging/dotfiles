@@ -1,18 +1,18 @@
-- name: include arch.yml
+- name: (tmux) include archlinux tasks
   tags:
     - include
   ansible.builtin.include_tasks:
     file: arch.yml
   when: ansible_os_family == "Archlinux"
 
-- name: include void.yml
+- name: (tmux) include voidlinux tasks
   tags:
     - include
   ansible.builtin.include_tasks:
     file: void.yml
   when: ansible_os_family == "Void"
 
-- name: Ensure the tmux configuration directory exists
+- name: (tmux) create config directory
   become: false
   tags:
     - tmux
@@ -24,7 +24,7 @@
     group: "{{ ansible_user }}"
     mode: 0755
 
-- name: clone tpm package manager
+- name: (tmux) clone tpm
   become: false
   tags:
     - tmux
@@ -34,7 +34,7 @@
     dest: /home/{{ ansible_user }}/.tmux/plugins/tpm
     update: false
 
-- name: copy the config file to ~/.config/tmux
+- name: (tmux) copy config file
   become: false
   tags:
     - tmux
@@ -46,7 +46,7 @@
     group: "{{ ansible_user }}"
     mode: 0755
 
-- name: copy back tmux config file from ~/.config/tmux
+- name: (tmux) save config file
   become: false
   tags:
     - save

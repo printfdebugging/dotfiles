@@ -1,18 +1,18 @@
-- name: include arch.yml
+- name: (neovim) include archlinux tasks
   tags:
     - include
   ansible.builtin.include_tasks:
     file: arch.yml
   when: ansible_os_family == "Archlinux"
 
-- name: include void.yml
+- name: (neovim) include voidlinux tasks
   tags:
     - include
   ansible.builtin.include_tasks:
     file: void.yml
   when: ansible_os_family == "Void"
 
-- name: copy config files to ~/.config
+- name: (neovim) copy config files
   become: false
   tags:
     - neovim
@@ -24,7 +24,7 @@
     owner: "{{ ansible_user }}"
     mode: 0755
 
-- name: copy back the config files from ~/.config/nvim
+- name: (neovim) save config files
   become: false
   tags:
     - save

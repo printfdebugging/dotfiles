@@ -1,4 +1,4 @@
-- name: copy scripts to the ~/.local/bin folder
+- name: (bin) copy shell-scripts 
   become: false
   tags:
     - bin
@@ -10,7 +10,7 @@
     group: "{{ ansible_user }}"
     mode: 0755
 
-- name: copy back config files from ~/.local/bin
+- name: (bin) save shell-scripts
   become: false
   tags:
     - save

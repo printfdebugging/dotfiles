@@ -1,4 +1,4 @@
-- name: install neovim and dependencies
+- name: (neovim@archlinux) install packages
   tags:
     - neovim
     - packages

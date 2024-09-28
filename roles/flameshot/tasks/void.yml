@@ -1,4 +1,4 @@
-- name: install flameshot on voidlinux
+- name: (flameshot@voidlinux) install packages
   tags:
     - flameshot
     - packages

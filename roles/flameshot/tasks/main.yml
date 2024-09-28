@@ -1,18 +1,18 @@
-- name: include arch.yml
+- name: (flameshot) include archlinux tasks
   tags:
     - include
   ansible.builtin.include_tasks:
     file: arch.yml
   when: ansible_os_family == "Archlinux"
 
-- name: include void.yml
+- name: (flameshot) include voidlinux tasks
   tags:
     - include
   ansible.builtin.include_tasks:
     file: void.yml
   when: ansible_os_family == "Void"
 
-- name: ensure config directory exists
+- name: (flameshot) create config directory
   become: false
   tags:
     - flameshot
@@ -24,7 +24,7 @@
     group: "{{ ansible_user }}"
     mode: "0755"
 
-- name: copy config files to ~/.config/flameshot
+- name: (flameshot) copy config file
   become: false
   tags:
     - flameshot

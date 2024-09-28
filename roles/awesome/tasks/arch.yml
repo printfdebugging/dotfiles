@@ -1,4 +1,4 @@
-- name: install awesomewm on Archlinux
+- name: (awesome@archlinux) install awesome
   tags:
     - awesome
     - packages

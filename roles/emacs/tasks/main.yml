@@ -1,18 +1,18 @@
-- name: include arch.yml
+- name: (emacs) include archlinux tasks
   tags:
     - include
   ansible.builtin.include_tasks:
     file: arch.yml
   when: ansible_os_family == "Archlinux"
 
-- name: include void.yml
+- name: (emacs) include voidlinux tasks
   tags:
     - include
   ansible.builtin.include_tasks:
     file: void.yml
   when: ansible_os_family == "Void"
 
-- name: ensure config directory exists
+- name: (emacs) create config directory
   become: false
   tags:
     - emacs
@@ -24,7 +24,7 @@
     group: "{{ ansible_user }}"
     mode: "0755"
 
-- name: copy emacs config files
+- name: (emacs) copy config file
   become: false
   tags:
     - emacs
@@ -39,7 +39,7 @@
     - init.el
     - config.org
 
-- name: copy emacs snippets
+- name: (emacs) copy snippets
   become: false
   tags:
     - emacs
@@ -51,7 +51,7 @@
     group: "{{ ansible_user }}"
     mode: 0755
 
-- name: copy back config files from ~/.config/emacs
+- name: (emacs) save config files
   become: false
   tags:
     - save
@@ -66,7 +66,7 @@
     - init.el
     - config.org
 
-- name: copy back emacs-snippets
+- name: (emacs) save snippets
   become: false
   tags:
     - save

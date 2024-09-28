@@ -1,18 +1,18 @@
-- name: include arch.yml
+- name: (suckless) include archlinux tasks
   tags:
     - include
   ansible.builtin.include_tasks:
     file: arch.yml
   when: ansible_os_family == "Archlinux"
 
-- name: include void.yml
+- name: (suckless) include voidlinux tasks
   tags:
     - include
   ansible.builtin.include_tasks:
     file: void.yml
   when: ansible_os_family == "Void"
 
-- name: remove ~/.local/src directory
+- name: (suckless) remove src files
   become: false
   tags:
     - suckless
@@ -21,7 +21,7 @@
     path: /home/{{ ansible_user }}/.local/src
     state: absent
 
-- name: Ensure source directory exists
+- name: (suckless) create src directory
   become: false
   tags:
     - suckless
@@ -33,7 +33,7 @@
     group: "{{ ansible_user }}"
     mode: "0755"
 
-- name: copy source files to ~/.local/src
+- name: (suckless) copy src files
   become: false
   tags:
     - suckless
@@ -49,7 +49,7 @@
     - dmenu
     - st
 
-- name: compile suckless software
+- name: (suckless) compile src files
   become: true
   tags:
     - suckless

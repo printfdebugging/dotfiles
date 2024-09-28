@@ -1,4 +1,4 @@
-- name: install tmux
+- name: (tmux@archlinux) install packages
   tags:
     - tmux
     - packages

@@ -1,18 +1,18 @@
-- name: include arch.yml
+- name: (mpv) include archlinux tasks
   tags:
     - include
   ansible.builtin.include_tasks:
     file: arch.yml
   when: ansible_os_family == "Archlinux"
 
-- name: include void.yml
+- name: (mpv) include voidlinux tasks
   tags:
     - include
   ansible.builtin.include_tasks:
     file: void.yml
   when: ansible_os_family == "Void"
 
-- name: ensure config directory exists
+- name: (mpv) create config directory
   become: false
   tags:
     - mpv
@@ -24,7 +24,7 @@
     group: "{{ ansible_user }}"
     mode: 0755
 
-- name: copy config files to ~/.config/mpv
+- name: (mpv) create config directory
   become: false
   tags:
     - mpv
@@ -39,7 +39,7 @@
     - input.conf
     - mpv.conf
 
-- name: copy back mpv config from ~/.config/mpv
+- name: (mpv) save config directory
   become: false
   tags:
     - save

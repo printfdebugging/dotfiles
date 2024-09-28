@@ -1,4 +1,4 @@
-- name: copy files to ~/.local/share
+- name: (wallpapers) copy walls and icons
   become: false
   tags:
     - wallpapers

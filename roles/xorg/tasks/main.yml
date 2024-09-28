@@ -1,18 +1,18 @@
-- name: include arch.yml
+- name: (xorg) include archlinux roles
   tags:
     - include
   ansible.builtin.include_tasks:
     file: arch.yml
   when: ansible_os_family == "Archlinux"
 
-- name: include void.yml
+- name: (xorg) include voidlinux roles
   tags:
     - include
   ansible.builtin.include_tasks:
     file: void.yml
   when: ansible_os_family == "Void"
 
-- name: copy .xinitrc file
+- name: (xorg) copy xinitrc
   become: false
   tags:
     - xorg
@@ -24,7 +24,7 @@
     group: "{{ ansible_user }}"
     mode: 0644
 
-- name: ensure xorg.conf.d/ directory exists
+- name: (xorg) create conf.d directory
   become: true
   tags:
     - xorg
@@ -35,7 +35,7 @@
     owner: "root"
     group: "root"
 
-- name: copy 30-touchpad.conf file
+- name: (xorg) copy 30-touchpad.conf file
   become: true
   tags:
     - xorg
@@ -47,7 +47,7 @@
     group: "root"
     mode: 0644
 
-- name: copy 00-keyboard.conf file
+- name: (xorg) copy 00-keyboard.conf file
   become: true
   tags:
     - xorg
@@ -59,7 +59,7 @@
     group: "root"
     mode: 0644
 
-- name: copy back .xinitrc from ~/.xinitrc
+- name: (xorg) save xinitrc
   become: false
   tags:
     - save

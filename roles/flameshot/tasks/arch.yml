@@ -1,4 +1,4 @@
-- name: install flameshot on archlinux
+- name: (flameshot@archlinux) install packages
   tags:
     - flameshot
     - packages

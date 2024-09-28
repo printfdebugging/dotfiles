@@ -1,18 +1,18 @@
-- name: include arch.yml
+- name: (git) include archlinux tasks
   tags:
     - include
   ansible.builtin.include_tasks:
     file: arch.yml
   when: ansible_os_family == "Archlinux"
 
-- name: include void.yml
+- name: (git) include voidlinux tasks
   tags:
     - include
   ansible.builtin.include_tasks:
     file: void.yml
   when: ansible_os_family == "Void"
 
-- name: write git config file to .gitconfig
+- name: (git) create gitconfig
   tags:
     - git
     - files
@@ -24,7 +24,7 @@
     mode: "0644"
   become: false
 
-- name: ensure ~/repos exists
+- name: (git) create repos directory
   become: false
   tags:
     - git
@@ -36,7 +36,7 @@
     group: "{{ ansible_user }}"
     mode: 0755
 
-- name: ensure ~/downloads exists
+- name: (git) create downloads directory
   become: false
   tags:
     - git
@@ -48,7 +48,7 @@
     group: "{{ ansible_user }}"
     mode: 0755
 
-- name: ensure gitlab.com is a known host
+- name: (git) gitlab rsa key
   become: false
   tags:
     - git
@@ -60,7 +60,7 @@
     line: "{{ lookup('pipe', 'ssh-keyscan -t rsa gitlab.com') }}"
     regexp: "^gitlab\\.com"
 
-- name: clone git repositories
+- name: (git) clone git repositories
   become: false
   tags:
     - git

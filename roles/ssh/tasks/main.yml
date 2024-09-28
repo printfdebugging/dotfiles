@@ -1,4 +1,4 @@
-- name: ensure .ssh directory exists
+- name: (ssh) create ssh directory
   become: false
   tags:
     - ssh
@@ -10,7 +10,7 @@
     owner: "{{ ansible_user }}"
     mode: "0755"
 
-- name: copy public SSH key
+- name: (ssh) create public file
   become: false
   tags:
     - ssh
@@ -22,7 +22,7 @@
     owner: "{{ ansible_user }}"
     mode: "0644"
 
-- name: write encrypted private SSH key to file
+- name: (ssh) create private file
   become: false
   tags:
     - ssh
@@ -34,7 +34,7 @@
     owner: "{{ ansible_user }}"
     mode: "0600"
 
-- name: write encrypted SSH config to file
+- name: (ssh) create config file
   become: false
   tags:
     - ssh

@@ -1,4 +1,4 @@
-- name: install yt-dlp
+- name: (yt-dlp@voidlinux) install packages
   tags:
     - yt-dlp
     - packages

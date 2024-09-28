@@ -1,4 +1,4 @@
-- name: install yt-dlp
+- name: (yt-dlp@archlinux) install packages
   tags:
     - yt-dlp
     - packages

@@ -1,4 +1,4 @@
-- name: install git and openssh
+- name: (git@voidlinux) install packages
   tags:
     - git
     - packages

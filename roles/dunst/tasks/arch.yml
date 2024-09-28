@@ -1,4 +1,4 @@
-- name: install dunst
+- name: (dunst@archlinux) install packages
   tags:
     - dunst
     - packages

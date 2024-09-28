@@ -1,4 +1,4 @@
-- name: Allow the `{{ ansible_user }}` user to run without passwords, like a king.
+- name: (base@archlinux) allow sudo without passwd
   tags:
     - aur
     - packages
@@ -10,7 +10,7 @@
     mode: 0644
     validate: "visudo -cf %s"
 
-- name: install aur helper on the system
+- name: (base@archlinux) install aur helper
   become: false
   tags:
     - aur
@@ -22,7 +22,7 @@
       cd yay-bin
       makepkg -si --noconfirm
 
-- name: install packages using aur helper
+- name: (base@archlinux) install packages
   become: false
   tags:
     - aur
@@ -96,7 +96,7 @@
     - xf86-video-amdgpu
     - xf86-video-ati
 
-- name: copy fontconfig to /etc/fonts/conf.d/
+- name: (base@archlinux) copy twemoji fontconfig
   become: true
   tags:
     - aur
@@ -108,7 +108,7 @@
     group: root
     mode: 0644
 
-- name: Remove NOPASSWD entry for {{ ansible_user }}
+- name: (base@archlinux) revoke sudo without passwd
   become: true
   tags:
     - aur
