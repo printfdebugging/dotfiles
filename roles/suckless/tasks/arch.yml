@@ -3,63 +3,14 @@
     - suckless
     - packages
   community.general.pacman:
-    name:
-      - base-devel
-      - libx11
-      - libxft
-      - libxinerama
-      - freetype2
-      - ttf-jetbrains-mono-nerd
-      - ttf-iosevka-nerd
+    name: "{{ item }}"
     state: latest
     extra_args: "--nodeps --noconfirm --overwrite '*'"
-
-- name: remove ~/.local/src directory
-  become: false
-  tags:
-    - suckless
-    - files
-  ansible.builtin.file:
-    path: /home/{{ ansible_user }}/.local/src
-    state: absent
-
-- name: Ensure source directory exists
-  become: false
-  tags:
-    - suckless
-    - files
-  ansible.builtin.file:
-    path: "/home/{{ ansible_user }}/.local/src"
-    state: directory
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
-    mode: "0755"
-
-- name: copy source files to ~/.local/src
-  become: false
-  tags:
-    - suckless
-    - files
-  ansible.builtin.copy:
-    src: "{{ item }}"
-    dest: /home/{{ ansible_user }}/.local/src
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
-    mode: 0755
   loop:
-    - dwm
-    - dmenu
-    - st
-
-- name: compile suckless software
-  become: true
-  tags:
-    - suckless
-    - files
-  shell: "make clean install"
-  args:
-    chdir: "/home/{{ ansible_user }}/.local/src/{{ item }}"
-  loop:
-    - dwm
-    - dmenu
-    - st
+    - base-devel
+    - libx11
+    - libxft
+    - libxinerama
+    - freetype2
+    - ttf-jetbrains-mono-nerd
+    - ttf-iosevka-nerd

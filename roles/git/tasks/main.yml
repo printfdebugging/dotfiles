@@ -1,15 +1,3 @@
-- name: write git config file to .gitconfig
-  tags:
-    - git
-    - files
-  copy:
-    content: "{{ git_config_file }}"
-    dest: "/home/{{ ansible_user }}/.gitconfig"
-    group: "{{ ansible_user }}"
-    owner: "{{ ansible_user }}"
-    mode: "0644"
-  become: false
-
 - name: include arch.yml
   tags:
     - include
@@ -24,4 +12,70 @@
     file: void.yml
   when: ansible_os_family == "Void"
 
+- name: write git config file to .gitconfig
+  tags:
+    - git
+    - files
+  copy:
+    content: "{{ git_config_file }}"
+    dest: "/home/{{ ansible_user }}/.gitconfig"
+    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user }}"
+    mode: "0644"
+  become: false
 
+- name: ensure ~/repos exists
+  become: false
+  tags:
+    - git
+    - files
+  ansible.builtin.file:
+    path: /home/{{ ansible_user }}/repos
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+
+- name: ensure ~/downloads exists
+  become: false
+  tags:
+    - git
+    - files
+  ansible.builtin.file:
+    path: /home/{{ ansible_user }}/downloads
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+
+- name: ensure gitlab.com is a known host
+  become: false
+  tags:
+    - git
+    - files
+  ansible.builtin.lineinfile:
+    dest: /home/{{ ansible_user }}/.ssh/known_hosts
+    create: yes
+    state: present
+    line: "{{ lookup('pipe', 'ssh-keyscan -t rsa gitlab.com') }}"
+    regexp: "^gitlab\\.com"
+
+- name: clone git repositories
+  become: false
+  tags:
+    - git
+    - files
+  ansible.builtin.git:
+    repo: "{{ item.repo }}"
+    dest: "{{ item.path }}"
+    update: no
+  loop:
+    [
+      { repo: "{{ my_gitlab_handle }}/dotfiles.git",                              path: "/home/{{ ansible_user }}/repos/dotfiles", },
+      { repo: "{{ my_gitlab_handle }}/chromium.git",                              path: "/home/{{ ansible_user }}/.config/chromium", },
+      { repo: "{{ my_gitlab_handle }}/thunderbird.git",                           path: "/home/{{ ansible_user }}/.thunderbird", },
+
+      # projects
+      { repo: "{{ my_gitlab_handle }}/exploring-various-graphics-apis.git",       path: "/home/{{ ansible_user }}/repos/exploring-various-graphics-apis", },
+      { repo: "{{ my_gitlab_handle }}/notes.git",                                 path: "/home/{{ ansible_user }}/repos/notes", },
+    ]

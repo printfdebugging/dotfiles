@@ -11,3 +11,69 @@
   ansible.builtin.include_tasks:
     file: void.yml
   when: ansible_os_family == "Void"
+
+- name: ensure config directory exists
+  become: false
+  tags:
+    - emacs
+    - files
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/.config/emacs"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0755"
+
+- name: copy emacs config files
+  become: false
+  tags:
+    - emacs
+    - files
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: /home/{{ ansible_user }}/.config/emacs/{{ item }}
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+  loop:
+    - init.el
+    - config.org
+
+- name: copy emacs snippets
+  become: false
+  tags:
+    - emacs
+    - files
+  ansible.builtin.copy:
+    src: "snippets"
+    dest: /home/{{ ansible_user }}/.config/emacs
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+
+- name: copy back config files from ~/.config/emacs
+  become: false
+  tags:
+    - save
+    - save-emacs
+  ansible.builtin.copy:
+    src: /home/{{ ansible_user }}/.config/emacs/{{ item }}
+    dest: "/home/{{ ansible_user }}/repos/dotfiles/roles/emacs/files/{{ item }}"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+  loop:
+    - init.el
+    - config.org
+
+- name: copy back emacs-snippets
+  become: false
+  tags:
+    - save
+    - save-emacs
+  ansible.builtin.copy:
+    src: /home/{{ ansible_user }}/.config/emacs/snippets
+    dest: "/home/{{ ansible_user }}/repos/dotfiles/roles/emacs/files"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755

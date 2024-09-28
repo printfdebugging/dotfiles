@@ -1,9 +1,10 @@
-- name: install yt-dlp
+- name: install awesome on void
   tags:
-    - yt-dlp
+    - awesome
     - packages
   community.general.pacman:
     name: "{{ item }}"
     state: latest
   loop:
-    - yt-dlp
+    - awesome
+

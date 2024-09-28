@@ -11,3 +11,39 @@
   ansible.builtin.include_tasks:
     file: void.yml
   when: ansible_os_family == "Void"
+
+- name: ensure config directory exists
+  become: false
+  tags:
+    - yt-dlp
+    - files
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/.config/yt-dlp"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+
+- name: copy config files to ~/.config/yt-dlp
+  become: false
+  tags:
+    - yt-dlp
+    - files
+  ansible.builtin.copy:
+    src: config
+    dest: /home/{{ ansible_user }}/.config/yt-dlp/config
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+
+- name: copy back config files from ~/.config/yt-dlp
+  become: false
+  tags:
+    - save
+    - save-yt-dlp
+  ansible.builtin.copy:
+    src: /home/{{ ansible_user }}/.config/yt-dlp/config
+    dest: /home/{{ ansible_user }}/repos/dotfiles/roles/yt-dlp/files/config
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755

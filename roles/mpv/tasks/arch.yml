@@ -3,7 +3,8 @@
     - zsh
     - packages
   community.general.pacman:
-    name:
-      - mpv
+    name: "{{ item }}"
     state: latest
+  loop:
+    - mpv
 

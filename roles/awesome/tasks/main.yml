@@ -1,3 +1,37 @@
-- name: setup awesomewm on archlinux
-  ansible.builtin.import_tasks: arch.yml
+- name: include arch.yml
+  tags:
+    - include
+  ansible.builtin.include_tasks:
+    file: arch.yml
   when: ansible_os_family == "Archlinux"
+
+- name: include void.yml
+  tags:
+    - include
+  ansible.builtin.include_tasks:
+    file: void.yml
+  when: ansible_os_family == "Void"
+
+- name: copy awesome config files
+  become: false
+  tags:
+    - awesome
+    - files
+  ansible.builtin.copy:
+    src: awesome
+    dest: /home/{{ ansible_user }}/.config
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+
+- name: save awesome config files
+  become: false
+  tags:
+    - save
+    - save-awesome
+  ansible.builtin.copy:
+    src: /home/{{ ansible_user }}/.config/awesome
+    dest: "/home/{{ ansible_user }}/repos/dotfiles/roles/awesome/files/"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
