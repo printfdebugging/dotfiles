@@ -19,7 +19,9 @@
     - vim
     - pasystray
     - pavucontrol
+    - pulseaudio
     - unzip
+    - NetworkManager
     - network-manager-applet
     - ripgrep
     - Thunar
