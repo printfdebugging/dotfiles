@@ -1,186 +1,51 @@
-#!/bin/bash
+#!/bin/env bash
 
-# don't touch the inventory file for local changes.
-# ansible-playbook  -i localhost,  --connection=local  --user=$(whoami)
-
-COLOR_BLUE='\e[34m'
-COLOR_GREEN='\e[32m'
-COLOR_ORANGE='\e[38;5;208m'
-COLOR_RED='\e[31m'
-COLOR_RESET='\e[0m'
-BOLD='\e[1m'
-
-function help() {
-    printf "Usage:
-dotfiles
-    init            install essential packages like ansible, python-watchdog..
-    full            start full system setup
-    files           sync all the files
-    packages        sync all the packages
-    save            to copy back all the files back from system to roles/files
-    save-\$role      to copy back only the files for the role
-    status          show pretty git status from /home/printfdebugging/repos/*
-    backup          Automated add, commit and push in all the git repositories
-    rebase          rebase changes from the remote (if any)
-"
+function init_archlinux() {
+    # install basic system packages
+    sudo pacman --noconfirm -Syu ansible python-watchdog neovim openssh git
 }
 
-function repos_backup() {
-    for repo in "/home/printfdebugging/repos"/*;
-    do
-        if [ -d "$repo/.git" ]; then
-            cd "$repo" || continue
+function init_voidlinux() {
+    # copy the mirror file
+    sudo cp /usr/share/xbps.d/00-repository-main.conf /etc/xbps.d/00-repository-main.conf
 
-            if [ $repo == "/home/printfdebugging/repos/libreoffice" ] ;then
-                echo -e "${BOLD}${COLOR_RED}Ignoring LibreOffice Repository${COLOR_RESET}"
-                continue;
-            fi
-
-            # Check for changes
-            if ! git diff-index --quiet HEAD --; then
-                echo -e "${BOLD}${COLOR_RED}Changes detected in${COLOR_RESET} $repo"
-                git add . > /dev/null 2>&1
-                git commit -m "Automated Backup Commit" > /dev/null 2>&1
-                git push > /dev/null 2>&1            
-            else
-                echo -e "${BOLD}${COLOR_GREEN}No changes in${COLOR_RESET} $repo"
-            fi
-        fi
-    done
+    # install the required packages
+    sudo xbps-install -Syu git openssl ansible python3-watchdog neovim
 }
 
-
-extract_commits() {
-    local pattern="$1"
-    local message="$2"
-
-    if [[ $message =~ $pattern ]]; then
-        echo "${BASH_REMATCH[1]}"
-    else
-        echo "0"
-    fi
+function init() {
+    # check for distro in /etc/os-release file
+    case $(cat /etc/os-release | grep -e "^NAME" | awk -F "=" '{gsub(/"/, "", $2); print $2}') in
+        "Arch Linux") init_archlinux;;
+        "Void") init_voidlinux;;
+        *) echo "distro not supported" && exit ;;
+    esac
 }
 
-rebase() {
-    for repo in "/home/printfdebugging/repos"/*;
-    do
-        if [ -d "$repo/.git" ]; then
-            cd "$repo" || continue
-
-            if [ $repo == "/home/printfdebugging/repos/libreoffice" ] ;then
-                continue;
-            fi
-            git rebase -r
-        fi
-    done
+function clone_dotfiles() {
+    mkdir -p $HOME/repos && cd $HOME/repos
+    [ ! -d "$HOME/repos/dotfiles" ] && git clone https://gitlab.com/printfdebugging/dotfiles.git $HOME/repos/dotfiles
+    cd $HOME/repos/dotfiles
 }
 
-function git_push_test() {
-    status_message=$(git status | head --lines 2 | tail --lines 1)
-    ahead=$(echo "$status_message" | grep -e "ahead")
-    behind=$(echo "$status_message" | grep -e "behind")
-
-    if ! [[ "$ahead" ]] && ! [[ "$behind" ]]; then 
-        echo -e "${BOLD}${COLOR_GREEN}No changes${COLOR_RESET}"
-        return
+function run_ansible_tasks_with_tag() {
+    if ! command -v ansible-playbook; then
+        init
     fi
 
-    status_message=$(git status | head -n2 | tail -n1)
-    ahead_count=$(extract_commits ".*ahead .* ([0-9]+) commit.*" "$status_message")
-    behind_count=$(extract_commits ".*behind .* ([0-9]+) commit.*" "$status_message")
-    echo -e "${BOLD}${COLOR_RED}Out of sync:${COLOR_RESET} ${ahead_count} ahead and ${behind_count} behind"
+    # setup dotfiles repository
+    clone_dotfiles
+
+    # run the ansible-playbook command
+    ansible-playbook main.yml \
+        --tags "${@}" \
+        --become --ask-become-pass \
+        --ask-vault-pass
 }
 
-function repos_status() {
-    repos=$(ls /home/printfdebugging/repos)
-    # Directory containing repositories
-    repo_dir="/home/printfdebugging/repos/"
-
-    # Check if the directory exists
-    if [ ! -d "$repo_dir" ]; then
-        echo "Directory $repo_dir does not exist."
-        exit 1
-    fi
-
-    # Change to the repository directory
-    cd "$repo_dir" || exit
-
-    # Loop through each repository
-    for repo in */; do
-        # echo "$( cd $repo && git status | head -n2 | tail -n1)"
-        # Print repository name with bold blue color
-        printf "${BOLD}${COLOR_BLUE}Repo:${COLOR_RESET} %-30s" "${repo}"
-        
-        cd "$repo" || continue
-        
-        git fetch > /dev/null 2>&1 & disown # fetch in the background
-        # Check if it's a Git repository
-        if ! git rev-parse --is-inside-work-tree &> /dev/null; then
-            echo -e "${BOLD}${COLOR_RED}Not a Git repository${COLOR_RESET}"
-            cd ..  # Move back to parent directory
-            continue
-        fi
-        # Get the Git status
-        git_status=$(git status --porcelain)
-        
-        # Print status with colors
-        if [[ -n "$git_status" ]]; then
-            printf "${BOLD}${COLOR_RED}Changes detected:${COLOR_RESET} $(echo "$git_status" | head -n 1)"
-            echo -e "${BOLD}${COLOR_RED} ... and more${COLOR_RESET}"
-        else
-            git_push_test $repo
-        fi
-        
-        cd ..  # Move back to parent directory
-    done
-}
-
-if [ $# -eq 0 ] || [ $# -gt 1 ]; then
-    echo "specify action in arguments"
-    help
-    exit 1
-fi
-
-[ -f  "/home/printfdebugging/dotfiles/main.yml" ] &&  dotfiles_playbook="/home/printfdebugging/dotfiles/main.yml" \
-    || dotfiles_playbook="/home/printfdebugging/repos/dotfiles/main.yml"
 
 case "$1" in 
-    "files") ansible-playbook "$dotfiles_playbook" --tags files -i localhost, \
-        --connection=local --user=printfdebugging \
-        --extra-vars ansible_user=printfdebugging \
-        --extra-vars ansiblecfg='{"defaults": {"stdout_callback": "beautiful_output", "bin_ansible_callbacks": true, "ansible_python_interpreter"="/usr/bin/python"}}' \
-        --become --ask-become-pass \
-        --ask-vault-pass;;
-
-    "packages") ansible-playbook "$dotfiles_playbook" --tags packages -i localhost, \
-        --extra-vars ansible_user=printfdebugging \
-        --extra-vars ansiblecfg='{"defaults": {"stdout_callback": "beautiful_output", "bin_ansible_callbacks": true, "ansible_python_interpreter"="/usr/bin/python"}}' \
-        --connection=local --user=printfdebugging
-        --become --ask-become-pass;;
-
-    "full") ansible-playbook "$dotfiles_playbook" --tags "files,system,packages" -i localhost, \
-        --connection=local --user=printfdebugging \
-        --extra-vars ansiblecfg='{"defaults": {"stdout_callback": "beautiful_output", "bin_ansible_callbacks": true, "ansible_python_interpreter"="/usr/bin/python"}}' \
-        --extra-vars ansible_user=printfdebugging \
-        --become --ask-become-pass \
-        --ask-vault-pass;;
-
-    "status") repos_status;;
-    "backup") repos_backup;;
-    "rebase") rebase;;
-
-    "init") sudo pacman -S ansible python-watchdog neovim openssh --noconfirm;;
-
-    "save-"*) ansible-playbook "$dotfiles_playbook" --tags "$1" -i localhost, \
-        --connection=local --user=printfdebugging \
-        --extra-vars ansible_user=printfdebugging \
-        --extra-vars ansiblecfg='{"defaults": {"stdout_callback": "beautiful_output", "bin_ansible_callbacks": true, "ansible_python_interpreter"="/usr/bin/python"}}' \
-        --tags "${@}";;
-
-    *) ansible-playbook "$dotfiles_playbook" --tags "$1" -i localhost, \
-        --connection=local --user=printfdebugging \
-        --extra-vars ansible_user=printfdebugging \
-        --extra-vars ansiblecfg='{"defaults": {"stdout_callback": "beautiful_output", "bin_ansible_callbacks": true, "ansible_python_interpreter"="/usr/bin/python"}}' \
-        --become --ask-become-pass \
-        --ask-vault-pass;;
+    "init") init;;
+    "full"|"") run_ansible_tasks_with_tag include,files,packages,system;;
+    *) run_ansible_tasks_with_tag ${@};;
 esac

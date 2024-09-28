@@ -1,8 +1,5 @@
 #!/bin/bash
 
-
-
-
 if [ ! -d "$HOME/repos/dotfiles" ]; then
     notify-send "dotfiles not found" && exit
 fi
