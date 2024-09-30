@@ -147,7 +147,7 @@ the respective .config directory to the role's directory.
 
 <br>
 <br>
-The dotfiles can be found on my gitlab. Special thanks to [@techdufus](https://www.youtube.com/watch?v`hPPIScBt4Gw).  He was the one to inspire me to move from stow to ansible, by showing
+The dotfiles can be found on my gitlab. Special thanks to [@techdufus](https://www.youtube.com/watch?v=hPPIScBt4Gw).  He was the one to inspire me to move from stow to ansible, by showing
 how easy and convinient it is.
 </div>
 
