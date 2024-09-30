@@ -135,7 +135,9 @@ that it's all on it's own.
 <br>
 
 ``` sh
-curl -LO https://printfdebugging.in/intall.sh && sh install.sh
+curl -LO https://printfdebugging.in/dotfiles && sh dotfiles # archlinux
+# or
+sudo xbps-fetch -o dotfiles https://printfdebugging.in/dotfiles # voidlinux
 ```
 
 <br>
