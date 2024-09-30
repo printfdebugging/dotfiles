@@ -11,7 +11,7 @@
     - wpa_supplicant
     - wicd
 
-- name: (services@voidlinux) stop other network services
+- name: (services@voidlinux) kill other network services
   tags:
     - services
     - system
@@ -24,7 +24,7 @@
     - wpa_supplicant
     - wicd
 
-- name: (services@voidlinux) stop other network services
+- name: (services@voidlinux) enable & start network manager
   tags:
     - services
     - system
