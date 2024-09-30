@@ -124,4 +124,11 @@
   community.general.xbps:
     upgrade: true
 
-# enable essential services
+- name: (base@voidlinux)
+  tags:
+    - base
+    - system
+  ansible.builtin.user:
+    name: "{{ ansible_user }}"
+    groups: network
+    append: true

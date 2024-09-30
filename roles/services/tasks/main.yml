@@ -1,0 +1,16 @@
+- name: (services) include archlinux tasks
+  tags:
+    - services
+    - include
+  ansible.builtin.include_tasks:
+    file: arch.yml
+  when: ansible_os_family == "Archlinux"
+
+- name: (services) include voidlinux tasks
+  tags:
+    - services
+    - include
+  ansible.builtin.include_tasks:
+    file: void.yml
+  when: ansible_os_family == "Void"
+

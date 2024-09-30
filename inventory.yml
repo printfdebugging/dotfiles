@@ -1,5 +1,5 @@
 ---
-linux:
+linux: # group
   hosts:
     system:
       ansible_user: printfdebugging

@@ -1,17 +1,8 @@
 ---
 - hosts: all
-  become: true
-  tags:
-    - full
-  tasks:
-    - name: update cache
-      ansible.builtin.package:
-        update_cache: true
-
-- hosts: all
   roles:
-    - ssh
     - base
+    - ssh
     - bin
     - flameshot
     - git
@@ -27,3 +18,5 @@
     - awesome
     - dunst
     - emacs
+    - services
+
