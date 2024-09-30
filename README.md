@@ -16,12 +16,15 @@ from the  command line  unlike windows,  where one has  to go  to the site,  the
 application. On Ubuntu it was  just `sudo apt install <pacakge-name>`. Another good thing about using  Ubuntu as your first linux distribution
 is that  it has a  big community, meaning  that if you  are facing any issue,  then someone else  might have faced  it as well,  and finding
 solutions on forums will be relatively easy.
-
+<br>
+<br>
 I started trying  other distributions because Ubuntu has very  old packages which sometimes breaks  a lot of things. Like once  I was trying
 someone's neovim config, and I got a lot of errors because neovim was  very old. I use ARCH now. It's not the best distribution in the world
 considering that without AUR, Archlinux is  same as any other distribution, and AUR breaks the system very  often. Today itself I was trying
 to install docker-desktop but it errored because some dependency was owned  by some other package. But putting all that aside, it has almost
 all the packages (latest) one can think of, and the learning experience cusotmizing Archlinux is very valuable.
+<br>
+<br>
 
 I tried Void Linux, and I love it. It has very updated packages, and the init system is `runit` which is considered light weight and bloat free.
 I have added separate tasks for Void Linux in the `void.yml` files. In the end I could reuse most of my dotfiles, and I didn't have to learn
@@ -36,6 +39,8 @@ investment one can make. There are two choices Neovim or Emacs, and I  am happy 
 write one of my own. I use neovim (primarily) to write code, and I use emacs to take notes, and maintain this site. Neovim is super fast and
 when paired with tmux,  it's a fatal solution.  Emacs on the other  hand is very powerful for text editing, but  it's very slow when working
 with large files.
+<br>
+<br>
 
 I struggled to choose between the two for a long time to the point where it started affecting my work.  I stopped thinking about it anymore,
 and just decided on what  works for the job. I still believe that If  we don't have an editor as fast as neovim, and  as capable as emacs in
@@ -51,6 +56,8 @@ awesomewm, BSPWM. With tiling window managers, you can control most  aspects of 
 efficient, which is questionable considering  how much time one spends hunting and configuring them.  I  don't like desktop environments, as
 they are very resource heavy, and mouse driven which makes them slow compared  to tiling ones. Even then if I were to choose, I would prefer
 KDE over Gnome.
+<br>
+<br>
 
 I  have used  all of  the  mentioned tilers  at some  point or  the  other.  I  used DWM  for  the longest  time, and  recently switched  to
 awesomewm. Awesome unlike  other tiling window managers  comes with really good  mouse support, builtin topbar/notification  system, and has
@@ -86,6 +93,7 @@ to bottom, like copy this file to `.config/emacs`, or create a user named `so-an
 It's quite simple  to understand. It says using `community.general.pacman`  modules of ansible, loop over the  specified packages, and install
 them (more or less).
 </div>
+<br>
 
 ``` yaml
 - name: install emacs packages tags:
@@ -99,6 +107,7 @@ them (more or less).
     - emacs-nativecomp
     - ttf-iosevka-nerd
 ```
+<br>
 
 <div align="justify"> 
 In ansible we  can group tasks like  installing packages and copying  configuration files together into  roles so that tasks  related to one
@@ -106,6 +115,7 @@ thing are exected  together.  Ansible has a utility called  `ansilbe-vault`, wit
 decrypt it back using that password.  This is very helpful when it comes to managing ssh keys or .gitconfigs. This is how my private ssh key
 looks in my dotfiles repo. So I don't have to keep it private anymore, and just by knowing the password, I can setup my system.
 </div>
+<br>
 
 ``` yaml
 private_ssh_key_file: !vault |
@@ -116,22 +126,27 @@ private_ssh_key_file: !vault |
   ...
 ```
 
+<br>
 <div align="justify"> 
 I created a  script to automate the  cloning process, and it's available  on this site https://printfdebugging.in/install.sh.  So whenever I
 reinstall my system, I run the following command. After installing some  basic packages and ansible, it asks me for the passwords, and after
 that it's all on it's own.
 </div>
+<br>
 
 ``` sh
 curl -LO https://printfdebugging.in/intall.sh && sh install.sh
 ```
 
+<br>
 <div align="justify"> 
 One issue that I faced was that  whenever I make some changes in my `.configs`, I had to manually copy  back the files to the respective roles
 directory. This became very annoying, and to solve this issue, I wrote additional tasks, which are tagged as `save, save-$role`, so whenever I
 change anything in `.config/emacs` for example,  I just run `dotfiles save-emacs`, and it run's the save-role,  which copies back the files from
 the respective .config directory to the role's directory.
 
+<br>
+<br>
 The dotfiles can be found on my gitlab. Special thanks to [@techdufus](https://www.youtube.com/watch?v`hPPIScBt4Gw).  He was the one to inspire me to move from stow to ansible, by showing
 how easy and convinient it is.
 </div>
