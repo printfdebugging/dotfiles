@@ -103,8 +103,8 @@
                     ;; (org-indent-mode)
                     (display-line-numbers-mode 0)))
 ;; (add-hook 'find-file-hook (lambda () (efs/relative-line-numbers)))
-(add-hook 'prog-mode-hook (lambda () (efs/relative-line-numbers)))
-(add-hook 'text-mode-hook (lambda () (efs/relative-line-numbers)))
+;; (add-hook 'prog-mode-hook (lambda () (efs/relative-line-numbers)))
+;; (add-hook 'text-mode-hook (lambda () (efs/relative-line-numbers)))
 #+END_SRC
 
 * Autopair

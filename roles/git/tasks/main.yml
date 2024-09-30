@@ -78,6 +78,7 @@
       { repo: "{{ my_gitlab_handle }}/thunderbird.git",                           path: "/home/{{ ansible_user }}/.thunderbird", },
 
       # projects
-      { repo: "{{ my_gitlab_handle }}/exploring-various-graphics-apis.git",       path: "/home/{{ ansible_user }}/repos/exploring-various-graphics-apis", },
+      { repo: "{{ my_gitlab_handle }}/printfdebugging.git",                                 path: "/home/{{ ansible_user }}/repos/printfdebugging", },
+      { repo: "{{ my_gitlab_handle }}/learnopengl-because-vulkan-is-too-hard.git",path: "/home/{{ ansible_user }}/repos/learnopengl", },
       { repo: "{{ my_gitlab_handle }}/notes.git",                                 path: "/home/{{ ansible_user }}/repos/notes", },
     ]
