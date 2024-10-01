@@ -71,7 +71,7 @@ awful.rules.rules = {
 
 	{ rule = { class = "thunderbird" }, properties = { tag = "9" } },
 	{ rule = { class = "Element-Nightly" }, properties = { tag = "8" } },
-	{ rule = { class = "Brave-browser" }, properties = { tag = "4" } },
+	{ rule = { class = "Chromium" }, properties = { tag = "4" } },
 	{ rule = { class = "Code" }, properties = { tag = "3" } },
 	-- Set Firefox to always map on the tag named "2" on screen 1.
 	-- { rule = { class = "Firefox" }, properties = { screen = 1, tag = "2" } },
