@@ -103,7 +103,7 @@
                     ;; (org-indent-mode)
                     (display-line-numbers-mode 0)))
 ;; (add-hook 'find-file-hook (lambda () (efs/relative-line-numbers)))
-;; (add-hook 'prog-mode-hook (lambda () (efs/relative-line-numbers)))
+(add-hook 'prog-mode-hook (lambda () (efs/relative-line-numbers)))
 ;; (add-hook 'text-mode-hook (lambda () (efs/relative-line-numbers)))
 #+END_SRC
 
@@ -587,6 +587,25 @@ To execute source blocks asynchronously, add =:async= to the source block's head
 (use-package cmake-project :ensure t)
 (use-package cmake-font-lock :ensure t)
 #+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(defun project-compile-custom ()
+  "Custom version of the real deal that automatically runs 'make run' and switches to the compilation buffer."
+  (declare (interactive-only compile))
+  (interactive)
+  (let* ((default-directory (project-root (project-current t)))
+         (compilation-buffer-name-function
+          (or project-compilation-buffer-name-function
+              compilation-buffer-name-function))
+         ;; Store the compilation buffer name based on the buffer naming function
+         (compilation-buffer (compilation-start "make run" nil)))
+    ;; Switch to the compilation buffer after starting the compilation
+    (when (bufferp compilation-buffer)
+      (switch-to-buffer-other-window compilation-buffer))))
+
+(evil-define-key 'normal 'global (kbd "t") 'project-compile-custom)
+#+END_SRC
+
 
 ** LSP Mode
 
