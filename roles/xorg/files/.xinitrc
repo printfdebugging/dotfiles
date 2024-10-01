@@ -6,4 +6,4 @@ pasystray &
 xcompmgr &
 dunst &
 
-exec awesome
+exec dwm
