@@ -64,6 +64,7 @@
     - wget
     - curl
     - fontconfig
+    - clang-tools-extra18
 
 - name: (base@voidlinux) install ttf-iosevka-nerd 
   become: true
