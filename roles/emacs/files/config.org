@@ -24,7 +24,7 @@
 
 #+BEGIN_SRC emacs-lisp
 (setq scroll-conservatively 100)
-(setq-default fill-column 140)
+(setq-default fill-column 90)
 (setq hscroll-step 1)
 (setq-default truncate-lines t)
 (setq frame-resize-pixelwise t) ;; respect tiling window managers
@@ -100,11 +100,11 @@
 #+BEGIN_SRC emacs-lisp
 ;; (add-hook 'org-mode-hook (lambda () (variable-pitch-mode)))
 (add-hook 'org-mode-hook (lambda ()
-                    ;; (org-indent-mode)
+                    (org-indent-mode)
                     (display-line-numbers-mode 0)))
-;; (add-hook 'find-file-hook (lambda () (efs/relative-line-numbers)))
+(add-hook 'find-file-hook (lambda () (efs/relative-line-numbers)))
 (add-hook 'prog-mode-hook (lambda () (efs/relative-line-numbers)))
-;; (add-hook 'text-mode-hook (lambda () (efs/relative-line-numbers)))
+(add-hook 'text-mode-hook (lambda () (efs/relative-line-numbers)))
 #+END_SRC
 
 * Autopair
@@ -133,31 +133,33 @@
                     :weight 'Regular)
 (set-face-attribute 'org-document-title nil
                     :family "Iosevka Nerd Font"
-                    :height 290
+                    :height 150
                     :weight 'Bold
                     :foreground "#bbc2cf")
 (set-face-attribute 'org-level-1 nil
                     :family "Iosevka Nerd Font"
-                    :height 250
+                    :height 150
                     :weight 'Bold)
 (set-face-attribute 'org-level-2 nil
                     :family "Iosevka Nerd Font"
-                    :height 200
+                    :height 150
                     :weight 'Bold
                     :foreground "#A9A1E1")
 (set-face-attribute 'org-level-3 nil
                     :family "Iosevka Nerd Font"
-                    :height 180
+                    :height 150
                     :weight 'Bold
                     :foreground "#A9A1E1")
 (set-face-attribute 'org-level-4 nil
                     :family "Iosevka Nerd Font"
-                     :height 160
-                     :weight 'Bold)
+                    :height 150
+                    :weight 'Bold)
 
 (set-face-attribute 'org-block-begin-line nil
         :foreground "#23272e")
 #+end_src
+
+#+RESULTS:
 
 * Keybindings
 
@@ -742,28 +744,28 @@ from $1 to $0 and back to $1, having them selected for change in the process.
 * Smooth Scrolling 
 
 #+BEGIN_SRC emacs-lisp
-(pixel-scroll-precision-mode)
+;; (pixel-scroll-precision-mode)
 
-(defun filter-mwheel-always-coalesce (orig &rest args)
-  "A filter function suitable for :around advices that ensures only 
-   coalesced scroll events reach the advised function."
-  (if mwheel-coalesce-scroll-events
-      (apply orig args)
-    (setq mwheel-coalesce-scroll-events t)))
+;; (defun filter-mwheel-always-coalesce (orig &rest args)
+;;   "A filter function suitable for :around advices that ensures only 
+;;    coalesced scroll events reach the advised function."
+;;   (if mwheel-coalesce-scroll-events
+;;       (apply orig args)
+;;     (setq mwheel-coalesce-scroll-events t)))
 
-(defun filter-mwheel-never-coalesce (orig &rest args)
-  "A filter function suitable for :around advices that ensures only 
-   non-coalesced scroll events reach the advised function."
-  (if mwheel-coalesce-scroll-events
-      (setq mwheel-coalesce-scroll-events nil)
-    (apply orig args)))
-; Don't coalesce for high precision scrolling
-(advice-add 'pixel-scroll-precision :around #'filter-mwheel-never-coalesce)
+;; (defun filter-mwheel-never-coalesce (orig &rest args)
+;;   "A filter function suitable for :around advices that ensures only 
+;;    non-coalesced scroll events reach the advised function."
+;;   (if mwheel-coalesce-scroll-events
+;;       (setq mwheel-coalesce-scroll-events nil)
+;;     (apply orig args)))
+;; ; Don't coalesce for high precision scrolling
+;; (advice-add 'pixel-scroll-precision :around #'filter-mwheel-never-coalesce)
 
-; Coalesce for default scrolling (which is still used for horizontal scrolling)
-; and text scaling (bound to ctrl + mouse wheel by default).
-(advice-add 'mwheel-scroll          :around #'filter-mwheel-always-coalesce)
-(advice-add 'mouse-wheel-text-scale :around #'filter-mwheel-always-coalesce)
+;; ; Coalesce for default scrolling (which is still used for horizontal scrolling)
+;; ; and text scaling (bound to ctrl + mouse wheel by default).
+;; (advice-add 'mwheel-scroll          :around #'filter-mwheel-always-coalesce)
+;; (advice-add 'mouse-wheel-text-scale :around #'filter-mwheel-always-coalesce)
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -789,15 +791,15 @@ from $1 to $0 and back to $1, having them selected for change in the process.
 * Clean Org Mode
 
 #+BEGIN_SRC emacs-lisp
-(defun me-org-mode-remove-stars ()
-  (font-lock-add-keywords
-   nil
-   '(("^\\*+ "
-      (0
-       (prog1 nil
-         (put-text-property (match-beginning 0) (match-end 0)
-                            'invisible t)))))))
-(add-hook 'org-mode-hook #'me-org-mode-remove-stars)
+;; (defun me-org-mode-remove-stars ()
+;;   (font-lock-add-keywords
+;;    nil
+;;    '(("^\\*+ "
+;;       (0
+;;        (prog1 nil
+;;          (put-text-property (match-beginning 0) (match-end 0)
+;;                             'invisible t)))))))
+;; (add-hook 'org-mode-hook #'me-org-mode-remove-stars)
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -814,7 +816,7 @@ from $1 to $0 and back to $1, having them selected for change in the process.
   (visual-fill-column-mode 1)
   (visual-line-mode 1))
 
-(add-hook 'org-mode-hook 'my/org-present-start)
+;; (add-hook 'org-mode-hook 'my/org-present-start)
 #+END_SRC
 
 * Smooth scrolling

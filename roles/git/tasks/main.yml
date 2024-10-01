@@ -73,12 +73,14 @@
     update: no
   loop:
     [
+      # configs and dotfiles
       { repo: "{{ my_gitlab_handle }}/dotfiles.git",                              path: "/home/{{ ansible_user }}/repos/dotfiles", },
       { repo: "{{ my_gitlab_handle }}/chromium.git",                              path: "/home/{{ ansible_user }}/.config/chromium", },
       { repo: "{{ my_gitlab_handle }}/thunderbird.git",                           path: "/home/{{ ansible_user }}/.thunderbird", },
 
-      # projects
-      { repo: "{{ my_gitlab_handle }}/printfdebugging.git",                                 path: "/home/{{ ansible_user }}/repos/printfdebugging", },
-      { repo: "{{ my_gitlab_handle }}/learnopengl-because-vulkan-is-too-hard.git",path: "/home/{{ ansible_user }}/repos/learnopengl", },
+      # website
       { repo: "{{ my_gitlab_handle }}/notes.git",                                 path: "/home/{{ ansible_user }}/repos/notes", },
+
+      # language design
+      { repo: "{{ my_gitlab_handle }}/interpreters.git",                          path: "/home/{{ ansible_user }}/repos/interpreters", },
     ]
