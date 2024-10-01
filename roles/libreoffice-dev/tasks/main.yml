@@ -1,0 +1,21 @@
+- name: (libreoffice-dev) include archlinux tasks
+  tags:
+    - libreoffice-dev
+    - include
+  ansible.builtin.include_tasks:
+    file: arch.yml
+  when: ansible_os_family == "Archlinux"
+
+
+- name: (libreoffice-dev) include voidlinux tasks
+  tags:
+    - libreoffice-dev
+    - include
+  ansible.builtin.include_tasks:
+    file: void.yml
+  when: ansible_os_family == "Void"
+
+# create repos/
+# clone libreoffice-dev
+# copy autogen.input
+# don't do anything else (better build from the terminal)
