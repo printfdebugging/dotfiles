@@ -6,4 +6,4 @@
     name: "{{ item }}"
     state: latest
   loop:
-    - emacs-gtk3
+    - emacs-x11
