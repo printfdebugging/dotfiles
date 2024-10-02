@@ -12,7 +12,7 @@ local themes_path = "/home/printfdebugging/.config/awesome/"
 
 local theme = {}
 
-theme.font = "SF Pro Bold 10"
+theme.font = "JetBrainsMono Nerd Font 10"
 
 theme.bg_normal = "#171a21"
 theme.bg_focus = "#30393D"

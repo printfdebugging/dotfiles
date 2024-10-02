@@ -13,7 +13,7 @@ local focused_screen = awful_screen.focused({
 
 local tray = wibox_widget({
 	base_size = 24,
-	horizontal = false,
+	horizontal = true,
 	screen = focused_screen,
 	widget = wibox_widget.systray,
 })
@@ -29,7 +29,7 @@ local systray = wibox_widget({
 		{
 			{
 				tray,
-				margins = dpi(3),
+				margins = dpi(1),
 				layout = wibox.layout.align.vertical,
 				widget = wibox_container.margin,
 			},
@@ -64,8 +64,8 @@ end)
 
 return {
 	systray,
-	left = dpi(3),
-	right = dpi(3),
+	left = dpi(2),
+	right = dpi(2),
 	widget = wibox_container.margin,
-	margins = dpi(3),
+	margins = dpi(2),
 }

@@ -28,7 +28,7 @@ client.connect_signal("manage", function(c)
 	end
 
 	local cairo = require("lgi").cairo
-	local default_icon = "/usr/share/icons/AdwaitaLegacy/32x32/legacy/utilities-terminal.png"
+	local default_icon = "/home/printfdebugging/.config/awesome/theme/assets/icons8-bash-48.png"
 	if c and c.valid and not c.icon then
 		local s = gears.surface(default_icon)
 		local img = cairo.ImageSurface.create(cairo.Format.ARGB32, s:get_width(), s:get_height())
