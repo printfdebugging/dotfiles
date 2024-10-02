@@ -24,7 +24,7 @@
 
 # status=$(xrandr -q | grep "^DP-1 connected")
 
-wallpaper="/home/printfdebugging/.local/share/wallpapers/black.jpg"
+wallpaper="/home/printfdebugging/.local/share/wallpapers/art.jpg"
 
 xrandr --output HDMI-A-1-1 --primary --mode 1920x1080
 xrandr --output HDMI-A-0 --mode 1920x1080 --right-of HDMI-A-1-1
