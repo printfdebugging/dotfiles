@@ -22,7 +22,7 @@ local some_func = function(args)
 			margins = args.margins or dpi(0),
 			widget = wibox_container.margin,
 		},
-		shape = rrect(2),
+		shape = rrect(4),
 		bg = "#11111b",
 		widget = wibox_container.background,
 	})
