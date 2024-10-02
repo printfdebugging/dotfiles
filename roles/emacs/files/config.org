@@ -608,6 +608,21 @@ To execute source blocks asynchronously, add =:async= to the source block's head
 (evil-define-key 'normal 'global (kbd "t") 'project-compile-custom)
 #+END_SRC
 
+For compilation buffer or lsp reference buffers, open them in horizontal split.
+
+#+BEGIN_SRC emacs-lisp
+(setq display-buffer-alist
+      '(("\\*compilation\\*" ;; Match the compilation buffer
+         (display-buffer-reuse-window
+          display-buffer-in-direction)
+         (direction . below) ;; Horizontal split below
+         (window-height . 0.3)) ;; Adjust the height percentage
+        ("\\*xref\\*" ;; Match the xref buffer used for references like lsp-find-references
+         (display-buffer-reuse-window
+          display-buffer-in-direction)
+         (direction . below) ;; Horizontal split below
+         (window-height . 0.3))))
+#+END_SRC
 
 ** LSP Mode
 
