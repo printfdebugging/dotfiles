@@ -76,7 +76,7 @@ local tasklist = function(t)
 			{
 				{
 					id = "clienticon",
-					forced_width = dpi(22),
+					forced_width = dpi(24),
 					widget = awful.widget.clienticon,
 				},
 				widget = wibox.container.place,
@@ -207,7 +207,7 @@ local taglist = function(s)
 
 	return some_func({
 		widget = custom_taglist,
-		margins = 3,
+		margins = 2,
 	})
 end
 
