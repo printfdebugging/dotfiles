@@ -7,3 +7,4 @@
     state: latest
   loop:
     - emacs-x11
+    - fd

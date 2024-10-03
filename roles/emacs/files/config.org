@@ -209,7 +209,7 @@
 
    "gr" 'lsp-find-references
 
-   "ff" 'consult-find
+   "ff" 'consult-fd
    "fs" 'consult-ripgrep
    "fb" 'consult-lsp-file-symbols
    "rn" 'lsp-rename
