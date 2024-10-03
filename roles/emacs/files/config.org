@@ -951,6 +951,8 @@ from $1 to $0 and back to $1, having them selected for change in the process.
                         :weight 'normal
                         :foreground "#98be65")
 
+(setq lsp-enable-symbol-highlighting nil)
+
 ;; (custom-set-faces
 ;;  '(header-line ((t (:background "98be65" )))))
 #+END_SRC
