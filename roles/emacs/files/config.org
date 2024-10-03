@@ -591,21 +591,22 @@ To execute source blocks asynchronously, add =:async= to the source block's head
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-(defun project-compile-custom ()
-  "Custom version of the real deal that automatically runs 'make run' and switches to the compilation buffer."
+(defun project-compile-custom (command)
+  "Custom version of the real deal that automatically runs COMMAND and switches to the compilation buffer."
   (declare (interactive-only compile))
-  (interactive)
+  (interactive "sCompile command: ")
   (let* ((default-directory (project-root (project-current t)))
          (compilation-buffer-name-function
           (or project-compilation-buffer-name-function
               compilation-buffer-name-function))
          ;; Store the compilation buffer name based on the buffer naming function
-         (compilation-buffer (compilation-start "make run" nil)))
+         (compilation-buffer (compilation-start command nil)))
     ;; Switch to the compilation buffer after starting the compilation
     (when (bufferp compilation-buffer)
       (switch-to-buffer-other-window compilation-buffer))))
 
-(evil-define-key 'normal 'global (kbd "t") 'project-compile-custom)
+(evil-define-key 'normal 'global (kbd "t") (lambda () (interactive) (project-compile-custom "make run")))
+(evil-define-key 'normal 'global (kbd "T") (lambda () (interactive) (project-compile-custom "make clean")))
 #+END_SRC
 
 For compilation buffer or lsp reference buffers, open them in horizontal split.
