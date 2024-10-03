@@ -837,9 +837,9 @@ from $1 to $0 and back to $1, having them selected for change in the process.
 * Smooth scrolling
 
 #+BEGIN_SRC emacs-lisp
-(use-package good-scroll
-  :ensure t)
-(good-scroll-mode)
+;; (use-package good-scroll
+;;   :ensure t)
+;; (good-scroll-mode)
 #+END_SRC
 
 * Org Tidy
