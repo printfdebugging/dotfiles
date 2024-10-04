@@ -957,3 +957,25 @@ from $1 to $0 and back to $1, having them selected for change in the process.
 ;; (custom-set-faces
 ;;  '(header-line ((t (:background "98be65" )))))
 #+END_SRC
+
+* Indent Bars
+
+#+BEGIN_SRC emacs-lisp
+(use-package indent-bars
+  :config
+  (require 'indent-bars-ts) 		; not needed with straight
+  :custom
+  (indent-bars-treesit-support t)
+  (indent-bars-treesit-ignore-blank-lines-types '("module"))
+   (setq
+    indent-bars-color '(highlight :face-bg t :blend 0.1)
+    indent-bars-pattern "."
+    indent-bars-width-frac 0.2
+    indent-bars-pad-frac 0.4
+    indent-bars-zigzag nil
+    indent-bars-starting-column 0
+    indent-bars-color-by-depth nil
+    indent-bars-highlight-current-depth nil
+    indent-bars-display-on-blank-lines t)
+  :hook ((python-base-mode yaml-mode go-mode text-mode prog-mode) . indent-bars-mode))
+#+END_SRC
