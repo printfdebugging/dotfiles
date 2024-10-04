@@ -967,7 +967,7 @@ from $1 to $0 and back to $1, having them selected for change in the process.
   :custom
     (indent-bars-treesit-support t)
     (indent-bars-treesit-ignore-blank-lines-types '("module"))
-  :hook ((text-mode prog-mode go-mode c-mode c++-mode sh-mode) . indent-bars-mode))
+  :hook ((go-mode c-mode c++-mode sh-mode yaml-mode) . indent-bars-mode))
 
 (setq
   indent-bars-color '(highlight :face-bg t :blend 0.1)
