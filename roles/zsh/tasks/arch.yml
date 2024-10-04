@@ -1,4 +1,4 @@
-- name: (zsh@voidlinux) install packages
+- name: (zsh@archlinux) install packages
   tags:
     - zsh
     - packages

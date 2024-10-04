@@ -9,5 +9,4 @@
   loop:
     - emacs-nativecomp
     - ttf-iosevka-nerd
-    - ttf-iosevka-aile
     - fd
