@@ -104,7 +104,9 @@
 ;;                     (org-indent-mode)
 ;;                     (display-line-numbers-mode 0)))
 (add-hook 'find-file-hook (lambda () (efs/relative-line-numbers)))
-(add-hook 'prog-mode-hook (lambda () (efs/relative-line-numbers)))
+(add-hook 'prog-mode-hook (lambda ()
+                               (efs/relative-line-numbers)
+                               (set-fringe-style '(10 . 0))))
 (add-hook 'text-mode-hook (lambda () (efs/relative-line-numbers)))
 #+END_SRC
 
@@ -964,9 +966,10 @@ from $1 to $0 and back to $1, having them selected for change in the process.
   :config
     (require 'indent-bars-ts) 		; not needed with straight
   :custom
-    (indent-bars-treesit-support t)
+    (indent-bars-treesit-support nil)
     (indent-bars-treesit-ignore-blank-lines-types '("module" "class" "function"))
-  :hook ((go-mode c-mode c++-mode sh-mode yaml-mode) . indent-bars-mode))
+  :hook (lsp-mode . indent-bars-mode)
+  )  ; Enable for all buffers
 
 (setq
   indent-bars-color '(highlight :face-bg t :blend 0.1)
