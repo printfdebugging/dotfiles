@@ -24,7 +24,7 @@
 
 #+BEGIN_SRC emacs-lisp
 (setq scroll-conservatively 100)
-(setq-default fill-column 90)
+(setq-default fill-column 140)
 (setq hscroll-step 1)
 (setq-default truncate-lines t)
 (setq frame-resize-pixelwise t) ;; respect tiling window managers
@@ -90,18 +90,19 @@
       display-line-numbers-current-absolute     t
       display-line-numbers-widen                nil
       display-line-numbers-width                4
-      org-image-actual-width                    nil
-      org-image-actual-width                    (list 650))
+      org-image-actual-width                    650
+      ;;org-image-actual-width                    (list 650)
+      )
   (org-babel-result-hide-all)
   ;; (global-hl-line-mode)
-  (display-line-numbers-mode))
+  (display-line-numbers-mode 0))
 #+end_src
 
 #+BEGIN_SRC emacs-lisp
 ;; (add-hook 'org-mode-hook (lambda () (variable-pitch-mode)))
-(add-hook 'org-mode-hook (lambda ()
-                    (org-indent-mode)
-                    (display-line-numbers-mode 0)))
+;; (add-hook 'org-mode-hook (lambda ()
+;;                     (org-indent-mode)
+;;                     (display-line-numbers-mode 0)))
 (add-hook 'find-file-hook (lambda () (efs/relative-line-numbers)))
 (add-hook 'prog-mode-hook (lambda () (efs/relative-line-numbers)))
 (add-hook 'text-mode-hook (lambda () (efs/relative-line-numbers)))
@@ -133,33 +134,31 @@
                     :weight 'Regular)
 (set-face-attribute 'org-document-title nil
                     :family "Iosevka Nerd Font"
-                    :height 150
+                    :height 250
                     :weight 'Bold
                     :foreground "#bbc2cf")
 (set-face-attribute 'org-level-1 nil
                     :family "Iosevka Nerd Font"
-                    :height 150
+                    :height 230
                     :weight 'Bold)
 (set-face-attribute 'org-level-2 nil
                     :family "Iosevka Nerd Font"
-                    :height 150
+                    :height 180
                     :weight 'Bold
                     :foreground "#A9A1E1")
 (set-face-attribute 'org-level-3 nil
                     :family "Iosevka Nerd Font"
-                    :height 150
+                    :height 170
                     :weight 'Bold
                     :foreground "#A9A1E1")
 (set-face-attribute 'org-level-4 nil
                     :family "Iosevka Nerd Font"
-                    :height 150
+                    :height 160
                     :weight 'Bold)
 
 (set-face-attribute 'org-block-begin-line nil
         :foreground "#23272e")
 #+end_src
-
-#+RESULTS:
 
 * Keybindings
 
@@ -807,15 +806,15 @@ from $1 to $0 and back to $1, having them selected for change in the process.
 * Clean Org Mode
 
 #+BEGIN_SRC emacs-lisp
-;; (defun me-org-mode-remove-stars ()
-;;   (font-lock-add-keywords
-;;    nil
-;;    '(("^\\*+ "
-;;       (0
-;;        (prog1 nil
-;;          (put-text-property (match-beginning 0) (match-end 0)
-;;                             'invisible t)))))))
-;; (add-hook 'org-mode-hook #'me-org-mode-remove-stars)
+(defun me-org-mode-remove-stars ()
+  (font-lock-add-keywords
+   nil
+   '(("^\\*+ "
+      (0
+       (prog1 nil
+         (put-text-property (match-beginning 0) (match-end 0)
+                            'invisible t)))))))
+(add-hook 'org-mode-hook #'me-org-mode-remove-stars)
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -832,7 +831,7 @@ from $1 to $0 and back to $1, having them selected for change in the process.
   (visual-fill-column-mode 1)
   (visual-line-mode 1))
 
-;; (add-hook 'org-mode-hook 'my/org-present-start)
+(add-hook 'org-mode-hook 'my/org-present-start)
 #+END_SRC
 
 * Smooth scrolling
@@ -966,7 +965,7 @@ from $1 to $0 and back to $1, having them selected for change in the process.
     (require 'indent-bars-ts) 		; not needed with straight
   :custom
     (indent-bars-treesit-support t)
-    (indent-bars-treesit-ignore-blank-lines-types '("module"))
+    (indent-bars-treesit-ignore-blank-lines-types '("module" "class" "function"))
   :hook ((go-mode c-mode c++-mode sh-mode yaml-mode) . indent-bars-mode))
 
 (setq
