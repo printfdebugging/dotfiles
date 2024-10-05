@@ -968,8 +968,7 @@ from $1 to $0 and back to $1, having them selected for change in the process.
   :custom
     (indent-bars-treesit-support nil)
     (indent-bars-treesit-ignore-blank-lines-types '("module" "class" "function"))
-  :hook (lsp-mode . indent-bars-mode)
-  )  ; Enable for all buffers
+  :hook ((shell-mode c++-mode yaml-mode c-mode go-mode) . indent-bars-mode))
 
 (setq
   indent-bars-color '(highlight :face-bg t :blend 0.1)
