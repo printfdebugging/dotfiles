@@ -68,7 +68,7 @@
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
-(fringe-mode 2)
+(fringe-mode 4)
 (setq initial-scratch-message ""
     inhibit-startup-message t
     standard-indent 2
@@ -105,8 +105,7 @@
 ;;                     (display-line-numbers-mode 0)))
 (add-hook 'find-file-hook (lambda () (efs/relative-line-numbers)))
 (add-hook 'prog-mode-hook (lambda ()
-                               (efs/relative-line-numbers)
-                               (set-fringe-style '(10 . 0))))
+                               (efs/relative-line-numbers)))
 (add-hook 'text-mode-hook (lambda () (efs/relative-line-numbers)))
 #+END_SRC
 
@@ -589,6 +588,8 @@ To execute source blocks asynchronously, add =:async= to the source block's head
 (use-package cmake-mode :ensure t)
 (use-package cmake-project :ensure t)
 (use-package cmake-font-lock :ensure t)
+(use-package rainbow-mode :ensure t)
+(rainbow-mode 1)
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -637,7 +638,10 @@ For compilation buffer or lsp reference buffers, open them in horizontal split.
          (c++-mode . lsp-deferred)
          (java-mode . lsp-deferred)
          (lua-mode . lsp-deferred)
+         ;; (makefile-mode . lsp-deferred)
          (cmake-mode . lsp-deferred)
+         (yaml-mode . lsp-deferred)
+         (sh-mode . lsp-deferred)
          (c-mode . lsp-deferred))
   :commands lsp)
 
@@ -964,11 +968,12 @@ from $1 to $0 and back to $1, having them selected for change in the process.
 #+BEGIN_SRC emacs-lisp
 (use-package indent-bars
   :config
-    (require 'indent-bars-ts) 		; not needed with straight
+  (require 'indent-bars-ts) 		; not needed with straight
   :custom
-    (indent-bars-treesit-support nil)
-    (indent-bars-treesit-ignore-blank-lines-types '("module" "class" "function"))
-  :hook ((shell-mode c++-mode yaml-mode c-mode go-mode) . indent-bars-mode))
+  (indent-bars-no-descend-lists nil) ; no extra bars in continued func arg lists
+  (indent-bars-treesit-support t)
+  (indent-bars-treesit-ignore-blank-lines-types '("module"))
+  :hook ((lsp-mode) . indent-bars-mode))
 
 (setq
   indent-bars-color '(highlight :face-bg t :blend 0.1)
