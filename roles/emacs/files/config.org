@@ -24,6 +24,7 @@
 
 #+BEGIN_SRC emacs-lisp
 (setq scroll-conservatively 100)
+(setq scroll-margin 7)
 (setq-default fill-column 140)
 (setq hscroll-step 1)
 (setq-default truncate-lines t)
@@ -641,6 +642,8 @@ For compilation buffer or lsp reference buffers, open them in horizontal split.
          ;; (makefile-mode . lsp-deferred)
          (cmake-mode . lsp-deferred)
          (yaml-mode . lsp-deferred)
+         (css-mode . lsp-deferred)
+         (xml-mode . lsp-deferred)
          (sh-mode . lsp-deferred)
          (c-mode . lsp-deferred))
   :commands lsp)
