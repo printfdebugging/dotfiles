@@ -122,53 +122,47 @@
 #+begin_src emacs-lisp
 (set-face-attribute 'variable-pitch nil
                     :family "Iosevka Nerd Font"
-                    :width 'ultra-condensed
                     :foreground "#d8dee9"
                     :height 150
                     :weight 'Regular)
 (set-face-attribute 'default nil
                     :family "Iosevka Nerd Font"
-                    :height 150
-                    :width 'ultra-condensed
+                    :height 160
                     :weight 'Regular)
 (set-face-attribute 'fixed-pitch nil
                     :family "Iosevka Nerd Font"
                     :height 150
-                    :width 'ultra-condensed
                     :foreground "#d8dee9"
                     :weight 'Regular)
 (set-face-attribute 'org-document-title nil
                     :family "Iosevka Nerd Font"
                     :height 370
-                    :width 'ultra-condensed
                     :weight 'Regular
                     :foreground "#bbc2cf")
 (set-face-attribute 'org-level-1 nil
                     :family "Iosevka Nerd Font"
-                    :width 'ultra-condensed
                     :height 320
                     :weight 'Regular)
 (set-face-attribute 'org-level-2 nil
                     :family "Iosevka Nerd Font"
-                    :width 'ultra-condensed
                     :height 260
                     :weight 'Regular
                     :foreground "#A9A1E1")
 (set-face-attribute 'org-level-3 nil
                     :family "Iosevka Nerd Font"
-                    :width 'ultra-condensed
                     :height 220
                     :weight 'Regular
                     :foreground "#A9A1E1")
 (set-face-attribute 'org-level-4 nil
                     :family "Iosevka Nerd Font"
-                    :width 'ultra-condensed
                     :height 200
                     :weight 'Regular)
 
 (set-face-attribute 'org-block-begin-line nil
                     :foreground "#23272e")
 #+end_src
+
+#+RESULTS:
 
 * Keybindings
 
