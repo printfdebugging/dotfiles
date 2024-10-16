@@ -83,4 +83,5 @@
 
       # language design
       { repo: "{{ my_gitlab_handle }}/interpreters.git",                          path: "/home/{{ ansible_user }}/repos/interpreters", },
+      { repo: "{{ my_gitlab_handle }}/systraybot.git",                            path: "/home/{{ ansible_user }}/repos/systraybot", },
     ]
