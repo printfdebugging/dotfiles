@@ -990,7 +990,7 @@ from $1 to $0 and back to $1, having them selected for change in the process.
   indent-bars-starting-column 0
   indent-bars-color-by-depth nil
   indent-bars-highlight-current-depth nil
-  indent-bars-display-on-blank-lines t)
+  indent-bars-display-on-blank-lines 'least)
 #+END_SRC
 
 * Ligatures Mode
