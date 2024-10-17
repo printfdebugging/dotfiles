@@ -1,0 +1,49 @@
+- name: (qemu@voidlinux) install qemu packages
+  tags:
+    - qemu
+    - packages
+  community.general.xbps:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - libvirt
+    - virt-manager
+    - virt-manager-tools
+    - qemu
+    - polkit
+
+- name: (qemu@voidlinux)
+  tags:
+    - qemu
+    - system
+  ansible.builtin.user:
+    name: "{{ ansible_user }}"
+    groups: 
+      - libvirt
+      - kvm
+    append: true
+
+- name: (qemu@voidlinux) enable and start neccessary services
+  tags:
+    - qemu
+    - system
+  community.general.runit:
+    name: "{{ item }}"
+    state: started
+    enabled: true
+  loop:
+    - dbus
+    - polkitd
+    - libvirtd
+    - virtlockd
+    - virtlogd
+
+- name: (qemu@voidlinux) enable and start network default
+  become: true
+  tags:
+    - qemu
+    - system
+  ansible.builtin.shell:
+    cmd: |
+      virsh net-start default
+      virsh net-autostart default

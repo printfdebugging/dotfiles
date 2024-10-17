@@ -125,7 +125,7 @@
   community.general.xbps:
     upgrade: true
 
-- name: (base@voidlinux)
+- name: (base@voidlinux) add user to network group
   tags:
     - base
     - system
