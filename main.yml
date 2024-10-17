@@ -19,5 +19,5 @@
     - dunst
     - emacs
     - services
-    - libreoffice-dev
+    # - libreoffice-dev
     # - qemu

@@ -125,3 +125,14 @@
     - hsqldb1.8.0
     - llvm18
     - llvm18-devel
+
+- name: (libreoffice-dev@voidlinux) copy autogen.input
+  tags:
+    - libreoffice-dev
+    - files
+  ansible.builtin.copy:
+    src: autogen.input
+    dest: /home/{{ ansible_user }}/repos/libreoffice/autogen.input
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
