@@ -29,6 +29,7 @@
     - adwaita-icon-theme
     - go
     - xdotool
+    - xprop
     - netcat
     - python3-watchdog
     - libreoffice
