@@ -24,7 +24,7 @@
     - NetworkManager
     - network-manager-applet
     - ripgrep
-    - Thunar
+    - dolphin
     - breeze-icons
     - adwaita-icon-theme
     - go

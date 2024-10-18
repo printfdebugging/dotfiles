@@ -49,7 +49,7 @@
     - network-manager-applet
     - python-pexpect
     - ripgrep
-    - thunar
+    - dolphin
     - breeze-icons
     - ocean-sound-theme
     - go
