@@ -66,6 +66,7 @@
     - curl
     - fontconfig
     - clang-tools-extra18
+    - libnma
 
 - name: (base@voidlinux) install ttf-iosevka-nerd 
   become: true
