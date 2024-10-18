@@ -26,6 +26,7 @@
     - ripgrep
     - Thunar
     - breeze-icons
+    - adwaita-icon-theme
     - go
     - xdotool
     - netcat

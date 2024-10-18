@@ -1,3 +1,19 @@
+- name: (gtk) include archlinux tasks
+  tags:
+    - gtk
+    - include
+  ansible.builtin.include_tasks:
+    file: arch.yml
+  when: ansible_os_family == "Archlinux"
+
+- name: (gtk) include voidlinux tasks
+  tags:
+    - gtk
+    - include
+  ansible.builtin.include_tasks:
+    file: void.yml
+  when: ansible_os_family == "Void"
+
 - name: (gtk) create config directory
   become: false
   tags:
@@ -22,14 +38,14 @@
     group: "{{ ansible_user }}"
     mode: 0755
 
-- name: (gtk) copy back config file
-  become: false
+- name: (gtk) copy config file to etc
+  become: true
   tags:
-    - save
-    - save-gtk
+    - gtk
+    - files
   ansible.builtin.copy:
-    src: /home/{{ ansible_user }}/.config/gtk-3.0/settings.ini
-    dest: /home/{{ ansible_user }}/repos/dotfiles/roles/gtk-3.0/files/settings.ini
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
-    mode: 0644
+    src: settings.ini
+    dest: /etc/gtk-3.0/settings.ini
+    owner: root
+    group: root
+    mode: 0755
