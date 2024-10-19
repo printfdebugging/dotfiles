@@ -127,6 +127,7 @@
     - hsqldb1.8.0
     - llvm18
     - llvm18-devel
+    - nasm
 
 - name: (git) clone the git repo
   tags:
