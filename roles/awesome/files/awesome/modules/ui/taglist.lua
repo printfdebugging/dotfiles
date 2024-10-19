@@ -69,7 +69,7 @@ local tasklist = function(t)
 		layout = {
 			spacing_widget = nil,
 			spacing = 1,
-			layout = wibox.layout.fixed.horizontal,
+			layout = wibox.layout.fixed.vertical,
 		},
 		widget_template = {
 			nil,
@@ -90,7 +90,7 @@ local tasklist = function(t)
 			create_callback = function(self, c, index, objects) --luacheck: no unused args
 				self:get_children_by_id("clienticon")[1].client = c
 			end,
-			layout = wibox.layout.align.horizontal,
+			layout = wibox.layout.align.vertical,
 		},
 	})
 end
@@ -121,7 +121,7 @@ local taglist_buttons = gears.table.join(
 local grid_layout = wibox.layout({
 	forced_num_cols = 2,
 	forced_num_rows = 1,
-	orientation = "horizontal",
+	orientation = "vertical",
 	expand = true,
 	homogeneous = false,
 	layout = wibox.layout.grid,
@@ -129,8 +129,8 @@ local grid_layout = wibox.layout({
 
 local function adjust_grid_layout(s)
 	local screen = s or awful.screen.focused()
-	local is_horizontal = screen.geometry.height < screen.geometry.width
-	if is_horizontal then
+	local is_vertical = screen.geometry.height < screen.geometry.width
+	if is_vertical then
 		return
 	end
 
@@ -163,7 +163,7 @@ local taglist = function(s)
 		style = {
 			shape = rrect(4),
 		},
-		layout = wibox.layout.fixed.horizontal,
+		layout = wibox.layout.fixed.vertical,
 		widget_template = {
 			{
 				{
@@ -175,20 +175,22 @@ local taglist = function(s)
 							widget = wibox.widget.textbox,
 						},
 						left = dpi(7),
+						top = dpi(5),
+						bottom = dpi(5),
 						right = dpi(7),
 						widget = wibox.container.margin,
 					},
 					-- tasklist
 					{
 						id = "tasklist_placeholder",
-						layout = wibox.layout.fixed.horizontal,
+						layout = wibox.layout.fixed.vertical,
 						widget = wibox.container.margin,
 					},
 					-- spacing = dpi(8),
-					layout = wibox.layout.fixed.horizontal,
+					layout = wibox.layout.fixed.vertical,
 				},
 				widget = wibox.container.margin,
-				layout = wibox.layout.align.horizontal,
+				layout = wibox.layout.align.vertical,
 			},
 			id = "background_role",
 			widget = wibox.container.background,

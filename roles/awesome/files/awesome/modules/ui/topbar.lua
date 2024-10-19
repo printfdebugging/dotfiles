@@ -141,18 +141,19 @@ awful.screen.connect_for_each_screen(function(s)
 				widget = wibox.container.place,
 			},
 			spacing = 0,
-			layout = wibox.layout.fixed.horizontal,
+			layout = wibox.layout.fixed.vertical,
 		},
 	})
 
 	-- Create the wibox
 
 	s.mywibox = awful.wibar({
-		position = "bottom",
+		position = "left",
 		screen = s,
-		height = 30,
+		-- height = 30,
+		width = 35,
 		widget = {
-			layout = wibox.layout.align.horizontal,
+			layout = wibox.layout.align.vertical,
 		},
 	})
 
@@ -160,21 +161,21 @@ awful.screen.connect_for_each_screen(function(s)
 	s.mywibox:setup({
 		{
 			{
-				layout = wibox.layout.align.horizontal,
+				layout = wibox.layout.align.vertical,
 				expand = "none",
 				{
 					-- s.mytaglist,
 					s.mylayoutbox,
-					layout = wibox.layout.align.horizontal,
+					layout = wibox.layout.align.vertical,
 				},
 				{
 					client_info,
 					require("modules.ui.taglist")(s),
-					layout = wibox.layout.align.horizontal,
+					layout = wibox.layout.align.vertical,
 				},
 				{
 					require("modules.ui.systray"),
-					layout = wibox.layout.align.horizontal,
+					layout = wibox.layout.align.vertical,
 				},
 			},
 			margins = dpi(1),
