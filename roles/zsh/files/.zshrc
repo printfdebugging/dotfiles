@@ -149,5 +149,3 @@ alias xi="sudo xbps-install"
 # export QT_QPA_PLATFORMTHEME=gtk3
 export LOCOREPATH=/home/printfdebugging/repos/libreoffice
 export COOL_SERVE_FROM_FS=1
-
-if [ -e /home/printfdebugging/.nix-profile/etc/profile.d/nix.sh ]; then . /home/printfdebugging/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
