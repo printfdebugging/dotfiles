@@ -2,8 +2,7 @@
 --without-java
 --without-help
 --without-doxygen
-#--enable-kf5
-#--enable-kf6
+--enable-kf6
 --enable-compiler-plugins
 --with-help=html
 --with-system-libxml=no
