@@ -90,6 +90,8 @@
     - gst-plugins-base1-devel
     - qt6-base-devel
     - qt6-multimedia-devel
+    - qt5-qmake
+    - qt5-devel
     - kf6-kio-devel
     - kf6-frameworkintegration-devel
     - libmariadbclient-devel
@@ -125,6 +127,15 @@
     - hsqldb1.8.0
     - llvm18
     - llvm18-devel
+
+- name: (git) clone the git repo
+  tags:
+    - libreoffice-dev
+    - files
+  ansible.builtin.git:
+    repo: https://gerrit.libreoffice.org/core
+    dest: /home/{{ ansible_user }}/repos/libreoffice
+    update: no
 
 - name: (libreoffice-dev@voidlinux) copy autogen.input
   tags:
