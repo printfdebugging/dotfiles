@@ -2,5 +2,6 @@ gpg-agent --daemon &
 dispscript
 flameshot &
 xcompmgr &
+dunst &
 
-exec awesome
+exec dwm
