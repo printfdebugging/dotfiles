@@ -1,8 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 
-/*
- * appearance
- *
+/* appearance
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 static char *font =
@@ -131,7 +129,7 @@ const char *colorname[] = {
     [15] = "#eeffff", /* white   */
 
     /* special colors */
-    [256] = "#282c34", /* background */
+    [256] = "#000000", /* background */
     [257] = "#d8dee9", /* foreground */
     [258] = "#d8dee9", /* cursor */
 };
