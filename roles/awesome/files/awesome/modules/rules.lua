@@ -69,7 +69,7 @@ awful.rules.rules = {
 	-- Add titlebars to normal clients and dialogs
 	{ rule_any = { type = { "normal", "dialog" } }, properties = { titlebars_enabled = true } },
 
-	{ rule = { class = "thunderbird" }, properties = { tag = "9" } },
+	{ rule = { class = "Thunderbird" }, properties = { tag = "9" } },
 	{ rule = { class = "Element-Nightly" }, properties = { tag = "8" } },
 	{ rule = { class = "Chromium" }, properties = { tag = "4" } },
 	{ rule = { class = "Code" }, properties = { tag = "3" } },
