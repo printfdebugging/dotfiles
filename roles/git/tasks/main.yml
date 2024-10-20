@@ -73,15 +73,9 @@
     update: no
   loop:
     [
-      # configs and dotfiles
+      # basic repositories
       { repo: "{{ my_gitlab_handle }}/dotfiles.git",                              path: "/home/{{ ansible_user }}/repos/dotfiles", },
       { repo: "{{ my_gitlab_handle }}/chromium.git",                              path: "/home/{{ ansible_user }}/.config/chromium", },
       { repo: "{{ my_gitlab_handle }}/thunderbird.git",                           path: "/home/{{ ansible_user }}/.thunderbird", },
-
-      # website
       { repo: "{{ my_gitlab_handle }}/notes.git",                                 path: "/home/{{ ansible_user }}/repos/notes", },
-
-      # language design
-      { repo: "{{ my_gitlab_handle }}/interpreters.git",                          path: "/home/{{ ansible_user }}/repos/interpreters", },
-      { repo: "{{ my_gitlab_handle }}/systraybot.git",                            path: "/home/{{ ansible_user }}/repos/systraybot", },
     ]
