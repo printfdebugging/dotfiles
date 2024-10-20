@@ -78,4 +78,6 @@
       { repo: "{{ my_gitlab_handle }}/chromium.git",                              path: "/home/{{ ansible_user }}/.config/chromium", },
       { repo: "{{ my_gitlab_handle }}/thunderbird.git",                           path: "/home/{{ ansible_user }}/.thunderbird", },
       { repo: "{{ my_gitlab_handle }}/notes.git",                                 path: "/home/{{ ansible_user }}/repos/notes", },
+
+      { repo: "{{ my_gitlab_handle }}/learn-opengl.git",                          path: "/home/{{ ansible_user }}/repos/learn-opengl", },
     ]
