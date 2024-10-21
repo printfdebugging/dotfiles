@@ -24,7 +24,7 @@ function init() {
 
 function clone_dotfiles() {
     mkdir -p $HOME/repos && cd $HOME/repos
-    [ ! -d "$HOME/repos/dotfiles" ] && git clone https://gitlab.com/printfdebugging/dotfiles.git $HOME/repos/dotfiles
+    [ ! -d "$HOME/repos/dotfiles" ] && git clone https://github.com/printfdebugging/dotfiles.git $HOME/repos/dotfiles
     cd $HOME/repos/dotfiles
 }
 
