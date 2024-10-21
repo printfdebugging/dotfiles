@@ -17,7 +17,7 @@
     - zsh
     - awesome
     - dunst
-    - emacs
     - services
-    - libreoffice-dev
-    - qemu
+    # - emacs
+    # - libreoffice-dev
+    # - qemu
