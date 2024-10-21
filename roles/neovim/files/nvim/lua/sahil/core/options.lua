@@ -20,7 +20,7 @@ local options = {
 	splitright = true,
 	splitbelow = true,
 	pumheight = 12,
-	conceallevel = 3,
+	conceallevel = 0,
 	-- guicursor = "a:block",
 	hlsearch = true,
 	incsearch = true,
@@ -28,7 +28,7 @@ local options = {
 	updatetime = 50,
 	scroll = 4,
 	showtabline = 2,
-	concealcursor = "nvic",
+	concealcursor = "",
 	-- mouse = "",
 	formatprg = "par jw122",
 }
