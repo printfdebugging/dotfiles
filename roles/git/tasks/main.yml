@@ -73,9 +73,17 @@
     update: no
   loop:
     [
+
       # basic repositories
-      { repo: "{{ my_github_handle }}/dotfiles.git",                              path: "/home/{{ ansible_user }}/repos/dotfiles", },
       { repo: "{{ my_github_handle }}/chromium.git",                              path: "/home/{{ ansible_user }}/.config/chromium", },
       { repo: "{{ my_github_handle }}/thunderbird.git",                           path: "/home/{{ ansible_user }}/.thunderbird", },
-      { repo: "{{ my_github_handle }}/printfdebugging.github.io.git",              path: "/home/{{ ansible_user }}/repos/website", },
+
+      # other repositores
+      { repo: "{{ my_github_handle }}/dotfiles.git",                              path: "/home/{{ ansible_user }}/repos/dotfiles", },
+      { repo: "{{ my_github_handle }}/Libreoffice-Theme-Template.git",            path: "/home/{{ ansible_user }}/Libreoffice-Theme-Template", },
+      { repo: "{{ my_github_handle }}/printfdebugging.github.io.git",             path: "/home/{{ ansible_user }}/repos/website", },
+      { repo: "{{ my_github_handle }}/icecream-parlour-management-system.git",    path: "/home/{{ ansible_user }}/repos/icecream-parlour-management-system", },
+      { repo: "{{ my_github_handle }}/geometry-wars.git",                         path: "/home/{{ ansible_user }}/repos/geometry-wars", },
+      { repo: "{{ my_github_handle }}/interpreters.git",                          path: "/home/{{ ansible_user }}/repos/interpreters", },
+      { repo: "{{ my_github_handle }}/bouncing-shapes.git",                       path: "/home/{{ ansible_user }}/repos/bouncing-shapes", },
     ]
