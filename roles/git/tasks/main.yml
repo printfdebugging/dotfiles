@@ -86,4 +86,5 @@
       { repo: "{{ my_gitlab_handle }}/geometry-wars.git",                         path: "/home/{{ ansible_user }}/repos/geometry-wars", },
       { repo: "{{ my_gitlab_handle }}/interpreters.git",                          path: "/home/{{ ansible_user }}/repos/interpreters", },
       { repo: "{{ my_gitlab_handle }}/bouncing-shapes.git",                       path: "/home/{{ ansible_user }}/repos/bouncing-shapes", },
+      { repo: "{{ my_gitlab_handle }}/learn-opengl.git",                          path: "/home/{{ ansible_user }}/repos/learn-opengl", },
     ]
