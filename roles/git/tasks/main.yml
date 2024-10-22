@@ -50,7 +50,7 @@
     group: "{{ ansible_user }}"
     mode: 0755
 
-- name: (git) github rsa key
+- name: (git) gitlab rsa key
   become: false
   tags:
     - git
@@ -59,8 +59,8 @@
     dest: /home/{{ ansible_user }}/.ssh/known_hosts
     create: yes
     state: present
-    line: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
-    regexp: "^github\\.com"
+    line: "{{ lookup('pipe', 'ssh-keyscan -t rsa gitlab.com') }}"
+    regexp: "^gitlab\\.com"
 
 - name: (git) clone git repositories
   become: false
@@ -75,15 +75,15 @@
     [
 
       # basic repositories
-      { repo: "{{ my_github_handle }}/chromium.git",                              path: "/home/{{ ansible_user }}/.config/chromium", },
-      { repo: "{{ my_github_handle }}/thunderbird.git",                           path: "/home/{{ ansible_user }}/.thunderbird", },
+      { repo: "{{ my_gitlab_handle }}/chromium.git",                              path: "/home/{{ ansible_user }}/.config/chromium", },
+      { repo: "{{ my_gitlab_handle }}/thunderbird.git",                           path: "/home/{{ ansible_user }}/.thunderbird", },
+      { repo: "{{ my_gitlab_handle }}/notes.git",                                 path: "/home/{{ ansible_user }}/repos/notes", },
 
       # other repositores
-      { repo: "{{ my_github_handle }}/dotfiles.git",                              path: "/home/{{ ansible_user }}/repos/dotfiles", },
-      { repo: "{{ my_github_handle }}/Libreoffice-Theme-Template.git",            path: "/home/{{ ansible_user }}/Libreoffice-Theme-Template", },
-      { repo: "{{ my_github_handle }}/printfdebugging.github.io.git",             path: "/home/{{ ansible_user }}/repos/website", },
-      { repo: "{{ my_github_handle }}/icecream-parlour-management-system.git",    path: "/home/{{ ansible_user }}/repos/icecream-parlour-management-system", },
-      { repo: "{{ my_github_handle }}/geometry-wars.git",                         path: "/home/{{ ansible_user }}/repos/geometry-wars", },
-      { repo: "{{ my_github_handle }}/interpreters.git",                          path: "/home/{{ ansible_user }}/repos/interpreters", },
-      { repo: "{{ my_github_handle }}/bouncing-shapes.git",                       path: "/home/{{ ansible_user }}/repos/bouncing-shapes", },
+      { repo: "{{ my_gitlab_handle }}/dotfiles.git",                              path: "/home/{{ ansible_user }}/repos/dotfiles", },
+      { repo: "{{ my_gitlab_handle }}/Libreoffice-Theme-Template.git",            path: "/home/{{ ansible_user }}/Libreoffice-Theme-Template", },
+      { repo: "{{ my_gitlab_handle }}/icecream-parlour-management-system.git",    path: "/home/{{ ansible_user }}/repos/icecream-parlour-management-system", },
+      { repo: "{{ my_gitlab_handle }}/geometry-wars.git",                         path: "/home/{{ ansible_user }}/repos/geometry-wars", },
+      { repo: "{{ my_gitlab_handle }}/interpreters.git",                          path: "/home/{{ ansible_user }}/repos/interpreters", },
+      { repo: "{{ my_gitlab_handle }}/bouncing-shapes.git",                       path: "/home/{{ ansible_user }}/repos/bouncing-shapes", },
     ]

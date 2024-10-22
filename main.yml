@@ -18,6 +18,6 @@
     - awesome
     - dunst
     - services
-    # - emacs
+    - emacs
     # - libreoffice-dev
     # - qemu
