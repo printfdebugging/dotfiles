@@ -510,7 +510,7 @@ To execute source blocks asynchronously, add =:async= to the source block's head
       '(("d" "default" plain
          "%?"
          :target (file+head "${slug}.org"
-                            "#+TITLE: ${title}\n#+AUTHOR: Sahil Gautam\n#+HTML_HEAD: <link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\"/>\n#+EXCLUDE_TAGS: noexport\n#+STATE: draft\n"))))
+                            "#+TITLE: ${title}\n#+AUTHOR: Sahil Gautam\n#+HTML_HEAD: <link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\"/>\n#+OPTIONS: toc:nil\n#+INCLUDE: \"./navigation.org\" :lines \"7-\"\n#+EXCLUDE_TAGS: noexport\n#+TOC:headlines 2\n#+STATE: draft\n"))))
 #+end_src
 
 * Org Bullets

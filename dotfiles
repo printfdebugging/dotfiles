@@ -55,6 +55,6 @@ case "$1" in
     "init")     init;;
     "full"|"")  run_ansible_tasks_with_tag include,files,packages,system;;
     "save-"*)   run_ansible_save_task ${@};;
-    *)          run_ansible_tasks_with_tag ${@};;
+    *)          run_ansible_tasks_with_tag include,${@};;
 esac
 

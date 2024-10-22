@@ -97,6 +97,20 @@
         cp -r JetBrainsMono /usr/share/fonts
       fi
 
+- name: (base@voidlinux) install ttf-iosevka-aile
+  become: true
+  tags:
+    - base
+    - fonts
+  ansible.builtin.shell:
+    cmd: |
+      if [ $(fc-list | grep "Iosevka Aile" | wc -l) -eq 0 ]; then
+        cd /tmp
+        curl -LO https://github.com/be5invis/Iosevka/releases/download/v31.9.1/PkgTTC-IosevkaAile-31.9.1.zip 
+        unzip PkgTTC-IosevkaAile-31.9.1.zip -d IosevkaAile
+        cp -r IosevkaAile /usr/share/fonts
+      fi
+
 - name: (base@voidlinux) copy twemoji font file
   become: true
   tags:
