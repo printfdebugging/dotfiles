@@ -81,7 +81,7 @@
 
       # other repositores
       { repo: "{{ my_gitlab_handle }}/dotfiles.git",                              path: "/home/{{ ansible_user }}/repos/dotfiles", },
-      { repo: "{{ my_gitlab_handle }}/Libreoffice-Theme-Template.git",            path: "/home/{{ ansible_user }}/Libreoffice-Theme-Template", },
+      { repo: "{{ my_gitlab_handle }}/libreoffice-theme-template.git",            path: "/home/{{ ansible_user }}/libreoffice-theme-template", },
       { repo: "{{ my_gitlab_handle }}/icecream-parlour-management-system.git",    path: "/home/{{ ansible_user }}/repos/icecream-parlour-management-system", },
       { repo: "{{ my_gitlab_handle }}/geometry-wars.git",                         path: "/home/{{ ansible_user }}/repos/geometry-wars", },
       { repo: "{{ my_gitlab_handle }}/interpreters.git",                          path: "/home/{{ ansible_user }}/repos/interpreters", },
