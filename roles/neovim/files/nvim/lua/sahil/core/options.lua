@@ -79,12 +79,12 @@ vim.fn.sign_define(
 )
 vim.fn.sign_define("DapStopped", { text = "", texthl = "DapStopped", linehl = "DapStopped", numhl = "DapStopped" })
 
-vim.api.nvim_create_augroup("MarkdownKeymap", { clear = true })
-vim.api.nvim_create_autocmd("FileType", {
-	group = "MarkdownKeymap",
-	pattern = "markdown",
-	command = "setlocal keymap=accents",
-})
+-- vim.api.nvim_create_augroup("MarkdownKeymap", { clear = true })
+-- vim.api.nvim_create_autocmd("FileType", {
+-- 	group = "MarkdownKeymap",
+-- 	pattern = "markdown",
+-- 	command = "setlocal keymap=accents",
+-- })
 
 -- vim.g.markdown_folding = 1
 -- opt.guicursor =
