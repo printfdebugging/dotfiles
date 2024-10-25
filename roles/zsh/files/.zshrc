@@ -150,5 +150,11 @@ alias xr="sudo xbps-remove"
 # export QT_QPA_PLATFORMTHEME=gtk3
 export LOCOREPATH=/home/printfdebugging/repos/libreoffice
 export COOL_SERVE_FROM_FS=1
+
+if grep -q '^NAME="Arch Linux"' /etc/os-release; then
+    export QT5DIR=/usr/lib/qt
+else
+    export QT5DIR=/usr/lib/qt5
+fi
+
 export QT6DIR=/usr/lib/qt6
-export QT5DIR=/usr/lib/qt5
