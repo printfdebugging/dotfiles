@@ -90,4 +90,5 @@
       { repo: "{{ my_gitlab_handle }}/win32-qt-comparison.git",                   path: "/home/{{ ansible_user }}/repos/win32-qt-comparison", },
       { repo: "{{ my_gitlab_handle }}/nullptr.git",                               path: "/home/{{ ansible_user }}/repos/nullptr", },
       { repo: "{{ my_gitlab_handle }}/project-earth.git",                         path: "/home/{{ ansible_user }}/repos/project-earth", },
+      { repo: "{{ my_gitlab_handle }}/sfml-blueprints.git",                         path: "/home/{{ ansible_user }}/repos/sfml-blueprints", },
     ]
