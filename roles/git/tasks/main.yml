@@ -87,4 +87,6 @@
       { repo: "{{ my_gitlab_handle }}/interpreters.git",                          path: "/home/{{ ansible_user }}/repos/interpreters", },
       { repo: "{{ my_gitlab_handle }}/bouncing-shapes.git",                       path: "/home/{{ ansible_user }}/repos/bouncing-shapes", },
       { repo: "{{ my_gitlab_handle }}/learn-opengl.git",                          path: "/home/{{ ansible_user }}/repos/learn-opengl", },
+      { repo: "{{ my_gitlab_handle }}/win32-qt-comparison.git",                  path: "/home/{{ ansible_user }}/repos/win32-qt-comparison", },
+      { repo: "{{ my_gitlab_handle }}/nullptr.git",                               path: "/home/{{ ansible_user }}/repos/nullptr", },
     ]
