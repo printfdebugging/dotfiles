@@ -685,6 +685,7 @@ For compilation buffer or lsp reference buffers, open them in horizontal split.
 
 #+BEGIN_SRC emacs-lisp
 (defun my-c++-mode-hook ()
+  (setq c-default-style "bsd")
   (setq c-basic-offset 4)
   (c-set-offset 'substatement-open 0))
 (add-hook 'c++-mode-hook 'my-c++-mode-hook)
