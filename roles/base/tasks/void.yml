@@ -77,7 +77,8 @@
   ansible.builtin.shell:
     cmd: |
       if [ $(fc-list | grep "Iosevka" | wc -l) -eq 0 ]; then
-        cd /tmp
+        mkdir -p ~/.local/tmp
+        cd ~/.local/tmp
         curl -LO https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/Iosevka.zip
         unzip Iosevka.zip -d Iosevka
         cp -r Iosevka /usr/share/fonts
@@ -91,7 +92,8 @@
   ansible.builtin.shell:
     cmd: |
       if [ $(fc-list | grep "JetBrainsMono" | wc -l) -eq 0 ]; then
-        cd /tmp
+        mkdir -p ~/.local/tmp
+        cd ~/.local/tmp
         curl -LO https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/JetBrainsMono.zip
         unzip JetBrainsMono.zip -d JetBrainsMono
         cp -r JetBrainsMono /usr/share/fonts
