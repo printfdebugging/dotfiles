@@ -80,6 +80,7 @@
 
       # other repositores
       { repo: "{{ my_gitlab_handle }}/website.git",                               path: "/home/{{ ansible_user }}/repos/website", },
+      { repo: "{{ my_gitlab_handle }}/notes.git",                                 path: "/home/{{ ansible_user }}/repos/notes", },
       { repo: "{{ my_gitlab_handle }}/dotfiles.git",                              path: "/home/{{ ansible_user }}/repos/dotfiles", },
       { repo: "{{ my_gitlab_handle }}/libreoffice-theme-template.git",            path: "/home/{{ ansible_user }}/repos/libreoffice-theme-template", },
       { repo: "{{ my_gitlab_handle }}/icecream-parlour-management-system.git",    path: "/home/{{ ansible_user }}/repos/icecream-parlour-management-system", },
@@ -90,5 +91,5 @@
       { repo: "{{ my_gitlab_handle }}/win32-qt-comparison.git",                   path: "/home/{{ ansible_user }}/repos/win32-qt-comparison", },
       { repo: "{{ my_gitlab_handle }}/nullptr.git",                               path: "/home/{{ ansible_user }}/repos/nullptr", },
       { repo: "{{ my_gitlab_handle }}/project-earth.git",                         path: "/home/{{ ansible_user }}/repos/project-earth", },
-      { repo: "{{ my_gitlab_handle }}/sfml-blueprints.git",                         path: "/home/{{ ansible_user }}/repos/sfml-blueprints", },
+      { repo: "{{ my_gitlab_handle }}/sfml-blueprints.git",                       path: "/home/{{ ansible_user }}/repos/sfml-blueprints", },
     ]

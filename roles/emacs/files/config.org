@@ -499,18 +499,18 @@ To execute source blocks asynchronously, add =:async= to the source block's head
   :init
     (setq org-roam-v2-ack t)
   :custom
-    (org-roam-directory "~/repos/website")
+    (org-roam-directory "~/repos/notes")
     (org-roam-completion-everywhere t)
   :config
     (org-roam-db-autosync-mode))
 ;; (setq org-hide-block-startup t
 ;;       org-startup-folded "fold")
 
-(setq org-roam-capture-templates
-      '(("d" "default" plain
-         "%?"
-         :target (file+head "${slug}.org"
-                            "#+TITLE: ${title}\n#+AUTHOR: Sahil Gautam\n#+HTML_HEAD: <link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\"/>\n#+OPTIONS: toc:nil\n#+INCLUDE: \"./navigation.org\" :lines \"7-\"\n#+EXCLUDE_TAGS: noexport\n#+TOC:headlines 2\n#+STATE: draft\n"))))
+;; (setq org-roam-capture-templates
+;;       '(("d" "default" plain
+;;          "%?"
+;;          :target (file+head "${slug}.org"
+;;                             "#+TITLE: ${title}\n#+AUTHOR: Sahil Gautam\n#+HTML_HEAD: <link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\"/>\n#+OPTIONS: toc:nil\n#+INCLUDE: \"./navigation.org\" :lines \"7-\"\n#+EXCLUDE_TAGS: noexport\n#+TOC:headlines 2\n#+STATE: draft\n"))))
 #+end_src
 
 * Org Bullets
