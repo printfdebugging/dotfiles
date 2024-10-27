@@ -499,7 +499,7 @@ To execute source blocks asynchronously, add =:async= to the source block's head
   :init
     (setq org-roam-v2-ack t)
   :custom
-    (org-roam-directory "~/repos/notes")
+    (org-roam-directory "~/repos/website")
     (org-roam-completion-everywhere t)
   :config
     (org-roam-db-autosync-mode))
