@@ -158,10 +158,12 @@
                     :height 200
                     :weight 'Regular)
 
+(set-face-attribute 'org-verbatim nil
+                    :background "#23272e")
 (set-face-attribute 'org-block-begin-line nil
                     :foreground "#23272e")
 (set-face-attribute 'bold nil
-          :foreground "#98817B")
+                    :foreground "#98817B")
 #+end_src
 
 * Keybindings
