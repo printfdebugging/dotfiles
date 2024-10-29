@@ -1,18 +1,13 @@
-- name: (dunst) include archlinux tasks
+- name: (dunst@voidlinux) install packages
   tags:
     - dunst
-    - include
-  ansible.builtin.include_tasks:
-    file: arch.yml
-  when: ansible_os_family == "Archlinux"
-
-- name: (dunst) include voidlinux tasks
-  tags:
+    - packages
+  community.general.xbps:
+    name:
+      - "{{ item }}"
+    state: latest
+  loop:
     - dunst
-    - include
-  ansible.builtin.include_tasks:
-    file: void.yml
-  when: ansible_os_family == "Void"
 
 - name: (dunst) create config directory
   become: false

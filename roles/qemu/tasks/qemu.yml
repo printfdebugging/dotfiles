@@ -1,4 +1,4 @@
-- name: (qemu@voidlinux) install qemu packages
+- name: (qemu) install qemu packages
   tags:
     - qemu
     - packages
@@ -12,7 +12,7 @@
     - qemu
     - polkit
 
-- name: (qemu@voidlinux)
+- name: (qemu)
   tags:
     - qemu
     - system
@@ -23,7 +23,7 @@
       - kvm
     append: true
 
-- name: (qemu@voidlinux) enable and start neccessary services
+- name: (qemu) enable and start neccessary services
   tags:
     - qemu
     - system
@@ -38,7 +38,7 @@
     - virtlockd
     - virtlogd
 
-- name: (qemu@voidlinux) enable and start network default
+- name: (qemu) enable and start network default
   become: true
   tags:
     - qemu

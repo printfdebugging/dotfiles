@@ -1,18 +1,12 @@
-- name: (mpv) include archlinux tasks
+- name: (mpv) install packages
   tags:
+    - zsh
+    - packages
+  community.general.xbps:
+    name: "{{ item }}"
+    state: latest
+  loop:
     - mpv
-    - include
-  ansible.builtin.include_tasks:
-    file: arch.yml
-  when: ansible_os_family == "Archlinux"
-
-- name: (mpv) include voidlinux tasks
-  tags:
-    - mpv
-    - include
-  ansible.builtin.include_tasks:
-    file: void.yml
-  when: ansible_os_family == "Void"
 
 - name: (mpv) create config directory
   become: false

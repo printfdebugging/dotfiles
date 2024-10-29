@@ -1,18 +1,14 @@
-- name: (neovim) include archlinux tasks
+- name: (neovim) install packages
   tags:
     - neovim
-    - include
-  ansible.builtin.include_tasks:
-    file: arch.yml
-  when: ansible_os_family == "Archlinux"
-
-- name: (neovim) include voidlinux tasks
-  tags:
+    - packages
+  community.general.xbps:
+    name: "{{ item }}"
+    state: latest
+  loop:
     - neovim
-    - include
-  ansible.builtin.include_tasks:
-    file: void.yml
-  when: ansible_os_family == "Void"
+    - git
+    - nodejs
 
 - name: (neovim) copy config files
   become: false

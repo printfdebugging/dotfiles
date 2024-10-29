@@ -1,18 +1,9 @@
-- name: (qemu) install packages
+- name: (qemu) install qemu-libvirt
   tags:
     - qemu
     - include
   ansible.builtin.include_tasks:
-    file: arch.yml
-  when: ansible_os_family == "Archlinux"
-
-- name: (qemu) install packages
-  tags:
-    - qemu
-    - include
-  ansible.builtin.include_tasks:
-    file: void.yml
-  when: ansible_os_family == "Void"
+    file: qemu.yml
 
 - name: (qemu) install quickemu
   tags:
@@ -20,6 +11,5 @@
     - include
   ansible.builtin.include_tasks:
     file: quickemu.yml
-  when: ansible_os_family == "Void"
 
 

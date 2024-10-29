@@ -1,18 +1,13 @@
-- name: (git) include archlinux tasks
+- name: (git) install packages
   tags:
     - git
-    - include
-  ansible.builtin.include_tasks:
-    file: arch.yml
-  when: ansible_os_family == "Archlinux"
-
-- name: (git) include voidlinux tasks
-  tags:
+    - packages
+  community.general.xbps:
+    name: "{{ item }}"
+    state: latest
+  loop:
     - git
-    - include
-  ansible.builtin.include_tasks:
-    file: void.yml
-  when: ansible_os_family == "Void"
+    - openssh
 
 - name: (git) create gitconfig
   tags:

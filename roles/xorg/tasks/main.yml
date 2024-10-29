@@ -1,18 +1,20 @@
-- name: (xorg) include archlinux roles
+- name: (xorg@voidlinux) install packages
   tags:
     - xorg
-    - include
-  ansible.builtin.include_tasks:
-    file: arch.yml
-  when: ansible_os_family == "Archlinux"
-
-- name: (xorg) include voidlinux roles
-  tags:
-    - xorg
-    - include
-  ansible.builtin.include_tasks:
-    file: void.yml
-  when: ansible_os_family == "Void"
+    - packages
+  community.general.xbps:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - xorg-server
+    - xinit
+    - xrandr
+    - setxkbmap
+    - xset
+    - xcompmgr
+    - xwallpaper
+    - xclip
+    - xsel
 
 - name: (xorg) copy xinitrc
   become: false

@@ -1,18 +1,12 @@
-- name: (awesome) include archlinux tasks
+- name: (awesome) install awesome
   tags:
     - awesome
-    - include
-  ansible.builtin.include_tasks:
-    file: arch.yml
-  when: ansible_os_family == "Archlinux"
-
-- name: (awesome) include voidlinux tasks
-  tags:
+    - packages
+  community.general.xbps:
+    name: "{{ item }}"
+    state: latest
+  loop:
     - awesome
-    - include
-  ansible.builtin.include_tasks:
-    file: void.yml
-  when: ansible_os_family == "Void"
 
 - name: (awesome) copy config files
   become: false

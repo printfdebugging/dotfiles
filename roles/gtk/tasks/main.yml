@@ -1,18 +1,19 @@
-- name: (gtk) include archlinux tasks
+- name: (gtk) copy Adwaita theme to default theme
+  become: true
   tags:
     - gtk
-    - include
-  ansible.builtin.include_tasks:
-    file: arch.yml
-  when: ansible_os_family == "Archlinux"
+    - files
+  ansible.builtin.copy:
+    src: /usr/share/icons/Adwaita/
+    dest: /usr/share/icons/default/
+    owner: root
+    group: root
+    remote_src: true
 
-- name: (gtk) include voidlinux tasks
-  tags:
-    - gtk
-    - include
-  ansible.builtin.include_tasks:
-    file: void.yml
-  when: ansible_os_family == "Void"
+- name: (gtk) reinstall gdk-pixbuf
+  community.general.xbps:
+    name: gdk-pixbuf
+    state: latest
 
 - name: (gtk) create config directory
   become: false

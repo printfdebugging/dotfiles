@@ -1,18 +1,15 @@
-- name: (zsh) include archlinux tasks
+- name: (zsh) install packages
   tags:
     - zsh
-    - include
-  ansible.builtin.include_tasks:
-    file: arch.yml
-  when: ansible_os_family == "Archlinux"
-
-- name: (zsh) include voidlinux tasks
-  tags:
+    - packages
+  community.general.xbps:
+    name: "{{ item }}"
+    state: latest
+  loop:
     - zsh
-    - include
-  ansible.builtin.include_tasks:
-    file: void.yml
-  when: ansible_os_family == "Void"
+    - zsh-syntax-highlighting
+    - zsh-completions
+    - zsh-autosuggestions
 
 - name: (zsh) setup zsh shell
   tags:

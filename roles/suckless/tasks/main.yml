@@ -1,18 +1,17 @@
-- name: (suckless) include archlinux tasks
+- name: (suckless) install packages
   tags:
     - suckless
-    - include
-  ansible.builtin.include_tasks:
-    file: arch.yml
-  when: ansible_os_family == "Archlinux"
-
-- name: (suckless) include voidlinux tasks
-  tags:
-    - suckless
-    - include
-  ansible.builtin.include_tasks:
-    file: void.yml
-  when: ansible_os_family == "Void"
+    - packages
+  community.general.xbps:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - base-devel
+    - libX11-devel
+    - libXft-devel
+    - libXinerama-devel
+    - harfbuzz-devel
+    - freetype
 
 - name: (suckless) remove src files
   become: false

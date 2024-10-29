@@ -1,18 +1,13 @@
-- name: (emacs) include archlinux tasks
+- name: (emacs) install packages
   tags:
     - emacs
-    - include
-  ansible.builtin.include_tasks:
-    file: arch.yml
-  when: ansible_os_family == "Archlinux"
-
-- name: (emacs) include voidlinux tasks
-  tags:
-    - emacs
-    - include
-  ansible.builtin.include_tasks:
-    file: void.yml
-  when: ansible_os_family == "Void"
+    - packages
+  community.general.xbps:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - emacs-x11
+    - fd
 
 - name: (emacs) create config directory
   become: false

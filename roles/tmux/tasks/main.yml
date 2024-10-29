@@ -1,18 +1,12 @@
-- name: (tmux) include archlinux tasks
+- name: (tmux) install packages
   tags:
     - tmux
-    - include
-  ansible.builtin.include_tasks:
-    file: arch.yml
-  when: ansible_os_family == "Archlinux"
-
-- name: (tmux) include voidlinux tasks
-  tags:
+    - packages
+  community.general.xbps:
+    name: "{{ item }}"
+    state: latest
+  loop:
     - tmux
-    - include
-  ansible.builtin.include_tasks:
-    file: void.yml
-  when: ansible_os_family == "Void"
 
 - name: (tmux) create config directory
   become: false

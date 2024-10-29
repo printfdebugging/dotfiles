@@ -1,9 +1,0 @@
-- name: (yt-dlp@archlinux) install packages
-  tags:
-    - yt-dlp
-    - packages
-  community.general.pacman:
-    name: "{{ item }}"
-    state: latest
-  loop:
-    - yt-dlp

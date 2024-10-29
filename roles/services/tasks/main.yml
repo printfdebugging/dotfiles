@@ -1,16 +1,39 @@
-- name: (services) include archlinux tasks
+- name: (services) stop other network services
   tags:
     - services
-    - include
-  ansible.builtin.include_tasks:
-    file: arch.yml
-  when: ansible_os_family == "Archlinux"
+    - system
+  community.general.runit:
+    name: "{{ item }}"
+    state: stopped
+    enabled: false
+  loop:
+    - dhcpcd
+    - wpa_supplicant
+    - wicd
+    - elogind
 
-- name: (services) include voidlinux tasks
+- name: (services) kill other network services
   tags:
     - services
-    - include
-  ansible.builtin.include_tasks:
-    file: void.yml
-  when: ansible_os_family == "Void"
+    - system
+  community.general.runit:
+    name: "{{ item }}"
+    state: killed
+    enabled: false
+  loop:
+    - dhcpcd
+    - wpa_supplicant
+    - wicd
 
+- name: (services) enable & start network manager
+  tags:
+    - services
+    - system
+  community.general.runit:
+    name: "{{ item }}"
+    state: started
+    enabled: true
+  loop:
+    - dbus
+    - NetworkManager
+    - elogind

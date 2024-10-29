@@ -1,9 +1,0 @@
-- name: (tmux@voidlinux) install packages
-  tags:
-    - tmux
-    - packages
-  community.general.xbps:
-    name: "{{ item }}"
-    state: latest
-  loop:
-    - tmux
