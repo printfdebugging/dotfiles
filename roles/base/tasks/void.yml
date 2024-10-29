@@ -52,6 +52,7 @@
     - qt5ct
     - ruff
     - i3lock-fancy
+    - SFML-devel
     - glfw-devel
     - mesa-vulkan-radeon
     - vulkan-loader-devel
