@@ -10,6 +10,7 @@
     - dhcpcd
     - wpa_supplicant
     - wicd
+    - elogind
 
 - name: (services@voidlinux) kill other network services
   tags:
@@ -35,4 +36,5 @@
   loop:
     - dbus
     - NetworkManager
+    - elogind
 

@@ -1,0 +1,56 @@
+- name: clone quickemu
+  become: false
+  tags:
+    - quickemu
+    - packages
+  ansible.builtin.git:
+    repo: https://github.com/quickemu-project/quickemu
+    dest: /home/{{ ansible_user }}/downloads/quickemu
+    update: no
+    depth: 1
+    recursive: false
+
+- name: install dependencies
+  tags:
+    - quickemu
+    - packages
+  community.general.xbps:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - qemu
+    - bash
+    - coreutils
+    - edk2-ovmf
+    - gawk
+    - grep
+    - glxinfo
+    - jq
+    - pciutils
+    - procps-ng
+    - python3
+    - cdrtools # for mkisofs
+    - usbutils
+    - util-linux
+    - sed
+    - socat
+    - swtpm
+    - xdg-user-dirs
+    - xrandr
+    - zsync
+    - unzip
+    - elogind # for XDG_RUNTIME_DIR
+
+- name: copy scripts to path
+  become: true
+  tags:
+    - quickemu
+    - packages
+  ansible.builtin.copy:
+    src: "/home/{{ ansible_user }}/downloads/quickemu/{{ item }}"
+    dest: /usr/local/bin/{{ item }}
+    mode: 0755
+  loop:
+    - quickemu
+    - quickget
+    - quickreport

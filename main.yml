@@ -18,5 +18,5 @@
     - awesome
     - services
     - emacs
-    # - libreoffice-dev
-    # - qemu
+    - libreoffice-dev
+    - qemu

@@ -10,3 +10,7 @@
     group: root
     remote_src: true
 
+- name: (gtk@voidlinux) reinstall gdk-pixbuf
+  community.general.xbps:
+    name: gdk-pixbuf
+    state: latest

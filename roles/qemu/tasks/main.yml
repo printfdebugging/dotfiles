@@ -14,4 +14,12 @@
     file: void.yml
   when: ansible_os_family == "Void"
 
+- name: (qemu) install quickemu
+  tags:
+    - quickemu
+    - include
+  ansible.builtin.include_tasks:
+    file: quickemu.yml
+  when: ansible_os_family == "Void"
+
 

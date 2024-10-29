@@ -130,6 +130,7 @@
     - nasm
 
 - name: (git) clone the git repo
+  become: false
   tags:
     - libreoffice-dev
     - files
@@ -137,6 +138,7 @@
     repo: https://gerrit.libreoffice.org/core
     dest: /home/{{ ansible_user }}/repos/libreoffice
     update: no
+    recursive: false
 
 - name: (libreoffice-dev@voidlinux) copy autogen.input
   tags:
