@@ -75,6 +75,7 @@
 
       # other repositores
       { repo: "{{ my_gitlab_handle }}/website.git",                               path: "/home/{{ ansible_user }}/repos/website", },
+      { repo: "{{ my_gitlab_handle }}/site.git",                                  path: "/home/{{ ansible_user }}/repos/site", },
       { repo: "{{ my_gitlab_handle }}/notes.git",                                 path: "/home/{{ ansible_user }}/repos/notes", },
       { repo: "{{ my_gitlab_handle }}/dotfiles.git",                              path: "/home/{{ ansible_user }}/repos/dotfiles", },
       { repo: "{{ my_gitlab_handle }}/libreoffice-theme-template.git",            path: "/home/{{ ansible_user }}/repos/libreoffice-theme-template", },
