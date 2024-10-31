@@ -146,6 +146,7 @@ alias br="git branch"
 alias gca="git commit --amend"
 alias xi="sudo xbps-install"
 alias xr="sudo xbps-remove"
+alias xf="xbps-fetch -o "
 
 # export QT_QPA_PLATFORMTHEME=gtk3
 export LOCOREPATH=/home/printfdebugging/repos/libreoffice
