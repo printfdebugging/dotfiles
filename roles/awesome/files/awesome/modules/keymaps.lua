@@ -108,10 +108,6 @@ globalkeys = gears.table.join(
 		awful.spawn.with_shell("getbookmark")
 	end, { description = "bookmark-dwm", group = "launcher" }),
 
-	awful.key({ modkey }, "e", function()
-		awful.spawn.with_shell("ema")
-	end, { description = "dmenu_run", group = "launcher" }),
-
 	awful.key({ modkey }, "w", function()
 		awful.spawn.with_shell("chromium")
 	end, { description = "dmenu_run", group = "launcher" }),
