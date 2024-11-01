@@ -129,7 +129,7 @@ alias cm="cd ~/repos/media/"
 alias cr="cd ~/repos/"
 alias msu="sudo make clean install"
 alias ssha='eval $(ssh-agent) && ssh-add'
-alias list="nvim /home/$USER/repos/notes/bookmarks.md"
+alias list="nvim /home/$USER/repos/files/bookmarks.md"
 alias bin="nvim /home/$USER/.local/bin"
 alias hss="zola serve"
 
