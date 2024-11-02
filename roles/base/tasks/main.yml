@@ -71,6 +71,7 @@
     - clang-tools-extra18
     - libnma
     - elogind
+    - gtypist
 
 - name: (base) install ttf-iosevka-nerd 
   become: true
