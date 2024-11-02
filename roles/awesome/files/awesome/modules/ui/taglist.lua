@@ -22,7 +22,7 @@ local some_func = function(args)
 			margins = args.margins or dpi(0),
 			widget = wibox_container.margin,
 		},
-		shape = rrect(4),
+		shape = rrect(2),
 		bg = "#11111b",
 		widget = wibox_container.background,
 	})
@@ -161,7 +161,7 @@ local taglist = function(s)
 		screen = s,
 		filter = awful.widget.taglist.filter.all,
 		style = {
-			shape = rrect(4),
+			shape = rrect(2),
 		},
 		layout = wibox.layout.fixed.vertical,
 		widget_template = {
