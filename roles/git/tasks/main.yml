@@ -74,7 +74,7 @@
       { repo: "{{ my_github_handle }}/thunderbird.git",                           path: "/home/{{ ansible_user }}/.thunderbird", },
 
       # other repositores
-      { repo: "{{ my_github_handle }}/printfdebugging.github.io.git",             path: "/home/{{ ansible_user }}/repos/site", },
+      { repo: "{{ my_github_handle }}/site",                                      path: "/home/{{ ansible_user }}/repos/site", },
       { repo: "{{ my_github_handle }}/files.git",                                 path: "/home/{{ ansible_user }}/repos/files", },
       { repo: "{{ my_github_handle }}/dotfiles.git",                              path: "/home/{{ ansible_user }}/repos/dotfiles", },
       { repo: "{{ my_github_handle }}/libreoffice-theme-template.git",            path: "/home/{{ ansible_user }}/repos/libreoffice-theme-template", },
