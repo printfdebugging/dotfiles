@@ -87,4 +87,5 @@
       { repo: "{{ my_github_handle }}/win32-qt-comparison.git",                   path: "/home/{{ ansible_user }}/repos/win32-qt-comparison", },
       { repo: "{{ my_github_handle }}/nullptr.git",                               path: "/home/{{ ansible_user }}/repos/nullptr", },
       { repo: "{{ my_github_handle }}/project-earth.git",                         path: "/home/{{ ansible_user }}/repos/project-earth", },
+      { repo: "{{ my_github_handle }}/adventure",                                 path: "/home/{{ ansible_user }}/repos/adventure", },
     ]
