@@ -10,7 +10,6 @@
     - dhcpcd
     - wpa_supplicant
     - wicd
-    - elogind
 
 - name: (services) kill other network services
   tags:

@@ -70,6 +70,7 @@
     - fontconfig
     - clang-tools-extra18
     - libnma
+    - elogind
 
 - name: (base) install ttf-iosevka-nerd 
   become: true
