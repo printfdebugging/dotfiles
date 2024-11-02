@@ -178,7 +178,7 @@ awful.screen.connect_for_each_screen(function(s)
 					layout = wibox.layout.align.vertical,
 				},
 			},
-			margins = dpi(1),
+			margins = dpi(2),
 			widget = wibox.container.margin,
 		},
 		widget = wibox.container.background,
