@@ -1,0 +1,12 @@
+#!/bin/python
+import yaml
+from sys import argv
+from pprint import pprint
+
+if len(argv) <= 1:
+    print("empty argv")
+    exit(1)
+with open(argv[1]) as file:
+    config: dict = yaml.safe_load(file)
+
+pprint(config, sort_dicts=False)

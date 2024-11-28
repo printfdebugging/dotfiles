@@ -1,0 +1,22 @@
+---
+- hosts: all
+  roles:
+    - base
+    - ssh
+    - bin
+    - flameshot
+    - git
+    - gtk
+    - mpv
+    - dunst
+    - neovim
+    - suckless
+    - tmux
+    - wallpapers
+    - xorg
+    - yt-dlp
+    - zsh
+    - awesome
+    - services
+    - libreoffice-dev
+    - qemu

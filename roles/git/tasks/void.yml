@@ -1,0 +1,73 @@
+- name: (git) install packages
+  tags:
+    - git
+    - packages
+  community.general.xbps:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - git
+    - openssh
+
+- name: (git) create gitconfig
+  tags:
+    - git
+    - files
+  copy:
+    content: "{{ git_config_file }}"
+    dest: "/home/{{ ansible_user }}/.gitconfig"
+    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user }}"
+    mode: "0644"
+  become: false
+
+- name: (git) create repos directory
+  become: false
+  tags:
+    - git
+    - files
+  ansible.builtin.file:
+    path: /home/{{ ansible_user }}/repos
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+
+- name: (git) create downloads directory
+  become: false
+  tags:
+    - git
+    - files
+  ansible.builtin.file:
+    path: /home/{{ ansible_user }}/downloads
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+
+- name: (git) github rsa key
+  become: false
+  tags:
+    - git
+    - files
+  ansible.builtin.lineinfile:
+    dest: /home/{{ ansible_user }}/.ssh/known_hosts
+    create: yes
+    state: present
+    line: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
+    regexp: "^github\\.com"
+
+- name: (git) clone git repositories
+  become: false
+  tags:
+    - git
+    - files
+  ansible.builtin.git:
+    repo: "{{ item.repo }}"
+    dest: "{{ item.path }}"
+    update: no
+  loop:
+    [
+      { repo: "{{ my_github_handle }}/dotfiles.git",                                path: "/home/{{ ansible_user }}/repos/dotfiles", },
+      { repo: "{{ my_github_handle }}/graphics-programming.git",                    path: "/home/{{ ansible_user }}/repos/graphics-programming", },
+    ]

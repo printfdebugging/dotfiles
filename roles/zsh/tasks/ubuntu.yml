@@ -1,0 +1,78 @@
+- name: (zsh) install packages
+  tags:
+    - zsh
+    - packages
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - zsh
+    - zsh-syntax-highlighting
+    - zsh-autosuggestions
+    - zsh-antidote
+
+- name: (zsh) setup zsh shell
+  tags:
+    - zsh
+    - system
+  ansible.builtin.user:
+    name: "{{ item }}"
+    shell: /usr/bin/zsh
+  become: true
+  loop:
+    - root
+    - "{{ ansible_user }}"
+
+- name: (zsh) copy config files
+  become: false
+  tags:
+    - zsh
+    - files
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: /home/{{ ansible_user }}/{{ item }}
+    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user }}"
+    mode: 0644
+  loop:
+    - .zshrc
+    - .zprofile
+
+- name: (zsh) create cache directory
+  become: false
+  tags:
+    - zsh
+    - files
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/.cache/zsh"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0755"
+
+- name: (zsh) create history file
+  become: false
+  tags:
+    - zsh
+    - files
+  ansible.builtin.file:
+    path: /home/{{ ansible_user }}/.cache/zsh/history
+    state: touch
+    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user }}"
+    mode: 0755
+
+- name: (zsh) save config files
+  become: false
+  tags:
+    - save
+    - save-zsh
+  ansible.builtin.copy:
+    src: "/home/{{ ansible_user }}/{{ item }}"
+    dest: /home/{{ ansible_user }}/repos/dotfiles/roles/zsh/files/{{ item }}
+    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user }}"
+    mode: 0644
+  loop:
+    - .zshrc
+    - .zprofile

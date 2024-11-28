@@ -1,0 +1,9 @@
+#!/bin/bash
+
+cd ~/repos/dotfiles/roles/suckless/files/ || exit
+echo $(pwd)
+
+cd dwm && sudo make clean install && cd ..
+cd st && sudo make clean install && cd ..
+cd dmenu && sudo make clean install && cd ..
+cd

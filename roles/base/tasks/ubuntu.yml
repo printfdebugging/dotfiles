@@ -1,0 +1,131 @@
+- name: (base) install apt packages
+  tags:
+    - base
+    - packages
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - firefox
+    - par
+    - lua5.3
+    - cmake
+    - ansible
+    - neofetch
+    - man-db
+    - btop
+    - vim
+    - pasystray
+    - pavucontrol
+    - pulseaudio
+    - unzip
+    - network-manager
+    - ripgrep
+    - dolphin
+    - breeze-icon-theme
+    - adwaita-icon-theme
+    - xdotool
+    - netcat-openbsd
+    - python3-watchdog
+    - libreoffice
+    - loupe
+    - bear
+    - mtp-tools
+    - gvfs
+    - mpv
+    - pip
+    - evince
+    - okular
+    - gdb
+    - ntfs-3g
+    - obs-studio
+    - glade
+    - luarocks
+    - imagemagick
+    - libmagick-dev
+    - qt5-style-plugins
+    - qt5ct
+    - i3lock-fancy
+    - libsfml-dev
+    - libglfw3-dev
+    - libglm-dev
+    - vulkan-tools
+    - vulkan-validationlayers
+    - spirv-tools
+    - libvulkan-dev
+    - libxxf86vm-dev
+    - gimp
+    - yarn
+    - wget
+    - curl
+    - fontconfig
+    - clang-18
+    - clang-tools-18
+    - gtypist
+    - ueberzug
+    - xauth
+
+- name: (base) install snap packages
+  tags:
+    - base
+    - packages
+  community.general.snap:
+    name: "{{ item }}"
+    classic: true
+    channel: latest/edge
+    state: present
+  loop:
+    - go
+    - zola
+
+
+
+- name: (base) install fonts
+  become: true
+  tags:
+    - base
+    - packages
+  ansible.builtin.shell:
+    cmd: |
+      if [ $(fc-list | grep "{{ item.font }}" | wc -l) -eq 0 ]; then
+        mkdir -p ~/.local/tmp
+        cd ~/.local/tmp
+        curl -LO {{ item.url }}
+        unzip {{ item.font }}.zip -d {{ item.font }}
+        cp -r {{ item.font }} /usr/share/fonts
+      fi
+  loop:
+    [
+      { font: "Iosevka",         url: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/Iosevka.zip", },
+    ]
+
+- name: (base) copy twemoji font file
+  become: true
+  tags:
+    - base
+    - packages
+  ansible.builtin.copy:
+    src: twemoji
+    dest: /usr/share/fonts
+    owner: root
+    group: root
+    mode: 0644
+
+- name: (base) copy twemoji fontconfig
+  become: true
+  tags:
+    - base
+    - packages
+  ansible.builtin.copy:
+    src: 75-twemoji.conf
+    dest: /etc/fonts/conf.d/75-twemoji.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: (base) upgrade distribution
+  tags:
+    - base
+    - packages
+  ansible.builtin.apt:
+    upgrade: true

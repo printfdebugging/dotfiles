@@ -1,0 +1,26 @@
+#!/bin/bash
+
+
+COLLABORA_ROOT="/home/$USER/repos"
+
+if ! [ -d $COLLABORA_ROOT ] > /dev/null; then
+    mkdir -p $COLLABORA_ROOT
+fi
+
+# install the required packages
+sudo pacman -Syu libcap libcap-ng libpng poco cppunit nodejs npm chromium python-lxml python-polib --noconfirm
+
+# clone the git repository
+git clone https://github.com/printfdebugging/online.git $COLLABORA_ROOT/online
+
+cd $COLLABORA_ROOT/online
+
+./autogen.sh
+
+./configure --enable-silent-rules --with-lokit-path=${LOCOREPATH}/include \
+            --with-lo-path=${LOCOREPATH}/instdir \
+            --enable-debug --enable-cypress
+
+cd browser && npm install canvas@next && cd ..
+
+make -j$(nproc)
