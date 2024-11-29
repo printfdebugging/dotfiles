@@ -2,24 +2,16 @@
 vim.cmd([[
   augroup LuaTabStop
   autocmd!
-  autocmd FileType lua setlocal tabstop=2
-  autocmd FileType lua setlocal shiftwidth=2
-  augroup END
-]])
-
-vim.cmd([[
-  augroup CTabStop
-  autocmd!
-  autocmd FileType c setlocal tabstop=2
-  autocmd FileType c setlocal shiftwidth=2
+  autocmd FileType lua set tabstop=2
+  autocmd FileType lua set shiftwidth=2
   augroup END
 ]])
 
 vim.cmd([[
   augroup JavaScriptTabStop
   autocmd!
-  autocmd FileType javascript setlocal tabstop=2
-  autocmd FileType javascript setlocal shiftwidth=2
+  autocmd FileType javascript set tabstop=2
+  autocmd FileType javascript set shiftwidth=2
   augroup END
 ]])
 

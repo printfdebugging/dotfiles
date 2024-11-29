@@ -101,9 +101,9 @@ vim.keymap.set("n", "<leader>rr", ":MdEvalClean<CR>")
 -- PERSONAL CONVINIENCE
 keymap.set("n", "<leader>x", ":lua ExecuteCurrentFileProgram()<CR>", { noremap = true, silent = true })
 keymap.set("n", "J", "mzJ`z")
-keymap.set("n", "t", ":!make run<CR>")
 keymap.set("n", "<leader>a", ":TodoQuickFix keywords=PIN<CR>")
--- keymap.set("n", "T", ":!make clean<CR>")
+keymap.set("n", "t", ":!make run<CR>")
+keymap.set("n", "T", ":!make clean<CR>")
 -- keymap.set("n", "S", ":!make save<CR>")
 -- keymap.set("n", "\\", ":lua saveToReadmeFile()<CR>") -- mapping to restart lsp if necessary
 -- keymap.set("n", "M", ":lua today()<CR>") -- mapping to restart lsp if necessary
