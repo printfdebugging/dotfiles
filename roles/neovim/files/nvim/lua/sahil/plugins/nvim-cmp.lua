@@ -122,7 +122,6 @@ return {
 		local servers = {
 			"clangd",
 			"ts_ls",
-      "cmake-language-server",
 			"lua_ls",
 			"ansiblels",
 			"cmake",
