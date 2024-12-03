@@ -151,7 +151,7 @@ awful.screen.connect_for_each_screen(function(s)
 		position = "left",
 		screen = s,
 		-- height = 40,
-		width = 35,
+		width = 40,
 		widget = {
 			layout = wibox.layout.align.vertical,
 		},
@@ -164,10 +164,10 @@ awful.screen.connect_for_each_screen(function(s)
 				layout = wibox.layout.align.vertical,
 				expand = "none",
 				{
+					s.mylayoutbox,
 					layout = wibox.layout.align.vertical,
 				},
 				{
-					s.mylayoutbox,
 					client_info,
 					require("modules.ui.taglist")(s),
 					layout = wibox.layout.align.vertical,

@@ -68,6 +68,9 @@
     update: no
   loop:
     [
-      { repo: "{{ my_github_handle }}/dotfiles.git",                                path: "/home/{{ ansible_user }}/repos/dotfiles", },
-      { repo: "{{ my_github_handle }}/graphics-programming.git",                    path: "/home/{{ ansible_user }}/repos/graphics-programming", },
+      { repo: "{{ my_github_handle }}/dotfiles.git",        path: "/home/{{ ansible_user }}/repos/dotfiles", },
+      { repo: "{{ my_github_handle }}/graphics.git",        path: "/home/{{ ansible_user }}/repos/graphics", },
+      { repo: "{{ my_github_handle }}/timepast.git",        path: "/home/{{ ansible_user }}/repos/timepast", },
+      { repo: "{{ my_github_handle }}/printfdebugging.git", path: "/home/{{ ansible_user }}/repos/printfdebugging", },
+      { repo: "{{ my_github_handle }}/themes.git",          path: "/home/{{ ansible_user }}/repos/themes", },
     ]
