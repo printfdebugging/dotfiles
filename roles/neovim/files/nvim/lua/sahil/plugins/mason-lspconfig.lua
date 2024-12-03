@@ -14,6 +14,7 @@ return {
 				"clangd",
 				"gopls",
         "ts_ls",
+        "html",
         "ansiblels",
 				"marksman",
 				"bashls",
