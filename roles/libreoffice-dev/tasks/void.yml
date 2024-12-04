@@ -146,7 +146,7 @@
     - libreoffice-dev
     - files
   ansible.builtin.copy:
-    src: autogen.input
+    src: autogen.void
     dest: /home/{{ ansible_user }}/repos/libreoffice/autogen.input
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"

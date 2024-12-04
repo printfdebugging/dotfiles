@@ -1,0 +1,6 @@
+--enable-dbgutil
+--without-java
+--without-doxygen
+--enable-ccache
+--with-help=html
+--with-system-libxml=no
