@@ -45,6 +45,7 @@
     - libnss3-dev
     - libavahi-client-dev
     - libxt-dev
+    - llvm
 
 - name: (git) clone the git repo
   become: false
