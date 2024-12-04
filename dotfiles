@@ -17,6 +17,10 @@ function init_debian() {
     sudo apt -y upgrade
 }
 
+function init_suse() {
+    sudo zypper --non-interactive install git-core ansible python311-watchdog neovim gcc
+}
+
 function init_voidlinux() {
     # copy the mirror file
     sudo cp /usr/share/xbps.d/00-repository-main.conf /etc/xbps.d/00-repository-main.conf
@@ -32,6 +36,7 @@ function init() {
         "Void") init_voidlinux;;
         "Ubuntu") init_ubuntu;;
         "Debian GNU/Linux") init_debian;;
+        "openSUSE Tumbleweed") init_suse;;
         *) echo "distro not supported" && exit ;;
     esac
 }
