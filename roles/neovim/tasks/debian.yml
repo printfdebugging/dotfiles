@@ -1,0 +1,46 @@
+- name: (neovim) install packages
+  tags:
+    - neovim
+    - packages
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - git
+    - nodejs
+    - snapd
+
+- name: (base) install snap packages
+  tags:
+    - neovim
+    - packages
+  community.general.snap:
+    name: "{{ item }}"
+    classic: true
+    state: present
+  loop:
+    - nvim
+
+- name: (neovim) copy config files
+  become: false
+  tags:
+    - neovim
+    - files
+  ansible.builtin.copy:
+    src: nvim
+    dest: /home/{{ ansible_user }}/.config
+    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user }}"
+    mode: 0755
+
+- name: (neovim) save config files
+  become: false
+  tags:
+    - save
+    - save-neovim
+  ansible.builtin.copy:
+    src: /home/{{ ansible_user }}/.config/nvim
+    dest: /home/{{ ansible_user }}/repos/dotfiles/roles/neovim/files
+    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user }}"
+    mode: 0755
