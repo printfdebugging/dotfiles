@@ -7,6 +7,8 @@
     state: latest
   loop:
     - firefox
+    - thunderbird
+    - element-desktop
     - vscode
     - par
     - lua
@@ -55,6 +57,7 @@
     - SFML-devel
     - glfw-devel
     - mesa-vulkan-radeon
+    - Vulkan-Tools
     - vulkan-loader-devel
     - libXxf86vm-devel
     - glm
@@ -73,6 +76,7 @@
     - ueberzug
     - xauth
     - pyright
+    - xtools
 
 - name: (base) install fonts
   become: true

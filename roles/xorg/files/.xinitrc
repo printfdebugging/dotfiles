@@ -8,4 +8,4 @@ dunst &
 thunderbird &
 element-desktop &
 
-exec awesome
+exec dwm
