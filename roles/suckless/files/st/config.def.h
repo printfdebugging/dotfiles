@@ -6,7 +6,7 @@
 static char *font =
     "Iosevka Nerd "
     "Font:pixelsize=18:style=Regular:antialias=true:autohint=true";
-static int borderpx = 4;
+static int borderpx = 12;
 
 /*
  * What program is execed by st depends of these precedence rules:

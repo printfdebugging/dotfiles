@@ -121,13 +121,14 @@ return {
 		vim.cmd.colorscheme("catppuccin")
 
 		vim.cmd([[
-    highlight TabLineSel    guifg=#ffffff
-    highlight LineNr        guifg=#bbc2cf 
-    highlight LineNrAbove   guifg=#3f444a
-    highlight LineNrBelow   guifg=#3f444a
-    highlight CursorLine    guibg=#21242b
-    highlight CursorLineNr  guibg=#21242b
-]])
+      highlight TabLineSel    guifg=#242b38 guibg=#59c2ff
+      highlight TabLineFill   guibg=#1F2735
+      highlight LineNr        guifg=#bbc2cf 
+      highlight LineNrAbove   guifg=#3f444a
+      highlight LineNrBelow   guifg=#3f444a
+      highlight CursorLine    guibg=#21242b
+      highlight CursorLineNr  guibg=#21242b
+    ]])
 		vim.cmd([[highlight! link CursorLineSign CursorLine]])
 	end,
 }

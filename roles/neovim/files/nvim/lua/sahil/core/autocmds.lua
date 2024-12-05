@@ -63,14 +63,6 @@ vim.cmd([[
 -- })
 
 -- " Define an autocommand group to avoid duplication
-vim.cmd([[
-  augroup MatchParenHighlight
-    autocmd!
-    autocmd BufEnter * hi MatchParen guifg=NONE guibg=NONE
-    autocmd BufWinEnter * set norelativenumber nonumber signcolumn=yes
-  augroup END
-]])
-
 vim.api.nvim_create_autocmd("TermOpen", {
 	pattern = "*",
 	command = "setlocal nonumber norelativenumber",
