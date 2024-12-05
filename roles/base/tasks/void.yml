@@ -77,6 +77,7 @@
     - xauth
     - pyright
     - xtools
+    - git-review
 
 - name: (base) install fonts
   become: true
