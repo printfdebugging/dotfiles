@@ -160,3 +160,5 @@ else
 fi
 
 export QT6DIR=/usr/lib/qt6
+export SAL_DISABLEGL=1
+export SAL_DISABLE_OPENCL=1
