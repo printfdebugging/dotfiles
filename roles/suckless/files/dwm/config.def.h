@@ -38,7 +38,7 @@ static const Rule rules[] = {
 	 */
 	/* class            instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
   { "Gimp",           NULL,     NULL,           0,         0,          0,           0,        -1 },
-  { "Firefox",        NULL,     NULL,           1 << 3,    0,          0,          -1,        -1 },
+  { "Chromium",        NULL,     NULL,           1 << 3,    0,          0,          -1,        -1 },
   { "Element",        NULL,     NULL,           1 << 7,    0,          0,          -1,        -1 },
   { "thunderbird",    NULL,     NULL,           1 << 8,    0,          0,          -1,        1 },
   { "Thunderbird",    NULL,     NULL,           1 << 8,    0,          0,          -1,        1 },
@@ -108,7 +108,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 
-	{ MODKEY,                       XK_w,      spawn,          SHCMD("firefox") },
+	{ MODKEY,                       XK_w,      spawn,          SHCMD("chromium") },
 	{ MODKEY,                       XK_g,      spawn,          SHCMD("getbookmark") },
 	{ MODKEY,                       XK_b,      spawn,          SHCMD("bookmark-dwm") },
 	{ MODKEY,                       XK_c,      spawn,          SHCMD("quickemu-vms") },
