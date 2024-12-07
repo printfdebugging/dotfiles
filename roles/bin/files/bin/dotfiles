@@ -17,6 +17,10 @@ function init_debian() {
     sudo apt -y upgrade
 }
 
+function init_suse() {
+    sudo zypper --non-interactive install git-core ansible python311-watchdog neovim gcc
+}
+
 function init_voidlinux() {
     # copy the mirror file
     sudo cp /usr/share/xbps.d/00-repository-main.conf /etc/xbps.d/00-repository-main.conf
@@ -32,14 +36,15 @@ function init() {
         "Void") init_voidlinux;;
         "Ubuntu") init_ubuntu;;
         "Debian GNU/Linux") init_debian;;
+        "openSUSE Tumbleweed") init_suse;;
         *) echo "distro not supported" && exit ;;
     esac
 }
 
 function clone_dotfiles() {
-    mkdir -p $HOME/repos && cd $HOME/repos
-    [ ! -d "$HOME/repos/dotfiles" ] && git clone https://github.com/printfdebugging/dotfiles.git $HOME/repos/dotfiles
-    cd $HOME/repos/dotfiles
+    mkdir -p $HOME/personal && cd $HOME/personal
+    [ ! -d "$HOME/personal/dotfiles" ] && git clone https://github.com/printfdebugging/dotfiles.git $HOME/personal/dotfiles
+    cd $HOME/personal/dotfiles
 }
 
 function run_ansible_tasks_with_tag() {
@@ -70,3 +75,4 @@ case "$1" in
     "save-"*)   run_ansible_save_task include,${@};;
     *)          run_ansible_tasks_with_tag include,${@};;
 esac
+

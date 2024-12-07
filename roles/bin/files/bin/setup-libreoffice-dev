@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LIBREOFFICE_ROOT_DIR="/home/$USER/repos"
+LIBREOFFICE_ROOT_DIR="/home/$USER/work"
 
 if ! [ -d $LIBREOFFICE_ROOT_DIR ] > /dev/null; then
     mkdir -p $LIBREOFFICE_ROOT_DIR

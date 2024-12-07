@@ -110,35 +110,33 @@ export XDG_VIDEOS_DIR="$HOME/downloads"
 alias t='tmux'
 alias v='nvim'
 alias c="cd /home/$USER/"
-alias l="cd /home/$USER/repos/libreoffice/"
+alias l="cd /home/$USER/work/libreoffice/"
 alias x="clear"
 alias dif="git diff HEAD~ HEAD | delta"
 
-alias e="[ -f '/home/printfdebugging/repos/libreoffice/instdir/program/libcurl.so.4' ] \
-    && rm /home/printfdebugging/repos/libreoffice/instdir/program/libcurl.so.4; \
-    SAL_USE_VCLPLUGIN=kf5 /home/printfdebugging/repos/libreoffice/instdir/program/soffice"
+alias e="[ -f '/home/printfdebugging/work/libreoffice/instdir/program/libcurl.so.4' ] \
+    && rm /home/printfdebugging/work/libreoffice/instdir/program/libcurl.so.4; \
+    SAL_USE_VCLPLUGIN=kf5 /home/printfdebugging/work/libreoffice/instdir/program/soffice"
 
-alias f="[ -f '/home/printfdebugging/repos/libreoffice/instdir/program/libcurl.so.4' ] \
-    && rm /home/printfdebugging/repos/libreoffice/instdir/program/libcurl.so.4; \
-    SAL_USE_VCLPLUGIN=kf6 /home/printfdebugging/repos/libreoffice/instdir/program/soffice"
+alias f="[ -f '/home/printfdebugging/work/libreoffice/instdir/program/libcurl.so.4' ] \
+    && rm /home/printfdebugging/work/libreoffice/instdir/program/libcurl.so.4; \
+    SAL_USE_VCLPLUGIN=kf6 /home/printfdebugging/work/libreoffice/instdir/program/soffice"
 
-alias g="SAL_USE_VCLPLUGIN=gtk3 /home/printfdebugging/repos/libreoffice/instdir/program/soffice"
+alias g="SAL_USE_VCLPLUGIN=gtk3 /home/printfdebugging/work/libreoffice/instdir/program/soffice"
 
-alias cr="cd ~/repos/"
-alias cm="cd ~/repos/media/"
-alias cr="cd ~/repos/"
+alias p="cd ~/personal/"
+alias d="cd ~/personal/dotfiles"
 alias msu="sudo make clean install"
 alias ssha='eval $(ssh-agent) && ssh-add'
-alias list="nvim /home/$USER/repos/files/bookmarks.md"
+alias list="nvim /home/$USER/personal/notes/bookmarks.md"
 alias bin="nvim /home/$USER/.local/bin"
 alias hss="zola serve"
 
 alias ls='ls --color=auto'
 alias ll='ls -al --color=auto'
 alias grep='grep --color=auto'
-alias n="cd ~/repos/notes && nvim README.md"
-alias b="cmake -B build && cd build && make && ./application && cd .."
-alias bin="cd ~/.local/bin/"
+alias n="cd ~/personal/notes/content/ && nvim _index.md"
+alias b="cd ~/.local/bin/"
 
 ## GIT
 alias tr="git log --all --oneline --graph --decorate"
@@ -150,7 +148,7 @@ alias xr="sudo xbps-remove"
 alias xf="xbps-fetch -o "
 
 # export QT_QPA_PLATFORMTHEME=gtk3
-export LOCOREPATH=/home/printfdebugging/repos/libreoffice
+export LOCOREPATH=/home/printfdebugging/work/libreoffice
 export COOL_SERVE_FROM_FS=1
 
 if grep -q '^NAME="Arch Linux"' /etc/os-release; then

@@ -42,9 +42,9 @@ function init() {
 }
 
 function clone_dotfiles() {
-    mkdir -p $HOME/repos && cd $HOME/repos
-    [ ! -d "$HOME/repos/dotfiles" ] && git clone https://github.com/printfdebugging/dotfiles.git $HOME/repos/dotfiles
-    cd $HOME/repos/dotfiles
+    mkdir -p $HOME/personal && cd $HOME/personal
+    [ ! -d "$HOME/personal/dotfiles" ] && git clone https://github.com/printfdebugging/dotfiles.git $HOME/personal/dotfiles
+    cd $HOME/personal/dotfiles
 }
 
 function run_ansible_tasks_with_tag() {

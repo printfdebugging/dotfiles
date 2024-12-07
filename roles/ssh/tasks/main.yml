@@ -1,5 +1,47 @@
-- name: include tasks
+- name: (ssh) create ssh directory
+  become: false
   tags:
     - ssh
-    - include
-  ansible.builtin.include_tasks: "{{ ansible_facts.distribution|lower }}.yml"
+    - files
+  ansible.builtin.file:
+    dest: "/home/{{ ansible_user }}/.ssh"
+    state: directory
+    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user }}"
+    mode: "0755"
+
+- name: (ssh) create public file
+  become: false
+  tags:
+    - ssh
+    - files
+  ansible.builtin.copy:
+    content: "{{ public_ssh_key_file }}"
+    dest: "/home/{{ ansible_user }}/.ssh/id_ed25519.pub"
+    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user }}"
+    mode: "0644"
+
+- name: (ssh) create private file
+  become: false
+  tags:
+    - ssh
+    - files
+  ansible.builtin.copy:
+    content: "{{ private_ssh_key_file }}"
+    dest: "/home/{{ ansible_user }}/.ssh/id_ed25519"
+    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user }}"
+    mode: "0600"
+
+- name: (ssh) create config file
+  become: false
+  tags:
+    - ssh
+    - files
+  ansible.builtin.copy:
+    content: "{{ ssh_config_file }}"
+    dest: "/home/{{ ansible_user }}/.ssh/config"
+    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user }}"
+    mode: "0644"

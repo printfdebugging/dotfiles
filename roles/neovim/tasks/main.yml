@@ -1,5 +1,35 @@
-- name: include tasks
+- name: (neovim) install packages
   tags:
     - neovim
-    - include
-  ansible.builtin.include_tasks: "{{ ansible_facts.distribution|lower }}.yml"
+    - packages
+  community.general.xbps:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - neovim
+    - git
+    - nodejs
+
+- name: (neovim) copy config files
+  become: false
+  tags:
+    - neovim
+    - files
+  ansible.builtin.copy:
+    src: nvim
+    dest: /home/{{ ansible_user }}/.config
+    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user }}"
+    mode: 0755
+
+- name: (neovim) save config files
+  become: false
+  tags:
+    - save
+    - save-neovim
+  ansible.builtin.copy:
+    src: /home/{{ ansible_user }}/.config/nvim
+    dest: /home/{{ ansible_user }}/personal/dotfiles/roles/neovim/files
+    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user }}"
+    mode: 0755
