@@ -1,26 +1,5 @@
 #!/bin/env bash
 
-function init_archlinux() {
-    # install basic system packages
-    sudo pacman --noconfirm -Syu ansible python-watchdog neovim openssh git
-}
-
-function init_ubuntu() {
-    # install basic system packages
-    sudo apt install -y ansible python3-watchdog gcc openssh-server git
-    sudo apt -y upgrade
-}
-
-function init_debian() {
-    # install basic system packages
-    sudo apt install -y ansible python3-watchdog gcc openssh-server git
-    sudo apt -y upgrade
-}
-
-function init_suse() {
-    sudo zypper --non-interactive install git-core ansible python311-watchdog neovim gcc
-}
-
 function init_voidlinux() {
     # copy the mirror file
     sudo cp /usr/share/xbps.d/00-repository-main.conf /etc/xbps.d/00-repository-main.conf
@@ -32,11 +11,7 @@ function init_voidlinux() {
 function init() {
     # check for distro in /etc/os-release file
     case $(cat /etc/os-release | grep -e "^NAME" | awk -F "=" '{gsub(/"/, "", $2); print $2}') in
-        "Arch Linux") init_archlinux;;
         "Void") init_voidlinux;;
-        "Ubuntu") init_ubuntu;;
-        "Debian GNU/Linux") init_debian;;
-        "openSUSE Tumbleweed") init_suse;;
         *) echo "distro not supported" && exit ;;
     esac
 }
@@ -75,3 +50,4 @@ case "$1" in
     "save-"*)   run_ansible_save_task ${@};;
     *)          run_ansible_tasks_with_tag ${@};;
 esac
+

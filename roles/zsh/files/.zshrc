@@ -125,6 +125,7 @@ alias f="[ -f '/home/printfdebugging/work/libreoffice/instdir/program/libcurl.so
 alias g="SAL_USE_VCLPLUGIN=gtk3 /home/printfdebugging/work/libreoffice/instdir/program/soffice"
 
 alias p="cd ~/personal/"
+alias w="cd ~/work/"
 alias d="cd ~/personal/dotfiles"
 alias msu="sudo make clean install"
 alias ssha='eval $(ssh-agent) && ssh-add'
