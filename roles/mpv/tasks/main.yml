@@ -42,7 +42,7 @@
     - save-mpv
   ansible.builtin.copy:
     src: /home/{{ ansible_user }}/.config/mpv/{{ item }}
-    dest: /home/{{ ansible_user }}/repos/dotfiles/roles/mpv/files/{{ item }}
+    dest: /home/{{ ansible_user }}/personal/dotfiles/roles/mpv/files/{{ item }}
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
     mode: 0644

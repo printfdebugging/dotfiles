@@ -39,7 +39,7 @@
     - save-yt-dlp
   ansible.builtin.copy:
     src: /home/{{ ansible_user }}/.config/yt-dlp/config
-    dest: /home/{{ ansible_user }}/work/dotfiles/roles/yt-dlp/files/config
+    dest: /home/{{ ansible_user }}/personal/dotfiles/roles/yt-dlp/files/config
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
     mode: 0755

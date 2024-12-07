@@ -1,9 +1,0 @@
---enable-dbgutil
---without-java
---without-doxygen
---enable-ccache
---enable-compiler-plugins
---with-help=html
---with-system-libxml=no
-CC=clang
-CXX=clang++
