@@ -138,3 +138,14 @@
     groups: network
     append: true
 
+- name: (base) create downloads directory
+  become: false
+  tags:
+    - base
+    - files
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/downloads"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
