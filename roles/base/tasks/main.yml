@@ -6,7 +6,7 @@
     name: "{{ item }}"
     state: latest
   loop:
-    - firefox
+    - chromium
     - thunderbird
     - element-desktop
     - vscode
@@ -25,7 +25,7 @@
     - NetworkManager
     - network-manager-applet
     - ripgrep
-    - dolphin
+    - Thunar
     - breeze-icons
     - adwaita-icon-theme
     - go
