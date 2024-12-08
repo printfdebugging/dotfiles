@@ -111,6 +111,10 @@ alias v='nvim'
 alias c="cd /home/$USER/"
 alias l="cd /home/$USER/work/libreoffice/"
 alias x="clear"
+alias p="cd ~/personal/"
+alias w="cd ~/work/"
+alias d="cd ~/personal/dotfiles"
+
 alias dif="git diff HEAD~ HEAD | delta"
 
 alias e="[ -f '/home/printfdebugging/work/libreoffice/instdir/program/libcurl.so.4' ] \
@@ -123,13 +127,9 @@ alias f="[ -f '/home/printfdebugging/work/libreoffice/instdir/program/libcurl.so
 
 alias g="SAL_USE_VCLPLUGIN=gtk3 /home/printfdebugging/work/libreoffice/instdir/program/soffice"
 
-alias p="cd ~/personal/"
-alias w="cd ~/work/"
-alias d="cd ~/personal/dotfiles"
 alias msu="sudo make clean install"
 alias ssha='eval $(ssh-agent) && ssh-add'
-alias list="nvim /home/$USER/personal/notes/bookmarks.md"
-alias bin="nvim /home/$USER/.local/bin"
+alias list="nvim /home/$USER/downloads/bookmarks.md"
 alias hss="zola serve"
 
 alias ls='ls --color=auto'
