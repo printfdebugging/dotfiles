@@ -113,7 +113,7 @@ alias l="cd /home/$USER/work/libreoffice/"
 alias x="clear"
 alias p="cd ~/personal/"
 alias w="cd ~/work/"
-alias d="cd ~/personal/dotfiles"
+alias d="cd ~/downloads"
 
 alias dif="git diff HEAD~ HEAD | delta"
 
