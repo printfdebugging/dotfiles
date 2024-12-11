@@ -1,4 +1,4 @@
-my_gitlab_handle: git@gitlab.com:printfdebugging
+my_github_handle: git@github.com:printfdebugging
 
 git_config_file: !vault |
   $ANSIBLE_VAULT;1.1;AES256

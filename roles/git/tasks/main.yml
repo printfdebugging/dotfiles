@@ -45,7 +45,7 @@
     mode: "0644"
   become: false
 
-- name: (git) gitlab rsa key
+- name: (git) github rsa key
   become: false
   tags:
     - git
@@ -54,8 +54,8 @@
     dest: /home/{{ ansible_user }}/.ssh/known_hosts
     create: yes
     state: present
-    line: "{{ lookup('pipe', 'ssh-keyscan -t rsa gitlab.com') }}"
-    regexp: "^gitlab\\.com"
+    line: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
+    regexp: "^github\\.com"
 
 - name: (git) clone git repositories
   become: false
@@ -68,6 +68,7 @@
     update: no
   loop:
     [
-      { repo: "{{ my_gitlab_handle }}/dotfiles.git",        path: "/home/{{ ansible_user }}/personal/dotfiles", },
-      { repo: "{{ my_gitlab_handle }}/notes.git",           path: "/home/{{ ansible_user }}/personal/notes", },
+      { repo: "{{ my_github_handle }}/dotfiles.git",        path: "/home/{{ ansible_user }}/personal/dotfiles", },
+      { repo: "{{ my_github_handle }}/notes.git",           path: "/home/{{ ansible_user }}/personal/notes", },
+      { repo: "{{ my_github_handle }}/zola-thesis.git",     path: "/home/{{ ansible_user }}/personal/zola-thesis", },
     ]
