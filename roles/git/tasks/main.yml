@@ -70,5 +70,5 @@
     [
       { repo: "{{ my_github_handle }}/dotfiles.git",        path: "/home/{{ ansible_user }}/personal/dotfiles", },
       { repo: "{{ my_github_handle }}/notes.git",           path: "/home/{{ ansible_user }}/personal/notes", },
-      { repo: "{{ my_github_handle }}/zola-thesis.git",     path: "/home/{{ ansible_user }}/personal/zola-thesis", },
+      { repo: "{{ my_github_handle }}/graphics.git",        path: "/home/{{ ansible_user }}/personal/graphics", },
     ]
