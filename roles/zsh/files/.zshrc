@@ -129,7 +129,7 @@ alias g="SAL_USE_VCLPLUGIN=gtk3 /home/printfdebugging/work/libreoffice/instdir/p
 
 alias msu="sudo make clean install"
 alias ssha='eval $(ssh-agent) && ssh-add'
-alias list="nvim /home/$USER/personal/notes/bookmarks.md"
+alias list="nvim /home/$USER/downloads/bookmarks.md"
 alias hss="zola serve"
 
 alias ls='ls --color=auto'
