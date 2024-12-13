@@ -15,37 +15,6 @@ function saveToReadmeFile()
 	vim.cmd("!echo '' > %")
 end
 
----@diagnostic disable-next-line: lowercase-global
-function today()
-	-- Check if tmp file exists in the notes directory
-	local notes_dir = "/home/sahil/files/notes"
-	local tmp_file = notes_dir .. "/tmp"
-
-	local test = io.open(tmp_file, "r")
-	if test == nil then
-		return
-	end
-
-	local date_today = os.date("%Y.%m.%d")
-	local entry_name = notes_dir .. "/" .. date_today .. ".md"
-
-	test = io.open(entry_name, "r")
-	if test == nil then
-		-- File doesn't exist (then create the file)
-		test = io.open(entry_name, "w")
-		if test ~= nil then
-			test:close()
-		else
-			print("Error creating file: " .. entry_name)
-			return
-		end
-	end
-
-	-- Open the file in Neovim
-	local nvim_command = string.format("e %s", entry_name)
-	vim.cmd(nvim_command)
-end
-
 function ExecuteCurrentFileProgram()
 	local file_extension = vim.fn.expand("%:e")
 
