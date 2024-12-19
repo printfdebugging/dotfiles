@@ -28,6 +28,19 @@ return {
 					{ i(1), i(2), i(0) }
 				)
 			),
+
+			s(
+				"info",
+				fmt(
+					[[
+<!-- ok, warning, error, info -->
+{{% note(type="{}", display="block", markdown=true) %}}
+{}
+{{% end %}}
+        ]],
+					{ i(1), i(2)}
+				)
+			),
 			-- the sequence starts from 1 - 2 - then last 0
 		})
 	end,
