@@ -56,7 +56,7 @@
     - save-emacs
   ansible.builtin.copy:
     src: /home/{{ ansible_user }}/.config/emacs/{{ item }}
-    dest: /home/{{ ansible_user }}/personal/dotfiles/roles/emacs/files/{{ item }}
+    dest: /home/{{ ansible_user }}/repos/dotfiles/roles/emacs/files/{{ item }}
     group: "{{ ansible_user }}"
     owner: "{{ ansible_user }}"
     mode: 0755
@@ -71,7 +71,7 @@
     - save-emacs
   ansible.builtin.copy:
     src: /home/{{ ansible_user }}/.config/emacs/{{ item }}
-    dest: /home/{{ ansible_user }}/personal/dotfiles/roles/emacs/files
+    dest: /home/{{ ansible_user }}/repos/dotfiles/roles/emacs/files
     group: "{{ ansible_user }}"
     owner: "{{ ansible_user }}"
     mode: 0755

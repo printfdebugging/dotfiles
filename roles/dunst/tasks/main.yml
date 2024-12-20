@@ -40,7 +40,7 @@
     - save-dunst
   ansible.builtin.copy:
     src: /home/{{ ansible_user }}/.config/dunst/dunstrc
-    dest: /home/{{ ansible_user }}/personal/dotfiles/roles/dunst/files/dunstrc
+    dest: /home/{{ ansible_user }}/repos/dotfiles/roles/dunst/files/dunstrc
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
     mode: 0644

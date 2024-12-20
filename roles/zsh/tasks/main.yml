@@ -69,7 +69,7 @@
     - save-zsh
   ansible.builtin.copy:
     src: "/home/{{ ansible_user }}/{{ item }}"
-    dest: /home/{{ ansible_user }}/personal/dotfiles/roles/zsh/files/{{ item }}
+    dest: /home/{{ ansible_user }}/repos/dotfiles/roles/zsh/files/{{ item }}
     group: "{{ ansible_user }}"
     owner: "{{ ansible_user }}"
     mode: 0644

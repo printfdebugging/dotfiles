@@ -137,7 +137,7 @@
     - files
   ansible.builtin.git:
     repo: https://gerrit.libreoffice.org/core
-    dest: /home/{{ ansible_user }}/work/libreoffice
+    dest: /home/{{ ansible_user }}/repos/libreoffice
     update: no
     recursive: false
 
@@ -147,7 +147,7 @@
     - files
   ansible.builtin.copy:
     src: autogen.input
-    dest: /home/{{ ansible_user }}/work/libreoffice/autogen.input
+    dest: /home/{{ ansible_user }}/repos/libreoffice/autogen.input
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
     mode: 0755

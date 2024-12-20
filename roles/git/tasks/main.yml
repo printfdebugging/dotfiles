@@ -44,6 +44,6 @@
     update: no
   loop:
     [
-      { repo: "{{ my_github_handle }}/website.git",         path: "/home/{{ ansible_user }}/personal/website", },
-      { repo: "{{ my_github_handle }}/dotfiles.git",        path: "/home/{{ ansible_user }}/personal/dotfiles", },
+      { repo: "{{ my_github_handle }}/website.git",         path: "/home/{{ ansible_user }}/repos/website", },
+      { repo: "{{ my_github_handle }}/dotfiles.git",        path: "/home/{{ ansible_user }}/repos/dotfiles", },
     ]

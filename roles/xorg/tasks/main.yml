@@ -70,7 +70,7 @@
     - save-xorg
   ansible.builtin.copy:
     src: /home/{{ ansible_user }}/.xinitrc
-    dest: /home/{{ ansible_user }}/personal/dotfiles/roles/xorg/files/.xinitrc
+    dest: /home/{{ ansible_user }}/repos/dotfiles/roles/xorg/files/.xinitrc
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
     mode: 0644

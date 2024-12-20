@@ -1,10 +1,10 @@
 #!/bin/bash
 
-if [ ! -d "$HOME/personal/dotfiles" ]; then
+if [ ! -d "$HOME/repos/dotfiles" ]; then
     notify-send "dotfiles not found" && exit
 fi
 
-selection=$(ls ~/personal/dotfiles/roles | dmenu -i -l 15 -vi -p "Save Dotfiles: ")
+selection=$(ls ~/repos/dotfiles/roles | dmenu -i -l 15 -vi -p "Save Dotfiles: ")
 
 if [ "$selection" != "" ]; then
     dotfiles "save-$selection" && notify-send "$selection saved" || notify-send "failed to save $selection"

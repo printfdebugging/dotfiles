@@ -16,15 +16,11 @@ function init() {
     esac
 }
 
-function dotfiles_dir_and_sshagent() {
-    mkdir -p $HOME/personal && cd $HOME/personal
-    [ ! -d "$HOME/personal/dotfiles" ] && git clone https://github.com/printfdebugging/dotfiles.git $HOME/personal/dotfiles
-    cd $HOME/personal/dotfiles
+function dotfiles_dir() {
+    mkdir -p $HOME/repos && cd $HOME/repos
+    [ ! -d "$HOME/repos/dotfiles" ] && git clone https://github.com/printfdebugging/dotfiles.git $HOME/repos/dotfiles
+    cd $HOME/repos/dotfiles
 
-    # ssh-agent
-    if ! [ $(pidof ssh-agent) ]; then
-        eval $(ssh-agent) && ssh-add
-    fi
 }
 
 function run_ansible_tasks_with_tag() {
@@ -33,7 +29,7 @@ function run_ansible_tasks_with_tag() {
     fi
 
     # setup dotfiles repository
-    dotfiles_dir_and_sshagent
+    dotfiles_dir
 
     # run the ansible-playbook command
     ansible-playbook main.yml \
@@ -44,7 +40,7 @@ function run_ansible_tasks_with_tag() {
 
 function run_ansible_save_task() {
     # Run ansible-playbook with the save tag
-    dotfiles_dir_and_sshagent
+    dotfiles_dir
     ansible-playbook main.yml \
         --tags "${@}"
 }

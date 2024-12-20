@@ -27,7 +27,7 @@
     - save-awesome
   ansible.builtin.copy:
     src: /home/{{ ansible_user }}/.config/awesome
-    dest: /home/{{ ansible_user }}/personal/dotfiles/roles/awesome/files
+    dest: /home/{{ ansible_user }}/repos/dotfiles/roles/awesome/files
     group: "{{ ansible_user }}"
     owner: "{{ ansible_user }}"
     mode: 0755

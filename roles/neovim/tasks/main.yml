@@ -29,7 +29,7 @@
     - save-neovim
   ansible.builtin.copy:
     src: /home/{{ ansible_user }}/.config/nvim
-    dest: /home/{{ ansible_user }}/personal/dotfiles/roles/neovim/files
+    dest: /home/{{ ansible_user }}/repos/dotfiles/roles/neovim/files
     group: "{{ ansible_user }}"
     owner: "{{ ansible_user }}"
     mode: 0755
