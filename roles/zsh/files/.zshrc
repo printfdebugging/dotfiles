@@ -111,9 +111,8 @@ alias v='nvim'
 alias c="cd /home/$USER/"
 alias l="cd /home/$USER/work/libreoffice/"
 alias x="clear"
-alias p="cd ~/personal/"
-alias w="cd ~/work/"
-alias d="cd ~/downloads"
+alias cr="cd ~/repos/"
+alias d="cd ~/repos/dotfiles/"
 
 alias dif="git diff HEAD~ HEAD | delta"
 
