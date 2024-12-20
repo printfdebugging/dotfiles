@@ -21,30 +21,6 @@
     mode: "0644"
   become: false
 
-- name: (git) create gitconfig personal file
-  tags:
-    - git
-    - files
-  copy:
-    content: "{{ git_config_personal_file }}"
-    dest: "/home/{{ ansible_user }}/.gitconfig-personal"
-    group: "{{ ansible_user }}"
-    owner: "{{ ansible_user }}"
-    mode: "0644"
-  become: false
-
-- name: (git) create gitconfig work file
-  tags:
-    - git
-    - files
-  copy:
-    content: "{{ git_config_work_file }}"
-    dest: "/home/{{ ansible_user }}/.gitconfig-work"
-    group: "{{ ansible_user }}"
-    owner: "{{ ansible_user }}"
-    mode: "0644"
-  become: false
-
 - name: (git) github rsa key
   become: false
   tags:
@@ -68,8 +44,6 @@
     update: no
   loop:
     [
-      { repo: "{{ my_github_handle }}/printfdebugging.git", path: "/home/{{ ansible_user }}/personal/printfdebugging", },
+      { repo: "{{ my_github_handle }}/website.git",         path: "/home/{{ ansible_user }}/personal/website", },
       { repo: "{{ my_github_handle }}/dotfiles.git",        path: "/home/{{ ansible_user }}/personal/dotfiles", },
-      { repo: "{{ my_github_handle }}/graphics.git",        path: "/home/{{ ansible_user }}/personal/graphics", },
-      { repo: "{{ my_github_handle }}/timepast.git",        path: "/home/{{ ansible_user }}/personal/timepast", },
     ]
