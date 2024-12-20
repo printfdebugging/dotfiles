@@ -150,7 +150,7 @@ awful.screen.connect_for_each_screen(function(s)
 	s.mywibox = awful.wibar({
 		position = "bottom",
 		screen = s,
-		height = 40,
+		height = 45,
 		-- width = 35,
 		widget = {
 			layout = wibox.layout.align.horizontal,

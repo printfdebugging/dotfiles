@@ -65,7 +65,7 @@ end)
 return {
 	systray,
 	left = dpi(4),
-	right = dpi(10),
+	right = dpi(14),
 	widget = wibox_container.margin,
 	-- margins = dpi(4),
 }
