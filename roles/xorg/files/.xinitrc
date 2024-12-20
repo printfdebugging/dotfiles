@@ -4,8 +4,9 @@ flameshot &
 nm-applet &
 pasystray &
 xcompmgr &
-dunst &
+# dunst &
 thunderbird &
 element-desktop &
 
-exec dwm
+exec awesome
+
