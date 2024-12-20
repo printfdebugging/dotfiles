@@ -109,22 +109,22 @@ export XDG_VIDEOS_DIR="$HOME/downloads"
 alias t='tmux'
 alias v='nvim'
 alias c="cd /home/$USER/"
-alias l="cd /home/$USER/work/libreoffice/"
+alias l="cd /home/$USER/repos/libreoffice/"
 alias x="clear"
 alias cr="cd ~/repos/"
 alias d="cd ~/repos/dotfiles/"
 
 alias dif="git diff HEAD~ HEAD | delta"
 
-alias e="[ -f '/home/printfdebugging/work/libreoffice/instdir/program/libcurl.so.4' ] \
-    && rm /home/printfdebugging/work/libreoffice/instdir/program/libcurl.so.4; \
-    SAL_USE_VCLPLUGIN=kf5 /home/printfdebugging/work/libreoffice/instdir/program/soffice"
+alias e="[ -f '/home/printfdebugging/repos/libreoffice/instdir/program/libcurl.so.4' ] \
+    && rm /home/printfdebugging/repos/libreoffice/instdir/program/libcurl.so.4; \
+    SAL_USE_VCLPLUGIN=kf5 /home/printfdebugging/repos/libreoffice/instdir/program/soffice"
 
-alias f="[ -f '/home/printfdebugging/work/libreoffice/instdir/program/libcurl.so.4' ] \
-    && rm /home/printfdebugging/work/libreoffice/instdir/program/libcurl.so.4; \
-    SAL_USE_VCLPLUGIN=kf6 /home/printfdebugging/work/libreoffice/instdir/program/soffice"
+alias f="[ -f '/home/printfdebugging/repos/libreoffice/instdir/program/libcurl.so.4' ] \
+    && rm /home/printfdebugging/repos/libreoffice/instdir/program/libcurl.so.4; \
+    SAL_USE_VCLPLUGIN=kf6 /home/printfdebugging/repos/libreoffice/instdir/program/soffice"
 
-alias g="SAL_USE_VCLPLUGIN=gtk3 /home/printfdebugging/work/libreoffice/instdir/program/soffice"
+alias g="SAL_USE_VCLPLUGIN=gtk3 /home/printfdebugging/repos/libreoffice/instdir/program/soffice"
 
 alias msu="sudo make clean install"
 alias ssha='eval $(ssh-agent) && ssh-add'
@@ -134,7 +134,7 @@ alias hss="zola serve"
 alias ls='ls --color=auto'
 alias ll='ls -al --color=auto'
 alias grep='grep --color=auto'
-alias n="cd ~/personal/notes/content/ && nvim _index.md"
+alias n="cd ~/repos/notes/content/ && nvim _index.md"
 alias b="cd ~/.local/bin/"
 
 ## GIT
@@ -147,7 +147,7 @@ alias xr="sudo xbps-remove"
 alias xf="xbps-fetch -o "
 
 # export QT_QPA_PLATFORMTHEME=gtk3
-export LOCOREPATH=/home/printfdebugging/work/libreoffice
+export LOCOREPATH=/home/printfdebugging/repos/libreoffice
 export COOL_SERVE_FROM_FS=1
 
 if grep -q '^NAME="Arch Linux"' /etc/os-release; then

@@ -47,4 +47,3 @@
     cmd: |
       virsh net-start default
       virsh net-autostart default
-

@@ -149,3 +149,14 @@
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
     mode: 0755
+
+- name: (base) copy user-dirs.dirs file
+  tags:
+    - base
+    - files
+  ansible.builtin.copy:
+    src: user-dirs.dirs
+    dest: /home/{{ ansible_user }}/.config/user-dirs.dirs
+    owner: root
+    group: root
+    mode: 0644

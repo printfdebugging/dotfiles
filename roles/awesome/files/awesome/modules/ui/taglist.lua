@@ -76,7 +76,7 @@ local tasklist = function(t)
 			{
 				{
 					id = "clienticon",
-					forced_width = dpi(34),
+					forced_width = dpi(30),
 					widget = awful.widget.clienticon,
 				},
 				widget = wibox.container.place,

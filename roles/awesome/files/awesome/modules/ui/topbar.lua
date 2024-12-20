@@ -150,7 +150,7 @@ awful.screen.connect_for_each_screen(function(s)
 	s.mywibox = awful.wibar({
 		position = "bottom",
 		screen = s,
-		height = 45,
+		height = 40,
 		-- width = 35,
 		widget = {
 			layout = wibox.layout.align.horizontal,
@@ -164,20 +164,20 @@ awful.screen.connect_for_each_screen(function(s)
 				layout = wibox.layout.align.horizontal,
 				expand = "none",
 				{
-					layout = wibox.layout.align.horizontal,
-				},
-				{
 					s.mylayoutbox,
 					client_info,
 					require("modules.ui.taglist")(s),
 					layout = wibox.layout.align.horizontal,
 				},
+        {
+          layout = wibox.layout.align.horizontal,
+        },
 				{
 					require("modules.ui.systray"),
 					layout = wibox.layout.align.horizontal,
 				},
 			},
-			margins = dpi(2),
+			margins = dpi(5),
 			widget = wibox.container.margin,
 		},
 		widget = wibox.container.background,
