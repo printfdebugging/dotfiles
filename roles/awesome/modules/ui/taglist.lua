@@ -69,7 +69,7 @@ local tasklist = function(t)
 		layout = {
 			spacing_widget = nil,
 			spacing = 1,
-			layout = wibox.layout.fixed.vertical,
+			layout = wibox.layout.fixed.horizontal,
 		},
 		widget_template = {
 			nil,
@@ -90,7 +90,7 @@ local tasklist = function(t)
 			create_callback = function(self, c, index, objects) --luacheck: no unused args
 				self:get_children_by_id("clienticon")[1].client = c
 			end,
-			layout = wibox.layout.align.vertical,
+			layout = wibox.layout.align.horizontal,
 		},
 	})
 end
@@ -121,7 +121,7 @@ local taglist_buttons = gears.table.join(
 local grid_layout = wibox.layout({
 	forced_num_cols = 2,
 	forced_num_rows = 1,
-	orientation = "vertical",
+	orientation = "horizontal",
 	expand = true,
 	homogeneous = false,
 	layout = wibox.layout.grid,
@@ -163,7 +163,7 @@ local taglist = function(s)
 		style = {
 			shape = rrect(2),
 		},
-		layout = wibox.layout.fixed.vertical,
+		layout = wibox.layout.fixed.horizontal,
 		widget_template = {
 			{
 				{
@@ -183,14 +183,14 @@ local taglist = function(s)
 					-- tasklist
 					{
 						id = "tasklist_placeholder",
-						layout = wibox.layout.fixed.vertical,
+						layout = wibox.layout.fixed.horizontal,
 						widget = wibox.container.margin,
 					},
 					-- spacing = dpi(8),
-					layout = wibox.layout.fixed.vertical,
+					layout = wibox.layout.fixed.horizontal,
 				},
 				widget = wibox.container.margin,
-				layout = wibox.layout.align.vertical,
+				layout = wibox.layout.align.horizontal,
 			},
 			id = "background_role",
 			widget = wibox.container.background,

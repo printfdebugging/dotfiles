@@ -1,6 +1,22 @@
 #+TITLE: Emacs Configuration
 #+AUTHOR: Sahil Gautam
 
+* Configure package.el 
+
+#+BEGIN_SRC emacs-lisp
+;; Configure package.el to include MELPA.
+(require 'package)
+(add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+(package-initialize)
+
+(when (not (package-installed-p 'use-package))
+  (package-refresh-contents)
+  (package-install 'use-package))
+(setq use-package-always-ensure t)
+#+END_SRC
+
 * Evil Mode
 
 #+BEGIN_SRC emacs-lisp
@@ -1057,4 +1073,13 @@ from $1 to $0 and back to $1, having them selected for change in the process.
 (set-face-attribute 'markdown-metadata-key-face nil :height 170 :weight 'Bold)
 (set-face-attribute 'markdown-metadata-value-face nil :height 170 :weight 'Bold)
 (set-face-attribute 'markdown-code-face nil :height 150 :background "#23272e" :weight 'Regular)
+#+END_SRC
+
+* Transparency
+
+#+BEGIN_SRC emacs-lisp
+(set-frame-parameter (selected-frame) 'alpha '(80 . 80))
+(add-to-list 'default-frame-alist '(alpha . (80 . 80)))
+(set-frame-parameter (selected-frame) 'fullscreen 'maximized)
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 #+END_SRC

@@ -19,3 +19,4 @@
     - services
     - libreoffice-dev
     - qemu
+    - emacs
