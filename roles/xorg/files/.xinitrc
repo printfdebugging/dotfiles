@@ -6,7 +6,6 @@ pasystray &
 xcompmgr &
 # dunst &
 thunderbird &
-element-desktop &
 
 exec awesome
 
