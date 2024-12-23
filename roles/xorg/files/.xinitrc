@@ -4,8 +4,5 @@ flameshot &
 nm-applet &
 pasystray &
 xcompmgr &
-# dunst &
-thunderbird &
 
 exec awesome
-
