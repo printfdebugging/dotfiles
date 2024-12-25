@@ -7,8 +7,6 @@
     state: latest
   loop:
     - firefox
-    - thunderbird
-    - element-desktop
     - vscode
     - par
     - lua
