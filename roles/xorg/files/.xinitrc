@@ -3,6 +3,7 @@ dispscript
 flameshot &
 nm-applet &
 pasystray &
+dunst &
 xcompmgr &
 
-exec awesome
+exec dwm
