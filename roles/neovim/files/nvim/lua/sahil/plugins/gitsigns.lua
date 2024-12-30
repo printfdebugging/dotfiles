@@ -20,7 +20,7 @@ return {
         changedelete = { text = '~' },
         untracked    = { text = '┆' },
       },
-  		signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
+			signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
       culhl = true,
 			numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
 			linehl = false, -- Toggle with `:Gitsigns toggle_linehl`

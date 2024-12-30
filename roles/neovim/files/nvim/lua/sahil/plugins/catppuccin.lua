@@ -53,7 +53,7 @@ return {
 					sapphire = "#74c7ec",
 					blue = "#51afef",
 					lavender = "#b4befe",
-					text = "#EEFFFF",
+					text = "#d8dee9",
 					subtext1 = "#bac2de",
 					subtext0 = "#a6adc8",
 					overlay2 = "#9399b2",
