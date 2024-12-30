@@ -93,16 +93,6 @@ export GOPATH="/home/$USER/.local/go"
 export PATH="${PATH}:${GOPATH}/bin"
 export GO_TABWIDTH=4
 
-export XDG_DESKTOP_DIR="$HOME/downloads"
-export XDG_DOCUMENTS_DIR="$HOME/downloads"
-export XDG_DOWNLOAD_DIR="$HOME/downloads"
-export XDG_MUSIC_DIR="$HOME/downloads"
-export XDG_PICTURES_DIR="$HOME/downloads"
-export XDG_PUBLICSHARE_DIR="$HOME/downloads"
-export XDG_TEMPLATES_DIR="$HOME/downloads"
-export XDG_VIDEOS_DIR="$HOME/downloads"
-
-
 ##############
 #   ALIASES  #
 ##############
@@ -141,6 +131,7 @@ alias b="cd ~/.local/bin/"
 alias tr="git log --all --oneline --graph --decorate"
 alias stat="git status"
 alias br="git branch"
+alias gc="git clone"
 alias gca="git commit --amend"
 alias xi="sudo xbps-install"
 alias xr="sudo xbps-remove"

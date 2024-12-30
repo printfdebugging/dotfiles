@@ -124,11 +124,17 @@ return {
       highlight TabLineSel    guifg=#242b38 guibg=#59c2ff
       highlight TabLineFill   guibg=#1F2735
       highlight TabLine       guibg=#1F2735
-      highlight LineNr        guifg=#bbc2cf 
+      highlight LineNr        guifg=#3f444a 
       highlight LineNrAbove   guifg=#3f444a
       highlight LineNrBelow   guifg=#3f444a
       highlight CursorLine    guibg=#21242b
       highlight CursorLineNr  guibg=#21242b
+      highlight GitSignsAddCul guibg=#21242b guifg=#98be65
+      highlight GitSignsChangeCul guibg=#21242b guifg=#ecb37b
+      highlight GitSignsDeleteCul guibg=#21242b guifg=#f38ba8
+      highlight GitSignsChangedeleteCul guibg=#21242b guifg=#f38ba8
+      highlight GitSignsTopdeleteCul guibg=#21242b guifg=#f38ba8
+      highlight GitSignsUntrackedCul guibg=#21242b guifg=#98be65
     ]])
 		vim.cmd([[highlight! link CursorLineSign CursorLine]])
 	end,
