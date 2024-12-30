@@ -116,7 +116,7 @@ alias hss="zola serve"
 alias ls='ls --color=auto'
 alias ll='ls -al --color=auto'
 alias grep='grep --color=auto'
-alias n="cd ~/repos/notes/content/ && nvim _index.md"
+alias n="cd ~/repos/files/ && nvim README.md"
 alias b="cd ~/.local/bin/"
 
 ## GIT
