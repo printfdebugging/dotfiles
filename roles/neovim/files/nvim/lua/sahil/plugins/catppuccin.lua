@@ -135,6 +135,7 @@ return {
       highlight GitSignsChangedeleteCul guibg=#21242b guifg=#f38ba8
       highlight GitSignsTopdeleteCul guibg=#21242b guifg=#f38ba8
       highlight GitSignsUntrackedCul guibg=#21242b guifg=#98be65
+      highlight Visual               guibg=#3f444a guifg=none
     ]])
 		vim.cmd([[highlight! link CursorLineSign CursorLine]])
 	end,
