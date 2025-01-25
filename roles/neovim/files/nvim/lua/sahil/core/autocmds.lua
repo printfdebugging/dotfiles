@@ -15,14 +15,6 @@ vim.cmd([[
   augroup END
 ]])
 
-vim.cmd([[
-  augroup JavaScriptTabStop
-  autocmd!
-  autocmd FileType c set tabstop=2
-  autocmd FileType c set shiftwidth=2
-  augroup END
-]])
-
 -- vim.cmd([[
 --   augroup MarkdownNoWarnings
 --   autocmd!
