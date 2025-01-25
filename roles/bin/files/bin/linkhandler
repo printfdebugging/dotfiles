@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Set the path to the YouTube icon
+icondir="/home/$USER/.local/share/icons/"
+youtubeIcon="$icondir/youtube64.png"
+# Get the URL from the clipboard
+clipboard="$(xclip -o -selection clipboard)"
+
+if [ -z "$1" ]; then
+    # If no URL argument is provided
+
+    if [ -z "$clipboard" ]; then
+        # If clipboard is empty
+        notify-send -i "$youtubeIcon" "Link Handler" "No URL"
+    else
+        # If clipboard has a URL, display it and play it with mpv
+        notify-send -i "$youtubeIcon" "Link Handler" "$clipboard"
+        setsid -f mpv "$clipboard" > /dev/null 2>&1
+    fi
+else
+    # If a URL argument is provided, display it and play it with mpv
+    notify-send -i "$youtubeIcon" "Link Handler" "$1"
+    setsid -f mpv "$1" > /dev/null 2>&1
+fi

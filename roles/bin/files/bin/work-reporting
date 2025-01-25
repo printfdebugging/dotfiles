@@ -1,0 +1,266 @@
+#!/bin/python3
+
+from datetime import datetime, timedelta, timezone
+import requests
+import textwrap
+import xml.etree.ElementTree as ET
+import pytz
+import sys
+
+def parse_datetime(datetime_str, tzid):
+    """Parse the datetime string and convert it to a timezone-aware datetime object."""
+    dt = datetime.strptime(datetime_str, '%Y%m%dT%H%M%S')
+    timezone = pytz.timezone(tzid)
+    return timezone.localize(dt)
+
+def parse_calendar_data(calendar_data):
+    """Parse calendar data and extract events."""
+    events = []
+    lines = calendar_data.splitlines()
+    event = {}
+    tzid = None
+    in_description = False
+    in_summary = False
+    description_lines = []
+    summary_lines = []
+
+    for line in lines:
+        if line.startswith("BEGIN:VEVENT"):
+            event = {}
+            description_lines = []
+            summary_lines = []
+            in_description = False
+            in_summary = False
+        elif line.startswith("END:VEVENT"):
+            if 'DTSTART' in event and 'DTEND' in event:
+                # Calculate duration
+                duration = (event['DTEND'] - event['DTSTART']).total_seconds() / 3600  # duration in hours
+                event['DURATION'] = duration
+                if description_lines:
+                    event['DESCRIPTION'] = ''.join(description_lines).replace('\\n', '\n').replace('\\,', ',')
+                if summary_lines:
+                    event['SUMMARY'] = ''.join(summary_lines).replace('\\n', '\n').replace('\\,', ',')
+                events.append(event)
+        elif line.startswith("DTSTART;TZID="):
+            tzid = line.split(':')[0].split('=')[1]
+            event['DTSTART'] = parse_datetime(line.split(':')[1], tzid)
+        elif line.startswith("DTEND;TZID="):
+            tzid = line.split(':')[0].split('=')[1]
+            event['DTEND'] = parse_datetime(line.split(':')[1], tzid)
+        elif line.startswith("SUMMARY:"):
+            in_summary = True
+            summary_lines.append(line[len("SUMMARY:"):])
+        elif line.startswith("DESCRIPTION:"):
+            in_description = True
+            description_lines.append(line[len("DESCRIPTION:"):])
+        elif in_description:
+            if line.startswith(" "):
+                description_lines.append(line[1:])
+            else:
+                in_description = False
+        elif in_summary:
+            if line.startswith(" "):
+                summary_lines.append(line[1:])
+            else:
+                in_summary = False
+    return events
+
+def parse_xml_file(file_path):
+    """Parse the XML file and extract calendar events."""
+    tree = ET.parse(file_path)
+    root = tree.getroot()
+
+    namespaces = {
+        'D': 'DAV:',
+        'CAL': 'urn:ietf:params:xml:ns:caldav'
+    }
+
+    all_events = []
+
+    for response in root.findall('D:response', namespaces):
+        calendar_data = response.find('.//CAL:calendar-data', namespaces).text
+        events = parse_calendar_data(calendar_data)
+        all_events.extend(events)
+
+    return all_events
+
+def fetch_calendar_events(start_date, end_date):
+    username = sys.argv[1]
+    password = sys.argv[2]
+    calendar_url = sys.argv[3]
+
+    # Define the XML data for the REPORT request
+    data = f"""<?xml version="1.0" encoding="UTF-8" ?>
+    <c:calendar-query xmlns:d="DAV:" xmlns:c="urn:ietf:params:xml:ns:caldav">
+        <d:prop>
+            <d:getetag />
+            <c:calendar-data />
+        </d:prop>
+        <c:filter>
+            <c:comp-filter name="VCALENDAR">
+                <c:comp-filter name="VEVENT">
+                    <c:time-range start="{start_date}" end="{end_date}" />
+                </c:comp-filter>
+            </c:comp-filter>
+        </c:filter>
+    </c:calendar-query>"""
+
+    # Make the REPORT request
+    response = requests.request(
+        "REPORT",
+        calendar_url,
+        data=data,
+        headers={
+            "Depth": "1",
+            "Content-Type": "application/xml"
+        },
+        auth=(username, password)
+    )
+
+    # Check the response
+    if response.status_code == 207:
+        return response.text
+    else:
+        response.raise_for_status()
+
+def events_get_tags(events):
+    """Organize events into a dictionary with tags as keys."""
+    tagged_events = {}
+
+    for event in events:
+        if 'SUMMARY' in event:
+            summary_parts = event['SUMMARY'].split(' - ', 2)
+            if len(summary_parts) == 3:
+                tag, subtag, summary = summary_parts
+                event['SUMMARY'] = f"{subtag} - {summary}"
+                if tag not in tagged_events:
+                    tagged_events[tag] = []
+                tagged_events[tag].append(event)
+
+    return tagged_events
+
+
+def apply_filter_operations(tagged_events):
+    # Create a nested dictionary for tags and subtags
+    nested_events = {}
+
+    for tag, events in tagged_events.items():
+        nested_events[tag] = {}
+        for event in events:
+            summary_parts = event['SUMMARY'].split(' - ', 1)
+            if len(summary_parts) == 2:
+                subtag, summary = summary_parts
+                event['SUMMARY'] = summary
+                if subtag not in nested_events[tag]:
+                    nested_events[tag][subtag] = []
+                nested_events[tag][subtag].append(event)
+    
+    # Print available tags
+    print("Available tags:")
+    for tag in nested_events:
+        print(f"- {tag}")
+
+    # Ask the user for which tag they want to summarize
+    tag = input("\nPlease enter the tag you want to summarize: ")
+
+    if tag not in nested_events:
+        print(f"No events found with the tag '{tag}'")
+        return
+
+    # Ask the user if they want to see events by subtag
+    view_by_subtag = input("Do you want to see events by subtag? (yes/no): ").strip().lower()
+
+    events = nested_events[tag]
+    
+    if view_by_subtag == 'yes':
+        # Print details grouped by subtag
+        for subtag, subtag_events in events.items():
+            aggregate_duration = sum(event.get('DURATION', 0) for event in subtag_events)
+            print("============SUBTAG==================", end="")
+            print(f"\nSubtag: {subtag}")
+            print(f"Aggregate Duration: {aggregate_duration} hours")
+            print("====================================")
+            for event in subtag_events:
+                print("----------------------------------------------------")
+                print("Summary:", end=" ")
+                print(event.get('SUMMARY', 'No summary available'))
+                print("Duration:", end=" ")
+                print(f"{event.get('DURATION', 'No duration available')} hours")
+                print("Start Date:", end=" ")
+                print(event.get('DTSTART', 'No start date available'))
+                print("Description:")
+                description = event.get('DESCRIPTION', '- No description available')
+                for line in description.split('\n'):
+                    wrapped_lines = textwrap.wrap(line, width=60, subsequent_indent='  ')
+                    for wrapped_line in wrapped_lines:
+                        print(wrapped_line)
+    else:
+        # Collect all events with their subtags
+        all_events = [(subtag, event) for subtag, subtag_events in events.items() for event in subtag_events]
+        aggregate_duration = sum(event.get('DURATION', 0) for _, event in all_events)
+        print(f"\nAggregate Duration for tag '{tag}': {aggregate_duration} hours")
+        for subtag, event in all_events:
+            print("------------------------------------------------------------------------")
+            print(f"Summary: {subtag} - ", end="")
+            print(event.get('SUMMARY', 'No summary available'))
+            print("Duration:", end=" ")
+            print(f"{event.get('DURATION', 'No duration available')} hours")
+            print("Start Date:", end=" ")
+            print(event.get('DTSTART', 'No start date available'))
+            print("Description:")
+            description = event.get('DESCRIPTION', '- No description available')
+            for line in description.split('\n'):
+                wrapped_lines = textwrap.wrap(line, width=80, subsequent_indent='  ')
+                for wrapped_line in wrapped_lines:
+                    print(wrapped_line)
+
+
+prompt = """
+0: exit
+1: last week's summary
+2: last month's summary"""
+
+def start_stdout_loop():
+    while True:
+        delta = 0
+        print(prompt)
+        user_input = input("Input: ")
+
+        # take user input
+        if user_input == "0":
+            print("thanks!")
+            break
+        elif user_input == "1":
+            delta = 7
+        elif user_input == "2":
+            delta = 31
+        else:
+            print("Invalid Input")
+            continue
+
+        # create appropriate dates
+        start_date = (datetime.now(timezone.utc) - timedelta(days=delta)).strftime("%Y%m%dT%H%M%SZ")
+        end_date = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+
+        # fetch calendar events for date range
+        try:
+            calendar_xml_filename = "calendar.xml"
+            print("Fetching calendar events from the last week...")
+            events = fetch_calendar_events(start_date, end_date)
+            with open(calendar_xml_filename, "w") as file:
+                file.write(str(events))
+            events = parse_xml_file(calendar_xml_filename)
+            tagged_events = events_get_tags(events)
+            apply_filter_operations(tagged_events)
+        except Exception as e:
+            print(f"An error occurred: {e}")
+            break
+
+def main():
+    if len(sys.argv) != 4:
+        print("error! arguments required: email, password, calendar_id")
+        exit(0)
+    start_stdout_loop()
+
+if __name__ == "__main__":
+    main()

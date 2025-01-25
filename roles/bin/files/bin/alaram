@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# time_now=$(date +"%H:%M")
+#
+# if [[ $time_now == "23:59" ]]; then
+#     notify-send "Alaram"
+# fi

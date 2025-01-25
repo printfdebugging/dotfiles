@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Function to check if the current window is a Brave browser window
+isBraveWindow() {
+    # Get the focused window ID
+    focused_window_id=$(xdotool getwindowfocus)
+    
+    # Get the class of the focused window
+    window_class=$(xprop -id "$focused_window_id" | grep "WM_CLASS" | awk '{print $4}')
+    
+    # Check if the window class contains "brave-browser" (case insensitive)
+    if echo "$window_class" | grep -q -i "brave-browser"; then
+        return 0  # Return true
+    else
+        return 1  # Return false
+    fi
+}
+
+# Loop until the focused window is a Brave browser window
+while isBraveWindow; do
+    # Once the Brave browser window is focused, run the "bookmark" script
+    bookmark  # Assuming "bookmark" is in your PATH
+
+    # Close the Brave browser window using xdotool (send Ctrl+W)
+    xdotool key ctrl+w
+done
+

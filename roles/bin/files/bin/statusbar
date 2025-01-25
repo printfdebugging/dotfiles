@@ -1,0 +1,15 @@
+#!/bin/bash
+
+notification_message="$(sb-internet)
+$(sb-nettraf)
+$(sb-battery)
+$(sb-cpubars)
+"
+
+# $(sb-audio)
+# $(sb-backlight)
+# $(sb-clock)
+# $(sb-cpu)
+# $(videostatus)
+
+notify-send -r 123499 -t 500 "$notification_message"

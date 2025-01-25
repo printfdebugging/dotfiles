@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# cd into the offline video directory
+archivesDir="/home/$USER/repos/media/yt-dlp"
+cd
+cd $archivesDir
+
+# get the dmenu response of the answer
+# if the user presses 'q', nothing is received
+ans=$(ls | dmenu -i -p "Videos: " -l 18 -vi)
+
+# if user selected something
+if [ -n "$ans" ]
+then
+    mpv "$archivesDir/$ans"
+fi
