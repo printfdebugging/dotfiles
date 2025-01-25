@@ -121,6 +121,7 @@ return {
 		local capabilities = require("cmp_nvim_lsp").default_capabilities()
 		local servers = {
 			"clangd",
+      "zls",
       "clojure_lsp",
       "glslls",
 			"ts_ls",

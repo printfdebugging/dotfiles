@@ -12,6 +12,7 @@ return {
 				"lua_ls",
 				"rust_analyzer",
 				"clangd",
+        "zls",
         "clojure_lsp",
         "glslls",
 				"gopls",
