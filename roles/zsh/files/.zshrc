@@ -84,7 +84,6 @@ export GOHOME=$HOME/.go
 export GOPATH="/home/$USER/.local/go"
 export PATH="${PATH}:${GOPATH}/bin"
 export GO_TABWIDTH=4
-export TERM=st
 
 ##############
 #   ALIASES  #
@@ -117,7 +116,7 @@ alias hss="zola serve"
 alias ls='ls --color=auto'
 alias ll='ls -al --color=auto'
 alias grep='grep --color=auto'
-alias n="cd ~/repos/files/ && nvim README.md"
+alias n="cd ~/repos/notes/ && nvim README.md"
 alias b="cd ~/.local/bin/"
 alias p="projects"
 

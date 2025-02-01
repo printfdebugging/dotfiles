@@ -17,6 +17,7 @@ return {
                 "go",
                 "python",
                 "java",
+                "zig",
                 "bash",
                 "html",
                 "yaml",

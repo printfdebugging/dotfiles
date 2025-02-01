@@ -12,6 +12,8 @@ return {
 				"lua_ls",
 				"rust_analyzer",
 				"clangd",
+        "neocmake",
+        "zls",
         "clojure_lsp",
         "glslls",
 				"gopls",

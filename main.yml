@@ -5,6 +5,8 @@
     - ssh
     - bin
     - flameshot
+    - awesome
+    - emacs
     - git
     - gtk
     - mpv
