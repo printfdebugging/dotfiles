@@ -116,7 +116,7 @@ alias hss="zola serve"
 alias ls='ls --color=auto'
 alias ll='ls -al --color=auto'
 alias grep='grep --color=auto'
-alias n="cd ~/repos/notes/ && nvim README.md"
+alias n="cd ~/repos/programming/wikipedia/ && nvim README.md"
 alias b="cd ~/.local/bin/"
 alias p="projects"
 
