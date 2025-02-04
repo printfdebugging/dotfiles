@@ -1,51 +1,52 @@
 #!/bin/env bash
 
 function init_voidlinux() {
-  # copy the mirror file
-  sudo cp /usr/share/xbps.d/00-repository-main.conf /etc/xbps.d/00-repository-main.conf
-  # install the required packages
-  sudo xbps-install -Syu git openssl ansible python3-watchdog neovim
+    # copy the mirror file
+    sudo cp /usr/share/xbps.d/00-repository-main.conf /etc/xbps.d/00-repository-main.conf
+    # install the required packages
+    sudo xbps-install -Syu git openssl ansible python3-watchdog neovim
 }
 
 function init() {
-  # check for distro in /etc/os-release file
-  case $(cat /etc/os-release | grep -e "^NAME" | awk -F "=" '{gsub(/"/, "", $2); print $2}') in
-    "Void") init_voidlinux;;
-    *) echo "distro not supported" && exit ;;
-  esac
+    # check for distro in /etc/os-release file
+    case $(cat /etc/os-release | grep -e "^NAME" | awk -F "=" '{gsub(/"/, "", $2); print $2}') in
+        "Void") init_voidlinux;;
+        *) echo "distro not supported" && exit ;;
+    esac
 }
 
 function clone_dotfiles() {
-  mkdir -p $HOME/repos && cd $HOME/repos
-  [ ! -d "$HOME/repos/dotfiles" ] && git clone https://github.com/printfdebugging/dotfiles.git $HOME/repos/dotfiles
-  cd $HOME/repos/dotfiles
+    mkdir -p $HOME/repos && cd $HOME/repos
+    [ ! -d "$HOME/repos/dotfiles" ] && git clone https://github.com/printfdebugging/dotfiles.git $HOME/repos/dotfiles
+    cd $HOME/repos/dotfiles
 }
 
 function run_ansible_tasks_with_tag() {
-  if ! command -v ansible-playbook; then
-    init
-  fi
+    if ! command -v ansible-playbook; then
+        init
+    fi
 
-  # setup dotfiles repository
-  clone_dotfiles
+    # setup dotfiles repository
+    clone_dotfiles
 
-  # run the ansible-playbook command
-  ansible-playbook main.yml \
-    --tags "${@}" \
-    --become --ask-become-pass \
-    --ask-vault-pass
+    # run the ansible-playbook command
+    ansible-playbook main.yml \
+        --tags "${@}" \
+        --become --ask-become-pass \
+        --ask-vault-pass
 }
 
 function run_ansible_save_task() {
-  # Run ansible-playbook with the save tag
-  clone_dotfiles
-  ansible-playbook main.yml \
-    --tags "${@}"
+    # Run ansible-playbook with the save tag
+    clone_dotfiles
+
+    ansible-playbook main.yml \
+        --tags "${@}"
 }
 
 case "$1" in 
-  "init")     init;;
-  "full"|"")  run_ansible_tasks_with_tag include,files,packages,system;;
-  "save-"*)   run_ansible_save_task include,${@};;
-  *)          run_ansible_tasks_with_tag include,${@};;
+    "init")     init;;
+    "full"|"")  run_ansible_tasks_with_tag include,files,packages,system;;
+    "save-"*)   run_ansible_save_task include,${@};;
+    *)          run_ansible_tasks_with_tag include,${@};;
 esac
