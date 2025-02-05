@@ -1,0 +1,14 @@
+- name: (suckless) install packages
+  tags:
+    - suckless
+    - packages
+  community.general.xbps:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - base-devel
+    - libX11-devel
+    - libXft-devel
+    - libXinerama-devel
+    - harfbuzz-devel
+    - freetype

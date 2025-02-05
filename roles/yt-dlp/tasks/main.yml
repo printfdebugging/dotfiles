@@ -1,0 +1,41 @@
+- name: include tasks
+  tags:
+    - yt-dlp
+    - include
+  ansible.builtin.include_tasks: "{{ ansible_facts.distribution|lower }}.yml"
+
+- name: (yt-dlp) create config directory
+  become: false
+  tags:
+    - yt-dlp
+    - files
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/.config/yt-dlp"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+
+- name: (yt-dlp) copy config file
+  become: false
+  tags:
+    - yt-dlp
+    - files
+  ansible.builtin.copy:
+    src: config
+    dest: /home/{{ ansible_user }}/.config/yt-dlp/config
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+
+- name: (yt-dlp) save config file
+  become: false
+  tags:
+    - save
+    - save-yt-dlp
+  ansible.builtin.copy:
+    src: /home/{{ ansible_user }}/.config/yt-dlp/config
+    dest: /home/{{ ansible_user }}/repos/dotfiles/roles/yt-dlp/files/config
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755

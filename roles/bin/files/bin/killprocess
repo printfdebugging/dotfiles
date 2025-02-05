@@ -1,0 +1,5 @@
+#!/bin/bash
+
+ans=$(ps -eo pid,comm,user --sort=pid | dmenu -i -l 20 -vi | awk '{print $2}')
+pkill $ans
+notify-send "Killed $ans"

@@ -1,0 +1,43 @@
+- name: (libreoffice-dev) install dependencies
+  tags:
+    - libreoffice-dev
+    - packages
+  community.general.zypper:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - git
+    - autoconf
+    - automake
+    - bison
+    - make
+    - gcc
+    - gcc-c++
+    - cups-devel
+    - fontconfig-devel
+    - gperf
+    - java-17-openjdk-devel
+    - libxslt-devel
+    - python3-devel
+    - krb5-devel
+    - libX11-devel
+    - libXext-devel
+    - libICE-devel
+    - libSM-devel
+    - libXt-devel
+    - libXrender-devel
+    - libXrandr-devel
+    - flex
+    - gtk3-devel
+    - gstreamer-devel
+    - gstreamer-plugins-base-devel
+    - ant
+    - junit
+    - nasm
+    - ccache
+    - binutils-gold
+    - mozilla-nss-devel
+    - clang
+    - llvm
+    - clang-devel
+    - llvm-devel

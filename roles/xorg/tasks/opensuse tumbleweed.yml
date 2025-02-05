@@ -1,0 +1,17 @@
+- name: (xorg) install packages
+  tags:
+    - xorg
+    - packages
+  community.general.zypper:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - xorg-x11
+    - xinit
+    - xrandr
+    - setxkbmap
+    - xset
+    - xcompmgr
+    - xwallpaper
+    - xclip
+    - xsel

@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# --------------------------------------------------------
+
+icondir="/home/$USER/.local/share/icons"
+deleteImage="$icondir/cancel.png"
+ytdlpInstances="$(pgrep -f yt-dlp)"
+mpvInstances="$(pgrep -f mpv)"
+
+# Create an array to store process IDs to kill
+pids_to_kill=()
+
+# Loop through the yt-dlpInstances and add them to pids_to_kill if not associated with mpv
+for pid in $ytdlpInstances; do
+    # Check if the pid is not in the mpvInstances list
+    if [[ ! $mpvInstances =~ $pid ]]; then
+        pids_to_kill+=("$pid")
+    fi
+done
+
+# Check if there are any yt-dlp processes to kill
+if [ ${#pids_to_kill[@]} -eq 0 ]; then
+    notify-send -i "$deleteImage" -r 129091 "Delete Script" "No yt-dlp process running"
+else
+    # Kill the yt-dlp processes
+    for pid in "${pids_to_kill[@]}"; do
+        notify-send -i "$deleteImage" -r 129091 "Delete Script" "Killed $pid"
+        kill "$pid"
+    done
+fi
+# --------------------------------------------------------
+
+# Delete files with ".part" or ".ytdl" extensions in a specific directory without notifications
+target_directory="/home/$USER/repos/media/yt-dlp/"
+find "$target_directory" -type f \( -name "*.part" -o -name "*.ytdl" \) -delete

@@ -1,0 +1,11 @@
+- name: (neovim) install packages
+  tags:
+    - neovim
+    - packages
+  community.general.xbps:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - neovim
+    - git
+    - nodejs

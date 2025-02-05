@@ -1,0 +1,11 @@
+- name: (gtk) create config directory
+  become: false
+  tags:
+    - gtk
+    - files
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/.config/gtk-3.0"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0755"

@@ -1,0 +1,72 @@
+- name: include tasks
+  tags:
+    - base
+    - include
+  ansible.builtin.include_tasks: "{{ ansible_facts.distribution|lower }}.yml"
+
+- name: (base) create downloads directory
+  become: false
+  tags:
+    - base
+    - files
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/downloads"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+
+- name: (base) copy user-dirs.dirs file
+  tags:
+    - base
+    - files
+  ansible.builtin.copy:
+    src: user-dirs.dirs
+    dest: /home/{{ ansible_user }}/.config/user-dirs.dirs
+    owner: root
+    group: root
+    mode: 0644
+
+- name: (base) install fonts
+  become: true
+  tags:
+    - base
+    - packages
+  ansible.builtin.shell:
+    cmd: |
+      if [ $(fc-list | grep "{{ item.font }}" | wc -l) -eq 0 ]; then
+        mkdir -p ~/.local/tmp
+        cd ~/.local/tmp
+        curl -LO {{ item.url }}
+        unzip {{ item.font }}.zip -d {{ item.font }}
+        cp -r {{ item.font }} /usr/share/fonts
+      fi
+  loop:
+    [
+      { font: "ZedMono",   url: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/ZedMono.zip", },
+    ]
+
+- name: (base) copy twemoji font file
+  become: true
+  tags:
+    - base
+    - packages
+  ansible.builtin.copy:
+    src: twemoji
+    dest: /usr/share/fonts
+    owner: root
+    group: root
+    mode: 0644
+
+- name: (base) copy twemoji fontconfig
+  become: true
+  tags:
+    - base
+    - packages
+  ansible.builtin.copy:
+    src: 75-twemoji.conf
+    dest: /etc/fonts/conf.d/75-twemoji.conf
+    owner: root
+    group: root
+    mode: 0644
+

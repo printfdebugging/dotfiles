@@ -1,0 +1,2 @@
+#!/bin/bash
+echo "bookmark" | dmenu "$@" -vi | ${SHELL:-"/bin/sh"} &

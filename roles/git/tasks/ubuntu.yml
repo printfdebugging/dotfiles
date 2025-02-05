@@ -1,0 +1,10 @@
+- name: (git) install packages
+  tags:
+    - git
+    - packages
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - git
+    - openssh-client

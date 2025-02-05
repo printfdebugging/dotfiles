@@ -1,0 +1,9 @@
+- name: (emacs) install packages
+  tags:
+    - emacs
+    - packages
+  community.general.xbps:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - emacs-x11

@@ -1,0 +1,17 @@
+#!/bin/bash
+
+
+
+# cd into the offline video directory
+emojiFile="/home/$USER/.local/share/emojis"
+
+# get the dmenu response of the answer
+# if the user presses 'q', nothing is received
+selectedEmoji=$(cat $emojiFile | dmenu -i -p "Emojis: " -l 18 -vi)
+
+# if user selected something
+if [ -n "$selectedEmoji" ]
+then
+    echo "$selectedEmoji" | xclip -selection clipboard
+    echo "$selectedEmoji" | xclip -selection primary
+fi

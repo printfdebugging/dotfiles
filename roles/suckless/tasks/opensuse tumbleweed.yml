@@ -1,0 +1,15 @@
+- name: (suckless) install packages
+  tags:
+    - suckless
+    - packages
+  community.general.zypper:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - libX11-devel
+    - libXinerama-devel
+    - libXft-devel
+    - libxcb-devel
+    - harfbuzz-devel
+    - posix_cc
+    - make

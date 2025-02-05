@@ -1,0 +1,47 @@
+- name: include tasks
+  tags:
+    - git
+    - include
+  ansible.builtin.include_tasks: "{{ ansible_facts.distribution|lower }}.yml"
+
+- name: (git) create gitconfig file
+  tags:
+    - git
+    - files
+  copy:
+    content: "{{ git_config_file }}"
+    dest: "/home/{{ ansible_user }}/.gitconfig"
+    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user }}"
+    mode: "0644"
+  become: false
+
+- name: (git) add remote rsa keys
+  become: false
+  tags:
+    - git
+    - files
+  ansible.builtin.lineinfile:
+    dest: /home/{{ ansible_user }}/.ssh/known_hosts
+    create: yes
+    state: present
+    line: "{{ lookup('pipe', 'ssh-keyscan -t rsa {{ item }}') }}"
+    regexp: "^{{ item }}"
+  loop:
+    - github.com
+
+- name: (git) clone git repositories
+  become: false
+  tags:
+    - git
+    - files
+  ansible.builtin.git:
+    repo: "{{ my_github_handle }}/{{ item }}.git"
+    dest: "/home/{{ ansible_user }}/repos/{{ item }}"
+    update: no
+  loop:
+    - themes
+    - dotfiles
+    - keybindings
+    - work-logging
+    - printfdebugging

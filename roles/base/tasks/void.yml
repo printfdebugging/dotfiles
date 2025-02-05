@@ -1,0 +1,95 @@
+- name: (base) install packages
+  tags:
+    - base
+    - packages
+  community.general.xbps:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - chromium
+    - vscode
+    - par
+    - lua
+    - cmake
+    - ansible
+    - neofetch
+    - man-db
+    - btop
+    - vim
+    - pasystray
+    - pavucontrol
+    - pulseaudio
+    - unzip
+    - NetworkManager
+    - network-manager-applet
+    - ripgrep
+    - Thunar
+    - breeze-icons
+    - adwaita-icon-theme
+    - go
+    - xdotool
+    - xprop
+    - netcat
+    - python3-watchdog
+    - libreoffice
+    - loupe
+    - Bear
+    - zola
+    - mtpfs
+    - gvfs-mtp
+    - mpv
+    - python-pip
+    - evince
+    - okular
+    - gdb
+    - ntfs-3g
+    - obs
+    - glade3
+    - luarocks
+    - ImageMagick
+    - libmagick-devel
+    - qt5-styleplugins
+    - qt5ct
+    - ruff
+    - i3lock-fancy
+    - SFML-devel
+    - glfw-devel
+    - mesa-vulkan-radeon
+    - Vulkan-Tools
+    - vulkan-loader-devel
+    - libXxf86vm-devel
+    - glm
+    - shaderc
+    - gimp
+    - xf86-video-amdgpu
+    - xf86-video-ati
+    - xf86-input-libinput
+    - yarn
+    - wget
+    - curl
+    - fontconfig
+    - clang-tools-extra18
+    - libnma
+    - gtypist
+    - ueberzug
+    - xauth
+    - pyright
+    - xtools
+    - git-review
+    - fzf
+
+- name: (base) upgrade distribution
+  tags:
+    - base
+    - packages
+  community.general.xbps:
+    upgrade: true
+
+- name: (base) add user to network group
+  tags:
+    - base
+    - system
+  ansible.builtin.user:
+    name: "{{ ansible_user }}"
+    groups: network
+    append: true

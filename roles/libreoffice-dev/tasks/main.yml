@@ -1,0 +1,35 @@
+- name: include tasks
+  tags:
+    - libreoffice-dev
+    - include
+  ansible.builtin.include_tasks: "{{ ansible_facts.distribution|lower }}.yml"
+
+- name: (git) clone the git repo
+  become: false
+  tags:
+    - libreoffice-dev
+    - files
+  ansible.builtin.git:
+    repo: https://gerrit.libreoffice.org/core
+    dest: /home/{{ ansible_user }}/repos/libreoffice
+    update: no
+    recursive: false
+
+- name: (libreoffice-dev) copy autogen.input
+  tags:
+    - libreoffice-dev
+    - files
+  ansible.builtin.copy:
+    src: autogen.{{ ansible_facts.distribution|lower }} 
+    dest: /home/{{ ansible_user }}/repos/libreoffice/autogen.input
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+
+- name: (libreoffice-dev) setup ccache with 100Gs
+  tags:
+    - libreoffice-dev
+    - files
+  ansible.builtin.shell:
+    cmd: |
+      ccache --max-size=100G

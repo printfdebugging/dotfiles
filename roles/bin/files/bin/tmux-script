@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Get the ID of the focused window
+focused_window_id=$(xdotool getwindowfocus)
+
+# Get the WM_CLASS property of the focused window
+window_class=$(xprop -id "$focused_window_id" | grep "WM_CLASS" | awk '{print $4}' | tr -d '"')
+
+# Check if the window class matches "st-256color"
+if [ "$window_class" = "st-256color" ]; then
+    tmux neww
+fi
+

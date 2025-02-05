@@ -1,0 +1,22 @@
+- name: (neovim) install packages
+  tags:
+    - neovim
+    - packages
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - git
+    - nodejs
+    - snapd
+
+- name: (base) install snap packages
+  tags:
+    - neovim
+    - packages
+  community.general.snap:
+    name: "{{ item }}"
+    classic: true
+    state: present
+  loop:
+    - nvim
