@@ -5,7 +5,7 @@
  */
 static char *font =
     "ZedMono Nerd"
-    "Font:pixelsize=26:style=Regular:antialias=true:autohint=true";
+    "Font:pixelsize=20:style=Regular:antialias=true:autohint=true";
 static int borderpx = 12;
 
 /*
@@ -129,7 +129,7 @@ const char *colorname[] = {
     [15] = "#d8dee9", /* white   */
 
     /* special colors */
-    [256] = "#1d1f21", /* background */
+    [256] = "#181818", /* background */
     [257] = "#d8dee9", /* foreground */
     [258] = "#51afef", /* cursor */
 };
