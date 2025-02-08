@@ -29,11 +29,6 @@ local options = {
   scroll = 4,
   showtabline = 2,
   concealcursor = "ncv",
-  -- list = true,
-  -- listchars = {
-  --   space = "⋅",
-  --   tab = "⋅⋅⋅",
-  -- },
   -- mouse = "",
   formatprg = "par jw82",
 }
