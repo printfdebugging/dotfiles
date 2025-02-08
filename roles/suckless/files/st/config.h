@@ -5,7 +5,7 @@
  */
 static char *font =
     "ZedMono Nerd"
-    "Font:pixelsize=20:style=Regular:antialias=true:autohint=true";
+    "Font:pixelsize=26:style=Regular:antialias=true:autohint=true";
 static int borderpx = 12;
 
 /*
