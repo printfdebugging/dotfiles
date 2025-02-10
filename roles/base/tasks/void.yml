@@ -6,7 +6,7 @@
     name: "{{ item }}"
     state: latest
   loop:
-    - chromium
+    - firefox
     - vscode
     - par
     - lua
