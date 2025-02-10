@@ -4,8 +4,8 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 static char *font =
-    "ZedMono Nerd"
-    "Font:pixelsize=20:style=Regular:antialias=true:autohint=true";
+    "IosevkaTermSlab Nerd"
+    "Font:pixelsize=22:style=Regular:antialias=true:autohint=true";
 static int borderpx = 12;
 
 /*
@@ -106,7 +106,7 @@ char *termname = "st-256color";
 unsigned int tabspaces = 8;
 
 /* bg opacity */
-float alpha = 0.6;
+float alpha = 1.0;
 const char *colorname[] = {
 
     /* 8 normal colors */
@@ -129,7 +129,7 @@ const char *colorname[] = {
     [15] = "#d8dee9", /* white   */
 
     /* special colors */
-    [256] = "#000104", /* background */
+    [256] = "#181818", /* background */
     [257] = "#d8dee9", /* foreground */
     [258] = "#51afef", /* cursor */
 };

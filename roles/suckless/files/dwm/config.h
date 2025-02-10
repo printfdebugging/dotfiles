@@ -15,9 +15,9 @@ static const unsigned int systrayonleft = 0;    /* 0: systray in the right corne
 static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray        = 1;        /* 0 means no systray */
-static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "ZedMono Nerd Font:size=14" };
-static const char col_gray1[]       = "#222222";
+static const int topbar             = 0;        /* 0 means bottom bar */
+static const char *fonts[]          = { "IosevkaTermSlab Nerd Font:size=14" };
+static const char col_gray1[]       = "#181818";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";

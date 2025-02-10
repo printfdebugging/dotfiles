@@ -44,7 +44,8 @@
       fi
   loop:
     [
-      { font: "ZedMono",   url: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/ZedMono.zip", },
+      { font: "ZedMono",            url: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/ZedMono.zip", },
+      { font: "IosevkaTermSlab",    url: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/IosevkaTermSlab.zip", },
     ]
 
 - name: (base) copy twemoji font file
