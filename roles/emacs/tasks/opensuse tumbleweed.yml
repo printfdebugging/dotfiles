@@ -1,9 +1,0 @@
-- name: (emacs) install packages
-  tags:
-    - emacs
-    - packages
-  community.general.zypper:
-    name: "{{ item }}"
-    state: latest
-  loop:
-    - emacs-x11

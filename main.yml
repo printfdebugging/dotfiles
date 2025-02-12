@@ -2,8 +2,6 @@
 - hosts: all
   roles:
     - base
-    - emacs
-    - awesome
     - ssh
     - bin
     - flameshot
@@ -19,5 +17,5 @@
     - yt-dlp
     - zsh
     - services
-#    - libreoffice-dev
+    - libreoffice-dev
     - qemu

@@ -1,9 +1,0 @@
-- name: (awesome) install awesome
-  tags:
-    - awesome
-    - packages
-  ansible.builtin.apt:
-    name: "{{ item }}"
-    state: latest
-  loop:
-    - awesome
