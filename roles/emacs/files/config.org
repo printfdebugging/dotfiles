@@ -137,41 +137,41 @@
 
 #+begin_src emacs-lisp
 (set-face-attribute 'variable-pitch nil
-                    :family "ZedMono Nerd Font"
+                    :family "Iosevka Nerd Font"
                     :foreground "#eeffff"
                     :height 150
                     :weight 'Regular)
 (set-face-attribute 'default nil
-                    :family "ZedMono Nerd Font"
+                    :family "Iosevka Nerd Font"
                     :foreground "#d8dee9"
                     :height 150
                     :weight 'Regular)
 (set-face-attribute 'fixed-pitch nil
-                    :family "ZedMono Nerd Font"
+                    :family "Iosevka Nerd Font"
                     :foreground "#d8dee9"
                     :height 150
                     :weight 'Regular)
 (set-face-attribute 'org-document-title nil
-                    :family "ZedMono Nerd Font"
+                    :family "Iosevka Nerd Font"
                     :height 280
                     :weight 'Bold
                     :foreground "#bbc2cf")
 (set-face-attribute 'org-level-1 nil
-                    :family "ZedMono Nerd Font"
+                    :family "Iosevka Nerd Font"
                     :height 250
                     :weight 'Bold)
 (set-face-attribute 'org-level-2 nil
-                    :family "ZedMono Nerd Font"
+                    :family "Iosevka Nerd Font"
                     :weight 'Bold
                     :height 230
                     :foreground "#A9A1E1")
 (set-face-attribute 'org-level-3 nil
-                    :family "ZedMono Nerd Font"
+                    :family "Iosevka Nerd Font"
                     :weight 'Bold
                     :height 200
                     :foreground "#A9A1E1")
 (set-face-attribute 'org-level-4 nil
-                    :family "ZedMono Nerd Font"
+                    :family "Iosevka Nerd Font"
                     :height 150
                     :weight 'Bold)
 

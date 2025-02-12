@@ -12,7 +12,7 @@ local themes_path = "/home/printfdebugging/.config/awesome/"
 
 local theme = {}
 
-theme.font = "ZedMono Nerd Font 11"
+theme.font = "Iosevka Nerd Font 11"
 
 theme.bg_normal = "#171a21"
 theme.bg_focus = "#30393D"
