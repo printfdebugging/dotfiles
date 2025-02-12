@@ -40,9 +40,5 @@
     dest: "/home/{{ ansible_user }}/repos/{{ item }}"
     update: no
   loop:
-    - utils
-    - themes
+    - files
     - dotfiles
-    - keybindings
-    - work-logging
-    - game-engine
