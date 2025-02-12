@@ -40,5 +40,5 @@
     dest: "/home/{{ ansible_user }}/repos/{{ item }}"
     update: no
   loop:
-    - files
+    - notes
     - dotfiles
