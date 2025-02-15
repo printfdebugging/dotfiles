@@ -119,6 +119,9 @@ alias grep='grep --color=auto'
 alias b="cd ~/.local/bin/"
 alias p="projects"
 
+alias sdm="sudo ln -s /etc/sv/sddm /var/service/"
+alias kdm="sudo rm -rf /var/service/sddm"
+
 ## GIT
 alias tr="git log --all --oneline --graph --decorate"
 alias stat="git status"
