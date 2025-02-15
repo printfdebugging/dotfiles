@@ -17,6 +17,7 @@ return {
                 "go",
                 "python",
                 "java",
+                "doxygen",
                 "zig",
                 "bash",
                 "html",
