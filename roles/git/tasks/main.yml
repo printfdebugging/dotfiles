@@ -41,9 +41,18 @@
     update: no
   loop:
     - notes
-    - themes
     - dotfiles
+
+    # allotropia & libreoffice
+    - themes
     - keybindings
-    - kohi-engine
     - work-logging
+
+    # personal projects
+    - kohi-engine
     - data-structures
+
+    # admin repositories
+    - books
+    - pictures
+    - documents
