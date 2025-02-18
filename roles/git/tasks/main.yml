@@ -41,4 +41,9 @@
     update: no
   loop:
     - notes
+    - themes
     - dotfiles
+    - keybindings
+    - kohi-engine
+    - work-logging
+    - data-structures
