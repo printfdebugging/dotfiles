@@ -5,7 +5,7 @@
  */
 static char *font =
     "Iosevka Nerd"
-    "Font:pixelsize=20:style=Regular:antialias=true:autohint=true";
+    "Font:pixelsize=16:style=Regular:antialias=true:autohint=true";
 static int borderpx = 02;
 
 /*
