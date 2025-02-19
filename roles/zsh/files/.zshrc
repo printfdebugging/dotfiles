@@ -95,6 +95,7 @@ alias l="cd /home/$USER/repos/libreoffice/"
 alias x="clear"
 alias cr="cd ~/repos/"
 alias d="cd ~/repos/dotfiles/"
+alias n="cd ~/repos/notes/ && nvim README.md"
 
 alias dif="git diff HEAD~ HEAD | delta"
 
