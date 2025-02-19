@@ -51,7 +51,6 @@
     - i3lock
     - sfml
     - glfw
-    - mesa-vulkan-radeon
     - vulkan-mesa-layers
     - vulkan-tools
     - vulkan-icd-loader

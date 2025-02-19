@@ -13,5 +13,5 @@
     - xorg-xset
     - xcompmgr
     - xwallpaper
-    - xorg-xclip
-    - xorg-xsel
+    - xclip
+    - xsel
