@@ -1,0 +1,79 @@
+- name: (base) install packages
+  tags:
+    - base
+    - packages
+  community.general.pacman:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - firefox
+    - vscode
+    # - par
+    - lua
+    - cmake
+    - ansible
+    - neofetch
+    - man-db
+    - btop
+    - vim
+    - pasystray
+    - pavucontrol
+    - pulseaudio
+    - unzip
+    - networkmanager
+    - network-manager-applet
+    - ripgrep
+    - thunar
+    - breeze-icons
+    - adwaita-icon-theme
+    - go
+    - xdotool
+    - xorg-xprop
+    - netcat
+    - libreoffice
+    - loupe
+    - bear
+    - zola
+    - mtpfs
+    - gvfs-mtp
+    - mpv
+    - python-pip
+    - evince
+    - okular
+    - gdb
+    - ntfs-3g
+    - obs-studio
+    - glade
+    - luarocks
+    - imagemagick
+    - qt5ct
+    - ruff
+    - i3lock
+    - sfml
+    - glfw
+    - mesa-vulkan-radeon
+    - vulkan-mesa-layers
+    - vulkan-tools
+    - vulkan-icd-loader
+    - libxxf86vm
+    - glm
+    - shaderc
+    - gimp
+    - xf86-video-amdgpu
+    - xf86-video-ati
+    - xf86-input-libinput
+    - yarn
+    - wget
+    - curl
+    - fontconfig
+    - libnma
+    - ueberzug
+    - pyright
+    - fzf
+
+- name: (base) upgrade distribution
+  tags:
+    - base
+    - packages
+  community.general.pacman:
+    upgrade: true

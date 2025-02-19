@@ -1,0 +1,14 @@
+- name: (suckless) install packages
+  tags:
+    - suckless
+    - packages
+  community.general.pacman:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - base-devel
+    - libx11
+    - libxft
+    - xorg-server
+    - xorg-xinit
+    - terminus-font

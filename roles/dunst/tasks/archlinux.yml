@@ -1,0 +1,10 @@
+- name: (dunst@archlinux) install packages
+  tags:
+    - dunst
+    - packages
+  community.general.pacman:
+    name:
+      - "{{ item }}"
+    state: latest
+  loop:
+    - dunst
