@@ -139,6 +139,8 @@ export COOL_SERVE_FROM_FS=1
 
 if grep -q '^NAME="Arch Linux"' /etc/os-release; then
     export QT5DIR=/usr/lib/qt
+    export QT5INC=/usr/include/qt
+    export QT5LIB=/usr/lib/qt
 else
     export QT5DIR=/usr/lib/qt5
 fi
