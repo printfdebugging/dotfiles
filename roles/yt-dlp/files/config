@@ -1,0 +1,7 @@
+# Config Locations
+# --config-locations "/home/sahil/.config/yt_dlp/yt-dlp.conf"
+# Output format for all the playlists
+-o "%(playlist_index)s - %(title)s.%(ext)s"
+
+# Resolution Settings
+-S "res:1080"
