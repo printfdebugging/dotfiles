@@ -39,7 +39,7 @@ return {
       win_options = {
         conceallevel = {
           default = vim.api.nvim_get_option_value('conceallevel', {}),
-          rendered = 0,
+          rendered = 3,
         },
         concealcursor = {
           default = vim.api.nvim_get_option_value('concealcursor', {}),
