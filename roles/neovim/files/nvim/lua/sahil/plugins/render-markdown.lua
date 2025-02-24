@@ -6,6 +6,16 @@ return {
     require('render-markdown').setup({
       render_modes = { 'n', 'no', 'nov', 'c', 't', 'i', 'o', 'V', 'v' },
 
+      anti_conceal = {
+        enabled = false,
+        ignore = {
+          code_background = true,
+          sign = true,
+        },
+        above = 0,
+        below = 0,
+      },
+
       overrides = {
         buftype = {
           nofile = {
