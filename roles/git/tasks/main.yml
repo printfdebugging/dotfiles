@@ -45,19 +45,11 @@
     dest: "/home/{{ ansible_user }}/repos/{{ item }}"
     update: no
   loop:
-    - notes
-    - dotfiles
-
-    # allotropia & libreoffice
+    # public projects
     - themes
+    - dotfiles
     - keybindings
     - work-logging
 
-    # personal projects
-    - kohi-engine
-    - data-structures
-
-    # admin repositories
-    - books
-    - pictures
-    - documents
+    # private projects
+    - notes
