@@ -24,6 +24,7 @@
     - network-manager-applet
     - ripgrep
     - Thunar
+    - tumbler-plugins-extra
     - breeze-icons
     - adwaita-icon-theme
     - go
