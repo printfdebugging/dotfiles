@@ -122,8 +122,8 @@ return {
 
     vim.cmd([[
       highlight TabLineSel    guifg=#242b38 guibg=#59c2ff
-      highlight TabLineFill   guibg=#000000
-      highlight TabLine       guibg=#000000
+      highlight TabLineFill   guibg=#00000000
+      highlight TabLine       guibg=#00000000
       highlight LineNr        guifg=#3f444a 
       highlight LineNrAbove   guifg=#3f444a
       highlight LineNrBelow   guifg=#3f444a
