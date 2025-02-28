@@ -16,8 +16,8 @@ static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray        = 1;        /* 0 means no systray */
 static const int topbar             = 0;        /* 0 means bottom bar */
-static const char *fonts[]          = { "Iosevka Nerd Font:size=12" };
-static const char col_gray1[]       = "#000000";
+static const char *fonts[]          = { "ZedMono Nerd Font:size=12" };
+static const char col_gray1[]       = "#181818";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";

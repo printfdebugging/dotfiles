@@ -4,7 +4,7 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 static char *font =
-    "Iosevka Nerd"
+    "ZedMono Nerd"
     "Font:pixelsize=26:style=Regular:antialias=true:autohint=true";
 static int borderpx = 8;
 

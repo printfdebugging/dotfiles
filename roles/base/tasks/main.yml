@@ -135,7 +135,7 @@
   become: true
   tags:
     - base
-    - font
+    - fonts
     - packages
   ansible.builtin.shell:
     cmd: |
@@ -148,7 +148,7 @@
       fi
   loop:
     [
-      { font: "Iosevka",            url: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.0/Iosevka.zip", },
+      { font: "ZedMono",            url: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/ZedMono.zip", },
     ]
 
 - name: (base) copy twemoji font file
