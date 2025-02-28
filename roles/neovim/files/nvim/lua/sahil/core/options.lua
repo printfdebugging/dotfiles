@@ -20,7 +20,7 @@ local options = {
   splitright = true,
   splitbelow = true,
   pumheight = 12,
-  conceallevel = 3,
+  conceallevel = 0,
   guicursor = "a:block",
   hlsearch = true,
   incsearch = true,
@@ -36,7 +36,7 @@ local options = {
   },
 
   -- mouse = "",
-  formatprg = "par jw130",
+  formatprg = "par jw80",
 }
 
 for key, value in pairs(options) do
