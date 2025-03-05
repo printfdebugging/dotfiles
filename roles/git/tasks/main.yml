@@ -50,6 +50,7 @@
     - dotfiles
     - keybindings
     - work-logging
+    - printfdebugging
 
     # neovim plugin experiments
     - neogit
