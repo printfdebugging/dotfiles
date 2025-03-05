@@ -62,6 +62,7 @@
 # private
   ## admin repositories
     - books
+    - worklogs
     - documents
 
   ## personal projects
