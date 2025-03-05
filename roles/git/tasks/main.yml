@@ -58,5 +58,6 @@
 
     # private projects
     - notes
+    - books
     - sfml-blueprints
     - learn-opengl
