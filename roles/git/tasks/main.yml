@@ -50,7 +50,12 @@
     - dotfiles
     - keybindings
     - work-logging
-    - sfml-blueprints
+
+    # neovim plugin experiments
+    - neogit
+    - todo-comments.nvim
 
     # private projects
     - notes
+    - sfml-blueprints
+    - learn-opengl
