@@ -1,9 +1,3 @@
-<!--toc:start-->
-- [About my dotfiles](#about-my-dotfiles)
-- [How I setup my environment](#how-i-setup-my-environment)
-- [How to get started](#how-to-get-started)
-<!--toc:end-->
-
 ## About my dotfiles
 + I use ansible to manage my dotfiles
 + I use void linux, so my dotfiles only work on void linux.
