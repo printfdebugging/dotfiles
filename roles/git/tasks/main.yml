@@ -56,8 +56,8 @@
     - printfdebugging
 
   ## neovim plugin experiments
-    - neogit
-    - todo-comments.nvim
+    - neogit-commented
+    - todo-comments-commented
 
 # private
   ## admin repositories
