@@ -35,7 +35,7 @@ function ExecuteCurrentFileProgram()
 	elseif file_extension == "go" then
 		vim.cmd("!go run .")
 	elseif file_extension == "sh" then
-		vim.cmd("!sh %")
+		vim.cmd("!bash %")
 	elseif file_extension == "js" then
 		vim.cmd("!node %")
 	elseif file_extension == "yaml" then
