@@ -148,7 +148,7 @@
       fi
   loop:
     [
-      { font: "ZedMono",            url: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/ZedMono.zip", },
+      { font: "JetBrainsMono",            url: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/JetBrainsMono.zip", },
     ]
 
 - name: (base) copy twemoji font file

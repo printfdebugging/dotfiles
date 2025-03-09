@@ -4,8 +4,8 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 static char *font =
-    "ZedMono Nerd"
-    "Font:pixelsize=18:style=Regular:antialias=true:autohint=true";
+    "JetBrainsMono Nerd"
+    "Font:pixelsize=15:style=Regular:antialias=true:autohint=true";
 static int borderpx = 8;
 
 /*

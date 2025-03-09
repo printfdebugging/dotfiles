@@ -29,13 +29,13 @@ local options = {
   scroll = 4,
   showtabline = 2,
   concealcursor = "ncv",
-  list = true,
+  list = false,
   listchars = {
     space = "⋅",
     tab = "⋅⋅⋅",
   },
-  mouse = "",
-  formatprg = "par jw130",
+  -- mouse = "",
+  formatprg = "par jw95",
 }
 
 for key, value in pairs(options) do
