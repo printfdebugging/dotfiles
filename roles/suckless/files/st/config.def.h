@@ -106,7 +106,7 @@ char *termname = "st-256color";
 unsigned int tabspaces = 8;
 
 /* bg opacity */
-float alpha = 1.0;
+float alpha = 0.6;
 const char *colorname[] = {
 
     /* 8 normal colors */
@@ -129,7 +129,7 @@ const char *colorname[] = {
     [15] = "#d8dee9", /* white   */
 
     /* special colors */
-    [256] = "#181818", /* background */
+    [256] = "#000104", /* background */
     [257] = "#d8dee9", /* foreground */
     [258] = "#51afef", /* cursor */
 };
