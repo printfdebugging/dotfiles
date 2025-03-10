@@ -7,6 +7,7 @@ return	{
   config = function ()
     require("nvim-tree").setup({
       view = {
+        cursorline = false,
         width = 35,
         side = "left",
       },
