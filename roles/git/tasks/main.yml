@@ -58,6 +58,8 @@
   ## neovim plugin experiments
     - neogit-commented
     - todo-comments-commented
+    - nvim-tree-commented
+    - neo-tree-commented
     - ircnvim
     - iris.vim
 
