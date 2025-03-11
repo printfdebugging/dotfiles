@@ -59,6 +59,7 @@
     - neogit-commented
     - todo-comments-commented
     - ircnvim
+    - iris.vim
 
 # private
   ## admin repositories

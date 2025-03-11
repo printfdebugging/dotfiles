@@ -79,6 +79,9 @@
     - git-review
     - fzf
     - fd
+    - figlet
+    - figlet-fonts
+    - lolcat-c
 
 - name: (base) upgrade distribution
   tags:

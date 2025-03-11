@@ -1,5 +1,5 @@
 return {
-	"NeogitOrg/neogit",
+  dir = "~/repos/neogit-commented",
 	tag = "v0.0.1",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
