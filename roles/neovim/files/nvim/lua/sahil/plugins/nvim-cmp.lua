@@ -124,7 +124,7 @@ return {
       "neocmake",
       "zls",
       "clojure_lsp",
-      "glslls",
+--      "glslls",
 			"ts_ls",
 			"lua_ls",
 			"ansiblels",

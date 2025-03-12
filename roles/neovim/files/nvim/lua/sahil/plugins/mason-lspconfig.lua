@@ -15,7 +15,7 @@ return {
         "neocmake",
         "zls",
         "clojure_lsp",
-        "glslls",
+--        "glslls",
 				"gopls",
         "ts_ls",
         "html",
