@@ -1,0 +1,20 @@
+#!/bin/bash
+
+usage="wrong command-line-argument!!
+usage:
+    to encrypt the folder - ./z-security.sh encrypt
+    to decrypt the folder - ./z-security.sh decrypt
+"
+
+files=""
+
+for file in $(find . -type f -not -path '*/.git/*' -not -name 'z-security.sh'); do
+    files="$files $file"
+done
+
+case "$1" in
+    "encrypt") ansible-vault encrypt $files;;
+    "decrypt") ansible-vault decrypt $files;;
+    *) printf "$usage";;
+esac
+
