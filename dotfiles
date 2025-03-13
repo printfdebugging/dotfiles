@@ -32,6 +32,11 @@ run_ansible_tasks_with_tag()
     # setup dotfiles repository
     clone_dotfiles
 
+    # start ssh-agent if not running
+    if ! [ -n "$(pgrep -f ssh-agent)" ]; then
+        eval $(ssh-agent) && ssh-add
+    fi
+
     # run the ansible-playbook command
     ansible-playbook main.yml \
         --tags "${@}" \
