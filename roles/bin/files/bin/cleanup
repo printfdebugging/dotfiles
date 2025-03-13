@@ -1,0 +1,19 @@
+#!/bin/bash
+
+
+private_files="
+    $HOME/.thunderbird
+    $HOME/.gitconfig
+    $HOME/.pubkeys
+    $HOME/.privkeys
+    $HOME/.mozilla
+    $HOME/.cache
+    $HOME/.gnupg
+    $HOME/.ssh
+
+    $HOME/downloads
+    $HOME/repos
+"
+
+
+sudo rm -rf $private_files
