@@ -17,7 +17,7 @@ targets=(
 
 
 for target in ${targets[@]}; do
-    rm -rf $target
+    sudo rm -rf $target
 done
 
 
