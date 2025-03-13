@@ -4,6 +4,7 @@
     - base
     - ssh
     - bin
+    - gpg
     - flameshot
     - git
     - gtk
