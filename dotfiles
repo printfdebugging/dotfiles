@@ -1,5 +1,6 @@
 #!/bin/env bash
 
+
 init() 
 {
     # copy the mirror file
@@ -9,12 +10,18 @@ init()
     sudo xbps-install -Syu git openssl ansible python3-watchdog neovim
 }
 
+
 clone_dotfiles() 
 {
     mkdir -p $HOME/repos && cd $HOME/repos
     [ ! -d "$HOME/repos/dotfiles" ] && git clone https://github.com/printfdebugging/dotfiles.git $HOME/repos/dotfiles
     cd $HOME/repos/dotfiles
+
+    # remote https remote and add ssh remote
+    git remote remove origin
+    git remote add origin git@github.com:printfdebugging/dotfiles.git
 }
+
 
 run_ansible_tasks_with_tag() 
 {
@@ -32,6 +39,7 @@ run_ansible_tasks_with_tag()
         --ask-vault-pass
 }
 
+
 run_ansible_save_task() 
 {
     # Run ansible-playbook with the save tag
@@ -39,6 +47,7 @@ run_ansible_save_task()
     ansible-playbook main.yml \
         --tags "${@}"
 }
+
 
 case "$1" in 
     "init")     init;;
