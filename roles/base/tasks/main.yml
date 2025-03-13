@@ -83,6 +83,7 @@
     - figlet
     - figlet-fonts
     - lolcat-c
+    - seahorse
 
 - name: (base) upgrade distribution
   tags:
