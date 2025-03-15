@@ -23,3 +23,6 @@ bash dotfiles
 
 [LearnLinuxTv's ansible playlist]: https://youtube.com/playlist?list=PLT98CRl2KxKEUHie1m24-wkyHpEsa4Y70&si=h0LGnnwsCFtm7cvp
 [TechDufus's video]: https://www.youtube.com/watch?v=hPPIScBt4Gw
+
+## Foot notes
++ don't use relative paths, they don't work. use `/home/{{ ansible_user }}/path` instead.

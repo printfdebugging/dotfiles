@@ -1,19 +1,10 @@
-- name: (gtk) copy Adwaita theme to default theme
-  become: true
-  tags:
-    - gtk
-    - files
-  ansible.builtin.copy:
-    src: /usr/share/icons/Adwaita/
-    dest: /usr/share/icons/default/
-    owner: root
-    group: root
-    remote_src: true
-
-- name: (gtk) reinstall gdk-pixbuf
+- name: (gtk) install gtk related packages
   community.general.xbps:
-    name: gdk-pixbuf
+    name: "{{ item }}"
     state: latest
+  loop:
+    - gdk-pixbuf
+    - lxappearance
 
 - name: (gtk) create config directory
   become: false
@@ -47,6 +38,42 @@
   ansible.builtin.copy:
     src: settings.ini
     dest: /etc/gtk-3.0/settings.ini
-    owner: root
-    group: root
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
     mode: 0755
+
+- name: (gtk) create ~/.local/share/themes/ directory
+  become: false
+  tags:
+    - gtk
+    - files
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/.local/share/themes"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+
+- name: (gtk) copy theme files to ~/.local/share/themes
+  become: true
+  tags:
+    - gtk
+    - files
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: /home/{{ ansible_user }}/.local/share/themes
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+  loop:
+    - Nordic-darker.tar.xz
+
+- name: (gtk) install tar.xz themes
+  tags:
+    - gtk
+    - files
+  ansible.builtin.shell:
+    cmd: |
+      cd /home/{{ ansible_user }}/.local/share/themes && tar -xf {{ item }}.tar.xz
+  loop:
+    - Nordic-darker
