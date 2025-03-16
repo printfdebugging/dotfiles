@@ -16,6 +16,10 @@ vim.cmd([[
 ]])
 
 
+vim.cmd([[
+  set shortmess+=I
+]])
+
 -- vim.cmd([[
 --   augroup MarkdownNoWarnings
 --   autocmd!
