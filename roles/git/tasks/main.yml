@@ -46,18 +46,4 @@
     update: no
   loop:
     - dotfiles
-
-- name: (git) clone finished git projects
-  become: false
-  tags:
-    - git
-    - files
-  ansible.builtin.git:
-    repo: "{{ my_github_handle }}/{{ item }}.git"
-    dest: "/home/{{ ansible_user }}/repos/archive/{{ item }}"
-    update: no
-  loop:
-    - books
-    - themes
-    - keybindings
-    - work-logging
+    - cookbook
