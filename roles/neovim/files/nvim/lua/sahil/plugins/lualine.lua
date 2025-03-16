@@ -4,7 +4,6 @@ return {
   config = function()
     require("lualine").setup({
       options = {
-        -- theme = 'one-dark',
         section_separators = { left = "|", right = "|" },
         component_separators = { left = "|", right = "|" },
       },
