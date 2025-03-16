@@ -1,6 +1,6 @@
 local options = {
-  relativenumber = true,
-  number = true,
+  relativenumber = false,
+  number = false,
   ruler = false,
   cmdheight = 1,
   background = "dark",
@@ -15,12 +15,12 @@ local options = {
   smartcase = true,
   cursorline = false,
   termguicolors = true,
-  signcolumn = "yes",
+  signcolumn = "no",
   backspace = "indent,eol,start",
   splitright = true,
   splitbelow = true,
   pumheight = 12,
-  conceallevel = 0,
+  conceallevel = 3,
   guicursor = "a:block",
   hlsearch = true,
   incsearch = true,
@@ -35,7 +35,7 @@ local options = {
     tab = "⋅⋅⋅",
   },
   -- mouse = "",
-  formatprg = "par jw95",
+  formatprg = "par jw155",
 }
 
 for key, value in pairs(options) do
