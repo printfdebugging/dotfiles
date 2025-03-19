@@ -9,18 +9,6 @@
     - git
     - openssh
 
-- name: (git) create gitconfig file
-  tags:
-    - git
-    - files
-  copy:
-    content: "{{ git_config_file }}"
-    dest: "/home/{{ ansible_user }}/.gitconfig"
-    group: "{{ ansible_user }}"
-    owner: "{{ ansible_user }}"
-    mode: "0644"
-  become: false
-
 - name: (git) add remote rsa keys
   become: false
   tags:
@@ -47,3 +35,4 @@
   loop:
     - dotfiles
     - cookbook
+    - blog
