@@ -68,6 +68,7 @@ export SAL_NO_MOUSEGRABS=T
 # system exports
 export PATH="/home/$USER/.local/bin:$PATH"
 export EDITOR=nvim
+export GPG_TTY=$(tty)
 # export GPG_AGENT_INFO="$(gpgconf --list-dirs agent-socket)/S.gpg-agent:0:1"
 
 
