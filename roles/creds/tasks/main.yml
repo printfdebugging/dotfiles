@@ -1,7 +1,7 @@
-- name: (ssh) create ssh directory
+- name: (creds) create ssh directory
   become: false
   tags:
-    - ssh
+    - creds
     - files
   ansible.builtin.file:
     dest: "/home/{{ ansible_user }}/.ssh"
@@ -10,10 +10,10 @@
     owner: "{{ ansible_user }}"
     mode: "0755"
 
-- name: (ssh) create public file
+- name: (creds) create public file
   become: false
   tags:
-    - ssh
+    - creds
     - files
   ansible.builtin.copy:
     content: "{{ public_ssh_key_file }}"
@@ -22,10 +22,10 @@
     owner: "{{ ansible_user }}"
     mode: "0644"
 
-- name: (ssh) create private file
+- name: (creds) create private file
   become: false
   tags:
-    - ssh
+    - creds
     - files
   ansible.builtin.copy:
     content: "{{ private_ssh_key_file }}"
@@ -34,14 +34,26 @@
     owner: "{{ ansible_user }}"
     mode: "0600"
 
-- name: (ssh) create config file
+- name: (creds) create ssh config file
   become: false
   tags:
-    - ssh
+    - creds
     - files
   ansible.builtin.copy:
     content: "{{ ssh_config_file }}"
     dest: "/home/{{ ansible_user }}/.ssh/config"
+    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user }}"
+    mode: "0644"
+
+- name: (creds) create git config file
+  become: false
+  tags:
+    - creds
+    - files
+  ansible.builtin.copy:
+    content: "{{ git_config_file }}"
+    dest: "/home/{{ ansible_user }}/.gitconfig"
     group: "{{ ansible_user }}"
     owner: "{{ ansible_user }}"
     mode: "0644"
