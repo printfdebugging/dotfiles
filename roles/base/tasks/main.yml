@@ -84,6 +84,7 @@
     - figlet-fonts
     - lolcat-c
     - seahorse
+    - valgrind
 
 - name: (base) upgrade distribution
   tags:
