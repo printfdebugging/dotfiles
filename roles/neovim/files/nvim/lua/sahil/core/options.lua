@@ -1,6 +1,6 @@
 local options = {
-  relativenumber = true,
-  number = true,
+  relativenumber = false,
+  number = false,
   ruler = false,
   cmdheight = 1,
   background = "dark",
@@ -15,7 +15,7 @@ local options = {
   smartcase = true,
   cursorline = false,
   termguicolors = true,
-  signcolumn = "yes",
+  signcolumn = "no",
   backspace = "indent,eol,start",
   splitright = true,
   splitbelow = true,
