@@ -127,6 +127,7 @@
     - hsqldb1.8.0
     - llvm18
     - llvm18-devel
+    - openjdk17
     - nasm
     - ccache
 

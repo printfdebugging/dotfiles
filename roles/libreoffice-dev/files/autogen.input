@@ -1,5 +1,6 @@
 --enable-dbgutil
---without-java
+--with-jdk-home=/usr/lib/jvm/openjdk17
+--without-junit
 --without-doxygen
 --enable-ccache
 --enable-kf6
