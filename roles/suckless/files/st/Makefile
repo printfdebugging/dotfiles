@@ -6,7 +6,7 @@ INCDIR = inc
 OBJDIR = obj
 APPEXE = st
 
-CFLAGS = -Iinc  \
+CFLAGS = -I$(INCDIR) \
 		 -I/usr/X11R6/include \
 		 -I/usr/include/freetype2  \
 		 -I/usr/include/libpng16  \
