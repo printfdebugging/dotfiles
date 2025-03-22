@@ -1,10 +1,12 @@
-PREFIX = /usr/local
-MANPREFIX = $(PREFIX)/share/man
+PREFIX 		= /usr/local
+MANPREFIX 	= $(PREFIX)/share/man
+
 
 SRCDIR = src
 INCDIR = inc
 OBJDIR = obj
 APPEXE = st
+
 
 CFLAGS = -I$(INCDIR) \
 		 -I/usr/X11R6/include \
@@ -20,6 +22,7 @@ CFLAGS = -I$(INCDIR) \
 		 -DVERSION=\"1\"  \
 		 -D_XOPEN_SOURCE=600
 
+
 LDFLAGS = -L/usr/X11R6/lib \
 		  -lm \
 		  -lrt \
@@ -34,7 +37,7 @@ LDFLAGS = -L/usr/X11R6/lib \
 
 CFILES = $(shell find $(SRCDIR) -name '*.c')
 HFILES = $(shell find $(INCDIR) -name '*.h')
-OFILES := $(CFILES:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
+OFILES = $(CFILES:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
 all : $(APPEXE)
 
