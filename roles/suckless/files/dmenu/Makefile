@@ -1,8 +1,8 @@
 PREFIX    = /usr/local
 MANPREFIX = $(PREFIX)/share/man
 
-SRCDIR    = source
-INCDIR 	  = include
+SRCDIR    = src
+INCDIR 	  = inc
 OBJDIR    = obj
 SCRIPTDIR = scripts
 MANDIR    = man
