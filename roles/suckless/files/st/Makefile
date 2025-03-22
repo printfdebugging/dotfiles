@@ -15,18 +15,15 @@ options:
 	@echo "LDFLAGS = $(STLDFLAGS)"
 	@echo "CC      = $(CC)"
 
-config.h:
-	cp config.def.h config.h
-
 .c.o:
 	$(CC) $(STCFLAGS) -c $<
 
-st.o: config.h st.h win.h
-x.o: arg.h config.h st.h win.h hb.h
+st.o:  st.h win.h
+x.o: arg.h  st.h win.h hb.h
 hb.o: st.h
-boxdraw.o: config.h st.h boxdraw_data.h
+boxdraw.o: st.h boxdraw_data.h
 
-$(OBJ): config.h config.mk
+$(OBJ):  config.mk
 
 st: $(OBJ)
 	$(CC) -o $@ $(OBJ) $(STLDFLAGS)
@@ -36,8 +33,8 @@ clean:
 
 dist: clean
 	mkdir -p st-$(VERSION)
-	cp -R FAQ LEGACY TODO LICENSE Makefile README config.mk\
-		config.def.h st.info st.1 arg.h st.h win.h $(SRC)\
+	cp -R Makefile README config.mk\
+		st.info st.1 arg.h st.h win.h $(SRC)\
 		st-$(VERSION)
 	tar -cf - st-$(VERSION) | gzip > st-$(VERSION).tar.gz
 	rm -rf st-$(VERSION)

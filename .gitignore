@@ -1,1 +1,10 @@
+# folders
+**/build/
+**/__pycache__/
+**/.cache/
+
+# files
+**compile_commands.json*
+**credentials.py*
+**calendar.xml*
 **.o*
