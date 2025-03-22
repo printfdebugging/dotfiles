@@ -2,7 +2,7 @@
   {
     "arguments": [
       "/usr/bin/cc",
-      "-std=c99",
+      "-Iinc",
       "-I/usr/X11R6/include",
       "-I/usr/include/freetype2",
       "-I/usr/include/libpng16",
@@ -13,18 +13,21 @@
       "-I/usr/include/libpng16",
       "-I/usr/include/glib-2.0",
       "-I/usr/lib64/glib-2.0/include",
-      "-DVERSION=\"0.9\"",
+      "-DVERSION=\"1\"",
       "-D_XOPEN_SOURCE=600",
       "-c",
-      "st.c"
+      "-o",
+      "obj/hb.o",
+      "src/hb.c"
     ],
     "directory": "/home/printfdebugging/repos/dotfiles/roles/suckless/files/st",
-    "file": "/home/printfdebugging/repos/dotfiles/roles/suckless/files/st/st.c"
+    "file": "/home/printfdebugging/repos/dotfiles/roles/suckless/files/st/src/hb.c",
+    "output": "/home/printfdebugging/repos/dotfiles/roles/suckless/files/st/obj/hb.o"
   },
   {
     "arguments": [
       "/usr/bin/cc",
-      "-std=c99",
+      "-Iinc",
       "-I/usr/X11R6/include",
       "-I/usr/include/freetype2",
       "-I/usr/include/libpng16",
@@ -35,18 +38,21 @@
       "-I/usr/include/libpng16",
       "-I/usr/include/glib-2.0",
       "-I/usr/lib64/glib-2.0/include",
-      "-DVERSION=\"0.9\"",
+      "-DVERSION=\"1\"",
       "-D_XOPEN_SOURCE=600",
       "-c",
-      "x.c"
+      "-o",
+      "obj/x.o",
+      "src/x.c"
     ],
     "directory": "/home/printfdebugging/repos/dotfiles/roles/suckless/files/st",
-    "file": "/home/printfdebugging/repos/dotfiles/roles/suckless/files/st/x.c"
+    "file": "/home/printfdebugging/repos/dotfiles/roles/suckless/files/st/src/x.c",
+    "output": "/home/printfdebugging/repos/dotfiles/roles/suckless/files/st/obj/x.o"
   },
   {
     "arguments": [
       "/usr/bin/cc",
-      "-std=c99",
+      "-Iinc",
       "-I/usr/X11R6/include",
       "-I/usr/include/freetype2",
       "-I/usr/include/libpng16",
@@ -57,18 +63,21 @@
       "-I/usr/include/libpng16",
       "-I/usr/include/glib-2.0",
       "-I/usr/lib64/glib-2.0/include",
-      "-DVERSION=\"0.9\"",
+      "-DVERSION=\"1\"",
       "-D_XOPEN_SOURCE=600",
       "-c",
-      "boxdraw.c"
+      "-o",
+      "obj/st.o",
+      "src/st.c"
     ],
     "directory": "/home/printfdebugging/repos/dotfiles/roles/suckless/files/st",
-    "file": "/home/printfdebugging/repos/dotfiles/roles/suckless/files/st/boxdraw.c"
+    "file": "/home/printfdebugging/repos/dotfiles/roles/suckless/files/st/src/st.c",
+    "output": "/home/printfdebugging/repos/dotfiles/roles/suckless/files/st/obj/st.o"
   },
   {
     "arguments": [
       "/usr/bin/cc",
-      "-std=c99",
+      "-Iinc",
       "-I/usr/X11R6/include",
       "-I/usr/include/freetype2",
       "-I/usr/include/libpng16",
@@ -79,12 +88,15 @@
       "-I/usr/include/libpng16",
       "-I/usr/include/glib-2.0",
       "-I/usr/lib64/glib-2.0/include",
-      "-DVERSION=\"0.9\"",
+      "-DVERSION=\"1\"",
       "-D_XOPEN_SOURCE=600",
       "-c",
-      "hb.c"
+      "-o",
+      "obj/boxdraw.o",
+      "src/boxdraw.c"
     ],
     "directory": "/home/printfdebugging/repos/dotfiles/roles/suckless/files/st",
-    "file": "/home/printfdebugging/repos/dotfiles/roles/suckless/files/st/hb.c"
+    "file": "/home/printfdebugging/repos/dotfiles/roles/suckless/files/st/src/boxdraw.c",
+    "output": "/home/printfdebugging/repos/dotfiles/roles/suckless/files/st/obj/boxdraw.o"
   }
 ]

@@ -1,48 +1,57 @@
-# st - simple terminal
-# See LICENSE file for copyright and license details.
-.POSIX:
+PREFIX = /usr/local
+MANPREFIX = $(PREFIX)/share/man
 
-include config.mk
+SRCDIR = src
+INCDIR = inc
+OBJDIR = obj
+APPEXE = st
 
-SRC = st.c x.c boxdraw.c hb.c
-OBJ = $(SRC:.c=.o)
+CFLAGS = -Iinc  \
+		 -I/usr/X11R6/include \
+		 -I/usr/include/freetype2  \
+		 -I/usr/include/libpng16  \
+		 -I/usr/include/freetype2  \
+		 -I/usr/include/libpng16   \
+		 -I/usr/include/harfbuzz \
+		 -I/usr/include/freetype2  \
+		 -I/usr/include/libpng16  \
+		 -I/usr/include/glib-2.0  \
+		 -I/usr/lib64/glib-2.0/include  \
+		 -DVERSION=\"1\"  \
+		 -D_XOPEN_SOURCE=600
 
-all: options st
+LDFLAGS = -L/usr/X11R6/lib \
+		  -lm \
+		  -lrt \
+		  -lX11 \
+		  -lutil \
+		  -lXft \
+		  -lXrender \
+		  -lfontconfig \
+		  -lfreetype \
+		  -lfreetype \
+		  -lharfbuzz
 
-options:
-	@echo st build options:
-	@echo "CFLAGS  = $(STCFLAGS)"
-	@echo "LDFLAGS = $(STLDFLAGS)"
-	@echo "CC      = $(CC)"
+CFILES = $(shell find $(SRCDIR) -name '*.c')
+HFILES = $(shell find $(INCDIR) -name '*.h')
+OFILES := $(CFILES:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
-.c.o:
-	$(CC) $(STCFLAGS) -c $<
+all : $(APPEXE)
 
-st.o:  st.h win.h
-x.o: arg.h  st.h win.h hb.h
-hb.o: st.h
-boxdraw.o: st.h boxdraw_data.h
+$(APPEXE) : $(OFILES)
+	$(CC) -o $@ $(OFILES) $(LDFLAGS)
 
-$(OBJ):  config.mk
-
-st: $(OBJ)
-	$(CC) -o $@ $(OBJ) $(STLDFLAGS)
+$(OBJDIR)/%.o : $(SRCDIR)/%.c
+	mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f st $(OBJ) st-$(VERSION).tar.gz
+	rm -rf $(APPEXE) $(OBJDIR)
 
-dist: clean
-	mkdir -p st-$(VERSION)
-	cp -R Makefile README config.mk\
-		st.info st.1 arg.h st.h win.h $(SRC)\
-		st-$(VERSION)
-	tar -cf - st-$(VERSION) | gzip > st-$(VERSION).tar.gz
-	rm -rf st-$(VERSION)
-
-install: st
+install: $(APPEXE)
 	mkdir -p $(DESTDIR)$(PREFIX)/bin
-	cp -f st $(DESTDIR)$(PREFIX)/bin
-	chmod 755 $(DESTDIR)$(PREFIX)/bin/st
+	cp -f $(APPEXE) $(DESTDIR)$(PREFIX)/bin
+	chmod 755 $(DESTDIR)$(PREFIX)/bin/$(APPEXE)
 	mkdir -p $(DESTDIR)$(MANPREFIX)/man1
 	sed "s/VERSION/$(VERSION)/g" < st.1 > $(DESTDIR)$(MANPREFIX)/man1/st.1
 	chmod 644 $(DESTDIR)$(MANPREFIX)/man1/st.1
@@ -50,7 +59,5 @@ install: st
 	@echo Please see the README file regarding the terminfo entry of st.
 
 uninstall:
-	rm -f $(DESTDIR)$(PREFIX)/bin/st
+	rm -f $(DESTDIR)$(PREFIX)/bin/$(APPEXE)
 	rm -f $(DESTDIR)$(MANPREFIX)/man1/st.1
-
-.PHONY: all options clean dist install uninstall

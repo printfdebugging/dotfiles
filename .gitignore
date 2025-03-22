@@ -1,5 +1,6 @@
 # folders
 **/build/
+**/obj/
 **/__pycache__/
 **/.cache/
 
