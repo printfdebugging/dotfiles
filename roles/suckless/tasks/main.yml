@@ -12,6 +12,8 @@
     - libXinerama-devel
     - harfbuzz-devel
     - freetype
+    - webkit2gtk-devel
+    - gcr-devel
 
 - name: (suckless) remove src files
   become: false
