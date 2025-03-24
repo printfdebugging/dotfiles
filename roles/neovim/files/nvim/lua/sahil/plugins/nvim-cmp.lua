@@ -25,6 +25,8 @@ return {
       view = { docs = { auto_open = false } },
       window = {
         completion = {
+            -- border = "rounded",
+          winhighlight = "Normal:lualine_c_normal",
           scrollbar = false,
         },
       },
