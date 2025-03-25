@@ -34,5 +34,3 @@
     update: no
   loop:
     - dotfiles
-    - cookbook
-    - blog
