@@ -34,3 +34,4 @@
     update: no
   loop:
     - dotfiles
+    - programming
