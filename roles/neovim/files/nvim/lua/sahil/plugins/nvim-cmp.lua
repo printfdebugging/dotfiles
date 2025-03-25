@@ -26,7 +26,7 @@ return {
       window = {
         completion = {
             -- border = "rounded",
-          winhighlight = "Normal:lualine_c_normal",
+          -- winhighlight = "Normal:lualine_c_normal",
           scrollbar = false,
         },
       },

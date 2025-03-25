@@ -23,9 +23,9 @@ return {
       no_underline = false,
       styles = {
         comments = {},
-        conditionals = {},
+        conditionals = { "bold" },
         loops = {},
-        functions = {},
+        functions = { "bold" },
         keywords = {},
         strings = {},
         variables = {},
@@ -73,19 +73,19 @@ return {
       highlight_overrides = {
         mocha = function(mocha)
           return {
-            -- ["@keyword.directive"] = { fg = "#C586C0" },
-            -- ["@keyword.import"] = { fg = "#C586C0" },
-            -- ["@function.method"] = { fg = mocha.blue },
             -- ["@function.cpp"] = { fg = mocha.blue },
-            -- ["@function.call"] = { fg = mocha.blue },
             -- ["@function.method.call"] = { fg = mocha.blue },
             -- ["@constructor"] = { fg = mocha.blue },
             -- ["@constant"] = { fg = mocha.peach },
             -- ["@operator"] = { fg = mocha.blue },
-            -- ["@keyword.type"] = { fg = mocha.blue },
             ["@comment"] = { fg = "#676E95" },
-            -- ["@string"] = { fg = "#CE9178" },
-
+            ["@keyword.import"] = { fg = "#cba6f7", style = { "bold" } },
+            ["@keyword.directive"] = { fg = "#cba6f7", style = { "bold" } },
+            ["@keyword.directive.define"] = { fg = "#f5c2e7", style = { "bold" } },
+            ["@constant"] = { fg = "#fab387", style = { "bold" } },
+            ["@constant.builtin"] = { fg = "#cba6f7", style = { "bold" } },
+            -- ["@function.call"] = { fg = mocha.blue },
+            -- ["@function.method"] = { fg = mocha.blue },
             ["@markup.heading.1.markdown"] = { fg = mocha.blue, style = { "bold" } },
             ["@markup.heading.2.markdown"] = { fg = "#A9A1E1", style = { "bold" } },
             ["@markup.heading.3.markdown"] = { fg = "#A9A1E1", style = { "bold" } },
@@ -93,15 +93,6 @@ return {
             ["@markup.heading.5.markdown"] = { fg = "#A9A1E1", style = { "bold" } },
             ["@markup.heading.6.markdown"] = { fg = "#A9A1E1", style = { "bold" } },
             ["@markup.link.label"] = { fg = mocha.blue, style = { "bold", "underline" } },
-
-            RenderMarkdownH1Bg = { fg = mocha.blue, bg = "#282c34", style = { "bold" } },
-            RenderMarkdownH2Bg = { fg = "#A9A1E1", bg = "#282c34", style = { "bold" } },
-            RenderMarkdownH3Bg = { fg = "#A9A1E1", bg = "#282c34", style = { "bold" } },
-            RenderMarkdownH4Bg = { fg = "#A9A1E1", bg = "#282c34", style = { "bold" } },
-            RenderMarkdownH5Bg = { fg = "#A9A1E1", bg = "#282c34", style = { "bold" } },
-            RenderMarkdownH6Bg = { fg = "#A9A1E1", bg = "#282c34", style = { "bold" } },
-            RenderMarkdownCode = { bg = "#21242b" },
-            RenderMarkdownCodeInline = { bg = "#21242b" },
           }
         end,
       },
@@ -127,15 +118,17 @@ return {
       highlight LineNr        guifg=#d8dee9
       highlight LineNrAbove   guifg=#3f444a
       highlight LineNrBelow   guifg=#3f444a
-      highlight CursorLine    guibg=#21242b
-      highlight CursorLineNr  guibg=#21242b
-      highlight GitSignsAddCul guibg=#21242b guifg=#98be65
-      highlight GitSignsChangeCul guibg=#21242b guifg=#ecb37b
-      highlight GitSignsDeleteCul guibg=#21242b guifg=#f38ba8
-      highlight GitSignsChangedeleteCul guibg=#21242b guifg=#f38ba8
-      highlight GitSignsTopdeleteCul guibg=#21242b guifg=#f38ba8
-      highlight GitSignsUntrackedCul guibg=#21242b guifg=#98be65
-      highlight Visual guibg=#3f444a guifg=none
+      highlight CursorLine    guibg=#3C435E
+      highlight CursorLineNr  guibg=#3C435E
+
+      highlight GitSignsAddCul guibg=#3c435e guifg=#98be65
+      highlight GitSignsChangeCul guibg=#3c435e guifg=#ecb37b
+      highlight GitSignsDeleteCul guibg=#3c435e guifg=#f38ba8
+      highlight GitSignsChangedeleteCul guibg=#3c435e guifg=#f38ba8
+      highlight GitSignsTopdeleteCul guibg=#3c435e guifg=#f38ba8
+      highlight GitSignsUntrackedCul guibg=#3c435e guifg=#98be65
+
+      highlight Visual guibg=#3C435E guifg=none
       highlight Whitespace guifg=#2a2a2a
       highlight MatchParen guibg=#00000000
     ]])
