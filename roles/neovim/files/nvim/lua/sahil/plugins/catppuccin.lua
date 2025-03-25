@@ -83,7 +83,7 @@ return {
             -- ["@constant"] = { fg = mocha.peach },
             -- ["@operator"] = { fg = mocha.blue },
             -- ["@keyword.type"] = { fg = mocha.blue },
-            ["@comment"] = { fg = "#5B6268" },
+            ["@comment"] = { fg = "#676E95" },
             -- ["@string"] = { fg = "#CE9178" },
 
             ["@markup.heading.1.markdown"] = { fg = mocha.blue, style = { "bold" } },

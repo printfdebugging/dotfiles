@@ -1,6 +1,6 @@
 local options = {
-  relativenumber = true,
-  number = true,
+  relativenumber = false,
+  number = false,
   ruler = false,
   cmdheight = 1,
   background = "dark",

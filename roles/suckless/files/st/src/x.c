@@ -66,10 +66,10 @@ static void ttysend(const Arg *);
 /* appearance
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Iosevka Nerd"
-                    "Font:pixelsize=24:style=Regular:antialias=true:autohint=true";
+static char *font = "JetBrainsMono Nerd"
+                    "Font:pixelsize=17:style=Regular:antialias=true:autohint=true";
 
-static int borderpx = 8;
+static int borderpx = 1;
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -186,7 +186,7 @@ const char *colorname[] = {
     [15] = "#d8dee9", /* white   */
 
     /* special colors */
-    [256] = "#181818", /* background */
+    [256] = "#292D3E", /* background */
     [257] = "#d8dee9", /* foreground */
     [258] = "#51afef", /* cursor */
 };
