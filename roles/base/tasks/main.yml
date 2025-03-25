@@ -164,7 +164,6 @@
       fi
   loop:
     [
-      { font: "Iosevka",        url: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.0/Iosevka.zip", },
       { font: "JetBrainsMono",  url: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.0/JetBrainsMono.zip", },
     ]
 
