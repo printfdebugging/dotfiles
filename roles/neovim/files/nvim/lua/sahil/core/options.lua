@@ -35,7 +35,7 @@ local options = {
     tab = "⋅⋅⋅",
   },
   -- mouse = "",
-  formatprg = "par jw155",
+  formatprg = "par jw75",
 }
 
 for key, value in pairs(options) do
