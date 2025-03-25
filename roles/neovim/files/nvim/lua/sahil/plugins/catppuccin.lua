@@ -120,6 +120,7 @@ return {
       highlight LineNrBelow   guifg=#3f444a
       highlight CursorLine    guibg=#3C435E
       highlight CursorLineNr  guibg=#3C435E
+      highlight Comment       guifg=#676E95
 
       highlight GitSignsAddCul guibg=#3c435e guifg=#98be65
       highlight GitSignsChangeCul guibg=#3c435e guifg=#ecb37b
