@@ -57,7 +57,7 @@
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
   ;; Sets the default theme to load!!! 
-  (load-theme 'doom-palenight t)
+  (load-theme 'doom-one t)
   ;; Enable custom neotree theme (all-the-icons must be installed!)
   (doom-themes-neotree-config)
   ;; Corrects (and improves) org-mode's native fontification.
@@ -90,7 +90,7 @@
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
-(fringe-mode 8)
+(fringe-mode 0)
 (setq initial-scratch-message ""
     inhibit-startup-message t
     standard-indent 2
@@ -140,51 +140,17 @@
 * Font Configuration
 
 #+begin_src emacs-lisp
-(set-face-attribute 'variable-pitch nil
-                    :family "JetBrainsMono Nerd Font"
-                    :foreground "#eeffff"
-                    :height 130
-                    :weight 'Regular)
-(set-face-attribute 'default nil
-                    :family "JetBrainsMono Nerd Font"
-                    :foreground "#d8dee9"
-                    :height 130
-                    :weight 'Regular)
-(set-face-attribute 'fixed-pitch nil
-                    :family "JetBrainsMono Nerd Font"
-                    :foreground "#d8dee9"
-                    :height 130
-                    :weight 'Regular)
-(set-face-attribute 'org-document-title nil
-                    :family "JetBrainsMono Nerd Font"
-                    :height 130
-                    :weight 'Bold
-                    :foreground "#bbc2cf")
-(set-face-attribute 'org-level-1 nil
-                    :family "JetBrainsMono Nerd Font"
-                    :height 130
-                    :weight 'Bold)
-(set-face-attribute 'org-level-2 nil
-                    :family "JetBrainsMono Nerd Font"
-                    :weight 'Bold
-                    :height 130
-                    :foreground "#A9A1E1")
-(set-face-attribute 'org-level-3 nil
-                    :family "JetBrainsMono Nerd Font"
-                    :weight 'Bold
-                    :height 130
-                    :foreground "#A9A1E1")
-(set-face-attribute 'org-level-4 nil
-                    :family "JetBrainsMono Nerd Font"
-                    :height 130
-                    :weight 'Bold)
-
-(set-face-attribute 'org-verbatim nil
-                    :background "#23272e")
-(set-face-attribute 'org-block-begin-line nil
-                    :foreground "#23272e")
-(set-face-attribute 'bold nil
-                    :foreground "#98817B")
+(set-face-attribute 'variable-pitch nil         :family "Iosevka Nerd Font" :foreground "#eeffff" :height 180     :weight 'Regular)
+(set-face-attribute 'default nil                :family "Iosevka Nerd Font" :foreground "#d8dee9" :height 180     :weight 'Regular)
+(set-face-attribute 'fixed-pitch nil            :family "Iosevka Nerd Font" :foreground "#d8dee9" :height 180     :weight 'Regular)
+(set-face-attribute 'org-document-title nil     :family "Iosevka Nerd Font" :height 330           :weight 'Bold   :foreground "#bbc2cf")
+(set-face-attribute 'org-level-1 nil            :family "Iosevka Nerd Font" :height 300           :weight 'Bold)
+(set-face-attribute 'org-level-2 nil            :family "Iosevka Nerd Font" :weight 'Bold         :height 270     :foreground "#A9A1E1")
+(set-face-attribute 'org-level-3 nil            :family "Iosevka Nerd Font" :weight 'Bold         :height 220     :foreground "#A9A1E1")
+(set-face-attribute 'org-level-4 nil            :family "Iosevka Nerd Font" :height 180           :weight 'Bold)
+(set-face-attribute 'org-verbatim nil           :background "#23272e")
+(set-face-attribute 'org-block-begin-line nil   :foreground "#23272e")
+(set-face-attribute 'bold nil                   :foreground "#98817B")
 #+end_src
 
 * Keybindings
@@ -545,7 +511,7 @@ To execute source blocks asynchronously, add =:async= to the source block's head
   :ensure t
   :hook (org-mode . org-bullets-mode)
   :config
-  (setq org-bullets-bullet-list '( "◉" "○" "✸" "⁖" "⁖" "⁖" "⁖" )))
+  (setq org-bullets-bullet-list '( "#" "##" "###" "⁖" "⁖" "⁖" "⁖" )))
 #+END_SRC
 
 * Indentation Source Blocks
@@ -648,12 +614,12 @@ For compilation buffer or lsp reference buffers, open them in horizontal split.
          (display-buffer-reuse-window
           display-buffer-in-direction)
          (direction . below) ;; Horizontal split below
-         (window-height . 0.3)) ;; Adjust the height percentage
+         (window-height . 0.5)) ;; Adjust the height percentage
         ("\\*xref\\*" ;; Match the xref buffer used for references like lsp-find-references
          (display-buffer-reuse-window
           display-buffer-in-direction)
          (direction . below) ;; Horizontal split below
-         (window-height . 0.3))))
+         (window-height . 0.5))))
 #+END_SRC
 
 ** LSP Mode
@@ -679,6 +645,7 @@ For compilation buffer or lsp reference buffers, open them in horizontal split.
 (setq lsp-signature-render-documentation nil)
 (setq lsp-signature-auto-activate nil)
 (setq lsp-headerline-arrow "•")
+(setq lsp-headerline-breadcrumb-enable nil)
 (setq lsp-prefer-flymake nil)
 #+END_SRC
 
@@ -844,14 +811,14 @@ from $1 to $0 and back to $1, having them selected for change in the process.
 * Clean Org Mode
 
 #+BEGIN_SRC emacs-lisp
-;; (defun me-org-mode-remove-stars ()
-;;   (font-lock-add-keywords
-;;    nil
-;;    '(("^\\*+ "
-;;       (0
-;;        (prog1 nil
-;;          (put-text-property (match-beginning 0) (match-end 0)
-;;                             'invisible t)))))))
+(defun me-org-mode-remove-stars ()
+  (font-lock-add-keywords
+   nil
+   '(("^\\*+ "
+      (0
+       (prog1 nil
+         (put-text-property (match-beginning 0) (match-end 0)
+                            'invisible t)))))))
 ;; (add-hook 'org-mode-hook #'me-org-mode-remove-stars)
 #+END_SRC
 
@@ -861,7 +828,7 @@ from $1 to $0 and back to $1, having them selected for change in the process.
   (package-install 'visual-fill-column))
 
 ;; Configure fill width
-(setq visual-fill-column-width 140
+(setq visual-fill-column-width 160
       visual-fill-column-center-text t)
 
 (defun my/org-present-start ()
@@ -1082,8 +1049,8 @@ from $1 to $0 and back to $1, having them selected for change in the process.
 * Transparency
 
 #+BEGIN_SRC emacs-lisp
-(set-frame-parameter (selected-frame) 'alpha '(90 . 90))
-(add-to-list 'default-frame-alist '(alpha . (90 . 90)))
+(set-frame-parameter (selected-frame) 'alpha '(100 . 100))
+(add-to-list 'default-frame-alist '(alpha . (100 . 100)))
 (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 #+END_SRC
