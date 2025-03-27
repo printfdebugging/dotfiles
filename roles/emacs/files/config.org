@@ -171,9 +171,9 @@
       ;; If *vterm* buffer is already visible, delete its window
       (delete-window (get-buffer-window "*terminal*"))
     ;; Otherwise, show *vterm* buffer in a new window
-    (select-window (split-window-vertically -12) )
+    (select-window (split-window-vertically) )
     (term "/usr/bin/zsh")
-    (text-scale-set 0.5)))
+    (text-scale-set 0)))
 
 (use-package evil-leader
   :ensure t
