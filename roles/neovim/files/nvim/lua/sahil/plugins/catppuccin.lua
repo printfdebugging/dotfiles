@@ -23,9 +23,9 @@ return {
       no_underline = false,
       styles = {
         comments = {},
-        conditionals = { "bold" },
+        conditionals = {},
         loops = {},
-        functions = { "bold" },
+        functions = {},
         keywords = {},
         strings = {},
         variables = {},
@@ -78,21 +78,21 @@ return {
             -- ["@constructor"] = { fg = mocha.blue },
             -- ["@constant"] = { fg = mocha.peach },
             -- ["@operator"] = { fg = mocha.blue },
-            ["@comment"] = { fg = "#676E95" },
-            ["@keyword.import"] = { fg = "#cba6f7", style = { "bold" } },
-            ["@keyword.directive"] = { fg = "#cba6f7", style = { "bold" } },
-            ["@keyword.directive.define"] = { fg = "#f5c2e7", style = { "bold" } },
-            ["@constant"] = { fg = "#fab387", style = { "bold" } },
-            ["@constant.builtin"] = { fg = "#cba6f7", style = { "bold" } },
-            -- ["@function.call"] = { fg = mocha.blue },
+            ["@comment"] = { fg = "#5b6268" },
+            ["@keyword.import"] = { fg = "#cba6f7", style = {} },
+            ["@keyword.directive"] = { fg = "#cba6f7", style = {} },
+            ["@keyword.directive.define"] = { fg = "#f5c2e7", style = {} },
+            ["@constant"] = { fg = "#fab387", style = {} },
+            ["@constant.builtin"] = { fg = "#cba6f7", style = {} },
+            ["@function.call"] = { fg = "#51afef", style = {} },
             -- ["@function.method"] = { fg = mocha.blue },
-            ["@markup.heading.1.markdown"] = { fg = mocha.blue, style = { "bold" } },
-            ["@markup.heading.2.markdown"] = { fg = "#A9A1E1", style = { "bold" } },
-            ["@markup.heading.3.markdown"] = { fg = "#A9A1E1", style = { "bold" } },
-            ["@markup.heading.4.markdown"] = { fg = "#A9A1E1", style = { "bold" } },
-            ["@markup.heading.5.markdown"] = { fg = "#A9A1E1", style = { "bold" } },
-            ["@markup.heading.6.markdown"] = { fg = "#A9A1E1", style = { "bold" } },
-            ["@markup.link.label"] = { fg = mocha.blue, style = { "bold", "underline" } },
+            ["@markup.heading.1.markdown"] = { fg = mocha.blue, style = {} },
+            ["@markup.heading.2.markdown"] = { fg = "#A9A1E1", style = {} },
+            ["@markup.heading.3.markdown"] = { fg = "#A9A1E1", style = {} },
+            ["@markup.heading.4.markdown"] = { fg = "#A9A1E1", style = {} },
+            ["@markup.heading.5.markdown"] = { fg = "#A9A1E1", style = {} },
+            ["@markup.heading.6.markdown"] = { fg = "#A9A1E1", style = {} },
+            ["@markup.link.label"] = { fg = mocha.blue, style = {} },
           }
         end,
       },
@@ -112,7 +112,7 @@ return {
     vim.cmd.colorscheme("catppuccin")
 
     vim.cmd([[
-      highlight TabLineSel    guifg=#242b38 guibg=#59c2ff
+      highlight TabLineSel    guifg=#1d2026 guibg=#59c2ff
       highlight TabLineFill   guibg=#00000000
       highlight TabLine       guibg=#00000000
       highlight LineNr        guifg=#d8dee9
@@ -120,7 +120,7 @@ return {
       highlight LineNrBelow   guifg=#3f444a
       highlight CursorLine    guibg=#3C435E
       highlight CursorLineNr  guibg=#3C435E
-      highlight Comment       guifg=#676E95
+      highlight Comment       guifg=#5b6268
 
       highlight GitSignsAddCul guibg=#3c435e guifg=#98be65
       highlight GitSignsChangeCul guibg=#3c435e guifg=#ecb37b
@@ -132,8 +132,8 @@ return {
       highlight Visual guibg=#3C435E guifg=none
       highlight Whitespace guifg=#2a2a2a
       highlight MatchParen guibg=#00000000
-      highlight lualine_tab_active guibg=#232635 guifg=#98be65 gui=bold
-      highlight lualine_tab_inactive guibg=#232635 guifg=#bbc2cf
+      highlight lualine_tab_active guibg=#1d2026 guifg=#98be65 gui=bold
+      highlight lualine_tab_inactive guibg=#1d2026 guifg=#bbc2cf
     ]])
     vim.cmd([[highlight! link CursorLineSign CursorLine]])
   end,

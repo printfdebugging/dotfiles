@@ -66,8 +66,8 @@ static void ttysend(const Arg *);
 /* appearance
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "JetBrainsMono Nerd"
-                    "Font:pixelsize=17:style=Regular:antialias=true:autohint=true";
+static char *font = "Iosevka Nerd"
+                    "Font:pixelsize=26:style=Regular:antialias=true:autohint=true";
 
 static int borderpx = 8;
 
@@ -186,7 +186,7 @@ const char *colorname[] = {
     [15] = "#d8dee9", /* white   */
 
     /* special colors */
-    [256] = "#292D3E", /* background */
+    [256] = "#282c34", /* background */
     [257] = "#d8dee9", /* foreground */
     [258] = "#51afef", /* cursor */
 };
