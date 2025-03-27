@@ -391,7 +391,7 @@ files as root with just a keybinding, therefore preventing the hassle to exit an
   (unless (or dw/is-termux
               (string-equal "/gnu/store/" (expand-file-name default-directory)))
     (nerd-icons-dired-mode 1))
-  (hl-line-mode 1))
+  (hl-line-mode 0))
 
 (use-package dired
   :ensure nil
