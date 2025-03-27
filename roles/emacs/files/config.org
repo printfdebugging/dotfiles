@@ -173,7 +173,7 @@
     ;; Otherwise, show *vterm* buffer in a new window
     (select-window (split-window-vertically -12) )
     (term "/usr/bin/zsh")
-    (text-scale-set 0.3)))
+    (text-scale-set 0.5)))
 
 (use-package evil-leader
   :ensure t
@@ -799,13 +799,14 @@ from $1 to $0 and back to $1, having them selected for change in the process.
 
 #+END_SRC
 
+* custom list bullet
 
 #+BEGIN_SRC emacs-lisp
-(font-lock-add-keywords
- 'org-mode
- '(("^[[:space:]]*\\(-\\) "
-        (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
-(setq-default org-list-indent-offset 2)
+;; (font-lock-add-keywords
+;;  'org-mode
+;;  '(("^[[:space:]]*\\(-\\) "
+;;         (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+;; (setq-default org-list-indent-offset 2)
 #+END_SRC
 
 * Clean Org Mode
