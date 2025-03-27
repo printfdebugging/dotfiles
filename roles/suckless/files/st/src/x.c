@@ -69,7 +69,7 @@ static void ttysend(const Arg *);
 static char *font = "Iosevka Nerd"
                     "Font:pixelsize=26:style=Regular:antialias=true:autohint=true";
 
-static int borderpx = 0;
+static int borderpx = 7;
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -1763,8 +1763,8 @@ cresize(int width, int height)
 	col = MAX(1, col);
 	row = MAX(1, row);
 
-	win.hborderpx = 0; // FIXME: (win.w - col * win.cw) / 2;
-	win.vborderpx = 0; // FIXME: (win.h - row * win.ch) / 2;
+	win.hborderpx = (win.w - col * win.cw) / 2;
+	win.vborderpx = (win.h - row * win.ch) / 2;
 
 	tresize(col, row);
 	xresize(col, row);
