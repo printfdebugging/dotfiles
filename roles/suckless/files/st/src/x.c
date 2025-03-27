@@ -66,8 +66,7 @@ static void ttysend(const Arg *);
 /* appearance
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Iosevka Nerd"
-                    "Font:pixelsize=26:style=Regular:antialias=true:autohint=true";
+static char *font = "Iosevka Nerd Font:pixelsize=26:style=Regular:antialias=true:autohint=true";
 
 static int borderpx = 7;
 
