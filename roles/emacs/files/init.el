@@ -14,6 +14,7 @@
                    "programming.el"
                    "neotree.el" ;; pending (remove the path from the top)
                    "org-babel.el"
+                   "org-roam.el"
                    "org-mode.el"
                    "snippets.el" ;; pending (not working)
                    "user-interface.el"
