@@ -1,14 +1,14 @@
 
-(defun efs/split-vertically()
-  (interactive)
-  (select-window (split-window-vertically)))
+;; (defun efs/split-vertically()
+;;   (interactive)
+;;   (select-window (split-window-vertically)))
 
-(defun efs/split-horizontally()
-  (interactive)
-  (select-window (split-window-horizontally)))
+;; (defun efs/split-horizontally()
+;;   (interactive)
+;;   (select-window (split-window-horizontally)))
 
 (defun efs/toggle-vterm ()
-  "Toggle the visibility of the *vterm* buffer."
+  "toggle the visibility of the *vterm* buffer."
   (interactive)
   (if (get-buffer-window "*terminal*")
       ;; If *vterm* buffer is already visible, delete its window
@@ -17,6 +17,9 @@
     (select-window (split-window-vertically) )
     (term "/usr/bin/zsh")
     (text-scale-set 0)))
+
+(require 'bind-key)
+(bind-key* "C-z" 'efs/toggle-vterm)
 
 (use-package evil-leader
   :ensure t
@@ -58,9 +61,9 @@
     "of" 'org-roam-node-find
     "oi" 'org-roam-node-insert
     "or" 'org-babel-remove-result-one-or-many
-    "sh" (lambda () (interactive) (efs/split-vertically))
-    "sv" (lambda () (interactive) (efs/split-horizontally))
-    "z"  (lambda () (interactive) (efs/toggle-vterm))
+    ;; "sh" (lambda () (interactive) (efs/split-vertically))
+    ;; "sv" (lambda () (interactive) (efs/split-horizontally))
+    ;; "z"  (lambda () (interactive) (efs/toggle-vterm))
 
     ;; harpoon.el keybindings
     "1"  'harpoon-go-to-1
@@ -83,10 +86,10 @@
 (setq-default tab-width 2)
 
 ;; I will try the C-w hjkl for sometime
-(evil-define-key 'normal global-map (kbd "C-h") 'evil-window-left)
-(evil-define-key 'normal global-map (kbd "C-j") 'evil-window-down)
-(evil-define-key 'normal global-map (kbd "C-k") 'evil-window-up)
-(evil-define-key 'normal global-map (kbd "C-l") 'evil-window-right)
+;; (evil-define-key 'normal global-map (kbd "C-h") 'evil-window-left)
+;; (evil-define-key 'normal global-map (kbd "C-j") 'evil-window-down)
+;; (evil-define-key 'normal global-map (kbd "C-k") 'evil-window-up)
+;; (evil-define-key 'normal global-map (kbd "C-l") 'evil-window-right)
 
 ;; keep the cursor as a block in evil insert mode
 (setq evil-insert-state-cursor 'box)

@@ -8,7 +8,7 @@
   :init
   (setq org-roam-v2-ack t)
   :custom
-  (org-roam-directory "~/repos/programming/notes/roam")
+  (org-roam-directory "~/repos/projectEnv/wiki")
   (org-roam-completion-everywhere t)
   :config
   (org-roam-db-autosync-mode))

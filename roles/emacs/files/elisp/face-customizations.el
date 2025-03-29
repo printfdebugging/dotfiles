@@ -1,6 +1,8 @@
 (defun my-customize-faces ()
   ;; most of the faces should be of regular weight
-  (dolist (face '(tree-sitter-hl-face:doc
+  (dolist (face '(tree-sitter-hl-face:variable
+                  tree-sitter-hl-face:punctuation.delimiter
+                  tree-sitter-hl-face:doc
                   tree-sitter-hl-face:tag
                   tree-sitter-hl-face:type
                   tree-sitter-hl-face:label
@@ -15,7 +17,6 @@
                   tree-sitter-hl-face:function
                   tree-sitter-hl-face:operator
                   tree-sitter-hl-face:property
-                  tree-sitter-hl-face:variable
                   tree-sitter-hl-face:attribute
                   tree-sitter-hl-face:type.super
                   tree-sitter-hl-face:constructor
@@ -36,7 +37,34 @@
                   tree-sitter-hl-face:property.definition
                   tree-sitter-hl-face:punctuation.bracket
                   tree-sitter-hl-face:punctuation.special
-                  tree-sitter-hl-face:punctuation.delimiter))
+                  font-lock-doc-face
+                  font-lock-string-face
+                  font-lock-regexp-face
+                  font-lock-type-face
+                  font-lock-escape-face
+                  font-lock-constant-face
+                  font-lock-preprocessor-face
+                  font-lock-number-face
+                  font-lock-bracket-face
+                  font-lock-comment-face
+                  font-lock-keyword-face
+                  font-lock-warning-face
+                  font-lock-operator-face
+                  font-lock-delimiter-face
+                  font-lock-doc-markup-face
+                  font-lock-punctuation-face
+                  font-lock-property-use-face
+                  font-lock-variable-use-face
+                  font-lock-function-call-face
+                  font-lock-function-name-face
+                  font-lock-negation-char-face
+                  font-lock-property-name-face
+                  font-lock-variable-name-face
+                  elisp-shorthand-font-lock-face
+                  font-lock-misc-punctuation-face
+                  font-lock-comment-delimiter-face
+                  font-lock-regexp-grouping-backslash
+                  font-lock-regexp-grouping-construct))
     (set-face-attribute face nil
                         :weight 'normal
                         :slant 'normal
@@ -63,7 +91,6 @@
                         :underline nil))
 
   (dolist (face '(tree-sitter-hl-face:type.builtin
-                  tree-sitter-hl-face:constant.builtin
                   tree-sitter-hl-face:function.builtin
                   tree-sitter-hl-face:constructor
                   tree-sitter-hl-face:variable.builtin))
@@ -72,6 +99,28 @@
                         :foreground "#ECBE7B"
                         :slant 'normal
                         :underline nil))
+
+  ;; bold constants
+  (dolist (face '(tree-sitter-hl-face:constant.builtin
+                  font-lock-constant-face
+                  tree-sitter-hl-face:constant))
+    (set-face-attribute face nil
+                        :weight 'bold
+                        :foreground "#fab387"
+                        :slant 'normal
+                        :underline nil))
+
+  (set-face-attribute 'tree-sitter-hl-face:variable.parameter nil
+                      :weight 'normal
+                      :foreground "#eba0ac"
+                      :slant 'normal
+                      :underline nil)
+
+  (set-face-attribute 'tree-sitter-hl-face:property.definition nil
+                      :weight 'normal
+                      :foreground "#b4befe"
+                      :slant 'normal
+                      :underline nil)
 
   (dolist (face '(tree-sitter-hl-face:function
                   tree-sitter-hl-face:function.call
@@ -104,6 +153,7 @@
 
 ;; emacs-lisp syntax highlighting
 (dolist (face '(font-lock-keyword-face
+                org-document-info
                 font-lock-builtin-face))
   (set-face-attribute face nil
                       :weight 'normal

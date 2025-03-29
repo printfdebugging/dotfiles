@@ -17,5 +17,6 @@
     (indent-bars-treesit-ignore-blank-lines-types '("module"))
     :hook ((lsp-mode  . indent-bars-mode)
            (text-mode . indent-bars-mode)
-           (prog-mode . indent-bars-mode)))
+           (prog-mode . indent-bars-mode)
+           (org-mode  . (lambda () (indent-bars-mode 0)))))
 
