@@ -121,11 +121,29 @@
                       :weight 'Regular
                       :foreground "#d8dee9"))
 
-;; (set-face-attribute 'org-document-title nil     :family "Iosevka Nerd Font" :height 300           :weight 'Bold   :foreground "#bbc2cf")
-;; (set-face-attribute 'org-level-1 nil            :family "Iosevka Nerd Font" :height 270           :weight 'Bold)
-;; (set-face-attribute 'org-level-2 nil            :family "Iosevka Nerd Font" :weight 'Bold         :height 240     :foreground "#A9A1E1")
-;; (set-face-attribute 'org-level-3 nil            :family "Iosevka Nerd Font" :weight 'Bold         :height 190     :foreground "#A9A1E1")
-;; (set-face-attribute 'org-level-4 nil            :family "Iosevka Nerd Font" :height 150           :weight 'Bold)
-;; (set-face-attribute 'org-verbatim nil           :background "#23272e")
-;; (set-face-attribute 'org-block-begin-line nil   :foreground "#23272e")
-;; (set-face-attribute 'bold nil                   :foreground "#98817B")
+;; org mode heading and source block faces
+(set-face-attribute 'org-document-title nil
+                    :family "Iosevka Nerd Font"
+                    :height 250
+                    :weight 'Bold
+                    :foreground "#bbc2cf")
+
+(set-face-attribute 'org-level-1 nil
+                    :family "Iosevka Nerd Font"
+                    :height 230
+                    :weight 'Bold)
+
+(set-face-attribute 'org-level-2 nil
+                    :family "Iosevka Nerd Font"
+                    :height 190
+                    :foreground "#A9A1E1"
+                    :weight 'Bold)
+
+(set-face-attribute 'org-level-3 nil
+                    :family "Iosevka Nerd Font"
+                    :height 170
+                    :foreground "#A9A1E1"
+                    :weight 'Bold)
+
+(set-face-attribute 'org-block-begin-line nil
+                    :foreground "#23272e")

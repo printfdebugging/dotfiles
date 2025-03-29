@@ -89,3 +89,12 @@
 
 (add-hook 'c++-mode-hook 'my-c-mode-hook)
 (add-hook 'c-mode-hook 'my-c-mode-hook)
+
+;; use lambda symbol instead of literal word in lisp
+(defun sm-greek-lambda ()
+  (font-lock-add-keywords nil `(("\\<lambda\\>"
+                                 (0 (progn (compose-region (match-beginning 0) (match-end 0)
+                                                           ,(make-char 'greek-iso8859-7 107))
+                                           nil))))))
+
+(add-hook 'emacs-lisp-mode-hook 'sm-greek-lambda)
