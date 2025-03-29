@@ -4,11 +4,11 @@
 (use-package neotree
   :init
   (setq neo-theme                    'nerd-icons
-        neo-show-hidden-files         nil
+        neo-show-hidden-files         t
         neo-window-width              40
         neo-window-fixed-size         nil
         neo-autorefresh               t
-        neo-smart-open                t
+        neo-smart-open                nil
         neo-toggle-window-keep-p      nil
         neo-click-changes-root        nil
         neo-show-slash-for-folder     nil
@@ -16,7 +16,7 @@
         neo-cwd-line-style           'button)
   :config
   (doom-modeline-mode 1)
-  (define-key neotree-mode-map (kbd "TAB")
+  (define-key neotree-mode-map (kbd "TAB") ;; doesn't work for the time being
               (neotree-make-executor
                :file-fn 'neo-open-file
                :dir-fn  'neo-open-dir)))

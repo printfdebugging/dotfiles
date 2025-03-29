@@ -47,6 +47,7 @@
     mode: 0755
   loop:
     - snippets
+    - elisp
 
 - name: (emacs) save config files
   become: false
