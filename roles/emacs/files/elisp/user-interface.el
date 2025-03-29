@@ -2,7 +2,7 @@
   "don't show the initial help message in minibuffer area"
   (message ""))
 
-(setq scroll-conservatively         100
+(setq scroll-conservatively         1000
       scroll-margin                 0
       initial-scratch-message       ""
       inhibit-startup-message       t
