@@ -67,6 +67,7 @@
                   font-lock-regexp-grouping-construct))
     (set-face-attribute face nil
                         :weight 'normal
+                        :height 165
                         :slant 'normal
                         :underline nil))
 
@@ -88,6 +89,7 @@
     (set-face-attribute face nil
                         :weight 'bold
                         :slant 'normal
+                        :height 165
                         :underline nil))
 
   (dolist (face '(tree-sitter-hl-face:type.builtin
