@@ -69,7 +69,7 @@ export SAL_NO_MOUSEGRABS=T
 export PATH="/home/$USER/.local/bin:$PATH"
 export EDITOR=nvim
 export GPG_TTY=$(tty)
-export GTK_THEME=Nordic-darker
+# export GTK_THEME=Nordic-darker
 # export GPG_AGENT_INFO="$(gpgconf --list-dirs agent-socket)/S.gpg-agent:0:1"
 
 
@@ -93,10 +93,23 @@ ascii() {
     figlet -t -f mono12 $@  | lolcat 
 }
 
+v() {
+  # check if tmux is already running
+  if [ -z "$TMUX" ]; then
+    # start a new tmux session with neovim
+    tmux new-session -d -s singletonsession "nvim $@"
+    tmux attach-session -t singletonsession
+  else
+    # If already in a tmux session, just start neovim
+    nvim "$@"
+  fi
+}
+
+# Export the function so it can be used as a command
+# export -f v
 
 # program aliases
 alias t='tmux'
-alias v='nvim'
 
 
 # path aliases
