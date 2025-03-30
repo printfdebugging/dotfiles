@@ -72,11 +72,8 @@ vim.keymap.set("n", "<leader>ff", ":lua G_telescope_last=0 require('telescope.bu
 vim.keymap.set("n", "<leader>fh", ":lua G_telescope_last=0 require('telescope.builtin').help_tags()<CR>")
 vim.keymap.set("n", "<leader>fm", ":lua G_telescope_last=0 require('telescope.builtin').man_pages()<CR>")
 vim.keymap.set("n", "<leader>gs", ":lua G_telescope_last=1 require('telescope.builtin').git_status()<CR>")
-vim.keymap.set(
-	"n",
-	"<leader>fb",
-	":lua G_telescope_last=0 require('telescope.builtin').current_buffer_fuzzy_find()<CR>"
-)
+vim.keymap.set( "n", "<leader>fb", ":lua G_telescope_last=0 require('telescope.builtin').current_buffer_fuzzy_find()<CR>")
+vim.keymap.set( "n", "<leader>ls", ":Telescope buffers<CR>")
 vim.keymap.set("n", "<leader>fs", G_telescope_resume)
 
 -- NVIM-TREE
