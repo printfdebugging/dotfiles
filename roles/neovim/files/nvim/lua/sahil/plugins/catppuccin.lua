@@ -133,8 +133,8 @@ return {
       highlight Visual guibg=#3C435E guifg=none
       highlight Whitespace guifg=#2a2a2a
       highlight MatchParen guibg=#00000000
-      highlight lualine_tab_active guibg=#1d2026 guifg=#98be65 gui=bold
-      highlight lualine_tab_inactive guibg=#1d2026 guifg=#bbc2cf
+      highlight lualine_tab_active guibg=#1d202600 guifg=#98be65 gui=bold
+      highlight lualine_tab_inactive guibg=#1d202600 guifg=#bbc2cf
     ]])
     vim.cmd([[highlight! link CursorLineSign CursorLine]])
   end,

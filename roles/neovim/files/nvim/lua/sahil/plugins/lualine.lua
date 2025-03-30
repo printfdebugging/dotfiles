@@ -4,7 +4,7 @@ return {
   config = function()
     local lualine = require('lualine')
     local colors = {
-      bg       = '#1d2026',
+      bg       = '#1d202600',
       fg       = '#bbc2cf',
       yellow   = '#ECBE7B',
       cyan     = '#008080',
@@ -78,7 +78,7 @@ return {
 
     ins_left {
       function()
-        return '|'
+        return ''
       end,
       color = { fg = colors.blue }, -- Sets highlighting of component
       padding = { left = 0, right = 1 }, -- We don't need space before this
@@ -121,7 +121,7 @@ return {
 
     ins_right {
       function()
-        return '|'
+        return ''
       end,
       color = { fg = colors.blue },
       padding = { left = 1 },
