@@ -168,31 +168,31 @@
                 variable-pitch))
   (set-face-attribute face nil
                       :family "Iosevka Nerd Font"
-                      :height 150
+                      :height 165
                       :weight 'Regular
                       :foreground "#d8dee9"))
 
 ;; org mode heading and source block faces
 (set-face-attribute 'org-document-title nil
                     :family "Iosevka Nerd Font"
-                    :height 250
+                    :height 255
                     :weight 'Bold
                     :foreground "#bbc2cf")
 
 (set-face-attribute 'org-level-1 nil
                     :family "Iosevka Nerd Font"
-                    :height 230
+                    :height 235
                     :weight 'Bold)
 
 (set-face-attribute 'org-level-2 nil
                     :family "Iosevka Nerd Font"
-                    :height 190
+                    :height 195
                     :foreground "#A9A1E1"
                     :weight 'Bold)
 
 (set-face-attribute 'org-level-3 nil
                     :family "Iosevka Nerd Font"
-                    :height 170
+                    :height 165
                     :foreground "#A9A1E1"
                     :weight 'Bold)
 
