@@ -22,3 +22,15 @@
   :init
     (add-hook 'dired-mode-hook #'dw/dired-mode-hook)
     (add-hook 'dired-mode-hook 'auto-revert-mode))
+
+
+;; thanks reddit!!
+;; https://www.reddit.com/r/emacs/comments/1ewvz2z/how_to_remove_folder_info_at_the_top_of_direds/
+(defun lynn/delete-first-dired-line ()
+  (let ((inhibit-read-only t))
+    (save-excursion
+      (goto-char (point-min))
+      (delete-region (point) (line-end-position))
+      (delete-char 1))))
+
+(add-hook 'dired-after-readin-hook 'lynn/delete-first-dired-line)

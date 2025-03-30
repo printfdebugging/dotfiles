@@ -154,6 +154,7 @@
 ;; emacs-lisp syntax highlighting
 (dolist (face '(font-lock-keyword-face
                 org-document-info
+                dired-directory
                 font-lock-builtin-face))
   (set-face-attribute face nil
                       :weight 'normal
