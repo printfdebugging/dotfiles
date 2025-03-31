@@ -132,6 +132,7 @@ return {
 
       highlight Visual guibg=#3C435E guifg=none
       highlight Whitespace guifg=#2a2a2a
+      highlight StatusLine guifg=#7f849c
       highlight MatchParen guibg=#00000000
       highlight lualine_tab_active guibg=#1d202600 guifg=#98be65 gui=bold
       highlight lualine_tab_inactive guibg=#1d202600 guifg=#bbc2cf
