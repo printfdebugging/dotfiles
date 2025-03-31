@@ -67,7 +67,7 @@
                   font-lock-regexp-grouping-construct))
     (set-face-attribute face nil
                         :weight 'normal
-                        :height 165
+                        :height 145
                         :slant 'normal
                         :underline nil))
 
@@ -89,7 +89,7 @@
     (set-face-attribute face nil
                         :weight 'bold
                         :slant 'normal
-                        :height 165
+                        :height 145
                         :underline nil))
 
   (dolist (face '(tree-sitter-hl-face:type.builtin
@@ -170,7 +170,7 @@
                 variable-pitch))
   (set-face-attribute face nil
                       :family "Iosevka Nerd Font"
-                      :height 165
+                      :height 145
                       :weight 'Regular
                       :foreground "#d8dee9"))
 
@@ -194,7 +194,7 @@
 
 (set-face-attribute 'org-level-3 nil
                     :family "Iosevka Nerd Font"
-                    :height 165
+                    :height 145
                     :foreground "#A9A1E1"
                     :weight 'Bold)
 
