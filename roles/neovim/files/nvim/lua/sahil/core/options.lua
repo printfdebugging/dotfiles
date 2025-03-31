@@ -36,8 +36,9 @@ local options = {
   },
   -- mouse = "",
   formatprg = "par jw75",
-}
+  fcs = "horiz:─,stlnc:─,stl:─,vert:│"
 
+}
 for key, value in pairs(options) do
   vim.opt[key] = value
 end
@@ -49,7 +50,7 @@ local globals = {
   noswapfile = true,
   nobackup = true,
   nowritebackup = true,
-  laststatus = 3,
+  laststatus = 0,
   mapleader = " ",
   editorconfig_max_line_length = 100,
 }

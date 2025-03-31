@@ -29,7 +29,7 @@ vim.cmd([[
 
 -- Set autoread
 vim.cmd("set autoread")
-vim.cmd("set laststatus=3")
+vim.cmd("set laststatus=0")
 
 -- Define an autocommand for CursorHold and CursorHoldI events
 vim.cmd([[
@@ -43,7 +43,7 @@ vim.cmd([[
 vim.cmd([[
   augroup AutoRead
   autocmd!
-  autocmd CursorMoved * set laststatus=3
+  autocmd CursorMoved * set laststatus=0
   augroup END
 ]])
 
@@ -108,7 +108,7 @@ vim.api.nvim_create_autocmd("FileType", {
       group = markdown_no_warnings,
       callback = function()
         vim.diagnostic.config({ virtual_text = false })
-        vim.g.laststatus = 3
+        vim.g.laststatus = 0
       end,
     })
   end,
