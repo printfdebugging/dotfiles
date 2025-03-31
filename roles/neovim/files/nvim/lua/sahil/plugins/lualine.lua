@@ -84,48 +84,10 @@ return {
       padding = { left = 0, right = 1 }, -- We don't need space before this
     }
 
-    ins_right { 'location' }
 
-    -- Add components to right sections
-    ins_right {
-      'o:encoding', -- option component same as &encoding in viml
-      fmt = string.upper, -- I'm not sure why it's upper case either ;)
-      cond = conditions.hide_in_width,
-      color = { fg = colors.green, gui = 'bold' },
-    }
 
-    ins_right {
-      'fileformat',
-      fmt = string.upper,
-      icons_enabled = false, -- I think icons are cool but Eviline doesn't have them. sigh
-      color = { fg = colors.green, gui = 'bold' },
-    }
 
-    ins_right {
-      'branch',
-      icon = '',
-      color = { fg = colors.violet, gui = 'bold' },
-    }
 
-    ins_right {
-      'diff',
-      -- Is it me or the symbol for modified us really weird
-      symbols = { added = ' ', modified = '󰝤 ', removed = ' ' },
-      diff_color = {
-        added = { fg = colors.green },
-        modified = { fg = colors.orange },
-        removed = { fg = colors.red },
-      },
-      cond = conditions.hide_in_width,
-    }
-
-    ins_right {
-      function()
-        return ''
-      end,
-      color = { fg = colors.blue },
-      padding = { left = 1 },
-    }
 
     ins_left {
       'tabs',

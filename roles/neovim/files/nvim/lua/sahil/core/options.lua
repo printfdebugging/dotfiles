@@ -49,7 +49,7 @@ local globals = {
   noswapfile = true,
   nobackup = true,
   nowritebackup = true,
-  laststatus = 2,
+  laststatus = 3,
   mapleader = " ",
   editorconfig_max_line_length = 100,
 }

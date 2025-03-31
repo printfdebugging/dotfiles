@@ -39,6 +39,14 @@ vim.cmd([[
   augroup END
 ]])
 
+-- Define an autocommand for CursorHold and CursorHoldI events
+vim.cmd([[
+  augroup AutoRead
+  autocmd!
+  autocmd CursorMoved * set laststatus=3
+  augroup END
+]])
+
 -- format all the c/cpp files with clang-format except for the files
 -- which have "/home/printf/repos/libreoffice/" in the path
 -- local cpp_formating_group = vim.api.nvim_create_augroup("CppFormatingWithClangd", { clear = true })
@@ -88,12 +96,7 @@ end
 -- vim.api.nvim_create_autocmd("VimEnter", {
 --   callback = open_terminal_in_first_tab,
 -- })
--- vim.cmd([[
---   augroup Terminal
---     autocmd!
---     autocmd TermOpen "terminal" setlocal nonumber norelativenumber
---   augroup END
--- ]])
+
 
 local markdown_no_warnings = vim.api.nvim_create_augroup("CppFormatingWithClangd", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
@@ -105,6 +108,7 @@ vim.api.nvim_create_autocmd("FileType", {
       group = markdown_no_warnings,
       callback = function()
         vim.diagnostic.config({ virtual_text = false })
+        vim.g.laststatus = 3
       end,
     })
   end,
