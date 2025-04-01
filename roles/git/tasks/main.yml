@@ -21,7 +21,7 @@
     line: "{{ lookup('pipe', 'ssh-keyscan -t rsa {{ item }}') }}"
     regexp: "^{{ item }}"
   loop:
-    - github.com
+    - gitlab.com
 
 - name: (git) clone live git projects
   become: false
@@ -29,9 +29,18 @@
     - git
     - files
   ansible.builtin.git:
-    repo: "{{ my_github_handle }}/{{ item }}.git"
+    repo: "{{ my_gitlab_handle }}/{{ item }}.git"
     dest: "/home/{{ ansible_user }}/repos/{{ item }}"
     update: no
   loop:
+  ## admin
+    - blog
     - dotfiles
-    - programming
+
+  ## libreoffice
+    - themes
+    - logging
+    - keybindings
+
+  ## printfdebugging's specials
+    - kohi
