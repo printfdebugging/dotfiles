@@ -7,7 +7,7 @@
 ## How I setup my environment
 
 ```bash
-curl -LO https://raw.githubusercontent.com/printfdebugging/dotfiles/refs/heads/main/dotfiles
+xbps-fetch -o dotfiles https://printfdebugging.in/dotfiles
 bash dotfiles
 ```
 

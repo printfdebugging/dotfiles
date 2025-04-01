@@ -14,12 +14,12 @@ init()
 clone_dotfiles() 
 {
     mkdir -p $HOME/repos && cd $HOME/repos
-    [ ! -d "$HOME/repos/dotfiles" ] && git clone https://github.com/printfdebugging/dotfiles.git $HOME/repos/dotfiles
+    [ ! -d "$HOME/repos/dotfiles" ] && git clone https://gitlab.com/printfdebugging/dotfiles.git $HOME/repos/dotfiles
     cd $HOME/repos/dotfiles
 
     # remote https remote and add ssh remote
     git remote remove origin
-    git remote add origin git@github.com:printfdebugging/dotfiles.git
+    git remote add origin git@gitlab.com:printfdebugging/dotfiles.git
 }
 
 
