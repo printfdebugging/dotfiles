@@ -149,7 +149,7 @@
     mode: 0755
 
 - name: (base) install fonts
-  become: true
+  become: false
   tags:
     - base
     - fonts
@@ -167,7 +167,7 @@
     ]
 
 - name: (base) copy twemoji font file
-  become: true
+  become: false
   tags:
     - base
     - packages

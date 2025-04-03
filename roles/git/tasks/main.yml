@@ -22,6 +22,7 @@
     regexp: "^{{ item }}"
   loop:
     - gitlab.com
+    - github.com
 
 - name: (git) clone live git projects
   become: false

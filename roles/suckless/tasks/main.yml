@@ -16,7 +16,7 @@
     - gcr-devel
 
 - name: (suckless) remove src files
-  become: false
+  become: true
   tags:
     - suckless
     - files

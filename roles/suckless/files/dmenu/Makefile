@@ -36,6 +36,7 @@ all: $(APPEXE)
 
 $(APPEXE) : $(OFILES)
 	$(CC) -o $@ $(OFILES) $(LDFLAGS)
+	$(CC) -o stest scripts/stest.c -Iinc
 
 $(OBJDIR)/%.o : $(SRCDIR)/%.c
 	mkdir -p $(dir $@)
@@ -46,8 +47,9 @@ clean:
 
 install: all
 	mkdir -p $(DESTDIR)$(PREFIX)/bin
-	cp -f dmenu $(SCRIPTDIR)/dmenu_path $(SCRIPTDIR)/dmenu_run $(DESTDIR)$(PREFIX)/bin
+	cp -f stest dmenu $(SCRIPTDIR)/dmenu_path $(SCRIPTDIR)/dmenu_run $(DESTDIR)$(PREFIX)/bin
 	chmod 755 $(DESTDIR)$(PREFIX)/bin/dmenu
+	chmod 755 $(DESTDIR)$(PREFIX)/bin/stest
 	chmod 755 $(DESTDIR)$(PREFIX)/bin/dmenu_path
 	chmod 755 $(DESTDIR)$(PREFIX)/bin/dmenu_run
 	mkdir -p $(DESTDIR)$(MANPREFIX)/man1
