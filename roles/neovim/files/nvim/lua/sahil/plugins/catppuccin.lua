@@ -136,6 +136,8 @@ return {
       highlight MatchParen guibg=#00000000
       highlight lualine_tab_active guibg=#1d202600 guifg=#98be65 gui=bold
       highlight lualine_tab_inactive guibg=#1d202600 guifg=#bbc2cf
+      highlight NvimTreeSC guibg=#00000000
+      highlight NvimTreeStatuslineNc guibg=#00000000
     ]])
     vim.cmd([[highlight! link CursorLineSign CursorLine]])
   end,
