@@ -7,5 +7,6 @@
 --enable-compiler-plugins
 --with-help=html
 --with-system-libxml=no
+--enable-odk
 CC=clang
 CXX=clang++
