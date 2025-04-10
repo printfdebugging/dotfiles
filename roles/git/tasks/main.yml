@@ -34,14 +34,5 @@
     dest: "/home/{{ ansible_user }}/repos/{{ item }}"
     update: no
   loop:
-  ## admin
-    - blog
     - dotfiles
-
-  ## libreoffice
-    - themes
-    - logging
-    - keybindings
-
-  ## printfdebugging's specials
-    - kohi
+    - cookbook
