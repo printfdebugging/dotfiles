@@ -76,10 +76,10 @@ return {
     }),
   },
   sources = cmp.config.sources({
-    { name = "nvim_lsp" },
-    { name = "luasnip" }, -- For luasnip users.
-    { name = "buffer" },
-    { name = "path" },
+    -- { name = "nvim_lsp" },
+    -- { name = "luasnip" }, -- For luasnip users.
+    -- { name = "buffer" },
+    -- { name = "path" },
   }),
 })
 require("lspsaga").setup({
@@ -122,22 +122,22 @@ end
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local servers = {
-  "clangd",
-  "neocmake",
-  "zls",
-  "clojure_lsp",
-  --      "glslls",
-  "ts_ls",
-  "lua_ls",
-  "ansiblels",
-  "cmake",
-  "html",
-  "cssls",
-  "pyright",
-  "bashls",
-  "gopls",
-  "emmet_ls",
-  "marksman",
+  -- "clangd",
+  -- "neocmake",
+  -- "zls",
+  -- "clojure_lsp",
+  -- --      "glslls",
+  -- "ts_ls",
+  -- "lua_ls",
+  -- "ansiblels",
+  -- "cmake",
+  -- "html",
+  -- "cssls",
+  -- "pyright",
+  -- "bashls",
+  -- "gopls",
+  -- "emmet_ls",
+  -- "marksman",
 }
 
 for _, server in ipairs(servers) do
@@ -147,11 +147,11 @@ for _, server in ipairs(servers) do
   })
 end
 
-require("lspconfig")["rust_analyzer"].setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-  cmd = { "rustup", "run", "stable", "rust-analyzer" },
-})
+-- require("lspconfig")["rust_analyzer"].setup({
+--   capabilities = capabilities,
+--   on_attach = on_attach,
+--   cmd = { "rustup", "run", "stable", "rust-analyzer" },
+-- })
 
 require("lspconfig")["lua_ls"].setup({
   capabilities = capabilities,

@@ -8,5 +8,7 @@
 --with-help=html
 --with-system-libxml=no
 --enable-odk
+--with-extra-cc-flags=-fdiagnostics-color=always
+--with-extra-cxx-flags=-fdiagnostics-color=always
 CC=clang
 CXX=clang++

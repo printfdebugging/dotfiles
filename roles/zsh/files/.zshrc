@@ -96,6 +96,7 @@ ascii() {
 # program aliases
 alias t='tmux'
 alias v='nvim'
+alias make="make -O"
 
 
 # path aliases
@@ -138,3 +139,8 @@ alias xf="xbps-fetch -o "
 alias grep='grep --color=auto'
 alias   ls='ls --color=auto'
 alias   ll='ls -al --color=auto'
+
+
+# for gnome TEMPORARY (don't add to dotfiles)
+xset r rate 300 50
+setxkbmap -option caps:swapescape
