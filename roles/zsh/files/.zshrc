@@ -105,7 +105,7 @@ alias  l="cd /home/$USER/repos/libreoffice/"
 alias cr="cd ~/repos/"
 alias  d="cd ~/repos/dotfiles/"
 alias  b="cd ~/.local/bin/"
-alias  n="cd ~/repos/blog/content/ && nvim ."
+alias  n="cd ~/repos/cookbook/wiki/ && nvim ."
 
 
 # git aliases
