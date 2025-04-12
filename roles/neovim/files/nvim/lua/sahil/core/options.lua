@@ -35,7 +35,7 @@ local options = {
     tab = "⋅⋅⋅",
   },
   -- mouse = "",
-  formatprg = "par jw140",
+  formatprg = "par jw80",
   fcs = "horiz:─,stlnc:─,stl:─,vert:│"
 
 }
