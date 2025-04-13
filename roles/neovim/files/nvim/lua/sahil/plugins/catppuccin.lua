@@ -138,6 +138,23 @@ return {
       highlight lualine_tab_inactive guibg=#1d202600 guifg=#bbc2cf
       highlight NvimTreeSC guibg=#00000000
       highlight NvimTreeStatuslineNc guibg=#00000000
+
+
+      " markdown headings
+      highlight markdownH1          guifg=#51afef gui=bold
+      highlight markdownH1Delimiter guifg=#51afef gui=bold
+      highlight markdownH2 guifg=#a9a1e1 gui=bold
+      highlight markdownH3 guifg=#a9a1e1 gui=bold
+      highlight markdownH4 guifg=#a9a1e1 gui=bold
+      highlight markdownH5 guifg=#a9a1e1 gui=bold
+      highlight markdownH6 guifg=#a9a1e1 gui=bold
+
+      highlight markdownH2Delimiter guifg=#a9a1e1 gui=bold
+      highlight markdownH3Delimiter guifg=#a9a1e1 gui=bold
+      highlight markdownH4Delimiter guifg=#a9a1e1 gui=bold
+      highlight markdownH5Delimiter guifg=#a9a1e1 gui=bold
+      highlight markdownH6Delimiter guifg=#a9a1e1 gui=bold
+      highlight confComment guifg=#51afef gui=bold
     ]])
     vim.cmd([[highlight! link CursorLineSign CursorLine]])
   end,
