@@ -77,9 +77,9 @@ return {
   },
   sources = cmp.config.sources({
     -- { name = "nvim_lsp" },
-    -- { name = "luasnip" }, -- For luasnip users.
     -- { name = "buffer" },
-    -- { name = "path" },
+    { name = "luasnip" },
+    { name = "path" },
   }),
 })
 require("lspsaga").setup({
