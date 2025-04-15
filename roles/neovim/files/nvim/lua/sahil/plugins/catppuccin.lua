@@ -75,32 +75,13 @@ return {
         },
       },
       highlight_overrides = {
-        mocha = function(mocha)
-          return {
-            ["@comment"]                   = { fg = "#5b6268", style = {} },
-            ["@keyword.import"]            = { fg = "#cba6f7", style = {} },
-            ["@keyword.directive"]         = { fg = "#cba6f7", style = {} },
-            ["@keyword.directive.define"]  = { fg = "#f5c2e7", style = {} },
-            ["@constant"]                  = { fg = "#fab387", style = {} },
-            ["@constant.macro"]            = { fg = "#cba6f7", style = {} },
-            ["@constant.builtin"]          = { fg = "#cba6f7", style = {} },
-            ["@function.call"]             = { fg = "#51afef", style = {} },
-            ["@markup.heading.1.markdown"] = { fg = "#51afef", style = { "bold" } },
-            ["@markup.heading.2.markdown"] = { fg = "#A9A1E1", style = { "bold" } },
-            ["@markup.heading.3.markdown"] = { fg = "#A9A1E1", style = { "bold" } },
-            ["@markup.heading.4.markdown"] = { fg = "#A9A1E1", style = { "bold" } },
-            ["@markup.heading.5.markdown"] = { fg = "#A9A1E1", style = { "bold" } },
-            ["@markup.heading.6.markdown"] = { fg = "#A9A1E1", style = { "bold" } },
-            ["@markup.link.label"]         = { fg = "#51afef", style = { "bold" } },
-          }
-        end,
       },
 
       integrations = {
         cmp        = true,
         gitsigns   = true,
         nvimtree   = true,
-        treesitter = true,
+        treesitter = false,
         notify     = false,
 
         mini = {
@@ -143,6 +124,8 @@ return {
       " markdown headings
       highlight markdownH1          guifg=#51afef gui=bold
       highlight markdownH1Delimiter guifg=#51afef gui=bold
+      highlight @markup.heading.1.delimiter.vimdoc guifg=#51afef gui=bold
+      highlight @markup.heading.2.delimiter.vimdoc guifg=#51afef gui=bold
       highlight markdownH2 guifg=#a9a1e1 gui=bold
       highlight markdownH3 guifg=#a9a1e1 gui=bold
       highlight markdownH4 guifg=#a9a1e1 gui=bold
