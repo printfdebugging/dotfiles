@@ -35,7 +35,9 @@
     update: no
   loop:
     - dotfiles
-    - cookbook
+    - notes
+    - logs
+    - books
 
 - name: (git) set remote push urls
   become: false
@@ -52,4 +54,6 @@
       git remote set-url --add --push all {{ my_github_handle }}/{{ item }}.git
   loop:
     - dotfiles
-    - cookbook
+    - notes
+    - logs
+    - books
