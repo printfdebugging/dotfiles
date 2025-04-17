@@ -45,6 +45,8 @@ end
 
 vim.opt.fillchars = { eob = " " }
 vim.opt.clipboard:append("unnamedplus")
+vim.opt.iskeyword:append("-")
+vim.opt.iskeyword:append(".")
 
 local globals = {
   noswapfile = true,
