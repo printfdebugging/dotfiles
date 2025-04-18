@@ -138,6 +138,9 @@ return {
       highlight markdownH5Delimiter guifg=#a9a1e1 gui=bold
       highlight markdownH6Delimiter guifg=#a9a1e1 gui=bold
       highlight confComment guifg=#51afef gui=bold
+      highlight @markup.link.vimdoc guifg=#a9a1e1
+      highlight @label.vimdoc guifg=#a9a1e1
+
     ]])
     vim.cmd([[highlight! link CursorLineSign CursorLine]])
   end,
