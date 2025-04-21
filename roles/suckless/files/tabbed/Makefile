@@ -28,10 +28,7 @@ all: ${BIN}
 .c.o:
 	${CC} -o $@ -c $< ${TABBED_CFLAGS} ${TABBED_CPPFLAGS}
 
-${OBJ}: config.h
-
-config.h:
-	cp config.def.h $@
+${OBJ}:
 
 .o:
 	${CC} -o $@ $< ${TABBED_LDFLAGS}
