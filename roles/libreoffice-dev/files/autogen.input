@@ -5,7 +5,7 @@
 --enable-ccache
 --enable-kf6
 --enable-compiler-plugins
---with-help=html
+#--with-help=html
 --with-system-libxml=no
 --enable-odk
 --with-extra-cc-flags=-fdiagnostics-color=always
