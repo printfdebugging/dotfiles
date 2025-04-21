@@ -85,6 +85,7 @@
     - seahorse
     - valgrind
     - ctags
+    - delta
 
 - name: (base) upgrade distribution
   tags:
