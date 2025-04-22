@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 #include <X11/Xatom.h>
-#include <X11/Xproto.h>
 #include <X11/Xlib.h>
+#include <X11/Xproto.h>
 #include <X11/Xutil.h>
 #include <ctype.h>
 #include <locale.h>
@@ -75,17 +75,17 @@ static Colormap cmap;
 /* See LICENSE file for copyright and license details. */
 /* Default settings; can be overriden by command line. */
 
-static int topbar = 0; /* -b  option; if 0, dmenu appears at bottom     */
-static const unsigned int alpha = 0x99;     /* Amount of opacity. 0xff is opaque             */
+static int                topbar = 0;    /* -b  option; if 0, dmenu appears at bottom     */
+static const unsigned int alpha  = 0x99; /* Amount of opacity. 0xff is opaque             */
 /* -fn option overrides fonts[0]; default X11 font or font set */
 
-static int centered = 1;                    /* -c option; centers dmenu on screen */
-static int min_width = 1400;                    /* minimum width when centered */
-static const float menu_height_ratio = 4.0f;  /* This is the ratio used in the original calculation */
+static int         centered          = 1;    /* -c option; centers dmenu on screen */
+static int         min_width         = 1400; /* minimum width when centered */
+static const float menu_height_ratio = 4.0f; /* This is the ratio used in the original calculation */
 
-static unsigned int border_width          = 2;
-static const char  *fonts[]               = {"Iosevka Nerd Font:size=14"};
-static const char  *prompt                = NULL; /* -p  option; prompt to the left of input field */
+static unsigned int border_width = 2;
+static const char  *fonts[]      = {"Iosevka Nerd Font:size=14"};
+static const char  *prompt       = NULL; /* -p  option; prompt to the left of input field */
 
 static const char *colors[SchemeLast][2] = {
     [SchemeNorm]   = {"#bbbbbb", "#000104"},
@@ -161,13 +161,12 @@ static void calcoffsets(void)
             break;
 }
 
-static int
-max_textw(void)
+static int max_textw(void)
 {
-	int len = 0;
-	for (struct item *item = items; item && item->text; item++)
-		len = MAX(TEXTW(item->text), len);
-	return len;
+    int len = 0;
+    for (struct item *item = items; item && item->text; item++)
+        len = MAX(TEXTW(item->text), len);
+    return len;
 }
 
 static void cleanup(void)
@@ -974,16 +973,16 @@ static void setup(void)
 #endif
     /* init appearance */
     for (j = 0; j < SchemeLast; j++)
-		scheme[j] = drw_scm_create(drw, colors[j], alphas[i], 2);
+        scheme[j] = drw_scm_create(drw, colors[j], alphas[i], 2);
 
     clip = XInternAtom(dpy, "CLIPBOARD", False);
     utf8 = XInternAtom(dpy, "UTF8_STRING", False);
 
     /* calculate menu geometry */
-    bh    = drw->fonts->h + 2;
-    lines = MAX(lines, 0);
-    mh    = (lines + 1) * bh;
-	promptw = (prompt && *prompt) ? TEXTW(prompt) - lrpad / 4 : 0;
+    bh      = drw->fonts->h + 2;
+    lines   = MAX(lines, 0);
+    mh      = (lines + 1) * bh;
+    promptw = (prompt && *prompt) ? TEXTW(prompt) - lrpad / 4 : 0;
 #ifdef XINERAMA
     i = 0;
     if (parentwin == root && (info = XineramaQueryScreens(dpy, &n)))
@@ -1155,8 +1154,8 @@ int main(int argc, char *argv[])
             colors[SchemeSel][ColFg] = argv[++i];
         else if (!strcmp(argv[i], "-w")) /* embedding window id */
             embed = argv[++i];
-		else if (!strcmp(argv[i], "-c"))   /* centers dmenu on screen */
-			centered = 1;
+        else if (!strcmp(argv[i], "-c")) /* centers dmenu on screen */
+            centered = 1;
         else
             usage();
 
@@ -1170,8 +1169,8 @@ int main(int argc, char *argv[])
         parentwin = root;
     if (!XGetWindowAttributes(dpy, parentwin, &wa))
         die("could not get embedding window attributes: 0x%lx", parentwin);
-	xinitvisual();
-	drw = drw_create(dpy, screen, root, wa.width, wa.height, visual, depth, cmap);
+    xinitvisual();
+    drw = drw_create(dpy, screen, root, wa.width, wa.height, visual, depth, cmap);
     if (!drw_fontset_create(drw, fonts, LENGTH(fonts)))
         die("no fonts could be loaded.");
     lrpad = drw->fonts->h;

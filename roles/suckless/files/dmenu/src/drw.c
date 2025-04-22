@@ -47,8 +47,7 @@ static int utf8decode(const char *s_in, long *u, int *err)
     return len;
 }
 
-Drw *
-drw_create(Display *dpy, int screen, Window root, unsigned int w, unsigned int h, Visual *visual, unsigned int depth, Colormap cmap)
+Drw *drw_create(Display *dpy, int screen, Window root, unsigned int w, unsigned int h, Visual *visual, unsigned int depth, Colormap cmap)
 {
     Drw *drw = ecalloc(1, sizeof(Drw));
 
@@ -76,7 +75,7 @@ void drw_resize(Drw *drw, unsigned int w, unsigned int h)
     drw->h = h;
     if (drw->drawable)
         XFreePixmap(drw->dpy, drw->drawable);
-	drw->drawable = XCreatePixmap(drw->dpy, drw->root, w, h, drw->depth);
+    drw->drawable = XCreatePixmap(drw->dpy, drw->root, w, h, drw->depth);
 }
 
 void drw_free(Drw *drw)
@@ -198,7 +197,7 @@ Clr *drw_scm_create(Drw *drw, const char *clrnames[], const unsigned int alphas[
         return NULL;
 
     for (i = 0; i < clrcount; i++)
-		drw_clr_create(drw, &ret[i], clrnames[i], alphas[i]);
+        drw_clr_create(drw, &ret[i], clrnames[i], alphas[i]);
     return ret;
 }
 
