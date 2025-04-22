@@ -27,6 +27,7 @@ LDFLAGS = -L/usr/X11R6/lib  \
 		  -lXinerama  \
 		  -lfontconfig  \
 		  -lXft \
+		  -lXrender \
 
 CFILES = $(shell find $(SRCDIR) -name '*.c')
 HFILES = $(shell find $(INCDIR) -name '*.h')

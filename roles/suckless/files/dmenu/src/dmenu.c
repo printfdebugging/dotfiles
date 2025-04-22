@@ -1,5 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 #include <X11/Xatom.h>
+#include <X11/Xproto.h>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 #include <ctype.h>
@@ -13,6 +14,7 @@
 #ifdef XINERAMA
     #include <X11/extensions/Xinerama.h>
 #endif
+#include <X11/extensions/Xrender.h>
 
 #include "drw.h"
 #include "util.h"
@@ -65,10 +67,16 @@ static XIC      xic;
 static Drw *drw;
 static Clr *scheme[SchemeLast];
 
+static int      useargb = 0;
+static Visual  *visual;
+static int      depth;
+static Colormap cmap;
+
 /* See LICENSE file for copyright and license details. */
 /* Default settings; can be overriden by command line. */
 
 static int topbar = 0; /* -b  option; if 0, dmenu appears at bottom     */
+static const unsigned int alpha = 0x99;     /* Amount of opacity. 0xff is opaque             */
 /* -fn option overrides fonts[0]; default X11 font or font set */
 
 static int centered = 1;                    /* -c option; centers dmenu on screen */
@@ -78,13 +86,21 @@ static const float menu_height_ratio = 4.0f;  /* This is the ratio used in the o
 static unsigned int border_width          = 2;
 static const char  *fonts[]               = {"Iosevka Nerd Font:size=14"};
 static const char  *prompt                = NULL; /* -p  option; prompt to the left of input field */
-static const char  *colors[SchemeLast][2] = {
-    /*     fg         bg       */
-    [SchemeNorm]   = {"#bbbbbb", "#222222"},
+
+static const char *colors[SchemeLast][2] = {
+    [SchemeNorm]   = {"#bbbbbb", "#000104"},
     [SchemeSel]    = {"#eeeeee", "#005577"},
     [SchemeOut]    = {"#000000", "#00ffff"},
     [SchemeCursor] = {"#222222", "#bbbbbb"},
 };
+
+static const unsigned int alphas[SchemeLast][2] = {
+    [SchemeNorm]   = {OPAQUE, alpha },
+    [SchemeSel]    = {OPAQUE, alpha },
+    [SchemeOut]    = {OPAQUE, alpha },
+    [SchemeCursor] = {OPAQUE, OPAQUE},
+};
+
 /* -l option; if nonzero, dmenu uses vertical list with given number of lines */
 static unsigned int lines = 0;
 
@@ -108,6 +124,7 @@ static Key          quit_keys[] = {
 
 static int (*fstrncmp)(const char *, const char *, size_t) = strncmp;
 static char *(*fstrstr)(const char *, const char *)        = strstr;
+static void xinitvisual();
 
 static unsigned int textw_clamp(const char *str, unsigned int n)
 {
@@ -957,7 +974,7 @@ static void setup(void)
 #endif
     /* init appearance */
     for (j = 0; j < SchemeLast; j++)
-        scheme[j] = drw_scm_create(drw, colors[j], 2);
+		scheme[j] = drw_scm_create(drw, colors[j], alphas[i], 2);
 
     clip = XInternAtom(dpy, "CLIPBOARD", False);
     utf8 = XInternAtom(dpy, "UTF8_STRING", False);
@@ -1036,10 +1053,23 @@ static void setup(void)
 
     /* create menu window */
     swa.override_redirect = True;
-    swa.background_pixel  = scheme[SchemeNorm][ColBg].pixel;
+    swa.background_pixel  = 0;
+    swa.border_pixel      = 0;
+    swa.colormap          = cmap;
     swa.event_mask        = ExposureMask | KeyPressMask | VisibilityChangeMask;
     win                   = XCreateWindow(
-        dpy, root, x, y, mw, mh, border_width, CopyFromParent, CopyFromParent, CopyFromParent, CWOverrideRedirect | CWBackPixel | CWEventMask, &swa);
+        dpy,
+        root,
+        x,
+        y,
+        mw,
+        mh,
+        border_width,
+        depth,
+        CopyFromParent,
+        visual,
+        CWOverrideRedirect | CWBackPixel | CWBorderPixel | CWColormap | CWEventMask,
+        &swa);
     if (border_width)
         XSetWindowBorder(dpy, win, scheme[SchemeSel][ColBg].pixel);
     XSetClassHint(dpy, win, &ch);
@@ -1140,7 +1170,8 @@ int main(int argc, char *argv[])
         parentwin = root;
     if (!XGetWindowAttributes(dpy, parentwin, &wa))
         die("could not get embedding window attributes: 0x%lx", parentwin);
-    drw = drw_create(dpy, screen, root, wa.width, wa.height);
+	xinitvisual();
+	drw = drw_create(dpy, screen, root, wa.width, wa.height, visual, depth, cmap);
     if (!drw_fontset_create(drw, fonts, LENGTH(fonts)))
         die("no fonts could be loaded.");
     lrpad = drw->fonts->h;
@@ -1164,4 +1195,39 @@ int main(int argc, char *argv[])
     run();
 
     return 1; /* unreachable */
+}
+
+void xinitvisual()
+{
+    XVisualInfo       *infos;
+    XRenderPictFormat *fmt;
+    int                nitems;
+    int                i;
+
+    XVisualInfo tpl   = {.screen = screen, .depth = 32, .class = TrueColor};
+    long        masks = VisualScreenMask | VisualDepthMask | VisualClassMask;
+
+    infos  = XGetVisualInfo(dpy, masks, &tpl, &nitems);
+    visual = NULL;
+    for (i = 0; i < nitems; i++)
+    {
+        fmt = XRenderFindVisualFormat(dpy, infos[i].visual);
+        if (fmt->type == PictTypeDirect && fmt->direct.alphaMask)
+        {
+            visual  = infos[i].visual;
+            depth   = infos[i].depth;
+            cmap    = XCreateColormap(dpy, root, visual, AllocNone);
+            useargb = 1;
+            break;
+        }
+    }
+
+    XFree(infos);
+
+    if (!visual)
+    {
+        visual = DefaultVisual(dpy, screen);
+        depth  = DefaultDepth(dpy, screen);
+        cmap   = DefaultColormap(dpy, screen);
+    }
 }
