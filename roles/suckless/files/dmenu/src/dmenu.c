@@ -71,6 +71,10 @@ static Clr *scheme[SchemeLast];
 static int topbar = 0; /* -b  option; if 0, dmenu appears at bottom     */
 /* -fn option overrides fonts[0]; default X11 font or font set */
 
+static int centered = 1;                    /* -c option; centers dmenu on screen */
+static int min_width = 1400;                    /* minimum width when centered */
+static const float menu_height_ratio = 4.0f;  /* This is the ratio used in the original calculation */
+
 static unsigned int border_width          = 2;
 static const char  *fonts[]               = {"Iosevka Nerd Font:size=14"};
 static const char  *prompt                = NULL; /* -p  option; prompt to the left of input field */
@@ -138,6 +142,15 @@ static void calcoffsets(void)
     for (i = 0, prev = curr; prev && prev->left; prev = prev->left)
         if ((i += (lines > 0) ? bh : textw_clamp(prev->left->text, n)) > n)
             break;
+}
+
+static int
+max_textw(void)
+{
+	int len = 0;
+	for (struct item *item = items; item && item->text; item++)
+		len = MAX(TEXTW(item->text), len);
+	return len;
 }
 
 static void cleanup(void)
@@ -953,6 +966,7 @@ static void setup(void)
     bh    = drw->fonts->h + 2;
     lines = MAX(lines, 0);
     mh    = (lines + 1) * bh;
+	promptw = (prompt && *prompt) ? TEXTW(prompt) - lrpad / 4 : 0;
 #ifdef XINERAMA
     i = 0;
     if (parentwin == root && (info = XineramaQueryScreens(dpy, &n)))
@@ -983,9 +997,19 @@ static void setup(void)
                 if (INTERSECT(x, y, 1, 1, info[i]) != 0)
                     break;
 
-        x  = info[i].x_org;
-        y  = info[i].y_org + (topbar ? 0 : info[i].height - mh);
-        mw = info[i].width;
+        if (centered)
+        {
+            mw = MIN(MAX(max_textw() + promptw, min_width), info[i].width);
+            x  = info[i].x_org + ((info[i].width - mw) / 2);
+            y  = info[i].y_org + ((info[i].height - mh) / menu_height_ratio);
+        }
+        else
+        {
+            x  = info[i].x_org;
+            y  = info[i].y_org + (topbar ? 0 : info[i].height - mh);
+            mw = info[i].width;
+        }
+
         XFree(info);
     }
     else
@@ -993,9 +1017,18 @@ static void setup(void)
     {
         if (!XGetWindowAttributes(dpy, parentwin, &wa))
             die("could not get embedding window attributes: 0x%lx", parentwin);
-        x  = 0;
-        y  = topbar ? 0 : wa.height - mh;
-        mw = wa.width;
+        if (centered)
+        {
+            mw = MIN(MAX(max_textw() + promptw, min_width), wa.width);
+            x  = (wa.width - mw) / 2;
+            y  = (wa.height - mh) / 2;
+        }
+        else
+        {
+            x  = 0;
+            y  = topbar ? 0 : wa.height - mh;
+            mw = wa.width;
+        }
     }
     promptw = (prompt && *prompt) ? TEXTW(prompt) - lrpad / 4 : 0;
     inputw  = mw / 3; /* input width: ~33% of monitor width */
@@ -1092,6 +1125,8 @@ int main(int argc, char *argv[])
             colors[SchemeSel][ColFg] = argv[++i];
         else if (!strcmp(argv[i], "-w")) /* embedding window id */
             embed = argv[++i];
+		else if (!strcmp(argv[i], "-c"))   /* centers dmenu on screen */
+			centered = 1;
         else
             usage();
 
