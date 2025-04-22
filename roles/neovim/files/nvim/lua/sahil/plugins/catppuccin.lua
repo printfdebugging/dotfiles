@@ -81,7 +81,7 @@ return {
         cmp        = true,
         gitsigns   = true,
         nvimtree   = true,
-        treesitter = false,
+        treesitter = true,
         notify     = false,
 
         mini = {
