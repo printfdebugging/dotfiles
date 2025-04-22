@@ -70,9 +70,11 @@ static Clr *scheme[SchemeLast];
 
 static int topbar = 0; /* -b  option; if 0, dmenu appears at bottom     */
 /* -fn option overrides fonts[0]; default X11 font or font set */
-static const char *fonts[]               = {"Iosevka Nerd Font:size=14"};
-static const char *prompt                = NULL; /* -p  option; prompt to the left of input field */
-static const char *colors[SchemeLast][2] = {
+
+static unsigned int border_width          = 2;
+static const char  *fonts[]               = {"Iosevka Nerd Font:size=14"};
+static const char  *prompt                = NULL; /* -p  option; prompt to the left of input field */
+static const char  *colors[SchemeLast][2] = {
     /*     fg         bg       */
     [SchemeNorm]   = {"#bbbbbb", "#222222"},
     [SchemeSel]    = {"#eeeeee", "#005577"},
@@ -1004,7 +1006,9 @@ static void setup(void)
     swa.background_pixel  = scheme[SchemeNorm][ColBg].pixel;
     swa.event_mask        = ExposureMask | KeyPressMask | VisibilityChangeMask;
     win                   = XCreateWindow(
-        dpy, root, x, y, mw, mh, 0, CopyFromParent, CopyFromParent, CopyFromParent, CWOverrideRedirect | CWBackPixel | CWEventMask, &swa);
+        dpy, root, x, y, mw, mh, border_width, CopyFromParent, CopyFromParent, CopyFromParent, CWOverrideRedirect | CWBackPixel | CWEventMask, &swa);
+    if (border_width)
+        XSetWindowBorder(dpy, win, scheme[SchemeSel][ColBg].pixel);
     XSetClassHint(dpy, win, &ch);
 
     /* input methods */
@@ -1065,6 +1069,8 @@ int main(int argc, char *argv[])
             global_esc.ksym  = XK_Escape;
             global_esc.state = 0;
         }
+        else if (!strcmp(argv[i], "-bw"))
+            border_width = atoi(argv[++i]); /* border width */
         else if (i + 1 == argc)
             usage();
         /* these options take one argument */
