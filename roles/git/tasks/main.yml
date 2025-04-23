@@ -38,7 +38,7 @@
     - notes
     - logs
     - books
-    - c
+    - timelog
 
 - name: (git) set remote push urls
   become: false
@@ -58,4 +58,4 @@
     - notes
     - logs
     - books
-    - c
+    - timelog
