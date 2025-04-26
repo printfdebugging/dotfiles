@@ -76,7 +76,7 @@ static Colormap cmap;
 /* Default settings; can be overriden by command line. */
 
 static int                topbar = 0;    /* -b  option; if 0, dmenu appears at bottom     */
-static const unsigned int alpha  = 0x99; /* Amount of opacity. 0xff is opaque             */
+static const unsigned int alpha  = 0xff; /* Amount of opacity. 0xff is opaque             */
 /* -fn option overrides fonts[0]; default X11 font or font set */
 
 static int         centered          = 1;    /* -c option; centers dmenu on screen */
@@ -88,8 +88,8 @@ static const char  *fonts[]      = {"Iosevka Nerd Font:size=14"};
 static const char  *prompt       = NULL; /* -p  option; prompt to the left of input field */
 
 static const char *colors[SchemeLast][2] = {
-    [SchemeNorm]   = {"#bbbbbb", "#000104"},
-    [SchemeSel]    = {"#eeeeee", "#005577"},
+    [SchemeNorm]   = {"#839496", "#001f27"},
+    [SchemeSel]    = {"#d8dee9", "#005577"},
     [SchemeOut]    = {"#000000", "#00ffff"},
     [SchemeCursor] = {"#222222", "#bbbbbb"},
 };
