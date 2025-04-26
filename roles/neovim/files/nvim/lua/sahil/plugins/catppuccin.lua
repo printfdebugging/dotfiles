@@ -123,10 +123,10 @@ return {
 
 
       " markdown headings
-      highlight markdownH1          guifg=#51afef gui=bold
-      highlight markdownH1Delimiter guifg=#51afef gui=bold
-      highlight @markup.heading.1.delimiter.vimdoc guifg=#51afef gui=bold
-      highlight @markup.heading.2.delimiter.vimdoc guifg=#51afef gui=bold
+      highlight markdownH1          guifg=#839496 gui=bold
+      highlight markdownH1Delimiter guifg=#839496 gui=bold
+      highlight @markup.heading.1.delimiter.vimdoc guifg=#839496 gui=bold
+      highlight @markup.heading.2.delimiter.vimdoc guifg=#839496 gui=bold
       highlight markdownH2 guifg=#a9a1e1 gui=bold
       highlight markdownH3 guifg=#a9a1e1 gui=bold
       highlight markdownH4 guifg=#a9a1e1 gui=bold
@@ -138,7 +138,7 @@ return {
       highlight markdownH4Delimiter guifg=#a9a1e1 gui=bold
       highlight markdownH5Delimiter guifg=#a9a1e1 gui=bold
       highlight markdownH6Delimiter guifg=#a9a1e1 gui=bold
-      highlight confComment guifg=#51afef gui=bold
+      highlight confComment guifg=#839496 gui=bold
       highlight @markup.link.vimdoc guifg=#a9a1e1
       highlight @label.vimdoc guifg=#a9a1e1
       highlight @variable guifg=#839496
