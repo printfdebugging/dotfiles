@@ -35,11 +35,14 @@
                         :slant 'normal
                         :underline nil))
 
-
-(set-face-attribute 'button nil
-                    :weight 'normal
-                    :foreground "#98be65")
-
+  (dolist (face '(font-lock-comment-face
+                  font-lock-comment-delimiter-face))
+    (set-face-attribute face nil
+                        :weight 'normal
+                        :height 135
+                        :foreground "#5b6268"
+                        :slant 'normal
+                        :underline nil))
 
 ;; emacs-lisp syntax highlighting
 (dolist (face '(font-lock-keyword-face
@@ -49,7 +52,7 @@
   (set-face-attribute face nil
                       :weight 'normal
                       :slant 'normal
-                      :foreground "#cba6f7"
+                      :foreground "#839496"
                       :underline nil))
 
 ;; editor font
@@ -64,31 +67,18 @@
                       :background "#001f27"))
 
 ;; org mode heading and source block faces
-(set-face-attribute 'org-document-title nil
-                    :family "Iosevka Nerd Font"
-                    :height 135
-                    :weight 'Bold
-                    :foreground "#bbc2cf")
-
-(set-face-attribute 'org-level-1 nil
-                    :family "Iosevka Nerd Font"
-                    :height 135
-                    :weight 'Bold)
-
-(set-face-attribute 'org-level-2 nil
-                    :family "Iosevka Nerd Font"
-                    :height 135
-                    :foreground "#A9A1E1"
-                    :weight 'Bold)
-
-(set-face-attribute 'org-level-3 nil
-                    :family "Iosevka Nerd Font"
-                    :height 135
-                    :foreground "#A9A1E1"
-                    :weight 'Bold)
-
-(set-face-attribute 'org-block-begin-line nil
-                    :foreground "#23272e")
+(dolist (face '(org-document-title
+                org-level-1
+                org-level-2
+                org-level-3
+                org-level-4
+                org-block-begin-line))
+  (set-face-attribute face nil
+                      :family "Iosevka Nerd Font"
+                      :height 135
+                      :weight 'Regular
+                      :foreground "#839496"
+                      :background "#001f27"))
 
 (set-face-attribute 'mode-line nil
                     :background "#002b36")

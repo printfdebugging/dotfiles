@@ -92,7 +92,7 @@ return {
 				virtual_text = false,
 			},
 			symbol_in_winbar = {
-				-- enable = false,
+				enable = false,
 			},
 		})
 		-- Set up lspconfig.
