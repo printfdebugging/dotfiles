@@ -65,13 +65,13 @@ return {
           lavender  = "#839496",
 
           text      = "#839496",
-          subtext1  = "#bac2de",
-          subtext0  = "#a6adc8",
-          overlay2  = "#9399b2",
-          overlay1  = "#7f849c",
-          overlay0  = "#5B6268",
-          surface2  = "#676E95",
-          surface1  = "#6C7085",
+          subtext1  = "#839496",
+          subtext0  = "#839496",
+          overlay2  = "#839496",
+          overlay1  = "#839496",
+          overlay0  = "#839496",
+          surface2  = "#839496",
+          surface1  = "#839496",
           surface0  = "#2D3952",
         },
       },
@@ -141,6 +141,7 @@ return {
       highlight confComment guifg=#51afef gui=bold
       highlight @markup.link.vimdoc guifg=#a9a1e1
       highlight @label.vimdoc guifg=#a9a1e1
+      highlight @variable guifg=#839496
 
     ]])
     vim.cmd([[highlight! link CursorLineSign CursorLine]])
