@@ -71,7 +71,7 @@ return {
           overlay1  = "#839496",
           overlay0  = "#839496",
           surface2  = "#839496",
-          surface1  = "#839496",
+          surface1  = "#2D3952",
           surface0  = "#2D3952",
         },
       },
