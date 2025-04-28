@@ -33,9 +33,11 @@
     dest: "/home/{{ ansible_user }}/repos/{{ item }}"
     update: no
   loop:
+    - learnOpengl
+    - kilo
+    - termLogging
     - dotfiles
     - notes
-    - logs
+    - jlox
+    - workLogs
     - books
-    - crafting-interpreters
-    - terminal-work-logger
