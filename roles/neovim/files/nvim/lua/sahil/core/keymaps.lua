@@ -28,7 +28,6 @@ keymap.set("n", "<leader>tp", ":tabp<CR>") --  go to previous tab
 keymap.set("n", "<leader>rs", ":LspRestart<CR>") -- mapping to restart lsp if necessary
 keymap.set("n", "<leader>oe", ":lua vim.diagnostic.open_float()<CR>") -- mapping to restart lsp if necessary
 keymap.set("n", "<leader>oo", ":FeMaco<CR>") -- mapping to restart lsp if necessary
-keymap.set("n", "<leader>gh", ':lua require("neogit").open()<CR>')
 keymap.set("n", "<", ":-tabmove<CR>") -- mapping to restart lsp if necessary
 keymap.set("n", ">", ":+tabmove<CR>") -- mapping to restart lsp if necessary
 
