@@ -21,16 +21,15 @@
     line: "{{ lookup('pipe', 'ssh-keyscan -t rsa {{ item }}') }}"
     regexp: "^{{ item }}"
   loop:
-    - gitlab.com
     - github.com
 
-- name: (git) clone gitlab project
+- name: (git) clone github projects
   become: false
   tags:
     - git
     - files
   ansible.builtin.git:
-    repo: "{{ my_gitlab_handle }}/{{ item }}.git"
+    repo: "{{ my_github_handle }}/{{ item }}.git"
     dest: "/home/{{ ansible_user }}/repos/{{ item }}"
     update: no
   loop:
@@ -38,26 +37,5 @@
     - notes
     - logs
     - books
-
     - crafting-interpreters
-
-- name: (git) set remote push urls
-  become: false
-  tags:
-    - git
-    - files
-  ansible.builtin.shell:
-    cmd: |
-      cd /home/{{ ansible_user }}/repos/{{ item }}
-      [ ! $(git remote -v | grep origin | wc -l) -eq 0 ] && git remote remove origin
-      [ ! $(git remote -v | grep all | wc -l) -eq 0 ] && git remote remove all
-      git remote add all {{ my_gitlab_handle }}/{{ item }}.git
-      git remote set-url --add --push all {{ my_gitlab_handle }}/{{ item }}.git
-      git remote set-url --add --push all {{ my_github_handle }}/{{ item }}.git
-  loop:
-    - dotfiles
-    - notes
-    - logs
-    - books
-
-    - crafting-interpreters
+    - terminal-work-logger
