@@ -77,31 +77,11 @@ vim.keymap.set("n", "<leader>fs", G_telescope_resume)
 -- NVIM-TREE
 vim.keymap.set("n", "<leader>e", ":NvimTreeFindFileToggle<CR>")
 
--- HARPOON
-vim.keymap.set("n", "<leader>mm", ':lua require("harpoon.mark").add_file()<CR>')
-vim.keymap.set("n", "<C-e>", ':lua require("harpoon.ui").toggle_quick_menu()<CR>')
-vim.keymap.set("n", "<leader>1", ':lua require("harpoon.ui").nav_file(1)<CR>')
-vim.keymap.set("n", "<leader>2", ':lua require("harpoon.ui").nav_file(2)<CR>')
-vim.keymap.set("n", "<leader>3", ':lua require("harpoon.ui").nav_file(3)<CR>')
-vim.keymap.set("n", "<leader>4", ':lua require("harpoon.ui").nav_file(4)<CR>')
-vim.keymap.set("n", "<leader>5", ':lua require("harpoon.ui").nav_file(5)<CR>')
-
--- GITSIGNS
-vim.keymap.set("n", "<leader>gt", ":Gitsigns toggle_deleted<CR>")
-vim.keymap.set("n", "<leader>gn", ":Gitsigns next_hunk<CR>")
-vim.keymap.set("n", "<leader>gp", ":Gitsigns prev_hunk<CR>")
-vim.keymap.set("n", "<leader>gx", ":Gitsigns reset_hunk<CR>")
-vim.keymap.set("n", "<leader>gs", ":Gitsigns toggle_signs<CR>")
-vim.keymap.set("n", "<leader>rr", ":MdEvalClean<CR>")
-
 -- PERSONAL CONVINIENCE
 keymap.set("n", "<leader>x", ":lua ExecuteCurrentFileProgram()<CR>", { noremap = true, silent = true })
 keymap.set("n", "J", "mzJ`z")
 keymap.set("n", "t", ":!make run<CR>")
 keymap.set("n", "T", ":!make clean<CR>")
--- keymap.set("n", "S", ":!make save<CR>")
--- keymap.set("n", "\\", ":lua saveToReadmeFile()<CR>") -- mapping to restart lsp if necessary
--- keymap.set("n", "M", ":lua today()<CR>") -- mapping to restart lsp if necessary
 
 -- LUASNIP
 vim.keymap.set({ "i", "s" }, "<M-l>", function()

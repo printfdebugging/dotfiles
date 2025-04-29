@@ -1,19 +1,4 @@
 ---@diagnostic disable-next-line: lowercase-global
-function saveToReadmeFile()
-	-- function to save the source code from codefile to a readme
-	local file_extension = vim.fn.expand("%:e")
-	-- if file_extension == "md" or file_extension == "go" then -- don't touch markdown files
-	-- 	return
-	-- end
-	local sourceFile = vim.fn.expand("%") -- full file path
-	local tailFilename = vim.fn.expand("%:t")
-	local readmeFile = "/home/printfdebugging/repos/files/sourcecode.md"
-	--[[ string.gsub(sourceFile, tailFilename, "readme.md") ]]
-	vim.cmd("!echo '```" .. file_extension .. "' >> " .. readmeFile)
-	vim.cmd("!cat " .. sourceFile .. " >> " .. readmeFile)
-	vim.cmd("!echo '```' >> " .. readmeFile)
-	vim.cmd("!echo '' > %")
-end
 
 function ExecuteCurrentFileProgram()
 	local file_extension = vim.fn.expand("%:e")
