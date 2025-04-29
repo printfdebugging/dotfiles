@@ -40,7 +40,6 @@
     - mtpfs
     - mpv
     - python-pip
-    - evince
     - okular
     - gdb
     - ntfs-3g
