@@ -100,7 +100,7 @@ alias make="make -O"
 
 
 # path aliases
-alias  c="cd /home/$USER/"
+alias  c="cd"
 alias  l="cd /home/$USER/repos/libreoffice/"
 alias cr="cd ~/repos/"
 alias  d="cd ~/repos/dotfiles/"
