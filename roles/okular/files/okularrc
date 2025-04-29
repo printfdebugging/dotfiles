@@ -7,6 +7,9 @@ shouldShowToolBarComingFromFullScreen=true
 LockSidebar=true
 ShowSidebar=false
 
+[MainWindow]
+MenuBar=Disabled
+
 [Recent Files]
 File1[$e]=$HOME/downloads/dokumen.pub_a-philosophy-of-software-design-2nd-edition-2nbsped-173210221x-9781732102217.epub
 File2[$e]=$HOME/tmp/tdf#164656-implement-native-win32-widgets-in-libreoffice.md
