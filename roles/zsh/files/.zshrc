@@ -126,7 +126,7 @@ alias  kdm="sudo rm -rf /var/service/sddm"
 alias    e="export SAL_USE_VCLPLUGIN=kf5;  /home/printfdebugging/repos/libreoffice/instdir/program/soffice"
 alias    f="export SAL_USE_VCLPLUGIN=kf6;  /home/printfdebugging/repos/libreoffice/instdir/program/soffice"
 alias    g="export SAL_USE_VCLPLUGIN=gtk3; /home/printfdebugging/repos/libreoffice/instdir/program/soffice"
-alias    p="projects"
+alias    p="cd $HOME/repos/projects"
 
 
 # package manager aliases
