@@ -1,5 +1,6 @@
 - name: (okular) install packages
   tags:
+    - bootstrap
     - okular
     - packages
   community.general.xbps:
@@ -11,6 +12,7 @@
 - name: (okular) copy config file
   become: false
   tags:
+    - bootstrap
     - okular
     - files
   ansible.builtin.copy:

@@ -1,6 +1,7 @@
 - name: (base) install packages
   tags:
     - base
+    - bootstrap
     - packages
   community.general.xbps:
     name: "{{ item }}"
@@ -89,6 +90,7 @@
 - name: (base) upgrade distribution
   tags:
     - base
+    - bootstrap
     - packages
   community.general.xbps:
     upgrade: true
@@ -96,6 +98,7 @@
 - name: (base) add user to network group
   tags:
     - base
+    - bootstrap
     - system
   ansible.builtin.user:
     name: "{{ ansible_user }}"
@@ -106,6 +109,7 @@
   become: false
   tags:
     - base
+    - bootstrap
     - files
   ansible.builtin.file:
     path: "/home/{{ ansible_user }}/downloads"
@@ -118,6 +122,7 @@
   become: false
   tags:
     - base
+    - bootstrap
     - files
   ansible.builtin.file:
     path: "/home/{{ ansible_user }}/.config"
@@ -129,6 +134,7 @@
 - name: (base) copy user-dirs.dirs file
   tags:
     - base
+    - bootstrap
     - files
   ansible.builtin.copy:
     src: user-dirs.dirs
@@ -141,6 +147,7 @@
   become: false
   tags:
     - gtk
+    - bootstrap
     - files
   ansible.builtin.file:
     path: "/home/{{ ansible_user }}/.local/share/fonts"
@@ -154,6 +161,7 @@
   tags:
     - base
     - fonts
+    - bootstrap
     - packages
   ansible.builtin.shell:
     cmd: |
@@ -171,6 +179,7 @@
   become: false
   tags:
     - base
+    - bootstrap
     - packages
   ansible.builtin.copy:
     src: twemoji
@@ -183,6 +192,7 @@
   become: true
   tags:
     - base
+    - bootstrap
     - packages
   ansible.builtin.copy:
     src: 75-twemoji.conf

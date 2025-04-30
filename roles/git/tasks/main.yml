@@ -1,5 +1,6 @@
 - name: (git) install packages
   tags:
+    - bootstrap
     - git
     - packages
   community.general.xbps:
@@ -12,6 +13,7 @@
 - name: (git) add remote rsa keys
   become: false
   tags:
+    - bootstrap
     - git
     - files
   ansible.builtin.lineinfile:

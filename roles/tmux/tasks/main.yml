@@ -1,5 +1,6 @@
 - name: (tmux) install packages
   tags:
+    - bootstrap
     - tmux
     - packages
   community.general.xbps:
@@ -11,6 +12,7 @@
 - name: (tmux) create config directory
   become: false
   tags:
+    - bootstrap
     - tmux
     - files
   file:
@@ -23,6 +25,7 @@
 - name: (tmux) clone tpm
   become: false
   tags:
+    - bootstrap
     - tmux
     - files
   ansible.builtin.git:
@@ -33,6 +36,7 @@
 - name: (tmux) copy config file
   become: false
   tags:
+    - bootstrap
     - tmux
     - files
   ansible.builtin.copy:

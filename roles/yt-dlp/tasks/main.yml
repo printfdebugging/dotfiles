@@ -1,5 +1,6 @@
 - name: (yt-dlp) install packages
   tags:
+    - bootstrap
     - yt-dlp
     - packages
   community.general.xbps:
@@ -11,6 +12,7 @@
 - name: (yt-dlp) create config directory
   become: false
   tags:
+    - bootstrap
     - yt-dlp
     - files
   ansible.builtin.file:
@@ -23,6 +25,7 @@
 - name: (yt-dlp) copy config file
   become: false
   tags:
+    - bootstrap
     - yt-dlp
     - files
   ansible.builtin.copy:

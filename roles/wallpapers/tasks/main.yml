@@ -1,6 +1,7 @@
 - name: (wallpapers) copy walls and icons
   become: false
   tags:
+    - bootstrap
     - wallpapers
     - files
   ansible.builtin.copy:

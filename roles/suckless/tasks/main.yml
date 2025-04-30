@@ -1,5 +1,6 @@
 - name: (suckless) install packages
   tags:
+    - bootstrap
     - suckless
     - packages
   community.general.xbps:
@@ -18,6 +19,7 @@
 - name: (suckless) remove src files
   become: true
   tags:
+    - bootstrap
     - suckless
     - files
   ansible.builtin.file:
@@ -27,6 +29,7 @@
 - name: (suckless) create src directory
   become: false
   tags:
+    - bootstrap
     - suckless
     - files
   ansible.builtin.file:
@@ -39,6 +42,7 @@
 - name: (suckless) copy src files
   become: false
   tags:
+    - bootstrap
     - suckless
     - files
   ansible.builtin.copy:
@@ -55,6 +59,7 @@
 - name: (suckless) compile src files
   become: true
   tags:
+    - bootstrap
     - suckless
     - files
   shell: "make clean install"

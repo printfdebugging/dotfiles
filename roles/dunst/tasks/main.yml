@@ -1,6 +1,7 @@
 - name: (dunst@voidlinux) install packages
   tags:
     - dunst
+    - bootstrap
     - packages
   community.general.xbps:
     name:
@@ -13,6 +14,7 @@
   become: false
   tags:
     - dunst
+    - bootstrap
     - files
   ansible.builtin.file:
     path: "/home/{{ ansible_user }}/.config/dunst"
@@ -25,6 +27,7 @@
   become: false
   tags:
     - dunst
+    - bootstrap
     - files
   ansible.builtin.copy:
     src: dunstrc

@@ -1,5 +1,6 @@
 - name: (libreoffice-dev) install dependencies
   tags:
+    - bootstrap
     - libreoffice-dev
     - packages
   community.general.xbps:
@@ -134,6 +135,7 @@
 - name: (git) clone the git repo
   become: false
   tags:
+    - bootstrap
     - libreoffice-dev
     - files
   ansible.builtin.git:
@@ -144,6 +146,7 @@
 
 - name: (libreoffice-dev) copy autogen.input
   tags:
+    - bootstrap
     - libreoffice-dev
     - files
   ansible.builtin.copy:
@@ -155,6 +158,7 @@
 
 - name: (libreoffice-dev) setup ccache with 100Gs
   tags:
+    - bootstrap
     - libreoffice-dev
     - files
   ansible.builtin.shell:
