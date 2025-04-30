@@ -9,13 +9,6 @@ ShowSidebar=false
 
 [MainWindow]
 MenuBar=Disabled
+ToolBarsMovable=Enabled
 
 [Recent Files]
-File1[$e]=$HOME/downloads/dokumen.pub_a-philosophy-of-software-design-2nd-edition-2nbsped-173210221x-9781732102217.epub
-File2[$e]=$HOME/tmp/tdf#164656-implement-native-win32-widgets-in-libreoffice.md
-File3[$e]=$HOME/repos/books/crafting-interpreters.pdf
-File4[$e]=$HOME/downloads/DSA questions.pdf
-Name1[$e]=dokumen.pub_a-philosophy-of-software-design-2nd-edition-2nbsped-173210221x-9781732102217.epub
-Name2[$e]=tdf#164656-implement-native-win32-widgets-in-libreoffice.md
-Name3[$e]=crafting-interpreters.pdf
-Name4[$e]=DSA questions.pdf
