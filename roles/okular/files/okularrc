@@ -10,5 +10,3 @@ ShowSidebar=false
 [MainWindow]
 MenuBar=Disabled
 ToolBarsMovable=Enabled
-
-[Recent Files]
