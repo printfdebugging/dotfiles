@@ -174,7 +174,7 @@ char *argv0;
 
 /* configuration, allows nested code to access above variables */
 /* appearance */
-static const char  font[]       = "JetBrainsMono Nerd Font:size=12";
+static const char  font[]       = "Iosevka Nerd Font:size=14";
 static const char* normbgcolor  = "#222222";
 static const char* normfgcolor  = "#bbbbbb";
 static const char* selbgcolor   = "#005577";
