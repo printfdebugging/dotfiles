@@ -5,6 +5,6 @@ nm-applet &
 pasystray &
 thunderbird &
 xcompmgr &
-# dunst &
+dunst &
 
 exec dwm
