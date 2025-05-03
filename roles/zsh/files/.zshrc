@@ -111,7 +111,7 @@ alias  n="cd ~/repos/notes/ && nvim ."
 # git aliases
 alias stat="git status"
 alias  gca="git commit --amend"
-alias  dif="git diff HEAD~ HEAD | delta"
+alias  dif="git diff HEAD~ HEAD"
 alias   tr="git log --all --oneline --graph --decorate"
 alias   br="git branch"
 alias   gc="git clone"
@@ -126,7 +126,7 @@ alias  kdm="sudo rm -rf /var/service/sddm"
 alias    e="export SAL_USE_VCLPLUGIN=kf5;  /home/printfdebugging/repos/libreoffice/instdir/program/soffice"
 alias    f="export SAL_USE_VCLPLUGIN=kf6;  /home/printfdebugging/repos/libreoffice/instdir/program/soffice"
 alias    g="export SAL_USE_VCLPLUGIN=gtk3; /home/printfdebugging/repos/libreoffice/instdir/program/soffice"
-alias    p="cd $HOME/repos/projects"
+alias    p="cd $HOME/repos/code"
 
 
 # package manager aliases
