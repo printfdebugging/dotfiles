@@ -145,6 +145,7 @@ return {
       highlight diffAdded   guifg=#a6e3a1
       highlight diffRemoved guifg=#f38ba8
       highlight diffNewFile guifg=#cba6f7
+      highlight diffLine    guifg=#5b6268
 
     ]])
     vim.cmd([[highlight! link CursorLineSign CursorLine]])
