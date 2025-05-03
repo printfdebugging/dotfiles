@@ -142,8 +142,8 @@ return {
       highlight @markup.link.vimdoc guifg=#a9a1e1
       highlight @label.vimdoc guifg=#a9a1e1
       highlight @variable guifg=#839496
-      highlight diffAdded   guifg=#a6e3a1
-      highlight diffRemoved guifg=#f38ba8
+      highlight diffAdded   guifg=#859900
+      highlight diffRemoved guifg=#c55555
       highlight diffNewFile guifg=#cba6f7
       highlight diffLine    guifg=#5b6268
 
