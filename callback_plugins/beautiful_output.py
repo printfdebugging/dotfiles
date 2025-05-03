@@ -497,16 +497,16 @@ class CallbackModule(CallbackBase, FileSystemEventHandler):
         name = play.get_name().strip()
         if name:
             self.display(
-                to_text("[PLAY: {0}]").format(stringc(name, C.COLOR_HIGHLIGHT)).center(91, "-")
+                to_text("[PLAY: {0}]").format(stringc(name, C.COLOR_HIGHLIGHT)).center(91, "─")
             )
         else:
-            self.display("[PLAY]".center(80, "-"))
+            self.display("[PLAY]".center(80, "─"))
 
         if play.hosts:
             self.display("Hosts:")
             for host in play.hosts:
                 self.display(to_text("  - {0}").format(stringc(host, C.COLOR_HIGHLIGHT)))
-            self.display(to_text("-") * 80)
+            self.display(to_text("─") * 80)
 
     def v2_playbook_on_task_start(self, task, is_conditional):
         """Displays a title for the giving ``task`.
@@ -791,7 +791,7 @@ class CallbackModule(CallbackBase, FileSystemEventHandler):
             method from the :class:`~ansible.plugins.callback.CallbackBase`
             class.
         """
-        self.display(to_text("{0}\n\n").format("-" * 80))
+        self.display(to_text("{0}\n\n").format("─" * 80))
         totals = {
             "ok": 0,
             "changed": 0,
@@ -826,7 +826,7 @@ class CallbackModule(CallbackBase, FileSystemEventHandler):
                 (host_summary["ignored"], C.COLOR_WARN, 7),
             )
 
-        self._display_summary_table_separator("-")
+        self._display_summary_table_separator("─")
         self._display_summary_table_row(
             ("Totals", C.COLOR_VERBOSE, 30),
             (totals["ok"], C.COLOR_OK, 7),
