@@ -36,4 +36,4 @@
     update: no
   loop:
     - dotfiles
-    - code
+    - private
