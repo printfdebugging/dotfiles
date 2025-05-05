@@ -23,32 +23,80 @@
     line: "{{ lookup('pipe', 'ssh-keyscan -t rsa {{ item }}') }}"
     regexp: "^{{ item }}"
   loop:
-    - github.com
+    - codeberg.org
+    - git.gay
 
-- name: (git) clone github projects
+- name: (git) clone git repositories
   become: false
   tags:
     - git
     - files
   ansible.builtin.git:
-    repo: "{{ my_github_handle }}/{{ item }}.git"
+    repo: "{{ my_codeberg_handle }}/{{ item }}.git"
     dest: "/home/{{ ansible_user }}/repos/{{ item }}"
     update: no
   loop:
-  # public
     - dotfiles
+    - themes
+    - keybindings
+    - callogging
   # private
-    - suckless
-    - vulkan
-    - clrs
-    - raytracer
-    - opengl
-    - sicp
-    - monkeylang
-    - lox
-    - kohi
-    - logs
-    - journal
-    - libregex
-    - libtags
     - editor
+    - journal
+
+- name: (git) remove 'all' and 'origin' if they exist
+  become: false
+  tags:
+    - git
+    - files
+  ansible.builtin.shell: |
+    if git remote -v | grep "origin" > /dev/null 2>&1; then
+      git remote remove origin
+    fi
+
+    if git remote -v | grep "all" > /dev/null 2>&1; then
+      git remote remove all
+    fi
+  args:
+    chdir: "/home/{{ ansible_user }}/repos/{{ item }}"
+  loop:
+    - dotfiles
+    - themes
+    - keybindings
+    - callogging
+  # private
+    - editor
+    - journal
+
+- name: (git) add codeberg and gitea as push remotes as all and set as default
+  become: false
+  tags:
+    - git
+    - files
+  ansible.builtin.shell: |
+    git remote add all {{ my_codeberg_handle }}/{{ item }}.git;
+    git remote set-url --add --push all {{ my_codeberg_handle }}/{{ item }}.git;
+    git remote set-url --add --push all {{ my_gitgay_handle }}/{{ item }}.git;
+    git config branch.main.remote all
+    git config branch.main.merge refs/heads/main
+  args:
+    chdir: "/home/{{ ansible_user }}/repos/{{ item }}"
+  loop:
+    - dotfiles
+    - themes
+    - keybindings
+    - callogging
+  # private
+    - editor
+    - journal
+  # - lox
+  # - monkeylang
+  # - clrs
+  # - sicp
+  # - raytracer
+  # - suckless
+  # - vulkan
+  # - opengl
+  # - kohi
+  # - libregex
+  # - libtags
