@@ -37,7 +37,6 @@
   loop:
   # public
     - dotfiles
-    - blog
   # private
     - suckless
     - vulkan
@@ -49,6 +48,7 @@
     - lox
     - kohi
     - logs
+    - journal
     - libregex
     - libtags
     - editor
