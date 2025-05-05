@@ -35,5 +35,20 @@
     dest: "/home/{{ ansible_user }}/repos/{{ item }}"
     update: no
   loop:
+  # public
     - dotfiles
-    - private
+    - blog
+  # private
+    - suckless
+    - vulkan
+    - clrs
+    - raytracer
+    - opengl
+    - sicp
+    - monkeylang
+    - lox
+    - kohi
+    - logs
+    - libregex
+    - libtags
+    - editor
