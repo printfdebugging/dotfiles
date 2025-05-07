@@ -172,7 +172,7 @@
       fi
   loop:
     [
-      { font: "Iosevka",  url: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.0/Iosevka.zip", },
+      { font: "IosevkaTermSlab",  url: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/IosevkaTermSlab.zip", },
     ]
 
 - name: (base) copy twemoji font file
