@@ -1,12 +1,9 @@
 ---
 - hosts: all
   roles:
-    - creds
-    - gpg
     - base
     - bin
     - flameshot
-    - git
     - gtk
     - mpv
     - dunst
@@ -21,3 +18,20 @@
     - services
     - libreoffice-dev
     - qemu
+
+- hosts: all
+  tags:
+    - personal
+  roles:
+    - git-personal
+    - creds-personal
+    - gpg-personal
+
+- hosts: all
+  tags:
+    - work
+  roles:
+    - git-work
+    - creds-work
+    - gpg-work
+    - libreoffice-dev

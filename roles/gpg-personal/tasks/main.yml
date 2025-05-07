@@ -34,7 +34,6 @@
   loop:
     [
       { content: "printfdebugging_gmail_com_private_asc",           file: "printfdebugging@gmail.com.private.asc", },
-      { content: "sahil_gautam_extern_allotropia_de_private_asc",   file: "sahil.gautam.extern@allotropia.de.private.asc", },
     ]
 
 - name: (gpg) copy .pubkeys on the system
@@ -45,18 +44,6 @@
   ansible.builtin.copy:
     src: .pubkeys
     dest: /home/{{ ansible_user }}/
-    group: "{{ ansible_user }}"
-    owner: "{{ ansible_user }}"
-    mode: 0755
-
-- name: (gpg) save .pubkeys
-  become: false
-  tags:
-    - save
-    - save-gpg
-  ansible.builtin.copy:
-    src: /home/{{ ansible_user }}/.pubkeys
-    dest: /home/{{ ansible_user }}/repos/dotfiles/roles/gpg/files
     group: "{{ ansible_user }}"
     owner: "{{ ansible_user }}"
     mode: 0755

@@ -2,6 +2,6 @@
 linux: # group
   hosts:
     system:
-      ansible_user: printfdebugging
+      ansible_user: "{{ lookup('env','USER') }}"
       ansible_host: localhost
       ansible_connection: local

@@ -1,0 +1,49 @@
+- name: (gpg) install packages
+  tags:
+    - gpg-work
+    - packages
+  community.general.xbps:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - gnupg2
+
+- name: (gpg) create ~/.privkeys directory
+  become: false
+  tags:
+    - gpg-work
+    - files
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/.privkeys"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0755"
+
+- name: (gpg) create private gpg files from vars
+  become: false
+  tags:
+    - gpg-work
+    - files
+  ansible.builtin.copy:
+    content: "{{ lookup('vars', item.content) }}"
+    dest: /home/{{ ansible_user }}/.privkeys/{{ item.file }}
+    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user }}"
+    mode: 0755
+  loop:
+    [
+      { content: "sahil_gautam_extern_allotropia_de_private_asc",   file: "sahil.gautam.extern@allotropia.de.private.asc", },
+    ]
+
+- name: (gpg) copy .pubkeys on the system
+  become: false
+  tags:
+    - gpg-work
+    - files
+  ansible.builtin.copy:
+    src: .pubkeys
+    dest: /home/{{ ansible_user }}/
+    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user }}"
+    mode: 0755

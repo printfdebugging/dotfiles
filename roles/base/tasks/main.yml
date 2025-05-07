@@ -143,21 +143,8 @@
     group: root
     mode: 0644
 
-- name: (base) create /home/{{ ansible_user }}/.local/share/fonts/ directory
-  become: false
-  tags:
-    - gtk
-    - bootstrap
-    - files
-  ansible.builtin.file:
-    path: "/home/{{ ansible_user }}/.local/share/fonts"
-    state: directory
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
-    mode: 0755
-
 - name: (base) install fonts
-  become: false
+  become: true
   tags:
     - base
     - fonts
@@ -166,9 +153,9 @@
   ansible.builtin.shell:
     cmd: |
       if [ $(fc-list | grep "{{ item.font }}" | wc -l) -eq 0 ]; then
-        cd /home/{{ ansible_user }}/.local/share/fonts
+        cd /tmp
         curl -LO {{ item.url }}
-        unzip {{ item.font }}.zip -d {{ item.font }}
+        unzip {{ item.font }}.zip -d /usr/share/fonts/{{ item.font }}
       fi
   loop:
     [

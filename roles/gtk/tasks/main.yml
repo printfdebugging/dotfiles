@@ -19,32 +19,6 @@
     - gdk-pixbuf
     - lxappearance
 
-- name: (gtk) create config directory
-  become: false
-  tags:
-    - bootstrap
-    - gtk
-    - files
-  ansible.builtin.file:
-    path: "/home/{{ ansible_user }}/.config/gtk-3.0"
-    state: directory
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
-    mode: "0755"
-
-- name: (gtk) copy config file
-  become: false
-  tags:
-    - bootstrap
-    - gtk
-    - files
-  ansible.builtin.copy:
-    src: settings.ini
-    dest: /home/{{ ansible_user }}/.config/gtk-3.0/settings.ini
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
-    mode: 0755
-
 - name: (gtk) copy config file to etc
   become: true
   tags:
@@ -58,20 +32,7 @@
     group: "{{ ansible_user }}"
     mode: 0755
 
-- name: (gtk) create ~/.local/share/themes/ directory
-  become: false
-  tags:
-    - bootstrap
-    - gtk
-    - files
-  ansible.builtin.file:
-    path: "/home/{{ ansible_user }}/.local/share/themes"
-    state: directory
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
-    mode: 0755
-
-- name: (gtk) copy theme files to ~/.local/share/themes
+- name: (gtk) copy theme files to /usr/share/themes
   become: false
   tags:
     - bootstrap
@@ -79,7 +40,7 @@
     - files
   ansible.builtin.copy:
     src: "{{ item }}"
-    dest: /home/{{ ansible_user }}/.local/share/themes
+    dest: /tmp
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
     mode: 0755
@@ -93,6 +54,6 @@
     - files
   ansible.builtin.shell:
     cmd: |
-      cd /home/{{ ansible_user }}/.local/share/themes && tar -xf {{ item }}.tar.xz
+      cd /tmp && tar -xf {{ item }}.tar.xz && mv {{ item }} /usr/share/themes
   loop:
     - Nordic-darker
