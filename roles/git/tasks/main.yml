@@ -43,8 +43,6 @@
     - callogging
     - timepast
   # private
-    - editor
-    - journal
     - logs
     - notes
 
@@ -70,8 +68,6 @@
     - callogging
     - timepast
   # private
-    - editor
-    - journal
     - logs
     - notes
 
@@ -97,18 +93,59 @@
     - callogging
     - timepast
   # private
-    - editor
-    - journal
     - logs
     - notes
+
+# CREATING SOME PROJECTS MYSELF
   # - lox
   # - monkeylang
   # - clrs
   # - sicp
+  # - editor (kilo, kilua, ded)
   # - raytracer
-  # - suckless
+  # - suckless (dwm, st, dmenu, foot, dwl, zathura, vim, mpv)
   # - vulkan
-  # - opengl
+  # - opengl (bookofshaders, oss opengl)
   # - kohi
   # - libregex
   # - libtags
+  # - env
+  # - earth
+# READING OTHERS PROJECTS
+  # - glfw-commented
+  # - make-commented
+  # - gdb-commented
+# LITERATURE
+  # - computer graphics by armin
+  # - real time rendering
+  # - the art of x86 assembly
+  # - vulkan specification
+  # - opengl specification
+  # - x86 specification
+  # - c specification
+  # - c++ specification
+  # - gcc specification
+  # - opengl superbible
+  # - opengl programming guide
+  # - x11 programming manual
+  # - wayland programming
+  # - beautiful code
+  # - coders at work
+  # - the philosophy of software design
+  # - the architecture of open source applications
+  # - operating system in three easy pieces
+  # - windows system programming p2
+  # - windows system programming
+  # - programming windows 5e
+  # - write great code 1 - 6
+  # - 66 effective debugging tactics
+  # - the art of debugging
+  # - systems performance
+  # - introduction to algorithms (clrs) (in c)
+  # - game engine arcitecture
+  # - game programming patterns
+  # - unicode text rendering
+  # - variable width font rendering
+  # - collabora TTT talks
+  # - 10km/day x 1000 days (10000km)
+  # - 20 pushups/day (20000 pushups)
