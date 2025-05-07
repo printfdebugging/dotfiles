@@ -23,6 +23,7 @@
     line: "{{ lookup('pipe', 'ssh-keyscan -t rsa {{ item }}') }}"
     regexp: "^{{ item }}"
   loop:
+    - github.com
     - codeberg.org
     - git.gay
 
@@ -45,6 +46,7 @@
     - editor
     - journal
     - logs
+    - notes
 
 - name: (git) remove 'all' and 'origin' if they exist
   become: false
@@ -71,6 +73,7 @@
     - editor
     - journal
     - logs
+    - notes
 
 - name: (git) add codeberg and gitea as push remotes as all and set as default
   become: false
@@ -81,6 +84,8 @@
     git remote add all {{ my_codeberg_handle }}/{{ item }}.git;
     git remote set-url --add --push all {{ my_codeberg_handle }}/{{ item }}.git;
     git remote set-url --add --push all {{ my_gitgay_handle }}/{{ item }}.git;
+    git remote set-url --add --push all {{ my_github_handle }}/{{ item }}.git;
+    git remote set-url --add --push all {{ my_gitlab_handle }}/{{ item }}.git;
     git config branch.main.remote all
     git config branch.main.merge refs/heads/main
   args:
@@ -95,6 +100,7 @@
     - editor
     - journal
     - logs
+    - notes
   # - lox
   # - monkeylang
   # - clrs
