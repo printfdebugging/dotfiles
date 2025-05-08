@@ -32,8 +32,8 @@
     group: "{{ ansible_user }}"
     mode: 0755
 
-- name: (gtk) copy theme files to /usr/share/themes
-  become: false
+- name: (gtk) extract tar.xz themes
+  become: true
   tags:
     - bootstrap
     - gtk
@@ -48,12 +48,16 @@
     - Nordic-darker.tar.xz
 
 - name: (gtk) install tar.xz themes
+  become: true
   tags:
     - bootstrap
     - gtk
     - files
-  ansible.builtin.shell:
-    cmd: |
-      cd /tmp && tar -xf {{ item }}.tar.xz && mv {{ item }} /usr/share/themes
+  ansible.builtin.shell: |
+    if [ ! -d /usr/share/themes/{{ item }} ]; then
+      cd /tmp 
+      tar -xf {{ item }}.tar.xz 
+      mv {{ item }} /usr/share/themes
+    fi
   loop:
     - Nordic-darker

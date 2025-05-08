@@ -1,5 +1,25 @@
 ---
 - hosts: all
+  tags:
+    - personal
+  roles:
+    - creds-personal
+    - git-personal
+    - gpg-personal
+
+- hosts: all
+  tags:
+    - work
+  roles:
+    - creds-work
+    - git-work
+    - gpg-work
+    - libreoffice-dev
+
+- hosts: all
+  tags:
+    - personal
+    - work
   roles:
     - base
     - bin
@@ -16,22 +36,4 @@
     - yt-dlp
     - zsh
     - services
-    - libreoffice-dev
     - qemu
-
-- hosts: all
-  tags:
-    - personal
-  roles:
-    - git-personal
-    - creds-personal
-    - gpg-personal
-
-- hosts: all
-  tags:
-    - work
-  roles:
-    - git-work
-    - creds-work
-    - gpg-work
-    - libreoffice-dev
