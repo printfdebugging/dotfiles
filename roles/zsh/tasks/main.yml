@@ -1,6 +1,5 @@
 - name: (zsh) install packages
   tags:
-    - bootstrap
     - zsh
     - packages
   community.general.xbps:
@@ -14,7 +13,6 @@
 
 - name: (zsh) setup zsh shell
   tags:
-    - bootstrap
     - zsh
     - system
   ansible.builtin.user:
@@ -28,7 +26,6 @@
 - name: (zsh) copy config files
   become: false
   tags:
-    - bootstrap
     - zsh
     - files
   ansible.builtin.copy:
@@ -44,7 +41,6 @@
 - name: (zsh) create cache directory
   become: false
   tags:
-    - bootstrap
     - zsh
     - files
   ansible.builtin.file:
@@ -57,7 +53,6 @@
 - name: (zsh) create history file
   become: false
   tags:
-    - bootstrap
     - zsh
     - files
   ansible.builtin.file:

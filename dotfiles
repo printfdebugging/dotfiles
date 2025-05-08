@@ -11,7 +11,6 @@ cloneDotfiles() {
     cd $HOME/repos/dotfiles
 }
 
-
 runAnsibleTaskWithoutVaultPass() {
     [ ! $(command -v ansible-playbook) ] && init
     cloneDotfiles
@@ -29,10 +28,18 @@ runAnsibleSaveTask() {
     ansible-playbook main.yml --tags "${@}"
 }
 
+runAnsibleSpecificToUser() {
+    if [ "$USER" = "printfdebugging" ]; then
+        runAnsibleTaskWithVaultPass files,packages,system,files-work,packages-work,system-work
+    elif [ "$USER" = "sahil" ]; then
+        runAnsibleTaskWithVaultPass files,packages,system,files-personal,packages-personal,system-personal
+    else
+        runAnsibleTaskWithoutVaultPass files,packages,system
+    fi
+}
+
 case "$1" in 
-    "init")         init;;
-    "bootstrap")    runAnsibleTaskWithoutVaultPass ${@};;
-    "full"|"")      runAnsibleTaskWithVaultPass files,packages,system;;
+    "")             runAnsibleSpecificToUser;;
     "save-"*)       runAnsibleSaveTask ${@};;
     *)              runAnsibleTaskWithVaultPass ${@};;
 esac

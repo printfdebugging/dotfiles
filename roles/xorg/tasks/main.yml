@@ -1,6 +1,5 @@
 - name: (xorg) install packages
   tags:
-    - bootstrap
     - xorg
     - packages
   community.general.xbps:
@@ -20,7 +19,6 @@
 - name: (xorg) copy xinitrc
   become: false
   tags:
-    - bootstrap
     - xorg
     - files
   ansible.builtin.copy:
@@ -33,7 +31,6 @@
 - name: (xorg) create conf.d directory
   become: true
   tags:
-    - bootstrap
     - xorg
     - files
   ansible.builtin.file:
@@ -45,7 +42,6 @@
 - name: (xorg) copy 30-touchpad.conf file
   become: true
   tags:
-    - bootstrap
     - xorg
     - files
   ansible.builtin.copy:
@@ -58,7 +54,6 @@
 - name: (xorg) copy 00-keyboard.conf file
   become: true
   tags:
-    - bootstrap
     - xorg
     - files
   ansible.builtin.copy:

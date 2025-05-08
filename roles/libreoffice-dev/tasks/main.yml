@@ -1,8 +1,7 @@
 - name: (libreoffice-dev) install dependencies
   tags:
-    - bootstrap
     - libreoffice-dev
-    - packages
+    - packages-work
   community.general.xbps:
     name: "{{ item }}"
     state: latest
@@ -135,9 +134,8 @@
 - name: (git) clone the git repo
   become: false
   tags:
-    - bootstrap
     - libreoffice-dev
-    - files
+    - files-work
   ansible.builtin.git:
     repo: https://gerrit.libreoffice.org/core
     dest: /home/{{ ansible_user }}/repos/libreoffice
@@ -146,9 +144,8 @@
 
 - name: (libreoffice-dev) copy autogen.input
   tags:
-    - bootstrap
     - libreoffice-dev
-    - files
+    - files-work
   ansible.builtin.copy:
     src: autogen.input
     dest: /home/{{ ansible_user }}/repos/libreoffice/autogen.input
@@ -158,9 +155,8 @@
 
 - name: (libreoffice-dev) setup ccache with 100Gs
   tags:
-    - bootstrap
     - libreoffice-dev
-    - files
+    - files-work
   ansible.builtin.shell:
     cmd: |
       ccache --max-size=100G

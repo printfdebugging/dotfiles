@@ -1,6 +1,5 @@
 - name: (neovim) install packages
   tags:
-    - bootstrap
     - neovim
     - packages
   community.general.xbps:
@@ -14,7 +13,6 @@
 - name: (neovim) copy config files
   become: false
   tags:
-    - bootstrap
     - neovim
     - files
   ansible.builtin.copy:

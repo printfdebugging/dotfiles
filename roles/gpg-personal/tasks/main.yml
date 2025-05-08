@@ -1,7 +1,7 @@
 - name: (gpg) install packages
   tags:
-    - gpg
-    - packages
+    - gpg-personal
+    - packages-personal
   community.general.xbps:
     name: "{{ item }}"
     state: latest
@@ -11,8 +11,8 @@
 - name: (gpg) create ~/.privkeys directory
   become: false
   tags:
-    - gpg
-    - files
+    - gpg-personal
+    - files-personal
   ansible.builtin.file:
     path: "/home/{{ ansible_user }}/.privkeys"
     state: directory
@@ -23,8 +23,8 @@
 - name: (gpg) create private gpg files from vars
   become: false
   tags:
-    - gpg
-    - files
+    - gpg-personal
+    - files-personal
   ansible.builtin.copy:
     content: "{{ lookup('vars', item.content) }}"
     dest: /home/{{ ansible_user }}/.privkeys/{{ item.file }}
@@ -39,8 +39,8 @@
 - name: (gpg) copy .pubkeys on the system
   become: false
   tags:
-    - gpg
-    - files
+    - gpg-personal
+    - files-personal
   ansible.builtin.copy:
     src: .pubkeys
     dest: /home/{{ ansible_user }}/

@@ -1,6 +1,5 @@
 - name: (mpv) install packages
   tags:
-    - bootstrap
     - mpv
     - packages
   community.general.xbps:
@@ -12,7 +11,6 @@
 - name: (mpv) create config directory
   become: false
   tags:
-    - bootstrap
     - mpv
     - files
   ansible.builtin.file:
@@ -25,7 +23,6 @@
 - name: (mpv) copy config files
   become: false
   tags:
-    - bootstrap
     - mpv
     - files
   ansible.builtin.copy:

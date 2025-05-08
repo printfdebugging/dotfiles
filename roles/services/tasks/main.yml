@@ -1,6 +1,5 @@
 - name: (services) stop other network services
   tags:
-    - bootstrap
     - services
     - system
   community.general.runit:
@@ -14,7 +13,6 @@
 
 - name: (services) kill other network services
   tags:
-    - bootstrap
     - services
     - system
   community.general.runit:
@@ -28,7 +26,6 @@
 
 - name: (services) enable & start network manager
   tags:
-    - bootstrap
     - services
     - system
   community.general.runit:

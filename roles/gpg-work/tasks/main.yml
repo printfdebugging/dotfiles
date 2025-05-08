@@ -1,7 +1,7 @@
 - name: (gpg) install packages
   tags:
     - gpg-work
-    - packages
+    - packages-work
   community.general.xbps:
     name: "{{ item }}"
     state: latest
@@ -12,7 +12,7 @@
   become: false
   tags:
     - gpg-work
-    - files
+    - files-work
   ansible.builtin.file:
     path: "/home/{{ ansible_user }}/.privkeys"
     state: directory
@@ -24,7 +24,7 @@
   become: false
   tags:
     - gpg-work
-    - files
+    - files-work
   ansible.builtin.copy:
     content: "{{ lookup('vars', item.content) }}"
     dest: /home/{{ ansible_user }}/.privkeys/{{ item.file }}
@@ -40,7 +40,7 @@
   become: false
   tags:
     - gpg-work
-    - files
+    - files-work
   ansible.builtin.copy:
     src: .pubkeys
     dest: /home/{{ ansible_user }}/

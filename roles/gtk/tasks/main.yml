@@ -1,7 +1,6 @@
 - name: (gtk) copy Adwaita theme to default theme
   become: true
   tags:
-    - bootstrap
     - gtk
     - files
   ansible.builtin.copy:
@@ -22,7 +21,6 @@
 - name: (gtk) copy config file to etc
   become: true
   tags:
-    - bootstrap
     - gtk
     - files
   ansible.builtin.copy:
@@ -35,7 +33,6 @@
 - name: (gtk) extract tar.xz themes
   become: true
   tags:
-    - bootstrap
     - gtk
     - files
   ansible.builtin.copy:
@@ -50,7 +47,6 @@
 - name: (gtk) install tar.xz themes
   become: true
   tags:
-    - bootstrap
     - gtk
     - files
   ansible.builtin.shell: |

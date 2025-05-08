@@ -1,6 +1,5 @@
 - name: (qemu) install qemu packages
   tags:
-    - bootstrap
     - qemu
     - packages
   community.general.xbps:
@@ -15,7 +14,6 @@
 
 - name: (qemu)
   tags:
-    - bootstrap
     - qemu
     - system
   ansible.builtin.user:
@@ -27,7 +25,6 @@
 
 - name: (qemu) enable and start neccessary services
   tags:
-    - bootstrap
     - qemu
     - system
   community.general.runit:
@@ -44,7 +41,6 @@
 - name: (qemu) enable and start network default
   become: true
   tags:
-    - bootstrap
     - qemu
     - system
   ansible.builtin.shell:

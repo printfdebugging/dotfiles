@@ -2,7 +2,6 @@
   become: false
   tags:
     - bin
-    - bootstrap
     - files
   ansible.builtin.copy:
     src: bin
