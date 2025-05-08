@@ -5,26 +5,35 @@ init() {
     sudo xbps-install -Syu git openssl ansible python3-watchdog neovim
 }
 
-clone_dotfiles() {
+cloneDotfiles() {
     mkdir -p $HOME/repos && cd $HOME/repos
     [ ! -d "$HOME/repos/dotfiles" ] && git clone https://codeberg.org/printfdebugging/dotfiles.git $HOME/repos/dotfiles
     cd $HOME/repos/dotfiles
 }
 
-run_ansible_tasks_with_tag() {
+
+runAnsibleTaskWithoutVaultPass() {
     [ ! $(command -v ansible-playbook) ] && init
-    clone_dotfiles
+    cloneDotfiles
+    ansible-playbook main.yml --tags "${@}" --become --ask-become-pass 
+}
+
+runAnsibleTaskWithVaultPass() {
+    [ ! $(command -v ansible-playbook) ] && init
+    cloneDotfiles
     ansible-playbook main.yml --tags "${@}" --become --ask-become-pass --ask-vault-pass
 }
 
-run_ansible_save_task() {
-    clone_dotfiles
+runAnsibleSaveTask() {
+    cloneDotfiles
     ansible-playbook main.yml --tags "${@}"
 }
 
 case "$1" in 
-    "init")     init;;
-    "full"|"")  run_ansible_tasks_with_tag files,packages,system;;
-    "save-"*)   run_ansible_save_task ${@};;
-    *)          run_ansible_tasks_with_tag ${@};;
+    "init")         init;;
+    "bootstrap")    runAnsibleTaskWithoutVaultPass ${@};;
+    "full"|"")      runAnsibleTaskWithVaultPass files,packages,system;;
+    "save-"*)       runAnsibleSaveTask ${@};;
+    *)              runAnsibleTaskWithVaultPass ${@};;
 esac
+

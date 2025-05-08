@@ -38,12 +38,9 @@
     update: no
   loop:
     - dotfiles
-    - themes
-    - keybindings
-    - callogging
-    - timepast
   # private
-    - notes
+    - journal
+    - editor
 
 - name: (git) remove 'all' and 'origin' if they exist
   become: false
@@ -62,12 +59,9 @@
     chdir: "/home/{{ ansible_user }}/repos/{{ item }}"
   loop:
     - dotfiles
-    - themes
-    - keybindings
-    - callogging
-    - timepast
   # private
-    - notes
+    - journal
+    - editor
 
 - name: (git) add codeberg and gitea as push remotes as all and set as default
   become: false
@@ -86,12 +80,9 @@
     chdir: "/home/{{ ansible_user }}/repos/{{ item }}"
   loop:
     - dotfiles
-    - themes
-    - keybindings
-    - callogging
-    - timepast
   # private
-    - notes
+    - journal
+    - editor
 
 # CREATING SOME PROJECTS MYSELF
   # - lox

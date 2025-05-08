@@ -39,6 +39,7 @@
   loop:
     - dotfiles
     - logs
+    - notes
 
 - name: (git) remove 'all' and 'origin' if they exist
   become: false
@@ -58,6 +59,7 @@
   loop:
     - dotfiles
     - logs
+    - notes
 
 - name: (git) add codeberg and gitea as push remotes as all and set as default
   become: false
@@ -77,3 +79,4 @@
   loop:
     - dotfiles
     - logs
+    - notes
