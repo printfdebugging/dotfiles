@@ -26,6 +26,7 @@
     - github.com
     - codeberg.org
     - git.gay
+    - gitlab.com
 
 - name: (git) clone git repositories
   become: false
