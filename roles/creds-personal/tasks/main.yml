@@ -34,18 +34,6 @@
     owner: "{{ ansible_user }}"
     mode: "0600"
 
-- name: (creds) create ssh config file
-  become: false
-  tags:
-    - creds-personal
-    - files-personal
-  ansible.builtin.copy:
-    content: "{{ ssh_config_file }}"
-    dest: "/home/{{ ansible_user }}/.ssh/config"
-    group: "{{ ansible_user }}"
-    owner: "{{ ansible_user }}"
-    mode: "0644"
-
 - name: (creds) create git config file
   become: false
   tags:
