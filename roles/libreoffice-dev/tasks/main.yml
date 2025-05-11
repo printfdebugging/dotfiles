@@ -130,6 +130,8 @@
     - openjdk17
     - nasm
     - ccache
+    - meson
+    - ninja
 
 - name: (git) clone the git repo
   become: false
