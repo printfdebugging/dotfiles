@@ -503,7 +503,7 @@ static const Key keys[] = {
     {MODKEY | ShiftMask, XK_comma,  tagmon,         {.i = -1}             },
     {MODKEY | ShiftMask, XK_period, tagmon,         {.i = +1}             },
 
-    {MODKEY,             XK_w,      spawn,          SHCMD("firefox")      },
+    {MODKEY,             XK_w,      spawn,          SHCMD("chromium")      },
     {MODKEY,             XK_g,      spawn,          SHCMD("getbookmark")  },
     {MODKEY,             XK_b,      spawn,          SHCMD("bookmark-dwm") },
     {MODKEY,             XK_c,      spawn,          SHCMD("quickemu-vms") },
