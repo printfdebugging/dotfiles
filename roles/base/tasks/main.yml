@@ -84,7 +84,8 @@
     - seahorse
     - valgrind
     - ctags
-    - delta
+    - sxiv
+    - feh
 
 - name: (base) upgrade distribution
   tags:
