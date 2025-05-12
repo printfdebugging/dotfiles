@@ -86,6 +86,7 @@
     - ctags
     - sxiv
     - feh
+    - exercism
 
 - name: (base) upgrade distribution
   tags:
