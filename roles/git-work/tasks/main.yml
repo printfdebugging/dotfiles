@@ -39,6 +39,8 @@
     - dotfiles
     - logs
     - notes
+    - themes
+    - keybindings
 
 - name: (git) remove 'all' and 'origin' if they exist
   become: false
@@ -59,6 +61,8 @@
     - dotfiles
     - logs
     - notes
+    - themes
+    - keybindings
 
 - name: (git) add other remotes as push for redundency
   become: false
@@ -79,3 +83,5 @@
     - dotfiles
     - logs
     - notes
+    - themes
+    - keybindings
