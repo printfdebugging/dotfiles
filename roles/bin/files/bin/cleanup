@@ -6,7 +6,7 @@ targets=(
     $HOME/.gitconfig
     $HOME/.pubkeys
     $HOME/.privkeys
-    $HOME/.mozilla
+    $HOME/.config/chromium
     $HOME/.cache
     $HOME/.gnupg
     $HOME/.ssh

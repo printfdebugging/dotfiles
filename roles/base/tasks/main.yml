@@ -6,7 +6,6 @@
     name: "{{ item }}"
     state: latest
   loop:
-    - chromium
     - thunderbird
     - vscode
     - par
@@ -86,7 +85,6 @@
     - ctags
     - sxiv
     - feh
-    - exercism
 
 - name: (base) upgrade distribution
   tags:
@@ -148,9 +146,9 @@
   ansible.builtin.shell:
     cmd: |
       if [ $(fc-list | grep "{{ item.font }}" | wc -l) -eq 0 ]; then
-        cd /tmp
+        mkdir -p /home/{{ ansible_user }}/.local/share/fonts && cd /home/{{ ansible_user }}/.local/share/fonts/
         curl -LO {{ item.url }}
-        unzip {{ item.font }}.zip -d /usr/share/fonts/{{ item.font }}
+        unzip {{ item.font }}.zip -d {{ item.font }}
       fi
   loop:
     [

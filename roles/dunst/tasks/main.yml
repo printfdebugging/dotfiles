@@ -1,4 +1,4 @@
-- name: (dunst@voidlinux) install packages
+- name: (dunst) install packages
   tags:
     - dunst
     - packages

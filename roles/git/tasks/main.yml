@@ -1,7 +1,7 @@
 - name: (git) install packages
   tags:
-    - git-work
-    - packages-work
+    - git
+    - packages
   community.general.xbps:
     name: "{{ item }}"
     state: latest
@@ -12,8 +12,8 @@
 - name: (git) add remote rsa keys
   become: false
   tags:
-    - git-work
-    - files-work
+    - git
+    - files
   ansible.builtin.lineinfile:
     dest: /home/{{ ansible_user }}/.ssh/known_hosts
     create: yes
@@ -29,8 +29,8 @@
 - name: (git) clone git repositories
   become: false
   tags:
-    - git-work
-    - files-work
+    - git
+    - files
   ansible.builtin.git:
     repo: "{{ my_codeberg_handle }}/{{ item }}.git"
     dest: "/home/{{ ansible_user }}/repos/{{ item }}"
@@ -41,12 +41,17 @@
     - notes
     - themes
     - keybindings
+  # private
+    - journal
+    - exercism
+    - editor
+    - lox
 
 - name: (git) remove 'all' and 'origin' if they exist
   become: false
   tags:
-    - git-work
-    - files-work
+    - git
+    - files
   ansible.builtin.shell: |
     if git remote -v | grep "origin" > /dev/null 2>&1; then
       git remote remove origin
@@ -63,12 +68,17 @@
     - notes
     - themes
     - keybindings
+  # private
+    - journal
+    - exercism
+    - editor
+    - lox
 
 - name: (git) add other remotes as push for redundency
   become: false
   tags:
-    - git-work
-    - files-work
+    - git
+    - files
   ansible.builtin.shell: |
     git remote add all {{ my_codeberg_handle }}/{{ item }}.git;
     git remote set-url --add --push all {{ my_codeberg_handle }}/{{ item }}.git;
@@ -85,3 +95,61 @@
     - notes
     - themes
     - keybindings
+  # private
+    - journal
+    - exercism
+    - editor
+    - lox
+
+# CREATING SOME PROJECTS MYSELF
+  # - monkeylang
+  # - clrs
+  # - sicp
+  # - (kilo, kilua, ded)
+  # - raytracer
+  # - suckless (dwm, st, dmenu, foot, dwl, zathura, vim, mpv)
+  # - vulkan
+  # - opengl (bookofshaders, oss opengl)
+  # - kohi
+  # - libregex
+  # - libtags
+  # - env
+  # - earth
+# READING OTHERS PROJECTS
+  # - glfw-commented
+  # - make-commented
+  # - gdb-commented
+# LITERATURE
+  # - computer graphics by armin
+  # - real time rendering
+  # - the art of x86 assembly
+  # - vulkan specification
+  # - opengl specification
+  # - x86 specification
+  # - c specification
+  # - c++ specification
+  # - gcc specification
+  # - opengl superbible
+  # - opengl programming guide
+  # - x11 programming manual
+  # - wayland programming
+  # - beautiful code
+  # - coders at work
+  # - the philosophy of software design
+  # - the architecture of open source applications
+  # - operating system in three easy pieces
+  # - windows system programming p2
+  # - windows system programming
+  # - programming windows 5e
+  # - write great code 1 - 6
+  # - 66 effective debugging tactics
+  # - the art of debugging
+  # - systems performance
+  # - introduction to algorithms (clrs) (in c)
+  # - game engine arcitecture
+  # - game programming patterns
+  # - unicode text rendering
+  # - variable width font rendering
+  # - collabora TTT talks
+  # - 10km/day x 1000 days (10000km)
+  # - 20 pushups/day (20000 pushups)

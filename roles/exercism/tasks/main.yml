@@ -1,0 +1,33 @@
+- name: (exercism) install packages
+  tags:
+    - exercism
+    - packages
+  community.general.xbps:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - exercism
+
+- name: (exercism) create config directory
+  become: false
+  tags:
+    - exercism
+    - files
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/.config/exercism"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0755"
+
+- name: (exercism) copy config file
+  become: false
+  tags:
+    - exercism
+    - files
+  ansible.builtin.copy:
+    content: "{{ user_json }}"
+    dest: /home/{{ ansible_user }}/.config/exercism/user.json
+    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user }}"
+    mode: 0755

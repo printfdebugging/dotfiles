@@ -1,16 +1,9 @@
 ---
 - hosts: all
   roles:
-    # personal
-    - creds-personal
-    - gpg-personal
-    - git-personal
-    # work
-    - creds-work
-    - gpg-work
-    - git-work
-    - libreoffice-dev
-    # common
+    - creds
+    - gpg
+    - git
     - base
     - bin
     - flameshot
@@ -19,11 +12,14 @@
     - dunst
     - neovim
     - suckless
+    - exercism
     - tmux
     - okular
     - wallpapers
     - xorg
     - yt-dlp
     - zsh
+    - chromium
     - services
     - qemu
+    - libreoffice-dev

@@ -28,19 +28,8 @@ runAnsibleSaveTask() {
     ansible-playbook main.yml --tags "${@}"
 }
 
-runAnsibleSpecificToUser() {
-    if [ "$USER" = "printfdebugging" ]; then
-        runAnsibleTaskWithVaultPass files,packages,system,files-work,packages-work,system-work
-    elif [ "$USER" = "sahil" ]; then
-        runAnsibleTaskWithVaultPass files,packages,system,files-personal,packages-personal,system-personal
-    else
-        runAnsibleTaskWithoutVaultPass files,packages,system
-    fi
-}
-
 case "$1" in 
-    "")             runAnsibleSpecificToUser;;
+    "")             runAnsibleTaskWithVaultPass files,packages,system;;
     "save-"*)       runAnsibleSaveTask ${@};;
     *)              runAnsibleTaskWithVaultPass ${@};;
 esac
-
