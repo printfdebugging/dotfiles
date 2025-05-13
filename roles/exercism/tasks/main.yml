@@ -7,6 +7,7 @@
     state: latest
   loop:
     - exercism
+    - libsanitizer-devel
 
 - name: (exercism) create config directory
   become: false
