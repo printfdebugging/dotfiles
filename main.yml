@@ -21,5 +21,5 @@
     - zsh
     - chromium
     - services
-    - qemu
     - libreoffice-dev
+    - qemu
