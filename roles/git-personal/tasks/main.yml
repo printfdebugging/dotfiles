@@ -39,7 +39,9 @@
     - dotfiles
   # private
     - journal
+    - exercism
     - editor
+    - lox
 
 - name: (git) remove 'all' and 'origin' if they exist
   become: false
@@ -60,7 +62,9 @@
     - dotfiles
   # private
     - journal
+    - exercism
     - editor
+    - lox
 
 - name: (git) add other remotes as push for redundency
   become: false
@@ -81,14 +85,15 @@
     - dotfiles
   # private
     - journal
+    - exercism
     - editor
+    - lox
 
 # CREATING SOME PROJECTS MYSELF
-  # - lox
   # - monkeylang
   # - clrs
   # - sicp
-  # - editor (kilo, kilua, ded)
+  # - (kilo, kilua, ded)
   # - raytracer
   # - suckless (dwm, st, dmenu, foot, dwl, zathura, vim, mpv)
   # - vulkan
