@@ -85,6 +85,7 @@
     - ctags
     - sxiv
     - feh
+    - openjdk21
 
 - name: (base) upgrade distribution
   tags:
