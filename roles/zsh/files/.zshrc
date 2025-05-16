@@ -51,6 +51,10 @@ export SAL_DISABLEGL=1
 export SAL_DISABLE_OPENCL=1
 export SAL_NO_MOUSEGRABS=T
 
+# use libreoffice logging utilities for printfdebugging
+export SAL_LOG="+INFO"
+export SAL_LOG_FILE=logfile
+
 
 # system exports
 export PATH="/home/$USER/.local/bin:$PATH"
@@ -79,6 +83,7 @@ ascii() {
 alias t='tmux'
 alias v='nvim'
 alias make="make -O"
+alias p="projects"
 
 
 # path aliases
@@ -108,7 +113,6 @@ alias  kdm="sudo rm -rf /var/service/sddm"
 alias    e="export SAL_USE_VCLPLUGIN=kf5;  /home/printfdebugging/repos/libreoffice/instdir/program/soffice"
 alias    f="export SAL_USE_VCLPLUGIN=kf6;  /home/printfdebugging/repos/libreoffice/instdir/program/soffice"
 alias    g="export SAL_USE_VCLPLUGIN=gtk3; /home/printfdebugging/repos/libreoffice/instdir/program/soffice"
-alias    p="cd $HOME/repos/code"
 
 
 # package manager aliases
