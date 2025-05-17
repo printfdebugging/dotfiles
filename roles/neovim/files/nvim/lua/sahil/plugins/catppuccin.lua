@@ -141,12 +141,12 @@ return {
       highlight confComment guifg=#839496 gui=bold
       highlight @markup.link.vimdoc guifg=#a9a1e1
       highlight @label.vimdoc guifg=#a9a1e1
+      highlight @markup.raw.vimdoc guifg=#859900
       highlight @variable guifg=#839496
       highlight diffAdded   guifg=#859900
       highlight diffRemoved guifg=#c55555
       highlight diffNewFile guifg=#cba6f7
       highlight diffLine    guifg=#5b6268
-
     ]])
     vim.cmd([[highlight! link CursorLineSign CursorLine]])
   end,

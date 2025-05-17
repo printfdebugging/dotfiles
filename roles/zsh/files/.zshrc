@@ -79,6 +79,10 @@ ascii() {
     figlet -t -f mono12 $@  | lolcat 
 }
 
+dif() {
+    git diff HEAD~1 HEAD > "$(git rev-parse --abbrev-ref HEAD).diff"
+}
+
 # program aliases
 alias t='tmux'
 alias v='nvim'
@@ -98,7 +102,6 @@ alias  n="cd ~/repos/notes/ && nvim ."
 # git aliases
 alias stat="git status"
 alias  gca="git commit --amend"
-alias  dif="git diff HEAD~ HEAD"
 alias   tr="git log --all --oneline --graph --decorate"
 alias   br="git branch"
 alias   gc="git clone"
