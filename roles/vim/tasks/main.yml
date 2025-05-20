@@ -1,0 +1,33 @@
+- name: (vim) install packages
+  tags:
+    - vim
+    - packages
+  community.general.xbps:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - vim-huge
+
+- name: (vim) copy config files
+  become: false
+  tags:
+    - vim
+    - files
+  ansible.builtin.copy:
+    src: .vimrc
+    dest: /home/{{ ansible_user }}/.vimrc
+    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user }}"
+    mode: 0755
+
+- name: (vim) save config file
+  become: false
+  tags:
+    - save
+    - save-vim
+  ansible.builtin.copy:
+    src: /home/{{ ansible_user }}/.vimrc
+    dest: /home/{{ ansible_user }}/repos/dotfiles/roles/vim/files/.vimrc
+    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user }}"
+    mode: 0755
