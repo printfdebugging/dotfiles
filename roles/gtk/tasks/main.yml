@@ -54,15 +54,17 @@
     group: "{{ ansible_user }}"
     mode: 0755
   loop:
-    - Nordic-darker.tar.xz
+    - NumixSolarizedDarkBlue.zip
 
-- name: (gtk) install tar.xz themes
+- name: (gtk) install .zip themes
   become: false
   tags:
     - gtk
     - files
   ansible.builtin.shell:
     cmd: |
-      cd /home/{{ ansible_user }}/.local/share/themes && tar -xf {{ item }}.tar.xz
+      if [ ! -d "/home/{{ ansible_user }}/.local/share/themes/{{ item }}"]; then
+        cd /home/{{ ansible_user }}/.local/share/themes && unzip {{ item }}.zip
+      fi
   loop:
-    - Nordic-darker
+    - NumixSolarizedDarkBlue

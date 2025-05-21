@@ -60,7 +60,7 @@ export SAL_LOG_FILE=~/downloads/logfile
 export PATH="/home/$USER/.local/bin:$PATH"
 export EDITOR=nvim
 export GPG_TTY=$(tty)
-export GTK_THEME=Nordic-darker
+export GTK_THEME=NumixSolarizedDarkBlue
 # export GPG_AGENT_INFO="$(gpgconf --list-dirs agent-socket)/S.gpg-agent:0:1"
 
 
