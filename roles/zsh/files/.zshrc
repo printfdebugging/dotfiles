@@ -53,7 +53,7 @@ export SAL_NO_MOUSEGRABS=T
 
 # use libreoffice logging utilities for printfdebugging
 export SAL_LOG="+INFO"
-export SAL_LOG_FILE=logfile
+export SAL_LOG_FILE=~/downloads/logfile
 
 
 # system exports
@@ -86,6 +86,7 @@ dif() {
 # program aliases
 alias t='tmux'
 alias v='nvim'
+alias vim=vim-huge
 alias make="make -O"
 alias p="projects"
 
