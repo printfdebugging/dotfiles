@@ -63,7 +63,7 @@
     - files
   ansible.builtin.shell:
     cmd: |
-      if [ ! -d "/home/{{ ansible_user }}/.local/share/themes/{{ item }}"]; then
+      if [ ! -d "/home/{{ ansible_user }}/.local/share/themes/{{ item }}" ]; then
         cd /home/{{ ansible_user }}/.local/share/themes && unzip {{ item }}.zip
       fi
   loop:
