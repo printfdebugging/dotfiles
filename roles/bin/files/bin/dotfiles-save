@@ -4,7 +4,7 @@ if [ ! -d "$HOME/repos/dotfiles" ]; then
     notify-send "dotfiles not found" && exit
 fi
 
-selection=$(ls ~/repos/dotfiles/roles | dmenu -i -l 10 -vi -p "Save Dotfiles: ")
+selection=$(ls ~/repos/dotfiles/roles | dmenu -i -p "Save Dotfiles: ")
 
 if [ "$selection" != "" ]; then
     dotfiles "save-$selection" && notify-send "$selection saved" || notify-send "failed to save $selection"

@@ -66,7 +66,7 @@ static void ttysend(const Arg *);
 /* appearance
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Maple Mono NF CN:pixelsize=19:style=Regular:antialias=true:autohint=true";
+static char *font = "Iosevka Nerd Font:pixelsize=24:style=Regular:antialias=true:autohint=true";
 
 static int borderpx = 7;
 

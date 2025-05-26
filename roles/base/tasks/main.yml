@@ -161,7 +161,7 @@
       fi
   loop:
     [
-      { font: "MapleMono-NF-CN-unhinted",     url: "https://github.com/subframe7536/maple-font/releases/download/v7.2/MapleMono-NF-CN-unhinted.zip", },
+      { font: "Iosevka",     url: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.0/Iosevka.zip", },
     ]
 
 - name: (base) copy twemoji font file
