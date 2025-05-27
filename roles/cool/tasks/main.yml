@@ -1,0 +1,37 @@
+- name: (cool) install dependencies
+  tags:
+    - cool
+    - packages
+  community.general.xbps:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - libcap-devel
+    - libcap-ng-devel
+    - libpng-devel
+    - poco-devel
+    - cpputest
+    - nodejs
+    - chromium
+    - python3-lxml
+    - python3-polib
+    - pam-devel
+
+- name: (git) clone the git repo
+  become: false
+  tags:
+    - cool
+    - files
+  ansible.builtin.git:
+    repo: https://github.com/printfdebugging/online.git
+    dest: /home/{{ ansible_user }}/repos/online
+    update: no
+    recursive: false
+
+- name: (cool) setup ccache with 100Gs
+  tags:
+    - cool
+    - files
+  ansible.builtin.shell:
+    cmd: |
+      ccache --max-size=100G

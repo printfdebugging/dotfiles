@@ -38,6 +38,14 @@
   loop:
     - dotfiles
     - cookbook
+    - kohi
+    - lox
+    - monkey
+    - editor
+    - notes
+    - patches
+    - documents
+    - journal
 
 - name: (git) remove 'all' and 'origin' if they exist
   become: false
@@ -57,6 +65,14 @@
   loop:
     - dotfiles
     - cookbook
+    - kohi
+    - lox
+    - monkey
+    - editor
+    - notes
+    - patches
+    - documents
+    - journal
 
 - name: (git) add other remotes as push for redundency
   become: false
@@ -76,9 +92,16 @@
   loop:
     - dotfiles
     - cookbook
+    - kohi
+    - lox
+    - monkey
+    - editor
+    - notes
+    - patches
+    - documents
+    - journal
 
 # CREATING SOME PROJECTS MYSELF
-  # - monkeylang
   # - clrs
   # - sicp
   # - (kilo, kilua, ded)
