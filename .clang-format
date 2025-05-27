@@ -1,7 +1,7 @@
 BasedOnStyle: Google
 AlignAfterOpenBracket: AlwaysBreak
 AlignConsecutiveAssignments: true
-AlignConsecutiveDeclarations: true
+AlignConsecutiveDeclarations: false
 AlignConsecutiveMacros: true
 AllowAllParametersOfDeclarationOnNextLine: true
 AllowShortLoopsOnASingleLine: false
@@ -12,7 +12,7 @@ AlwaysBreakAfterReturnType: None
 AlwaysBreakTemplateDeclarations: Yes
 BinPackArguments: false
 BinPackParameters: false
-BreakBeforeBraces: Allman
+BreakBeforeBraces: Attach
 ColumnLimit: 150
 ExperimentalAutoDetectBinPacking: false
 IndentCaseLabels: true
@@ -27,3 +27,5 @@ SortUsingDeclarations: true
 SpaceAfterCStyleCast: true
 SpaceBeforeAssignmentOperators: true
 SpaceBeforeParens: ControlStatements 
+
+

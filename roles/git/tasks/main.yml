@@ -46,6 +46,7 @@
     - patches
     - documents
     - journal
+    - logs
 
 - name: (git) remove 'all' and 'origin' if they exist
   become: false
@@ -73,6 +74,7 @@
     - patches
     - documents
     - journal
+    - logs
 
 - name: (git) add other remotes as push for redundency
   become: false
@@ -100,6 +102,7 @@
     - patches
     - documents
     - journal
+    - logs
 
 # CREATING SOME PROJECTS MYSELF
   # - clrs
