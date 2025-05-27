@@ -36,16 +36,19 @@
     dest: "/home/{{ ansible_user }}/repos/{{ item }}"
     update: no
   loop:
+  # public
     - dotfiles
-    - cookbook
+  # projects
     - kohi
     - lox
     - monkey
     - editor
+  # personal
     - notes
     - patches
     - documents
     - journal
+  # work
     - logs
 
 - name: (git) remove 'all' and 'origin' if they exist
@@ -65,7 +68,6 @@
     chdir: "/home/{{ ansible_user }}/repos/{{ item }}"
   loop:
     - dotfiles
-    - cookbook
     - kohi
     - lox
     - monkey
@@ -93,7 +95,6 @@
     chdir: "/home/{{ ansible_user }}/repos/{{ item }}"
   loop:
     - dotfiles
-    - cookbook
     - kohi
     - lox
     - monkey
