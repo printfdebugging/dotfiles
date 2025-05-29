@@ -161,7 +161,7 @@
       fi
   loop:
     [
-      { font: "Iosevka",     url: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.0/Iosevka.zip", },
+      { font: "FiraCode",     url: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/FiraCode.zip", },
     ]
 
 - name: (base) copy twemoji font file

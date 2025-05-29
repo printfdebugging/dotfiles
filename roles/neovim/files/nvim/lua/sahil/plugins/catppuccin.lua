@@ -4,7 +4,6 @@ return {
   commit = "18bab5ec4c782cdf7d7525dbe89c60bfa02fc195",
   name = "catppuccin",
   priority = 1000,
-
   config = function()
     require("catppuccin").setup({
       flavour                = "mocha",
@@ -42,47 +41,46 @@ return {
         misc         = {},
       },
 
-      color_overrides = {
+      color_overrides        = {
         all       = {},
         frappe    = {},
         macchiato = {},
         latte     = {},
+        mocha     = {
+					rosewater = "#f5e0dc",
+					flamingo = "#f2cdcd",
+					pink = "#f5c2e7",
+					mauve = "#cba6f7",
+					red = "#f38ba8",
+					maroon = "#eba0ac",
+					peach = "#fab387",
+					yellow = "#ECBE7B",
+					green = "#98be65",
+					teal = "#4db5bd",
+					sky = "#89dceb",
+					sapphire = "#74c7ec",
+					blue = "#51afef",
+					lavender = "#b4befe",
 
-        mocha = {
-          rosewater = "#839496",
-          flamingo  = "#839496",
-          pink      = "#839496",
-          mauve     = "#839496",
-          red       = "#839496",
-          maroon    = "#839496",
-          peach     = "#839496",
-          yellow    = "#839496",
-          green     = "#839496",
-          teal      = "#839496",
-          sky       = "#839496",
-          sapphire  = "#839496",
-          blue      = "#839496",
-          lavender  = "#839496",
-
-          text      = "#839496",
-          subtext1  = "#839496",
-          subtext0  = "#839496",
-          overlay2  = "#839496",
-          overlay1  = "#839496",
-          overlay0  = "#839496",
-          surface2  = "#839496",
+          text      = "#bbc2cf",
+          subtext1  = "#bbc2cf",
+          subtext0  = "#bbc2cf",
+          overlay2  = "#bbc2cf",
+          overlay1  = "#bbc2cf",
+          overlay0  = "#bbc2cf",
+          surface2  = "#bbc2cf",
           surface1  = "#5b6268",
           surface0  = "#2D3952",
         },
       },
-      highlight_overrides = {
+      highlight_overrides    = {
       },
 
       integrations = {
         cmp        = true,
         gitsigns   = true,
         nvimtree   = true,
-        treesitter = false,
+        treesitter = true,
         notify     = false,
 
         mini = {

@@ -74,7 +74,9 @@ return {
 				}),
 			},
 			sources = cmp.config.sources({
+				{ name = "nvim_lsp" },
 				{ name = "luasnip" }, -- For luasnip users.
+				{ name = "buffer" },
 				{ name = "path" },
 			}),
 		})
@@ -92,7 +94,7 @@ return {
 				virtual_text = false,
 			},
 			symbol_in_winbar = {
-				enable = false,
+				-- enable = false,
 			},
 		})
 		-- Set up lspconfig.
@@ -168,3 +170,4 @@ return {
 		})
 	end,
 }
+

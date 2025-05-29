@@ -77,6 +77,15 @@ vim.keymap.set("n", "<leader>fs", G_telescope_resume)
 -- NVIM-TREE
 vim.keymap.set("n", "<leader>e", ":NvimTreeFindFileToggle<CR>")
 
+-- GITSIGNS
+vim.keymap.set("n", "<leader>gt", ":Gitsigns toggle_deleted<CR>")
+vim.keymap.set("n", "<leader>gn", ":Gitsigns next_hunk<CR>")
+vim.keymap.set("n", "<leader>gp", ":Gitsigns prev_hunk<CR>")
+vim.keymap.set("n", "<leader>gx", ":Gitsigns reset_hunk<CR>")
+vim.keymap.set("n", "<leader>gs", ":Gitsigns toggle_signs<CR>")
+vim.keymap.set("n", "<leader>rr", ":MdEvalClean<CR>")
+vim.keymap.set("n", "<leader>gh", ':lua require("neogit").open()<CR>')
+
 -- PERSONAL CONVINIENCE
 keymap.set("n", "<leader>x", ":lua ExecuteCurrentFileProgram()<CR>", { noremap = true, silent = true })
 keymap.set("n", "J", "mzJ`z")

@@ -66,7 +66,7 @@ static void ttysend(const Arg *);
 /* appearance
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Iosevka Nerd Font:pixelsize=20:style=Regular:antialias=true:autohint=true";
+static char *font = "FiraCode Nerd Font:pixelsize=18:style=Regular:antialias=true:autohint=true";
 
 static int borderpx = 7;
 
@@ -166,27 +166,27 @@ float       alpha       = 1.0;
 const char *colorname[] = {
 
     /* 8 normal colors */
-    [0] = "#001F27", /* black   */
+    [0] = "#1B2229", /* black   */
     [1] = "#ac4242", /* red     */
-    [2] = "#859900", /* green   */
-    [3] = "#b58900", /* yellow  */
+    [2] = "#98be65", /* green   */
+    [3] = "#f4bf75", /* yellow  */
     [4] = "#51afef", /* blue    */
     [5] = "#aa759f", /* magenta */
     [6] = "#51afef", /* cyan    */
     [7] = "#d8dee9", /* white   */
     /* 8 bright colors */
-    [8]  = "#6b6b6b", /* black   */
-    [9]  = "#c55555", /* red     */
-    [10] = "#859900", /* green   */
-    [11] = "#b58900", /* yellow  */
+    [8] = "#6b6b6b",  /* black   */
+    [9] = "#c55555",  /* red     */
+    [10] = "#98be65", /* green   */
+    [11] = "#feca88", /* yellow  */
     [12] = "#51afef", /* blue    */
     [13] = "#c28cb8", /* magenta */
     [14] = "#51afef", /* cyan    */
     [15] = "#d8dee9", /* white   */
 
     /* special colors */
-    [256] = "#001F27", /* background */
-    [257] = "#839496", /* foreground */
+    [256] = "#282c34", /* background */
+    [257] = "#bbc2cf", /* foreground */
     [258] = "#51afef", /* cursor */
 };
 
