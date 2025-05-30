@@ -7,6 +7,7 @@
     state: latest
   loop:
     - git
+    - github-cli
     - openssh
 
 - name: (git) add remote rsa keys
@@ -22,9 +23,6 @@
     regexp: "^{{ item }}"
   loop:
     - github.com
-    - codeberg.org
-    - git.gay
-    - gitlab.com
 
 - name: (git) clone git repositories
   become: false
@@ -32,98 +30,24 @@
     - git
     - files
   ansible.builtin.git:
-    repo: "{{ my_codeberg_handle }}/{{ item }}.git"
+    repo: "{{ my_github_handle }}/{{ item }}.git"
     dest: "/home/{{ ansible_user }}/repos/{{ item }}"
     update: no
   loop:
   # public
     - dotfiles
+    - printfdebugging
   # projects
-    - kohi
-    - lox
-    - monkey
-    - editor # libregex, libtags, various renderers, exwm/xembed, kilo, kilua, ded
-    - learn-opengl # bookofshaders and other oss opengl projects
-    - vulkan-tutorial
-    - raytracer
-    - project-earth
-    - algorithms
-  # personal
-    - notes
-    - patches
-    - documents
-    - journal
-  # work
-    - logs
-
-- name: (git) remove 'all' and 'origin' if they exist
-  become: false
-  tags:
-    - git
-    - files
-  ansible.builtin.shell: |
-    if git remote -v | grep "origin" > /dev/null 2>&1; then
-      git remote remove origin
-    fi
-
-    if git remote -v | grep "all" > /dev/null 2>&1; then
-      git remote remove all
-    fi
-  args:
-    chdir: "/home/{{ ansible_user }}/repos/{{ item }}"
-  loop:
-  # public
-    - dotfiles
-  # projects
-    - kohi
-    - lox
-    - monkey
-    - editor # libregex, libtags, various renderers, exwm/xembed, kilo, kilua, ded
-    - learn-opengl # bookofshaders and other oss opengl projects
-    - vulkan-tutorial
-    - raytracer
-    - project-earth
-    - algorithms
-  # personal
-    - notes
-    - patches
-    - documents
-    - journal
-  # work
-    - logs
-
-- name: (git) add other remotes as push for redundency
-  become: false
-  tags:
-    - git
-    - files
-  ansible.builtin.shell: |
-    git remote add all {{ my_codeberg_handle }}/{{ item }}.git;
-    git remote set-url --add --push all {{ my_codeberg_handle }}/{{ item }}.git;
-    git remote set-url --add --push all {{ my_gitgay_handle }}/{{ item }}.git;
-    git remote set-url --add --push all {{ my_github_handle }}/{{ item }}.git;
-    git remote set-url --add --push all {{ my_gitlab_handle }}/{{ item }}.git;
-    git config branch.main.remote all
-    git config branch.main.merge refs/heads/main
-  args:
-    chdir: "/home/{{ ansible_user }}/repos/{{ item }}"
-  loop:
-  # public
-    - dotfiles
-  # projects
-    - kohi
-    - lox
-    - monkey
-    - editor # libregex, libtags, various renderers, exwm/xembed, kilo, kilua, ded
-    - learn-opengl # bookofshaders and other oss opengl projects
-    - vulkan-tutorial
-    - raytracer
-    - project-earth
-    - algorithms
-  # personal
-    - notes
-    - patches
-    - documents
-    - journal
-  # work
+  #   - kohi
+  #   - lox
+  #   - monkey
+  #   - editor # libregex, libtags, various renderers, exwm/xembed, kilo, kilua, ded
+  #   - learn-opengl # bookofshaders and other oss opengl projects
+  #   - vulkan-tutorial
+  #   - raytracer
+  #   - project-earth
+  #   - algorithms
+  # # personal
+  #   - notes
+  # # work
     - logs

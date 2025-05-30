@@ -23,7 +23,7 @@
     - cool
     - files
   ansible.builtin.git:
-    repo: https://github.com/printfdebugging/online.git
+    repo: git@github.com:printfdebugging/online.git
     dest: /home/{{ ansible_user }}/repos/online
     update: no
     recursive: false
