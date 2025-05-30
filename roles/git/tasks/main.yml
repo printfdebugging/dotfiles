@@ -34,20 +34,6 @@
     dest: "/home/{{ ansible_user }}/repos/{{ item }}"
     update: no
   loop:
-  # public
     - dotfiles
     - printfdebugging
-  # projects
-  #   - kohi
-  #   - lox
-  #   - monkey
-  #   - editor # libregex, libtags, various renderers, exwm/xembed, kilo, kilua, ded
-  #   - learn-opengl # bookofshaders and other oss opengl projects
-  #   - vulkan-tutorial
-  #   - raytracer
-  #   - project-earth
-  #   - algorithms
-  # # personal
-  #   - notes
-  # # work
     - logs
