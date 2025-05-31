@@ -94,6 +94,7 @@ alias p="projects"
 # path aliases
 alias  c="cd"
 alias  l="cd /home/$USER/repos/libreoffice/"
+alias  o="cd /home/$USER/repos/online"
 alias cr="cd ~/repos/"
 alias  d="cd ~/repos/dotfiles/"
 alias  b="cd ~/.local/bin/"
