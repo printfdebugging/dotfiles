@@ -37,3 +37,7 @@
     - dotfiles
     - printfdebugging
     - logs
+    - blog
+    - themes
+    - keybindings
+    - sfml-blueprints
