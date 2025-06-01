@@ -155,11 +155,3 @@
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
     mode: 0755
-
-- name: (libreoffice-dev) setup ccache with 100Gs
-  tags:
-    - libreoffice-dev
-    - files
-  ansible.builtin.shell:
-    cmd: |
-      ccache --max-size=100G

@@ -28,10 +28,12 @@
     update: no
     recursive: false
 
-- name: (cool) setup ccache with 100Gs
+- name: (cool) set upstream in the online repository
   tags:
     - cool
     - files
   ansible.builtin.shell:
     cmd: |
-      ccache --max-size=100G
+      cd "/home/{{ ansible_user }}/repos/online"
+      [ $(git remote -v | grep "upstream" | wc -l) -ne 0 ] && git remote remove upstream
+      git remote add upstream https://github.com/CollaboraOnline/online.git

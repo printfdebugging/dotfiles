@@ -22,6 +22,7 @@
     - zsh
     - chromium
     - services
+    - ccache
     - libreoffice-dev
     - cool
     - qemu

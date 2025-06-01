@@ -1,0 +1,49 @@
+- name: (ccache) install packages
+  tags:
+    - ccache
+    - packages
+  community.general.xbps:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - ccache
+
+- name: (ccache) create config directory
+  become: false
+  tags:
+    - ccache
+    - files
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/.config/ccache"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+
+- name: (ccache) copy config file
+  become: false
+  tags:
+    - ccache
+    - files
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: /home/{{ ansible_user }}/.config/ccache/{{ item }}
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+  loop:
+    - ccache.conf
+
+- name: (ccache) save config directory
+  become: false
+  tags:
+    - save
+    - save-ccache
+  ansible.builtin.copy:
+    src: /home/{{ ansible_user }}/.config/ccache/{{ item }}
+    dest: /home/{{ ansible_user }}/repos/dotfiles/roles/ccache/files/{{ item }}
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0644
+  loop:
+    - ccache.conf
