@@ -54,7 +54,7 @@
     group: "{{ ansible_user }}"
     mode: 0755
   loop:
-    - NumixSolarizedDarkBlue.zip
+    - Arc-Darkest.zip
 
 - name: (gtk) install .zip themes
   become: false
@@ -64,7 +64,7 @@
   ansible.builtin.shell:
     cmd: |
       if [ ! -d "/home/{{ ansible_user }}/.local/share/themes/{{ item }}" ]; then
-        cd /home/{{ ansible_user }}/.local/share/themes && unzip {{ item }}.zip
+        cd /home/{{ ansible_user }}/.local/share/themes && unzip {{ item }}.zip -d {{ item }}
       fi
   loop:
-    - NumixSolarizedDarkBlue
+    - Arc-Darkest
