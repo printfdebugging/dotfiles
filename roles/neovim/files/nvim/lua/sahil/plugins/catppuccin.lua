@@ -121,22 +121,15 @@ return {
 
 
       " markdown headings
-      highlight markdownH1          guifg=#839496 gui=bold
-      highlight markdownH1Delimiter guifg=#839496 gui=bold
-      highlight @markup.heading.1.delimiter.vimdoc guifg=#839496 gui=bold
-      highlight @markup.heading.2.delimiter.vimdoc guifg=#839496 gui=bold
-      highlight markdownH2 guifg=#a9a1e1 gui=bold
-      highlight markdownH3 guifg=#a9a1e1 gui=bold
-      highlight markdownH4 guifg=#a9a1e1 gui=bold
-      highlight markdownH5 guifg=#a9a1e1 gui=bold
-      highlight markdownH6 guifg=#a9a1e1 gui=bold
+      highlight @markup.heading.1.markdown guifg=#51afef gui=bold
+      highlight @markup.heading.2.markdown guifg=#51afef gui=bold
+      highlight @markup.heading.3.markdown guifg=#51afef gui=bold
+      highlight @markup.heading.4.markdown guifg=#51afef gui=bold
+      highlight @markup.heading.5.markdown guifg=#51afef gui=bold
+      highlight @markup.heading.6.markdown guifg=#51afef gui=bold
 
-      highlight markdownH2Delimiter guifg=#a9a1e1 gui=bold
-      highlight markdownH3Delimiter guifg=#a9a1e1 gui=bold
-      highlight markdownH4Delimiter guifg=#a9a1e1 gui=bold
-      highlight markdownH5Delimiter guifg=#a9a1e1 gui=bold
-      highlight markdownH6Delimiter guifg=#a9a1e1 gui=bold
     ]])
     vim.cmd([[highlight! link CursorLineSign CursorLine]])
   end,
 }
+
