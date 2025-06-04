@@ -128,6 +128,10 @@ return {
       highlight @markup.heading.5.markdown guifg=#51afef gui=bold
       highlight @markup.heading.6.markdown guifg=#51afef gui=bold
 
+      "vimdoc
+      hi @label               guifg=#f5c2e7
+      hi @markup.link         gui=Underline,Bold guifg=#51afef
+
     ]])
     vim.cmd([[highlight! link CursorLineSign CursorLine]])
   end,
