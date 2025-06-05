@@ -36,8 +36,12 @@
   loop:
     - dotfiles
     - printfdebugging
+    # writings
     - logs
-    - themes
     - journal
+    # libreoffice extensions
+    - themes
     - keybindings
+    # personal projects
     - sfml-blueprints
+    - editor
