@@ -38,7 +38,7 @@
     - zola
     - mtpfs
     - mpv
-    - python-pip
+    - python3-pip
     - okular
     - gdb
     - ntfs-3g

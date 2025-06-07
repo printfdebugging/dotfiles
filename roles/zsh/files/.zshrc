@@ -60,7 +60,7 @@ export SAL_LOG_FILE=~/downloads/logfile
 export PATH="/home/$USER/.local/bin:$PATH"
 export EDITOR=nvim
 export GPG_TTY=$(tty)
-export GTK_THEME=Arc-Darkest
+# export GTK_THEME=Arc-Darkest
 export GPG_AGENT_INFO="$(gpgconf --list-dirs agent-socket)/S.gpg-agent:0:1"
 
 
@@ -113,8 +113,8 @@ alias   gc="git clone"
 alias ssha='eval $(ssh-agent) && ssh-add'
 alias  msu="sudo make clean install"
 alias  hss="zola serve"
-alias  sdm="sudo ln -s /etc/sv/sddm /var/service/"
-alias  kdm="sudo rm -rf /var/service/sddm"
+alias  sdm="sudo ln -s /etc/sv/gdm /var/service/"
+alias  kdm="sudo rm -rf /var/service/gdm"
 alias    e="export SAL_USE_VCLPLUGIN=kf5;  /home/printfdebugging/repos/libreoffice/instdir/program/soffice"
 alias    f="export SAL_USE_VCLPLUGIN=kf6;  /home/printfdebugging/repos/libreoffice/instdir/program/soffice"
 alias    g="export SAL_USE_VCLPLUGIN=gtk3; /home/printfdebugging/repos/libreoffice/instdir/program/soffice"
