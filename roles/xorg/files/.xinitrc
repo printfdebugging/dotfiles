@@ -3,7 +3,6 @@ dispscript
 flameshot &
 nm-applet &
 pasystray &
-thunderbird &
 xcompmgr &
 dunst &
 

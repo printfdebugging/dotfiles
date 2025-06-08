@@ -5,7 +5,7 @@ return {
   config = function()
     require("ibl").setup({
       indent = { char = "│" },
-      exclude = { filetypes = { "markdown", "conf" } },
+      exclude = { filetypes = {"conf" } },
       whitespace = {
         remove_blankline_trail = false,
       },
