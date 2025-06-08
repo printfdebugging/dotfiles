@@ -1,3 +1,5 @@
+MenuBar=Disabled
+
 [Desktop Entry]
 FullScreen=false
 shouldShowMenuBarComingFromFullScreen=true

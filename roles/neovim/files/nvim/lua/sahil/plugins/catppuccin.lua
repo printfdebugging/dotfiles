@@ -130,7 +130,7 @@ return {
 
       "vimdoc
       hi @label               guifg=#f5c2e7
-      hi @markup.link         gui=NONE guifg=#cba6f7
+      hi @markup.link         gui=Underline,Bold guifg=#51afef
 
     ]])
     vim.cmd([[highlight! link CursorLineSign CursorLine]])
