@@ -11,6 +11,7 @@
     - par
     - lua
     - cmake
+    - extra-cmake-modules
     - ansible
     - neofetch
     - man-db
