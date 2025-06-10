@@ -155,3 +155,14 @@
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
     mode: 0755
+
+- name: (libreoffice-dev) copy glade.conf
+  tags:
+    - libreoffice-dev
+    - files
+  ansible.builtin.copy:
+    src: glade.conf
+    dest: /home/{{ ansible_user }}/.config/glade.conf
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
