@@ -1,0 +1,79 @@
+- name: (emacs) install packages
+  tags:
+    - emacs
+    - packages
+  community.general.xbps:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - emacs-x11
+
+- name: (base) create emacs directory
+  become: false
+  tags:
+    - emacs
+    - files
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/.config/emacs"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+
+- name: (emacs) copy config files
+  become: false
+  tags:
+    - emacs
+    - files
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: /home/{{ ansible_user }}/.config/emacs/{{ item }}
+    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user }}"
+    mode: 0755
+  loop:
+    - init.el
+    - config.org
+
+- name: (emacs) copy snippets
+  become: false
+  tags:
+    - emacs
+    - files
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: /home/{{ ansible_user }}/.config/emacs
+    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user }}"
+    mode: 0755
+  loop:
+    - snippets
+
+- name: (emacs) save config files
+  become: false
+  tags:
+    - save
+    - save-emacs
+  ansible.builtin.copy:
+    src: /home/{{ ansible_user }}/.config/emacs/{{ item }}
+    dest: /home/{{ ansible_user }}/repos/dotfiles/roles/emacs/files/{{ item }}
+    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user }}"
+    mode: 0755
+  loop:
+    - init.el
+    - config.org
+
+- name: (emacs) save snippets
+  become: false
+  tags:
+    - save
+    - save-emacs
+  ansible.builtin.copy:
+    src: /home/{{ ansible_user }}/.config/emacs/{{ item }}
+    dest: /home/{{ ansible_user }}/repos/dotfiles/roles/emacs/files
+    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user }}"
+    mode: 0755
+  loop:
+    - snippets
