@@ -40,7 +40,7 @@
 
 #+BEGIN_SRC emacs-lisp
 (setq scroll-conservatively 100)
-(setq scroll-margin 7)
+(setq scroll-margin 0)
 (setq-default fill-column 138)
 (setq hscroll-step 1)
 (setq-default truncate-lines t)
@@ -67,6 +67,7 @@
 (use-package doom-modeline
   :ensure t
   :init
+  (setq doom-modeline-height 38)
   (doom-modeline-mode))
 
 (use-package all-the-icons-nerd-fonts
@@ -153,22 +154,22 @@
                     :weight 'Regular)
 (set-face-attribute 'org-document-title nil
                     :family "FiraCode Nerd Font"
-                    :height 280
+                    :height 300
                     :weight 'Bold
                     :foreground "#bbc2cf")
 (set-face-attribute 'org-level-1 nil
                     :family "FiraCode Nerd Font"
-                    :height 250
+                    :height 270
                     :weight 'Bold)
 (set-face-attribute 'org-level-2 nil
                     :family "FiraCode Nerd Font"
                     :weight 'Bold
-                    :height 230
+                    :height 200
                     :foreground "#A9A1E1")
 (set-face-attribute 'org-level-3 nil
                     :family "FiraCode Nerd Font"
                     :weight 'Bold
-                    :height 200
+                    :height 170
                     :foreground "#A9A1E1")
 (set-face-attribute 'org-level-4 nil
                     :family "FiraCode Nerd Font"
@@ -531,7 +532,7 @@ To execute source blocks asynchronously, add =:async= to the source block's head
       '(("d" "default" plain
          "%?"
          :target (file+head "${slug}.org"
-                            "#+TITLE: ${title}\n#+AUTHOR: Sahil Gautam\n#+EMAIL: printfdebugging@gmail.com\n#+EXCLUDE_TAGS: noexport\n#+STATE: draft\n"))))
+                            "#+TITLE: ${title}\n#+AUTHOR: Sahil Gautam\n#+EMAIL: printfdebugging@gmail.com\n#+EXCLUDE_TAGS: noexport\n#+STATE: draft\n\n*** Table Of Contents                                                    :TOC_4:"))))
 #+end_src
 
 * Org Bullets
@@ -1082,4 +1083,15 @@ from $1 to $0 and back to $1, having them selected for change in the process.
 ;; (add-to-list 'default-frame-alist '(alpha . (90 . 90)))
 ;; (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
 ;; (add-to-list 'default-frame-alist '(fullscreen . maximized))
+#+END_SRC
+
+* TOC Org
+#+BEGIN_SRC emacs-lisp
+(use-package toc-org
+  :ensure t
+  :config
+    (progn
+      (add-hook 'org-mode-hook 'toc-org-mode)
+      (add-hook 'markdown-mode-hook 'toc-org-mode)
+      (define-key markdown-mode-map (kbd "\C-c\C-o") 'toc-org-markdown-follow-thing-at-point)))
 #+END_SRC
