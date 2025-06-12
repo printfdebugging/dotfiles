@@ -15,6 +15,9 @@
     - ansible
     - neofetch
     - man-db
+    - man-pages
+    - man-pages-devel
+    - man-pages-posix
     - btop
     - vim-huge
     - pasystray
