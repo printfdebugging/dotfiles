@@ -10,7 +10,7 @@
     owner: "{{ ansible_user }}"
     mode: "0755"
 
-- name: (creds) create public file
+- name: (creds) create personal public key
   become: false
   tags:
     - creds
@@ -22,7 +22,7 @@
     owner: "{{ ansible_user }}"
     mode: "0644"
 
-- name: (creds) create private file
+- name: (creds) create personal private key
   become: false
   tags:
     - creds
@@ -30,6 +30,30 @@
   ansible.builtin.copy:
     content: "{{ private_ssh_key_file }}"
     dest: "/home/{{ ansible_user }}/.ssh/id_ed25519"
+    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user }}"
+    mode: "0600"
+
+- name: (creds) create work public key
+  become: false
+  tags:
+    - creds
+    - files
+  ansible.builtin.copy:
+    content: "{{ public_work_ssh_key_file }}"
+    dest: "/home/{{ ansible_user }}/.ssh/cool.pub"
+    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user }}"
+    mode: "0644"
+
+- name: (creds) create work private key
+  become: false
+  tags:
+    - creds
+    - files
+  ansible.builtin.copy:
+    content: "{{ private_work_ssh_key_file }}"
+    dest: "/home/{{ ansible_user }}/.ssh/cool"
     group: "{{ ansible_user }}"
     owner: "{{ ansible_user }}"
     mode: "0600"
