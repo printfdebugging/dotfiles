@@ -39,7 +39,6 @@
     - zola
     - mtpfs
     - mpv
-    - python3-pip
     - okular
     - gdb
     - rr
