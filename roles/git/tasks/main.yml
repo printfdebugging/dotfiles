@@ -44,7 +44,8 @@
     - keybindings
     # personal projects
     - sfml-blueprints
-    - editor
+    - learn-opengl
     - monkey
-    - kohi
     - lox
+    - kohi
+    - editor
