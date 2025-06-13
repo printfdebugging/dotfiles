@@ -45,3 +45,6 @@
     # personal projects
     - sfml-blueprints
     - editor
+    - monkey
+    - kohi
+    - lox
