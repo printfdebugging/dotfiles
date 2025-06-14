@@ -36,6 +36,7 @@
   loop:
     - dotfiles
     - printfdebugging
+    - gtimelog
     # writings
     - logs
     - notes

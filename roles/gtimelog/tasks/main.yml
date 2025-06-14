@@ -1,0 +1,9 @@
+- name: (gtimelog) install gtimelog
+  become: true
+  tags:
+    - gtimelog
+    - files
+  ansible.builtin.shell:
+    cmd: |
+      cd /home/{{ ansible_user }}/repos/gtimelog
+      ./setup.py install
