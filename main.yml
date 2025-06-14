@@ -13,7 +13,6 @@
     - neovim
     - emacs
     - vim
-    - pip
     - suckless
     - exercism
     - tmux
