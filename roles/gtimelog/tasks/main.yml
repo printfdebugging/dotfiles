@@ -13,3 +13,4 @@
     cmd: |
       cd /home/{{ ansible_user }}/repos/gtimelog
       ./setup.py install
+  ignore_errors: true

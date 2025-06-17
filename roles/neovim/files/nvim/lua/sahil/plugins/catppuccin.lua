@@ -136,6 +136,8 @@ return {
       highlight GitSignsUntrackedCul guibg=#21242b guifg=#98be65
       highlight Visual               guibg=#3f444a guifg=none
       highlight @function.builtin   guifg=#51afef
+      highlight Comment             guifg=#5B6268
+      highlight CmpNormal           guibg=#21242b
     ]])
 
     vim.cmd([[highlight! link CursorLineSign CursorLine]])

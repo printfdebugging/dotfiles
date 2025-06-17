@@ -26,6 +26,7 @@ return {
 			window = {
 				completion = {
 					scrollbar = false,
+          winhighlight = "Normal:CmpNormal",
 				},
 			},
 			mapping = cmp.mapping.preset.insert({
