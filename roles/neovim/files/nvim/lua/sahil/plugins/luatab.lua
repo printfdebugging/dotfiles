@@ -1,5 +1,5 @@
 return {
-  url = "https://codeberg.org/printfdebugging/luatab.nvim.git",
+  "alvarosevilla95/luatab.nvim",
   requires = "kyazdani42/nvim-web-devicons",
   config = function()
     require("luatab").setup({})

@@ -1,6 +1,5 @@
 return {
   "catppuccin/nvim",
-  commit = "18bab5ec4c782cdf7d7525dbe89c60bfa02fc195",
   name = "catppuccin",
   priority = 1000,
   config = function()
@@ -136,7 +135,9 @@ return {
       highlight GitSignsTopdeleteCul guibg=#21242b guifg=#f38ba8
       highlight GitSignsUntrackedCul guibg=#21242b guifg=#98be65
       highlight Visual               guibg=#3f444a guifg=none
+      highlight @function.builtin   guifg=#51afef
     ]])
+
     vim.cmd([[highlight! link CursorLineSign CursorLine]])
   end,
 }

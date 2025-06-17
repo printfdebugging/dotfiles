@@ -1,5 +1,5 @@
 return {
-  url = "https://codeberg.org/printfdebugging/todo-comments.nvim.git",
+  "folke/todo-comments.nvim",
   dependencies = { "nvim-lua/plenary.nvim" },
   opts = {
     keywords = {
