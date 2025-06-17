@@ -1,6 +1,7 @@
 ---
 - hosts: all
   roles:
+    - mirrors
     - base
     - emacs
     - awesome

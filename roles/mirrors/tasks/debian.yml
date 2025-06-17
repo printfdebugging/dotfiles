@@ -1,0 +1,10 @@
+- name: (system) add testing repo
+  tags:
+    - mirrors
+    - system
+  ansible.builtin.apt_repository:
+    repo: "{{ item }}"
+    state: present
+  loop:
+    - deb http://deb.debian.org/debian/ testing main
+    - deb http://deb.debian.org/debian/ unstable main
