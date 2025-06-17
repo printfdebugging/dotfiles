@@ -13,20 +13,20 @@ function initDebian() {
     myuser=$(whoami)
     ## ensure sudoers
     if [ ! $(command -v sudo) ]; then
-        su root
-        apt install sudo
-        echo "$myuser ALL=ALL" > /etc/sudoers.d/$myuser
-        usermod -aG wheel $myuser
-        su $myuser
+        su root -c "
+            apt install sudo
+            echo "$myuser ALL=ALL" > /etc/sudoers.d/$myuser
+            usermod -aG wheel $myuser
+        "
     fi
 
     ## ensure locale
     if [ "$(locale | grep 'en_US.UTF-8')" = "" ]; then
-        su root
-        apt install locales
-        echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
-        sudo locale-gen
-        su $myuser
+        su root -c "
+            apt install locales
+            echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
+            sudo locale-gen
+        "
     fi
 
     ## install packages
