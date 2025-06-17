@@ -47,3 +47,6 @@
     - libxt-dev
     - llvm
     - meson
+    - qmake6
+    - qt6-base-dev
+    - qt6-multimedia-dev

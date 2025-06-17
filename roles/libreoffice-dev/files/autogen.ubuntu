@@ -1,10 +1,12 @@
 --enable-dbgutil
---with-jdk-home=/usr/lib/jvm/openjdk17
+--with-jdk-home=/usr/lib/jvm/java-17-openjdk-amd64
 --without-junit
 --without-doxygen
---enable-ccache
+#--enable-ccache
+--with-parallelism=48
+--enable-icecream
 --enable-pch
---enable-kf6
+# --enable-kf6
 --with-system-libxml=no
 --enable-odk
 
