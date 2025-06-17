@@ -1,0 +1,19 @@
+- name: (cool) install dependencies
+  tags:
+    - cool
+    - packages
+  community.general.xbps:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - libcap-devel
+    - libcap-ng-devel
+    - libpng-devel
+    - poco-devel
+    - cpputest
+    - nodejs
+    - chromium
+    - python3-lxml
+    - python3-polib
+    - pam-devel
+

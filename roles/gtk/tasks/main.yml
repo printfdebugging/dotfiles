@@ -1,0 +1,68 @@
+- name: include tasks
+  tags:
+    - gtk
+    - include
+  ansible.builtin.include_tasks: "{{ ansible_facts.distribution|lower }}.yml"
+
+- name: (gtk) copy Adwaita theme to default theme
+  become: true
+  tags:
+    - gtk
+    - files
+  ansible.builtin.copy:
+    src: /usr/share/icons/Adwaita/
+    dest: /usr/share/icons/default/
+    owner: root
+    group: root
+    remote_src: true
+
+- name: (gtk) copy config file to etc
+  become: true
+  tags:
+    - gtk
+    - files
+  ansible.builtin.copy:
+    src: settings.ini
+    dest: /etc/gtk-3.0/settings.ini
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+
+- name: (gtk) create ~/.local/share/themes/ directory
+  become: false
+  tags:
+    - gtk
+    - files
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/.local/share/themes"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+
+- name: (gtk) copy theme files to ~/.local/share/themes
+  become: false
+  tags:
+    - gtk
+    - files
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: /home/{{ ansible_user }}/.local/share/themes
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+  loop:
+    - Arc-Darkest.zip
+
+- name: (gtk) install .zip themes
+  become: false
+  tags:
+    - gtk
+    - files
+  ansible.builtin.shell:
+    cmd: |
+      if [ ! -d "/home/{{ ansible_user }}/.local/share/themes/{{ item }}" ]; then
+        cd /home/{{ ansible_user }}/.local/share/themes && unzip {{ item }}.zip -d {{ item }}
+      fi
+  loop:
+    - Arc-Darkest

@@ -1,0 +1,24 @@
+- name: (cool) install dependencies
+  tags:
+    - cool
+    - packages
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - libpoco-dev
+    - python3-polib
+    - libcap-dev
+    - npm
+    - libpam-dev
+    - wget
+    - git
+    - build-essential
+    - libtool
+    - libcap2-bin
+    - python3-lxml
+    - libpng-dev
+    - libcppunit-dev
+    - pkg-config
+    - fontconfig
+    - chromium

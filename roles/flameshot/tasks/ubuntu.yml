@@ -1,0 +1,9 @@
+- name: (flameshot) install packages
+  tags:
+    - flameshot
+    - packages
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - flameshot

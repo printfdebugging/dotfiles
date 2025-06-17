@@ -1,0 +1,13 @@
+- name: (xorg) install packages
+  tags:
+    - xorg
+    - packages
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - xorg
+    - xcompmgr
+    - xwallpaper
+    - xclip
+    - xsel

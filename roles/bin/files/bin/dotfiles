@@ -1,0 +1,35 @@
+#!/bin/env bash
+
+init() {
+    sudo cp /usr/share/xbps.d/00-repository-main.conf /etc/xbps.d/00-repository-main.conf
+    sudo xbps-install -Syu git openssl ansible python3-watchdog neovim
+}
+
+cloneDotfiles() {
+    mkdir -p $HOME/repos && cd $HOME/repos
+    [ ! -d "$HOME/repos/dotfiles" ] && git clone https://github.com/printfdebugging/dotfiles.git $HOME/repos/dotfiles
+    cd $HOME/repos/dotfiles
+}
+
+runAnsibleTaskWithoutVaultPass() {
+    [ ! $(command -v ansible-playbook) ] && init
+    cloneDotfiles
+    ansible-playbook main.yml --tags "${@}" --become --ask-become-pass 
+}
+
+runAnsibleTaskWithVaultPass() {
+    [ ! $(command -v ansible-playbook) ] && init
+    cloneDotfiles
+    ansible-playbook main.yml --tags "${@}" --become --ask-become-pass --ask-vault-pass
+}
+
+runAnsibleSaveTask() {
+    cloneDotfiles
+    ansible-playbook main.yml --tags "${@}"
+}
+
+case "$1" in 
+    "")             runAnsibleTaskWithVaultPass files,packages,system;;
+    "save-"*)       runAnsibleSaveTask ${@};;
+    *)              runAnsibleTaskWithVaultPass ${@};;
+esac

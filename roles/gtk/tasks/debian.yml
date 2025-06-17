@@ -1,0 +1,11 @@
+- name: (gtk) install packages
+  tags:
+    - gtk
+    - packages
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - breeze-icon-theme
+    - adwaita-icon-theme
+    - lxappearance

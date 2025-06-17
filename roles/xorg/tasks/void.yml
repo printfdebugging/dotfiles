@@ -1,0 +1,17 @@
+- name: (xorg) install packages
+  tags:
+    - xorg
+    - packages
+  community.general.xbps:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - xorg-server
+    - xinit
+    - xrandr
+    - setxkbmap
+    - xset
+    - xcompmgr
+    - xwallpaper
+    - xclip
+    - xsel

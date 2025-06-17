@@ -1,0 +1,51 @@
+- name: include tasks
+  tags:
+    - tmux
+    - include
+  ansible.builtin.include_tasks: "{{ ansible_facts.distribution|lower }}.yml"
+
+- name: (tmux) create config directory
+  become: false
+  tags:
+    - tmux
+    - files
+  file:
+    path: /home/{{ ansible_user }}/.config/tmux
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+
+- name: (tmux) clone tpm
+  become: false
+  tags:
+    - tmux
+    - files
+  ansible.builtin.git:
+    repo: https://github.com/tmux-plugins/tpm
+    dest: /home/{{ ansible_user }}/.tmux/plugins/tpm
+    update: false
+
+- name: (tmux) copy config file
+  become: false
+  tags:
+    - tmux
+    - files
+  ansible.builtin.copy:
+    src: tmux.conf
+    dest: /home/{{ ansible_user }}/.config/tmux/tmux.conf
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+
+- name: (tmux) save config file
+  become: false
+  tags:
+    - save
+    - save-tmux
+  ansible.builtin.copy:
+    src: /home/{{ansible_user}}/.config/tmux/tmux.conf
+    dest: /home/{{ ansible_user }}/repos/dotfiles/roles/tmux/files/tmux.conf
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755

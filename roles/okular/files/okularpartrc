@@ -1,0 +1,16 @@
+[Dlg Accessibility]
+RecolorBackground=40,44,52
+RecolorForeground=187,194,207
+
+[Document]
+ChangeColors=true
+RenderMode=Recolor
+
+[General]
+ttsEngine=
+
+[PageView]
+BackgroundColor=40,44,52
+MouseMode=TextSelect
+ShowScrollBars=false
+UseCustomBackgroundColor=true

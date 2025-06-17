@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+
+targets=(
+    $HOME/.thunderbird
+    $HOME/.gitconfig
+    $HOME/.pubkeys
+    $HOME/.privkeys
+    $HOME/.config/chromium
+    $HOME/.cache
+    $HOME/.gnupg
+    $HOME/.ssh
+
+    $HOME/downloads
+    $HOME/repos
+)
+
+
+for target in ${targets[@]}; do
+    sudo rm -rf $target
+done
+
+

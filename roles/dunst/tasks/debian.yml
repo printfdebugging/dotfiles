@@ -1,0 +1,10 @@
+- name: (dunst@voidlinux) install packages
+  tags:
+    - dunst
+    - packages
+  ansible.builtin.apt:
+    name:
+      - "{{ item }}"
+    state: latest
+  loop:
+    - dunst

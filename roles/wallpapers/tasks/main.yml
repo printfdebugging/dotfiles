@@ -1,0 +1,20 @@
+- name: include tasks
+  tags:
+    - wallpapers
+    - include
+  ansible.builtin.include_tasks: "{{ ansible_facts.distribution|lower }}.yml"
+
+- name: (wallpapers) copy walls and icons
+  become: false
+  tags:
+    - wallpapers
+    - files
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: /home/{{ ansible_user }}/.local/share
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+  loop:
+    - wallpapers
+    - icons

@@ -1,0 +1,12 @@
+# folders
+**/build/
+**/obj/
+**/__pycache__/
+**/.cache/
+
+# files
+**compile_commands.json*
+**lazy-lock.json**
+**credentials.py*
+**calendar.xml*
+**.o

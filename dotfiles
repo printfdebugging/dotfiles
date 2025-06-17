@@ -1,0 +1,68 @@
+#!/bin/env bash
+
+function initArchlinux() {
+    # install basic system packages
+    sudo pacman --noconfirm -Syu ansible python-watchdog neovim openssh git
+}
+
+function initUbuntu() {
+    # install basic system packages
+    sudo apt install -y ansible python3-watchdog gcc openssh-server git
+    sudo apt -y upgrade
+}
+
+function initDebian() {
+    # install basic system packages
+    sudo apt install -y ansible python3-watchdog gcc openssh-server git
+    sudo apt -y upgrade
+}
+
+function initSuseTumbleweed() {
+    sudo zypper --non-interactive install git-core ansible python311-watchdog neovim gcc
+}
+
+function initVoid() {
+    # copy the mirror file
+    sudo cp /usr/share/xbps.d/00-repository-main.conf /etc/xbps.d/00-repository-main.conf
+
+    # install the required packages
+    sudo xbps-install -Syu git openssl ansible python3-watchdog neovim
+}
+
+function init() {
+    # check for distro in /etc/os-release file
+    case $(cat /etc/os-release | grep -e "^NAME" | awk -F "=" '{gsub(/"/, "", $2); print $2}') in
+        # "Arch Linux") initArchlinux;;
+        # "Fedora") init_fedora;;
+        "Void") initVoid;;
+        "Ubuntu") initUbuntu;;
+        "Debian GNU/Linux") initDebian;;
+        "openSUSE Tumbleweed") initSuseTumbleweed;;
+        *) echo "distro not supported" && exit ;;
+    esac
+}
+
+cloneDotfiles() {
+    mkdir -p $HOME/repos && cd $HOME/repos
+    [ ! -d "$HOME/repos/dotfiles" ] && git clone https://github.com/printfdebugging/dotfiles.git $HOME/repos/dotfiles
+    cd $HOME/repos/dotfiles
+}
+
+function runAnsibleTasksWithVaultPass() {
+    [ ! $(command -v ansible-playbook) ] && init
+    cloneDotfiles
+    ansible-playbook main.yml --tags "${@}" --become --ask-become-pass --ask-vault-pass
+}
+
+function runAnsibleSaveTask() {
+    # Run ansible-playbook with the save tag
+    cloneDotfiles
+    ansible-playbook main.yml \
+        --tags "${@}"
+}
+
+case "$1" in 
+    "")         runAnsibleTasksWithVaultPass include,files,packages,system ;;
+    "save-"*)   runAnsibleSaveTask include,${@};;
+    *)          runAnsibleTasksWithVaultPass include,${@};;
+esac

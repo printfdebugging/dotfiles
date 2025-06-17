@@ -1,0 +1,10 @@
+- name: (dunst@voidlinux) install packages
+  tags:
+    - dunst
+    - packages
+  community.general.zypper:
+    name:
+      - "{{ item }}"
+    state: latest
+  loop:
+    - dunst

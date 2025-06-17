@@ -1,0 +1,81 @@
+- name: include tasks
+  tags:
+    - base
+    - include
+  ansible.builtin.include_tasks: "{{ ansible_facts.distribution|lower }}.yml"
+
+- name: (base) create downloads directory
+  become: false
+  tags:
+    - base
+    - files
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/downloads"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+
+- name: (base) create .config directory
+  become: false
+  tags:
+    - base
+    - files
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/.config"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+
+- name: (base) copy user-dirs.dirs file
+  tags:
+    - base
+    - files
+  ansible.builtin.copy:
+    src: user-dirs.dirs
+    dest: /home/{{ ansible_user }}/.config/user-dirs.dirs
+    owner: root
+    group: root
+    mode: 0644
+
+- name: (base) install fonts
+  become: false
+  tags:
+    - base
+    - fonts
+    - packages
+  ansible.builtin.shell:
+    cmd: |
+      [ ! -d "/home/{{ ansible_user }}/.local/share/fonts" ] && mkdir -p /home/{{ ansible_user }}/.local/share/fonts
+      cd /home/{{ ansible_user }}/.local/share/fonts/
+      [ ! -d "/home/{{ ansible_user }}/.local/share/fonts/{{ item.font }}.zip" ] && curl -LO {{ item.url }}
+      [ ! -d "/home/{{ ansible_user }}/.local/share/fonts/{{ item.font }}" ] && unzip {{ item.font }}.zip -d {{ item.font }}
+  loop:
+    [
+      { font: "FiraCode",     url: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/FiraCode.zip", },
+    ]
+
+- name: (base) copy twemoji font file
+  become: true
+  tags:
+    - base
+    - packages
+  ansible.builtin.copy:
+    src: twemoji
+    dest: /usr/share/fonts
+    owner: root
+    group: root
+    mode: 0644
+
+- name: (base) copy twemoji fontconfig
+  become: true
+  tags:
+    - base
+    - packages
+  ansible.builtin.copy:
+    src: 75-twemoji.conf
+    dest: /etc/fonts/conf.d/75-twemoji.conf
+    owner: root
+    group: root
+    mode: 0644

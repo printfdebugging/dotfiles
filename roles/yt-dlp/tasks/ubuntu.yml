@@ -1,0 +1,9 @@
+- name: (yt-dlp) install packages
+  tags:
+    - yt-dlp
+    - packages
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - yt-dlp

@@ -1,0 +1,10 @@
+- name: (gpg) install packages
+  tags:
+    - gpg
+    - packages
+  community.general.xbps:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - gnupg2
+

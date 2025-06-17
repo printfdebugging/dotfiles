@@ -1,0 +1,9 @@
+- name: (gpg) install packages
+  tags:
+    - gpg
+    - packages
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - gpgv2

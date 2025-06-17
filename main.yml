@@ -1,0 +1,28 @@
+---
+- hosts: all
+  roles:
+    - base
+    - emacs
+    - awesome
+    - creds
+    - bin
+    - flameshot
+    - git
+    - gtimelog
+    - gtk
+    - mpv
+    - dunst
+    - neovim
+    - suckless
+    - tmux
+    - wallpapers
+    - xorg
+    - yt-dlp
+    - zsh
+    - services
+    - libreoffice-dev
+    - qemu
+    - ccache
+    - chromium
+    - okular
+    - gpg

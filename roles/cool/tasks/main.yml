@@ -1,0 +1,26 @@
+- name: include tasks
+  tags:
+    - cool
+    - include
+  ansible.builtin.include_tasks: "{{ ansible_facts.distribution|lower }}.yml"
+
+- name: (cool) clone the git repo
+  become: false
+  tags:
+    - cool
+    - files
+  ansible.builtin.git:
+    repo: git@github.com:printfdebugging/online.git
+    dest: /home/{{ ansible_user }}/repos/online
+    update: no
+    recursive: false
+
+- name: (cool) set upstream in the online repository
+  tags:
+    - cool
+    - files
+  ansible.builtin.shell:
+    cmd: |
+      cd "/home/{{ ansible_user }}/repos/online"
+      [ $(git remote -v | grep "upstream" | wc -l) -ne 0 ] && git remote remove upstream
+      git remote add upstream https://github.com/CollaboraOnline/online.git

@@ -1,0 +1,82 @@
+- name: (base) install apt packages
+  tags:
+    - base
+    - packages
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - thunderbird
+    - par
+    - lua5.3
+    - cmake
+    - ansible
+    - neofetch
+    - man-db
+    - btop
+    - vim
+    - pasystray
+    - pavucontrol
+    - pulseaudio
+    - unzip
+    - network-manager
+    - ripgrep
+    - dolphin
+    - xdotool
+    - netcat-openbsd
+    - python3-watchdog
+    - libreoffice
+    - loupe
+    - bear
+    - mtp-tools
+    - gvfs
+    - mpv
+    - pip
+    - evince
+    - okular
+    - gdb
+    - ntfs-3g
+    - obs-studio
+    - glade
+    - luarocks
+    - qt5-style-plugins
+    - qt5ct
+    - i3lock-fancy
+    - libsfml-dev
+    - libglfw3-dev
+    - libglm-dev
+    - vulkan-tools
+    - vulkan-validationlayers
+    - spirv-tools
+    - libvulkan-dev
+    - libxxf86vm-dev
+    - gimp
+    - yarn
+    - wget
+    - curl
+    - fontconfig
+    - clang-18
+    - clang-tools-18
+    - gtypist
+    - ueberzug
+    - xauth
+
+- name: (base) install snap packages
+  tags:
+    - base
+    - packages
+  community.general.snap:
+    name: "{{ item }}"
+    classic: true
+    channel: latest/edge
+    state: present
+  loop:
+    - go
+    - zola
+
+- name: (base) upgrade distribution
+  tags:
+    - base
+    - packages
+  ansible.builtin.apt:
+    upgrade: true

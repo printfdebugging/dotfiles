@@ -1,0 +1,9 @@
+- name: (services) enable and start neccessary services
+  tags:
+    - services
+    - system
+  ansible.builtin.systemd_service:
+    name: "{{ item }}"
+    enabled: false
+  loop:
+    - gdm
