@@ -47,10 +47,16 @@
     - packages
   ansible.builtin.shell:
     cmd: |
-      [ ! -d "/home/{{ ansible_user }}/.local/share/fonts" ] && mkdir -p /home/{{ ansible_user }}/.local/share/fonts
+      if [ ! -d "/home/{{ ansible_user }}/.local/share/fonts" ]; then
+        mkdir -p /home/{{ ansible_user }}/.local/share/fonts 
+      fi
       cd /home/{{ ansible_user }}/.local/share/fonts/
-      [ ! -d "/home/{{ ansible_user }}/.local/share/fonts/{{ item.font }}.zip" ] && curl -LO {{ item.url }}
-      [ ! -d "/home/{{ ansible_user }}/.local/share/fonts/{{ item.font }}" ] && unzip {{ item.font }}.zip -d {{ item.font }}
+      if [ ! -d "/home/{{ ansible_user }}/.local/share/fonts/{{ item.font }}.zip" ]; then
+        curl -LO {{ item.url }}
+      fi
+      if [ ! -d "/home/{{ ansible_user }}/.local/share/fonts/{{ item.font }}" ]; then
+        unzip {{ item.font }}.zip -d {{ item.font }}
+      fi
   loop:
     [
       { font: "FiraCode",     url: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/FiraCode.zip", },
