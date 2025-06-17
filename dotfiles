@@ -1,18 +1,15 @@
 #!/bin/env bash
 
 function initArchlinux() {
-    # install basic system packages
     sudo pacman --noconfirm -Syu ansible python-watchdog neovim openssh git
 }
 
 function initUbuntu() {
-    # install basic system packages
     sudo apt install -y ansible python3-watchdog gcc openssh-server git
     sudo apt -y upgrade
 }
 
 function initDebian() {
-    # install basic system packages
     sudo apt install -y ansible python3-watchdog gcc openssh-server git
     sudo apt -y upgrade
 }
@@ -22,18 +19,14 @@ function initSuseTumbleweed() {
 }
 
 function initVoid() {
-    # copy the mirror file
     sudo cp /usr/share/xbps.d/00-repository-main.conf /etc/xbps.d/00-repository-main.conf
-
-    # install the required packages
     sudo xbps-install -Syu git openssl ansible python3-watchdog neovim
 }
 
 function init() {
-    # check for distro in /etc/os-release file
     case $(cat /etc/os-release | grep -e "^NAME" | awk -F "=" '{gsub(/"/, "", $2); print $2}') in
-        # "Arch Linux") initArchlinux;;
-        # "Fedora") init_fedora;;
+        "Arch Linux") initArchlinux;;
+        # "Fedora") initFedora;;
         "Void") initVoid;;
         "Ubuntu") initUbuntu;;
         "Debian GNU/Linux") initDebian;;
@@ -55,10 +48,9 @@ function runAnsibleTasksWithVaultPass() {
 }
 
 function runAnsibleSaveTask() {
-    # Run ansible-playbook with the save tag
     cloneDotfiles
-    ansible-playbook main.yml \
-        --tags "${@}"
+    # save-* tagged tasks neither use any vault string nor have become: true
+    ansible-playbook main.yml --tags "${@}"
 }
 
 case "$1" in 
