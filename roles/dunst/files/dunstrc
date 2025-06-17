@@ -24,16 +24,16 @@
     # dynamic width from 0 to 300
     # width = (0, 300)
     # constant width of 300
-    width = (0, 400)
+    width = (0, 300)
 
     # The maximum height of a single notification, excluding the frame.
-    height = (0, 300)
+    height = 400
 
     # Position the notification in the top right corner
     origin = top-right
 
     # Offset from the origin
-    offset = (4, 4)
+    offset = 18x18
 
     # Scale factor. It is auto-detected if value is 0.
     scale = 0
@@ -101,7 +101,7 @@
     # If value is greater than 0, separator_height will be ignored and a border
     # of size frame_width will be drawn around each notification instead.
     # Click events on gaps do not currently propagate to applications below.
-    gap_size = 0
+    gap_size = 4
 
     # Define a color for the separator.
     # possible values are:
