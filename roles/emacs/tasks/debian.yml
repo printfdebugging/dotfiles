@@ -1,0 +1,9 @@
+- name: (emacs) install packages
+  tags:
+    - emacs
+    - packages
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - emacs
