@@ -12,6 +12,7 @@ return {
 				"lua_ls",
 				"rust_analyzer",
 				"clangd",
+        "pyright",
 				"gopls",
         "ts_ls",
         "html",
