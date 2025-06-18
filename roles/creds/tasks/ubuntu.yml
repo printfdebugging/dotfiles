@@ -1,6 +1,6 @@
-- name: (gpg) install packages
+- name: (creds) install packages
   tags:
-    - gpg
+    - creds
     - packages
   ansible.builtin.apt:
     name: "{{ item }}"

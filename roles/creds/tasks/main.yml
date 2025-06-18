@@ -1,3 +1,9 @@
+- name: include tasks
+  tags:
+    - creds
+    - include
+  ansible.builtin.include_tasks: "{{ ansible_facts.distribution|lower }}.yml"
+
 - name: (creds) create ssh directory
   become: false
   tags:
@@ -78,6 +84,18 @@
   ansible.builtin.copy:
     content: "{{ git_config_file }}"
     dest: "/home/{{ ansible_user }}/.gitconfig"
+    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user }}"
+    mode: "0644"
+
+- name: (creds) create gpg key file
+  become: false
+  tags:
+    - creds
+    - files
+  ansible.builtin.copy:
+    content: "{{ gpg_key_file }}"
+    dest: "/home/{{ ansible_user }}/.gpgkey"
     group: "{{ ansible_user }}"
     owner: "{{ ansible_user }}"
     mode: "0644"
