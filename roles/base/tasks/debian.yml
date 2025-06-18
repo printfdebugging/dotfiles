@@ -20,6 +20,7 @@
     - pulseaudio
     - unzip
     - network-manager
+    - network-manager-applet
     - ripgrep
     - dolphin
     - xdotool
@@ -68,3 +69,12 @@
     - packages
   ansible.builtin.apt:
     upgrade: true
+
+- name: (base) add user to network group
+  tags:
+    - base
+    - system
+  ansible.builtin.user:
+    name: "{{ ansible_user }}"
+    groups: network
+    append: true
