@@ -62,6 +62,8 @@ export EDITOR=nvim
 export GPG_TTY=$(tty)
 export GTK_THEME=Arc-Darkest
 export GPG_AGENT_INFO="$(gpgconf --list-dirs agent-socket)/S.gpg-agent:0:1"
+export GTIMELOG_CONFIG_DIR="~/repos/logs"
+
 
 
 # golang exports
