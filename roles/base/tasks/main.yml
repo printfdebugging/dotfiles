@@ -25,6 +25,7 @@
     - pulseaudio
     - unzip
     - NetworkManager
+    - network-manager-applet
     - ripgrep
     - Thunar
     - tumbler-plugins-extra
