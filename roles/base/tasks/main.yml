@@ -1,7 +1,6 @@
 - name: (base) install packages
   tags:
     - base
-    - packages
   community.general.xbps:
     name: "{{ item }}"
     state: latest
@@ -91,14 +90,12 @@
 - name: (base) upgrade distribution
   tags:
     - base
-    - packages
   community.general.xbps:
     upgrade: true
 
 - name: (base) add user to network group
   tags:
     - base
-    - system
   ansible.builtin.user:
     name: "{{ ansible_user }}"
     groups: network
@@ -108,7 +105,6 @@
   become: false
   tags:
     - base
-    - files
   ansible.builtin.file:
     path: "/home/{{ ansible_user }}/downloads"
     state: directory
@@ -120,7 +116,6 @@
   become: false
   tags:
     - base
-    - files
   ansible.builtin.file:
     path: "/home/{{ ansible_user }}/.config"
     state: directory
@@ -131,57 +126,9 @@
 - name: (base) copy user-dirs.dirs file
   tags:
     - base
-    - files
   ansible.builtin.copy:
     src: user-dirs.dirs
     dest: /home/{{ ansible_user }}/.config/user-dirs.dirs
-    owner: root
-    group: root
-    mode: 0644
-
-- name: (base) install fonts
-  become: false
-  tags:
-    - base
-    - fonts
-    - packages
-  ansible.builtin.shell:
-    cmd: |
-      if [ ! -d "/home/{{ ansible_user }}/.local/share/fonts" ]; then
-        mkdir -p /home/{{ ansible_user }}/.local/share/fonts 
-      fi
-      cd /home/{{ ansible_user }}/.local/share/fonts/
-      if [ ! -d "/home/{{ ansible_user }}/.local/share/fonts/{{ item.font }}.zip" ]; then
-        curl -LO {{ item.url }}
-      fi
-      if [ ! -d "/home/{{ ansible_user }}/.local/share/fonts/{{ item.font }}" ]; then
-        unzip {{ item.font }}.zip -d {{ item.font }}
-      fi
-  loop:
-    [
-      { font: "FiraCode",     url: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/FiraCode.zip", },
-    ]
-
-- name: (base) copy twemoji font file
-  become: true
-  tags:
-    - base
-    - packages
-  ansible.builtin.copy:
-    src: twemoji
-    dest: /usr/share/fonts
-    owner: root
-    group: root
-    mode: 0644
-
-- name: (base) copy twemoji fontconfig
-  become: true
-  tags:
-    - base
-    - packages
-  ansible.builtin.copy:
-    src: 75-twemoji.conf
-    dest: /etc/fonts/conf.d/75-twemoji.conf
     owner: root
     group: root
     mode: 0644

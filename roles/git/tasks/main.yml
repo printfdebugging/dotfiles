@@ -1,7 +1,6 @@
 - name: (git) install packages
   tags:
     - git
-    - packages
   community.general.xbps:
     name: "{{ item }}"
     state: latest
@@ -13,7 +12,6 @@
   become: false
   tags:
     - git
-    - files
   ansible.builtin.lineinfile:
     dest: /home/{{ ansible_user }}/.ssh/known_hosts
     create: yes
@@ -27,7 +25,6 @@
   become: false
   tags:
     - git
-    - files
   ansible.builtin.git:
     repo: "{{ my_github_handle }}/{{ item }}.git"
     dest: "/home/{{ ansible_user }}/repos/{{ item }}"

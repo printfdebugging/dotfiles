@@ -1,7 +1,6 @@
 - name: (dunst) install packages
   tags:
     - dunst
-    - packages
   community.general.xbps:
     name:
       - "{{ item }}"
@@ -13,7 +12,6 @@
   become: false
   tags:
     - dunst
-    - files
   ansible.builtin.file:
     path: "/home/{{ ansible_user }}/.config/dunst"
     state: directory
@@ -25,7 +23,6 @@
   become: false
   tags:
     - dunst
-    - files
   ansible.builtin.copy:
     src: dunstrc
     dest: /home/{{ ansible_user }}/.config/dunst/dunstrc
@@ -36,7 +33,6 @@
 - name: (dunst) save config file
   become: false
   tags:
-    - save
     - save-dunst
   ansible.builtin.copy:
     src: /home/{{ ansible_user }}/.config/dunst/dunstrc
@@ -44,4 +40,3 @@
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
     mode: 0644
-

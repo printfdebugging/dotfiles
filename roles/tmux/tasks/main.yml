@@ -1,7 +1,6 @@
 - name: (tmux) install packages
   tags:
     - tmux
-    - packages
   community.general.xbps:
     name: "{{ item }}"
     state: latest
@@ -12,7 +11,6 @@
   become: false
   tags:
     - tmux
-    - files
   file:
     path: /home/{{ ansible_user }}/.config/tmux
     state: directory
@@ -24,7 +22,6 @@
   become: false
   tags:
     - tmux
-    - files
   ansible.builtin.git:
     repo: https://github.com/tmux-plugins/tpm
     dest: /home/{{ ansible_user }}/.tmux/plugins/tpm
@@ -34,7 +31,6 @@
   become: false
   tags:
     - tmux
-    - files
   ansible.builtin.copy:
     src: tmux.conf
     dest: /home/{{ ansible_user }}/.config/tmux/tmux.conf
@@ -45,7 +41,6 @@
 - name: (tmux) save config file
   become: false
   tags:
-    - save
     - save-tmux
   ansible.builtin.copy:
     src: /home/{{ansible_user}}/.config/tmux/tmux.conf

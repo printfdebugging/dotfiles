@@ -24,7 +24,8 @@ function runAnsibleSaveTask() {
 }
 
 case "$1" in 
-    "")         runAnsibleTasksWithVaultPass files,packages,system ;;
+    "")         runAnsibleTasksWithVaultPass $(ls ./roles | xargs | sed 's/\s\+/,/g') ;;
     "save-"*)   runAnsibleSaveTask ${@};;
     *)          runAnsibleTasksWithVaultPass ${@};;
 esac
+

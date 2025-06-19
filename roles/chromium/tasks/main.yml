@@ -1,7 +1,6 @@
 - name: (chromium) install chromium
   tags:
     - chromium
-    - packages
   community.general.xbps:
     name:
       - "{{ item }}"
@@ -13,7 +12,6 @@
   become: true
   tags:
     - chromium
-    - files
   ansible.builtin.file:
     path: "/usr/share/chromium/extensions"
     state: directory
@@ -26,7 +24,6 @@
   become: true
   tags:
     - chromium
-    - files
   ansible.builtin.copy:
     src: extension.json
     dest: "/usr/share/chromium/extensions/{{ item.id }}.json"

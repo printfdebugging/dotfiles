@@ -2,7 +2,6 @@
   become: false
   tags:
     - okular
-    - files
   ansible.builtin.copy:
     src: "{{ item }}"
     dest: /home/{{ ansible_user }}/.config/{{ item }}
@@ -16,7 +15,6 @@
 - name: (okular) save config file
   become: false
   tags:
-    - save
     - save-okular
   ansible.builtin.copy:
     src: /home/{{ansible_user}}/.config/{{ item }}

@@ -1,7 +1,6 @@
 - name: (cool) install dependencies
   tags:
     - cool
-    - packages
   community.general.xbps:
     name: "{{ item }}"
     state: latest
@@ -21,7 +20,6 @@
   become: false
   tags:
     - cool
-    - files
   ansible.builtin.git:
     repo: git@github.com:printfdebugging/online.git
     dest: /home/{{ ansible_user }}/repos/online
@@ -31,7 +29,6 @@
 - name: (cool) set upstream in the online repository
   tags:
     - cool
-    - files
   ansible.builtin.shell:
     cmd: |
       cd "/home/{{ ansible_user }}/repos/online"

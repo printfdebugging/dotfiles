@@ -1,14 +1,7 @@
-- name: include tasks
-  tags:
-    - gtimelog
-    - include
-  ansible.builtin.include_tasks: "{{ ansible_facts.distribution|lower }}.yml"
-
 - name: (gtimelog) create a symlink to gtimelog
   become: true
   tags:
     - gtimelog
-    - files
   ansible.builtin.file:
     src: "/home/{{ ansible_user }}/repos/gtimelog/gtimelog"
     dest: /usr/local/bin/gtimelog

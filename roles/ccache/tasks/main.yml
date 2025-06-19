@@ -1,14 +1,7 @@
-- name: include tasks
-  tags:
-    - ccache
-    - include
-  ansible.builtin.include_tasks: "{{ ansible_facts.distribution|lower }}.yml"
-
 - name: (ccache) create config directory
   become: false
   tags:
     - ccache
-    - files
   ansible.builtin.file:
     path: "/home/{{ ansible_user }}/.config/ccache"
     state: directory
@@ -20,7 +13,6 @@
   become: false
   tags:
     - ccache
-    - files
   ansible.builtin.copy:
     src: "{{ item }}"
     dest: /home/{{ ansible_user }}/.config/ccache/{{ item }}
@@ -33,7 +25,6 @@
 - name: (ccache) save config file
   become: false
   tags:
-    - save
     - save-ccache
   ansible.builtin.copy:
     src: /home/{{ ansible_user }}/.config/ccache/{{ item }}

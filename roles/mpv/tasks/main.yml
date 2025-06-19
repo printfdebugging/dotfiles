@@ -1,7 +1,6 @@
 - name: (mpv) install packages
   tags:
     - mpv
-    - packages
   community.general.xbps:
     name: "{{ item }}"
     state: latest
@@ -12,7 +11,6 @@
   become: false
   tags:
     - mpv
-    - files
   ansible.builtin.file:
     path: "/home/{{ ansible_user }}/.config/mpv"
     state: directory
@@ -24,7 +22,6 @@
   become: false
   tags:
     - mpv
-    - files
   ansible.builtin.copy:
     src: "{{ item }}"
     dest: /home/{{ ansible_user }}/.config/mpv/{{ item }}
@@ -38,7 +35,6 @@
 - name: (mpv) save config directory
   become: false
   tags:
-    - save
     - save-mpv
   ansible.builtin.copy:
     src: /home/{{ ansible_user }}/.config/mpv/{{ item }}

@@ -1,7 +1,6 @@
 - name: (flameshot) install packages
   tags:
     - flameshot
-    - packages
   community.general.xbps:
     name: "{{ item }}"
     state: latest
@@ -12,7 +11,6 @@
   become: false
   tags:
     - flameshot
-    - files
   ansible.builtin.file:
     path: "/home/{{ ansible_user }}/.config/flameshot"
     state: directory
@@ -24,10 +22,22 @@
   become: false
   tags:
     - flameshot
-    - files
   ansible.builtin.copy:
     src: flameshot.ini
     dest: /home/{{ ansible_user }}/.config/flameshot/flameshot.ini
     group: "{{ ansible_user }}"
     owner: "{{ ansible_user }}"
     mode: 0755
+
+- name: (flameshot) save config directory
+  become: false
+  tags:
+    - save-flameshot
+  ansible.builtin.copy:
+    src: /home/{{ ansible_user }}/.config/flameshot/{{ item }}
+    dest: /home/{{ ansible_user }}/repos/dotfiles/roles/flameshot/files/{{ item }}
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0644
+  loop:
+    - flameshot.ini

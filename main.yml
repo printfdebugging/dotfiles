@@ -1,28 +1,30 @@
 ---
 - hosts: all
   roles:
-    - mirrors
-    - base
-    - emacs
-    - awesome
     - creds
-    - bin
-    - flameshot
     - git
+    - awesome
+    - base
+    - bin
+    - ccache
+    - chromium
+    - cool
+    - dunst
+    - emacs
+    - flameshot
+    - fonts
     - gtimelog
     - gtk
+    - libreoffice-dev
     - mpv
-    - dunst
     - neovim
+    - okular
+    - qemu
+    - services
     - suckless
     - tmux
+    - user
     - wallpapers
     - xorg
     - yt-dlp
     - zsh
-    - services
-    - libreoffice-dev
-    - qemu
-    - ccache
-    - chromium
-    - okular

@@ -1,7 +1,6 @@
 - name: (suckless) install packages
   tags:
     - suckless
-    - packages
   community.general.xbps:
     name: "{{ item }}"
     state: latest
@@ -17,7 +16,6 @@
   become: true
   tags:
     - suckless
-    - files
   ansible.builtin.file:
     path: /home/{{ ansible_user }}/.local/src
     state: absent
@@ -26,7 +24,6 @@
   become: false
   tags:
     - suckless
-    - files
   ansible.builtin.file:
     path: "/home/{{ ansible_user }}/.local/src"
     state: directory
@@ -38,7 +35,6 @@
   become: false
   tags:
     - suckless
-    - files
   ansible.builtin.copy:
     src: "{{ item }}"
     dest: /home/{{ ansible_user }}/.local/src
@@ -54,7 +50,6 @@
   become: true
   tags:
     - suckless
-    - files
   shell: "make clean install"
   args:
     chdir: "/home/{{ ansible_user }}/.local/src/{{ item }}"

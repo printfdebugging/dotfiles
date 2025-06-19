@@ -1,0 +1,7 @@
+- name: (user) add user to network group
+  tags:
+    - user
+  ansible.builtin.user:
+    name: "{{ ansible_user }}"
+    groups: network
+    append: true

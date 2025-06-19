@@ -1,7 +1,6 @@
 - name: (neovim) install packages
   tags:
     - neovim
-    - packages
   community.general.xbps:
     name: "{{ item }}"
     state: latest
@@ -14,7 +13,6 @@
   become: false
   tags:
     - neovim
-    - files
   ansible.builtin.copy:
     src: nvim
     dest: /home/{{ ansible_user }}/.config
@@ -25,7 +23,6 @@
 - name: (neovim) save config files
   become: false
   tags:
-    - save
     - save-neovim
   ansible.builtin.copy:
     src: /home/{{ ansible_user }}/.config/nvim

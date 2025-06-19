@@ -1,7 +1,6 @@
 - name: (creds) install packages
   tags:
     - creds
-    - packages
   community.general.xbps:
     name: "{{ item }}"
     state: latest
@@ -12,7 +11,6 @@
   become: false
   tags:
     - creds
-    - files
   ansible.builtin.file:
     dest: "/home/{{ ansible_user }}/.ssh"
     state: directory
@@ -24,7 +22,6 @@
   become: false
   tags:
     - creds
-    - files
   ansible.builtin.copy:
     content: "{{ public_ssh_key_file }}"
     dest: "/home/{{ ansible_user }}/.ssh/id_ed25519.pub"
@@ -36,7 +33,6 @@
   become: false
   tags:
     - creds
-    - files
   ansible.builtin.copy:
     content: "{{ private_ssh_key_file }}"
     dest: "/home/{{ ansible_user }}/.ssh/id_ed25519"
@@ -48,7 +44,6 @@
   become: false
   tags:
     - creds
-    - files
   ansible.builtin.copy:
     content: "{{ public_work_ssh_key_file }}"
     dest: "/home/{{ ansible_user }}/.ssh/cool.pub"
@@ -60,7 +55,6 @@
   become: false
   tags:
     - creds
-    - files
   ansible.builtin.copy:
     content: "{{ private_work_ssh_key_file }}"
     dest: "/home/{{ ansible_user }}/.ssh/cool"
@@ -72,7 +66,6 @@
   become: false
   tags:
     - creds
-    - files
   ansible.builtin.copy:
     content: "{{ ssh_config_file }}"
     dest: "/home/{{ ansible_user }}/.ssh/config"
@@ -84,7 +77,6 @@
   become: false
   tags:
     - creds
-    - files
   ansible.builtin.copy:
     content: "{{ git_config_file }}"
     dest: "/home/{{ ansible_user }}/.gitconfig"
@@ -96,7 +88,6 @@
   become: false
   tags:
     - creds
-    - files
   ansible.builtin.copy:
     content: "{{ gpg_key_file }}"
     dest: "/home/{{ ansible_user }}/.gpgkey"

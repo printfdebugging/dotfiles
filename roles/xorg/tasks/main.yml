@@ -1,7 +1,6 @@
 - name: (xorg) install packages
   tags:
     - xorg
-    - packages
   community.general.xbps:
     name: "{{ item }}"
     state: latest
@@ -20,7 +19,6 @@
   become: false
   tags:
     - xorg
-    - files
   ansible.builtin.copy:
     src: .xinitrc
     dest: /home/{{ ansible_user }}/.xinitrc
@@ -32,7 +30,6 @@
   become: true
   tags:
     - xorg
-    - files
   ansible.builtin.file:
     path: "/etc/X11/xorg.conf.d"
     state: directory
@@ -43,7 +40,6 @@
   become: true
   tags:
     - xorg
-    - files
   ansible.builtin.copy:
     src: 30-touchpad.conf
     dest: /etc/X11/xorg.conf.d/30-touchpad.conf
@@ -55,7 +51,6 @@
   become: true
   tags:
     - xorg
-    - files
   ansible.builtin.copy:
     src: 00-keyboard.conf
     dest: /etc/X11/xorg.conf.d/00-keyboard.conf
@@ -66,7 +61,6 @@
 - name: (xorg) save xinitrc
   become: false
   tags:
-    - save
     - save-xorg
   ansible.builtin.copy:
     src: /home/{{ ansible_user }}/.xinitrc

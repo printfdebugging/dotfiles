@@ -2,7 +2,6 @@
   become: false
   tags:
     - bin
-    - files
   ansible.builtin.copy:
     src: bin
     dest: /home/{{ ansible_user }}/.local
@@ -13,7 +12,6 @@
 - name: (bin) save shell-scripts
   become: false
   tags:
-    - save
     - save-bin
   ansible.builtin.copy:
     src: /home/{{ ansible_user }}/.local/bin

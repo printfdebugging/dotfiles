@@ -1,7 +1,6 @@
 - name: (libreoffice-dev) install dependencies
   tags:
     - libreoffice-dev
-    - packages
   community.general.xbps:
     name: "{{ item }}"
     state: latest
@@ -135,7 +134,6 @@
   become: false
   tags:
     - libreoffice-dev
-    - files
   ansible.builtin.git:
     repo: https://gerrit.libreoffice.org/core
     dest: /home/{{ ansible_user }}/repos/libreoffice
@@ -145,9 +143,8 @@
 - name: (libreoffice-dev) copy autogen.input
   tags:
     - libreoffice-dev
-    - files
   ansible.builtin.copy:
-    src: autogen.{{ ansible_facts.distribution|lower }} 
+    src: autogen.input
     dest: /home/{{ ansible_user }}/repos/libreoffice/autogen.input
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
@@ -156,7 +153,6 @@
 - name: (libreoffice-dev) copy glade.conf
   tags:
     - libreoffice-dev
-    - files
   ansible.builtin.copy:
     src: glade.conf
     dest: /home/{{ ansible_user }}/.config/glade.conf

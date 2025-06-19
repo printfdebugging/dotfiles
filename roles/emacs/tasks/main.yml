@@ -1,7 +1,6 @@
 - name: (emacs) install packages
   tags:
     - emacs
-    - packages
   community.general.xbps:
     name: "{{ item }}"
     state: latest
@@ -12,7 +11,6 @@
   become: false
   tags:
     - emacs
-    - files
   ansible.builtin.file:
     path: "/home/{{ ansible_user }}/.config/emacs"
     state: directory
@@ -24,7 +22,6 @@
   become: false
   tags:
     - emacs
-    - files
   ansible.builtin.copy:
     src: "{{ item }}"
     dest: /home/{{ ansible_user }}/.config/emacs/{{ item }}
@@ -39,7 +36,6 @@
   become: false
   tags:
     - emacs
-    - files
   ansible.builtin.copy:
     src: "{{ item }}"
     dest: /home/{{ ansible_user }}/.config/emacs
@@ -52,7 +48,6 @@
 - name: (emacs) save config files
   become: false
   tags:
-    - save
     - save-emacs
   ansible.builtin.copy:
     src: /home/{{ ansible_user }}/.config/emacs/{{ item }}
@@ -67,7 +62,6 @@
 - name: (emacs) save snippets
   become: false
   tags:
-    - save
     - save-emacs
   ansible.builtin.copy:
     src: /home/{{ ansible_user }}/.config/emacs/{{ item }}
