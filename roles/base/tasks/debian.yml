@@ -20,7 +20,6 @@
     - pulseaudio
     - unzip
     - network-manager
-    - network-manager-applet
     - ripgrep
     - dolphin
     - xdotool
