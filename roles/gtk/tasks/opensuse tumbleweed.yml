@@ -1,9 +1,0 @@
-- name: (git) install packages
-  tags:
-    - gtk
-    - packages
-  community.general.zypper:
-    name: "{{ item }}"
-    state: latest
-  loop:
-    - kf6-breeze-icons

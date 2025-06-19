@@ -133,22 +133,6 @@ alias grep='grep --color=auto'
 alias   ls='ls --color=auto'
 alias   ll='ls -al --color=auto'
 
-setupEnvironmentVariables() {
-    case $(cat /etc/os-release | grep -e "^NAME" | awk -F "=" '{gsub(/"/, "", $2); print $2}') in
-        # "Arch Linux") ;;
-        # "Fedora") ;;
-        # "Void") ;;
-        # "Ubuntu") ;;
-        # "openSUSE Tumbleweed") ;;
-        "Debian GNU/Linux") 
-            export PATH="/snap/bin:$PATH";;
-        *)
-            echo "distro not supported";;
-    esac
-}
-
-setupEnvironmentVariables
-
 # for gnome TEMPORARY (don't add to dotfiles)
 xset r rate 300 50
 setxkbmap -option caps:swapescape

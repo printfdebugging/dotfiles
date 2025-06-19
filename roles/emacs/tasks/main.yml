@@ -1,8 +1,12 @@
-- name: include tasks
+- name: (emacs) install packages
   tags:
     - emacs
-    - include
-  ansible.builtin.include_tasks: "{{ ansible_facts.distribution|lower }}.yml"
+    - packages
+  community.general.xbps:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - emacs-x11
 
 - name: (base) create emacs directory
   become: false

@@ -1,9 +1,0 @@
-- name: (ccache) install packages
-  tags:
-    - ccache
-    - packages
-  ansible.builtin.apt:
-    name: "{{ item }}"
-    state: latest
-  loop:
-    - ccache

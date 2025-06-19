@@ -1,59 +1,8 @@
 #!/bin/env bash
 
-function initArchlinux() {
-    sudo pacman --noconfirm -Syu ansible python-watchdog neovim openssh git
-}
-
-function initUbuntu() {
-    sudo apt install -y ansible python3-watchdog gcc openssh-server git
-    sudo apt -y upgrade
-}
-
-function initDebian() {
-    myuser=$(whoami)
-    ## ensure locale
-    if [ "$(locale | grep 'en_US.UTF-8')" = "" ]; then
-        su - -c "
-            apt install locales
-            echo 'en_US.UTF-8 UTF-8' > /etc/locale.gen
-            locale-gen
-            localectl set-locale LANG=en_US.UTF-8
-        "
-    fi
-
-    ## ensure sudoers
-    if [ ! $(command -v sudo) ]; then
-        su - -c "
-            apt install sudo
-            echo '$myuser ALL=ALL' > /etc/sudoers.d/$myuser
-            usermod -aG wheel $myuser
-        "
-    fi
-
-    ## install packages
-    sudo apt install -y ansible python3-watchdog gcc openssh-server git
-    sudo apt -y upgrade
-}
-
-function initSuseTumbleweed() {
-    sudo zypper --non-interactive install git-core ansible python311-watchdog neovim gcc
-}
-
 function initVoid() {
     sudo cp /usr/share/xbps.d/00-repository-main.conf /etc/xbps.d/00-repository-main.conf
     sudo xbps-install -Syu git openssl ansible python3-watchdog neovim
-}
-
-function init() {
-    case $(cat /etc/os-release | grep -e "^NAME" | awk -F "=" '{gsub(/"/, "", $2); print $2}') in
-        "Arch Linux") initArchlinux;;
-        # "Fedora") initFedora;;
-        "Void") initVoid;;
-        "Ubuntu") initUbuntu;;
-        "Debian GNU/Linux") initDebian;;
-        "openSUSE Tumbleweed") initSuseTumbleweed;;
-        *) echo "distro not supported" && exit ;;
-    esac
 }
 
 cloneDotfiles() {
@@ -63,7 +12,7 @@ cloneDotfiles() {
 }
 
 function runAnsibleTasksWithVaultPass() {
-    [ ! $(command -v ansible-playbook) ] && init
+    [ ! $(command -v ansible-playbook) ] && initVoid
     cloneDotfiles
     ansible-playbook main.yml --tags "${@}" --become --ask-become-pass --ask-vault-pass
 }
@@ -75,7 +24,7 @@ function runAnsibleSaveTask() {
 }
 
 case "$1" in 
-    "")         runAnsibleTasksWithVaultPass include,files,packages,system ;;
-    "save-"*)   runAnsibleSaveTask include,${@};;
-    *)          runAnsibleTasksWithVaultPass include,${@};;
+    "")         runAnsibleTasksWithVaultPass files,packages,system ;;
+    "save-"*)   runAnsibleSaveTask ${@};;
+    *)          runAnsibleTasksWithVaultPass ${@};;
 esac

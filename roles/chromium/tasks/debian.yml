@@ -1,9 +1,0 @@
-- name: (chromium) install apt packages
-  tags:
-    - chromium
-    - packages
-  ansible.builtin.apt:
-    name: "{{ item }}"
-    state: latest
-  loop:
-    - chromium

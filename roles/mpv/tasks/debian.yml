@@ -1,9 +1,0 @@
-- name: (mpv) install packages
-  tags:
-    - mpv
-    - packages
-  ansible.builtin.apt:
-    name: "{{ item }}"
-    state: latest
-  loop:
-    - mpv

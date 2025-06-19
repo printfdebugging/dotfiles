@@ -1,8 +1,12 @@
-- name: include tasks
+- name: (yt-dlp) install packages
   tags:
     - yt-dlp
-    - include
-  ansible.builtin.include_tasks: "{{ ansible_facts.distribution|lower }}.yml"
+    - packages
+  community.general.xbps:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - yt-dlp
 
 - name: (yt-dlp) create config directory
   become: false

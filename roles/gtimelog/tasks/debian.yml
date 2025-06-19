@@ -1,9 +1,0 @@
-- name: (gtimelog) install packages
-  tags:
-    - gtimelog
-    - packages
-  ansible.builtin.apt:
-    name: "{{ item }}"
-    state: latest
-  loop:
-    - gir1.2-soup-2.4

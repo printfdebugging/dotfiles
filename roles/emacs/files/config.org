@@ -86,7 +86,7 @@
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
-(fringe-mode 8)
+(fringe-mode 0)
 (setq initial-scratch-message ""
     inhibit-startup-message t
     standard-indent 2
@@ -140,17 +140,17 @@
 (set-face-attribute 'variable-pitch nil
                     :family "FiraCode Nerd Font"
                     :foreground "#eeffff"
-                    :height 150
+                    :height 130
                     :weight 'Regular)
 (set-face-attribute 'default nil
                     :family "FiraCode Nerd Font"
                     :foreground "#d8dee9"
-                    :height 150
+                    :height 130
                     :weight 'Regular)
 (set-face-attribute 'fixed-pitch nil
                     :family "FiraCode Nerd Font"
                     :foreground "#d8dee9"
-                    :height 150
+                    :height 130
                     :weight 'Regular)
 (set-face-attribute 'org-document-title nil
                     :family "FiraCode Nerd Font"
@@ -173,7 +173,7 @@
                     :foreground "#A9A1E1")
 (set-face-attribute 'org-level-4 nil
                     :family "FiraCode Nerd Font"
-                    :height 150
+                    :height 130
                     :weight 'Bold)
 
 (set-face-attribute 'org-verbatim nil
@@ -183,6 +183,8 @@
 (set-face-attribute 'bold nil
                     :foreground "#98817B")
 #+end_src
+
+#+RESULTS:
 
 * Keybindings
 
@@ -858,7 +860,7 @@ from $1 to $0 and back to $1, having them selected for change in the process.
   (package-install 'visual-fill-column))
 
 ;; Configure fill width
-(setq visual-fill-column-width 140
+(setq visual-fill-column-width 130
       visual-fill-column-center-text t)
 
 (defun my/org-present-start ()
@@ -1073,7 +1075,7 @@ from $1 to $0 and back to $1, having them selected for change in the process.
 
 (set-face-attribute 'markdown-metadata-key-face nil :height 170 :weight 'Bold)
 (set-face-attribute 'markdown-metadata-value-face nil :height 170 :weight 'Bold)
-(set-face-attribute 'markdown-code-face nil :height 150 :background "#23272e" :weight 'Regular)
+(set-face-attribute 'markdown-code-face nil :height 130 :background "#23272e" :weight 'Regular)
 #+END_SRC
 
 * Transparency

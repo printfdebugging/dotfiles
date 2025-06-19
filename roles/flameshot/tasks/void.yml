@@ -1,9 +1,0 @@
-- name: (flameshot) install packages
-  tags:
-    - flameshot
-    - packages
-  community.general.xbps:
-    name: "{{ item }}"
-    state: latest
-  loop:
-    - flameshot

@@ -1,8 +1,21 @@
-- name: include tasks
+- name: (cool) install dependencies
   tags:
     - cool
-    - include
-  ansible.builtin.include_tasks: "{{ ansible_facts.distribution|lower }}.yml"
+    - packages
+  community.general.xbps:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - libcap-devel
+    - libcap-ng-devel
+    - libpng-devel
+    - poco-devel
+    - cpputest
+    - nodejs
+    - chromium
+    - python3-lxml
+    - python3-polib
+    - pam-devel
 
 - name: (cool) clone the git repo
   become: false

@@ -1,5 +1,37 @@
-- name: include tasks
+- name: (services) stop other network services
   tags:
     - services
-    - include
-  ansible.builtin.include_tasks: "{{ ansible_facts.distribution|lower }}.yml"
+    - system
+  community.general.runit:
+    name: "{{ item }}"
+    state: stopped
+    enabled: false
+  loop:
+    - dhcpcd
+    - wpa_supplicant
+    - wicd
+
+- name: (services) kill other network services
+  tags:
+    - services
+    - system
+  community.general.runit:
+    name: "{{ item }}"
+    state: killed
+    enabled: false
+  loop:
+    - dhcpcd
+    - wpa_supplicant
+    - wicd
+
+- name: (services) enable & start network manager
+  tags:
+    - services
+    - system
+  community.general.runit:
+    name: "{{ item }}"
+    state: started
+    enabled: true
+  loop:
+    - dbus
+    - NetworkManager

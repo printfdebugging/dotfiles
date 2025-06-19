@@ -1,9 +1,0 @@
-- name: (tmux) install packages
-  tags:
-    - tmux
-    - packages
-  ansible.builtin.apt:
-    name: "{{ item }}"
-    state: latest
-  loop:
-    - tmux

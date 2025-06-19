@@ -1,9 +1,0 @@
-- name: (yt-dlp) install packages
-  tags:
-    - yt-dlp
-    - packages
-  community.general.xbps:
-    name: "{{ item }}"
-    state: latest
-  loop:
-    - yt-dlp
