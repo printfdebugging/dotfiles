@@ -140,17 +140,17 @@
 (set-face-attribute 'variable-pitch nil
                     :family "FiraCode Nerd Font"
                     :foreground "#eeffff"
-                    :height 130
+                    :height 140
                     :weight 'Regular)
 (set-face-attribute 'default nil
                     :family "FiraCode Nerd Font"
                     :foreground "#d8dee9"
-                    :height 130
+                    :height 140
                     :weight 'Regular)
 (set-face-attribute 'fixed-pitch nil
                     :family "FiraCode Nerd Font"
                     :foreground "#d8dee9"
-                    :height 130
+                    :height 140
                     :weight 'Regular)
 (set-face-attribute 'org-document-title nil
                     :family "FiraCode Nerd Font"
@@ -173,7 +173,7 @@
                     :foreground "#A9A1E1")
 (set-face-attribute 'org-level-4 nil
                     :family "FiraCode Nerd Font"
-                    :height 130
+                    :height 140
                     :weight 'Bold)
 
 (set-face-attribute 'org-verbatim nil
@@ -523,7 +523,7 @@ To execute source blocks asynchronously, add =:async= to the source block's head
   :init
     (setq org-roam-v2-ack t)
   :custom
-    (org-roam-directory "~/repos/notes/roam")
+    (org-roam-directory "~/repos/logs/roam")
     (org-roam-completion-everywhere t)
   :config
     (org-roam-db-autosync-mode))
@@ -860,7 +860,7 @@ from $1 to $0 and back to $1, having them selected for change in the process.
   (package-install 'visual-fill-column))
 
 ;; Configure fill width
-(setq visual-fill-column-width 130
+(setq visual-fill-column-width 140
       visual-fill-column-center-text t)
 
 (defun my/org-present-start ()
@@ -1075,7 +1075,7 @@ from $1 to $0 and back to $1, having them selected for change in the process.
 
 (set-face-attribute 'markdown-metadata-key-face nil :height 170 :weight 'Bold)
 (set-face-attribute 'markdown-metadata-value-face nil :height 170 :weight 'Bold)
-(set-face-attribute 'markdown-code-face nil :height 130 :background "#23272e" :weight 'Regular)
+(set-face-attribute 'markdown-code-face nil :height 140 :background "#23272e" :weight 'Regular)
 #+END_SRC
 
 * Transparency
