@@ -129,6 +129,7 @@
     - nasm
     - ccache
     - meson
+    - lld
 
 - name: (git) clone the git repo
   become: false
