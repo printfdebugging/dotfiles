@@ -2,6 +2,7 @@
 
 function initVoid() {
     sudo cp /usr/share/xbps.d/00-repository-main.conf /etc/xbps.d/00-repository-main.conf
+    sudo xbps-install -Syu xbps
     sudo xbps-install -Syu git openssl ansible python3-watchdog neovim
 }
 
