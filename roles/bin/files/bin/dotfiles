@@ -12,20 +12,19 @@ cloneDotfiles() {
 }
 
 function runAnsibleTasksWithVaultPass() {
-    [ ! $(command -v ansible-playbook) ] && initVoid
-    cloneDotfiles
     ansible-playbook main.yml --tags "${@}" --become --ask-become-pass --ask-vault-pass
 }
 
 function runAnsibleSaveTask() {
-    cloneDotfiles
     # save-* tagged tasks neither use any vault string nor have become: true
     ansible-playbook main.yml --tags "${@}"
 }
+
+[ ! $(command -v ansible-playbook) ] && initVoid || echo "found ansible-playbook"
+cloneDotfiles
 
 case "$1" in 
     "")         runAnsibleTasksWithVaultPass $(ls ./roles | xargs | sed 's/\s\+/,/g') ;;
     "save-"*)   runAnsibleSaveTask ${@};;
     *)          runAnsibleTasksWithVaultPass ${@};;
 esac
-
