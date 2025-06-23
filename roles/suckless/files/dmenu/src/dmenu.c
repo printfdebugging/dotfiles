@@ -84,7 +84,7 @@ static int         min_width         = 1400; /* minimum width when centered */
 static const float menu_height_ratio = 4.0f; /* This is the ratio used in the original calculation */
 
 static unsigned int border_width = 0;
-static const char  *fonts[]      = {"FiraCode Nerd Font:size=19"};
+static const char  *fonts[]      = {"FiraCode Nerd Font:size=13"};
 static const char  *prompt       = NULL; /* -p  option; prompt to the left of input field */
 
 static const char *colors[SchemeLast][2] = {

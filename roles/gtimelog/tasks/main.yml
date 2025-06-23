@@ -8,14 +8,12 @@
   loop:
     - libsoup-devel
 
-- name: (gtimelog) create a symlink to gtimelog
+- name: (gtimelog) install gtimelog
   become: true
   tags:
     - gtimelog
-  ansible.builtin.file:
-    src: "/home/{{ ansible_user }}/repos/gtimelog/gtimelog"
-    dest: /usr/local/bin/gtimelog
-    state: link
-    group: "{{ ansible_user }}"
-    owner: "{{ ansible_user }}"
-    mode: "0755"
+  ansible.builtin.pip:
+    name: "{{ item }}"
+    break_system_packages: true
+  loop:
+    - gtimelog

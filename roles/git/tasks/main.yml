@@ -31,17 +31,5 @@
     update: no
   loop:
     - dotfiles
-    - printfdebugging
-    - gtimelog
-    # writings
     - logs
-    # libreoffice extensions
-    - themes
-    - keybindings
-    # personal projects
     - sfml-blueprints
-    - learn-opengl
-    - monkey
-    - lox
-    - kohi
-    - editor

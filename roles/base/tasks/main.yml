@@ -87,6 +87,7 @@
     - feh
     - openjdk
     - google-fonts-ttf
+    - python3-pip
 
 - name: (base) upgrade distribution
   tags:
