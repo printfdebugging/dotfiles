@@ -86,6 +86,7 @@
     - sxiv
     - feh
     - openjdk
+    - google-fonts-ttf
 
 - name: (base) upgrade distribution
   tags:
