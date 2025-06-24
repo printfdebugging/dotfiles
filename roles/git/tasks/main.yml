@@ -31,5 +31,4 @@
     update: no
   loop:
     - dotfiles
-    - logs
-    - sfml-blueprints
+    - cookbook
