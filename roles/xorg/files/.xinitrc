@@ -4,7 +4,6 @@ flameshot &
 nm-applet &
 pasystray &
 xcompmgr &
-gtimelog &
 thunderbird &
 dunst &
 
