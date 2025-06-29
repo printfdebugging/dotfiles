@@ -35,6 +35,8 @@
   loop:
     - dotfiles
     - website
+    - logs
+    - sfml-blueprints
 
 - name: (git) clone git repositories
   become: false
@@ -48,6 +50,8 @@
   loop:
     - dotfiles
     - website
+    - logs
+    - sfml-blueprints
 
 - name: (git) remove 'all' and 'origin' if they exist
   become: false
@@ -67,6 +71,8 @@
   loop:
     - dotfiles
     - website
+    - logs
+    - sfml-blueprints
 
 - name: (git) add other remotes as push for redundency
   become: false
@@ -86,3 +92,5 @@
   loop:
     - dotfiles
     - website
+    - logs
+    - sfml-blueprints
