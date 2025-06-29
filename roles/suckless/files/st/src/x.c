@@ -66,7 +66,7 @@ static void ttysend(const Arg *);
 /* appearance
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "FiraCode Nerd Font:pixelsize=15:style=Regular:antialias=true:autohint=true";
+static char *font = "FiraCode Nerd Font:pixelsize=17:style=Regular:antialias=true:autohint=true";
 
 static int borderpx = 7;
 
