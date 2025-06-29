@@ -20,6 +20,9 @@
     regexp: "^{{ item }}"
   loop:
     - github.com
+    - gitlab.com
+    - codeberg.org
+    - git.gay
 
 - name: (git) clone git repositories
   become: false
@@ -31,4 +34,55 @@
     update: no
   loop:
     - dotfiles
-    - cookbook
+    - website
+
+- name: (git) clone git repositories
+  become: false
+  tags:
+    - git
+    - files
+  ansible.builtin.git:
+    repo: "{{ my_codeberg_handle }}/{{ item }}.git"
+    dest: "/home/{{ ansible_user }}/repos/{{ item }}"
+    update: no
+  loop:
+    - dotfiles
+    - website
+
+- name: (git) remove 'all' and 'origin' if they exist
+  become: false
+  tags:
+    - git
+    - files
+  ansible.builtin.shell: |
+    if git remote -v | grep "origin" > /dev/null 2>&1; then
+      git remote remove origin
+    fi
+
+    if git remote -v | grep "all" > /dev/null 2>&1; then
+      git remote remove all
+    fi
+  args:
+    chdir: "/home/{{ ansible_user }}/repos/{{ item }}"
+  loop:
+    - dotfiles
+    - website
+
+- name: (git) add other remotes as push for redundency
+  become: false
+  tags:
+    - git
+    - files
+  ansible.builtin.shell: |
+    git remote add all {{ my_codeberg_handle }}/{{ item }}.git;
+    git remote set-url --add --push all {{ my_codeberg_handle }}/{{ item }}.git;
+    git remote set-url --add --push all {{ my_github_handle }}/{{ item }}.git;
+    git remote set-url --add --push all {{ my_gitgay_handle }}/{{ item }}.git;
+    git remote set-url --add --push all {{ my_gitlab_handle }}/{{ item }}.git;
+    git config branch.main.remote all
+    git config branch.main.merge refs/heads/main
+  args:
+    chdir: "/home/{{ ansible_user }}/repos/{{ item }}"
+  loop:
+    - dotfiles
+    - website
