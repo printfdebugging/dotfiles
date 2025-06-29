@@ -114,7 +114,7 @@ alias   gc="git clone"
 # command aliases
 alias ssha='eval $(ssh-agent) && ssh-add'
 alias  msu="sudo make clean install"
-alias  hss="zola serve"
+alias  hss="hugo serve"
 alias  sdm="sudo ln -s /etc/sv/gdm /var/service/"
 alias  kdm="sudo rm -rf /var/service/gdm"
 alias    e="export SAL_USE_VCLPLUGIN=kf5;  /home/printfdebugging/repos/libreoffice/instdir/program/soffice"

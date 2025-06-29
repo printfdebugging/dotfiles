@@ -30,7 +30,7 @@ local options = {
 	showtabline = 2,
 	concealcursor = "ncv",
 	-- mouse = "",
-	formatprg = "par jw70",
+	formatprg = "par w70",
 }
 
 for key, value in pairs(options) do
