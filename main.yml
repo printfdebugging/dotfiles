@@ -16,6 +16,7 @@
     - libreoffice-dev
     - mpv
     - neovim
+    - emacs
     - okular
     - qemu
     - services
