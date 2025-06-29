@@ -26,3 +26,8 @@ run dotfiles
 
 ## Foot notes
 + don't use relative paths, they don't work. use `/home/{{ ansible_user }}/path` instead.
+
+## TODO
+add work,  personal, public, server,  tags to various tasks  for work,
+personal development/use, all personal  stuff - credentials and server
+related configuration respectively.
