@@ -1,0 +1,38 @@
+- name: (git) install packages
+  tags:
+    - git
+  community.general.xbps:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - git
+    - openssh
+
+- name: (git) add remote rsa keys
+  become: false
+  tags:
+    - git
+  ansible.builtin.lineinfile:
+    dest: /home/{{ ansible_user }}/.ssh/known_hosts
+    create: yes
+    state: present
+    line: "{{ lookup('pipe', 'ssh-keyscan -t rsa {{ item }}') }}"
+    regexp: "^{{ item }}"
+  loop:
+    - github.com
+    - gitlab.com
+
+- name: (git) clone git repositories
+  become: false
+  tags:
+    - git
+    - files
+  ansible.builtin.git:
+    repo: "{{ gitlab }}/{{ item }}.git"
+    dest: "/home/{{ ansible_user }}/repos/{{ item }}"
+    update: no
+  loop:
+    - dotfiles
+    - notes
+    - website
+    - sfml-blueprints

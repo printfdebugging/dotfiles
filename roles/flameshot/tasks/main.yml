@@ -1,0 +1,43 @@
+- name: (flameshot) install packages
+  tags:
+    - flameshot
+  community.general.xbps:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - flameshot
+
+- name: (flameshot) create config directory
+  become: false
+  tags:
+    - flameshot
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/.config/flameshot"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0755"
+
+- name: (flameshot) copy config file
+  become: false
+  tags:
+    - flameshot
+  ansible.builtin.copy:
+    src: flameshot.ini
+    dest: /home/{{ ansible_user }}/.config/flameshot/flameshot.ini
+    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user }}"
+    mode: 0755
+
+- name: (flameshot) save config directory
+  become: false
+  tags:
+    - save-flameshot
+  ansible.builtin.copy:
+    src: /home/{{ ansible_user }}/.config/flameshot/{{ item }}
+    dest: /home/{{ ansible_user }}/repos/dotfiles/roles/flameshot/files/{{ item }}
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0644
+  loop:
+    - flameshot.ini

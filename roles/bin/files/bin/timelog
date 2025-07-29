@@ -1,0 +1,10 @@
+#!/bin/env bash
+
+log_file="$HOME/repos/notes/timelog.md"
+[ ! -f "$log_file" ] && touch "$log_file"
+
+time_now=$(date +'%F %T')
+doing_what=$(dmenu -i -p "$time_now" < /dev/null)
+
+[ "$doing_what" != "" ] && notify-send "$time_now" "$doing_what"
+[ "$doing_what" != "" ] && echo "$time_now $doing_what" >> $log_file

@@ -1,0 +1,42 @@
+- name: (gdb) install packages
+  tags:
+    - gdb
+  community.general.xbps:
+    name:
+      - "{{ item }}"
+    state: latest
+  loop:
+    - gdb
+
+- name: (gdb) create config directory
+  become: false
+  tags:
+    - gdb
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/.config/gdb"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0755"
+
+- name: (gdb) copy config files
+  become: false
+  tags:
+    - gdb
+  ansible.builtin.copy:
+    src: gdb
+    dest: /home/{{ ansible_user }}/.config
+    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user }}"
+    mode: 0755
+
+- name: (gdb) save config files
+  become: false
+  tags:
+    - save-gdb
+  ansible.builtin.copy:
+    src: /home/{{ ansible_user }}/.config/gdb
+    dest: /home/{{ ansible_user }}/repos/dotfiles/roles/gdb/files
+    group: "{{ ansible_user }}"
+    owner: "{{ ansible_user }}"
+    mode: 0755

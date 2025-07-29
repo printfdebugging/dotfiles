@@ -1,0 +1,44 @@
+#!/bin/env bash
+
+function init_void() {
+    sudo cp /usr/share/xbps.d/00-repository-main.conf /etc/xbps.d/00-repository-main.conf
+    sudo xbps-install -Syu xbps
+    sudo xbps-install -Syu git openssl ansible python3-watchdog neovim
+}
+
+clone_dotfiles() {
+    mkdir -p "$HOME/repos" && cd "$HOME/repos" || exit
+    [ ! -d "$HOME/repos/dotfiles" ] && git clone https://codeberg.org/printfdebugging/dotfiles.git "$HOME/repos/dotfiles"
+    cd "$HOME/repos/dotfiles" || exit
+}
+
+function run_ansible_tasks_with_vault_pass() {
+    ansible-playbook main.yml --tags "$(printf '%s\n' "${@// /,}")" --become --ask-become-pass --ask-vault-pass
+}
+
+function run_ansible_tasks_without_any_pass() {
+    # save-* tagged tasks neither use any vault string nor have become: true
+    ansible-playbook main.yml --tags "$(printf '%s\n' "${@// /,}")"
+}
+
+function run_ansible_tasks_without_creds() {
+    skip_tasks="creds git libreoffice-dev cool bluetooth zsh"
+    all_roles="$(printf '%s\n' "$@")"
+    for task in $skip_tasks; do
+        all_roles=${all_roles/$task}
+    done
+
+    ansible-playbook main.yml --tags "$(printf '%s\n' "${all_roles// /,}")" --become --ask-become-pass
+}
+
+[ ! "$(command -v ansible-playbook)" ] && init_void
+clone_dotfiles
+
+case "$1" in 
+    "")         run_ansible_tasks_with_vault_pass   "$(find roles -maxdepth 1 -mindepth 1 -print0 | xargs --null | sed 's/roles\///g;')" ;;
+    "server")   run_ansible_tasks_without_creds     "$(find roles -maxdepth 1 -mindepth 1 -print0 | xargs --null | sed 's/roles\///g;')" ;;
+    "save-"*)   run_ansible_tasks_without_any_pass  "${@}";;
+    *)          run_ansible_tasks_with_vault_pass   "${@}";;
+esac
+
+

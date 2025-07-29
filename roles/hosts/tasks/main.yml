@@ -1,0 +1,16 @@
+- name: (hosts) block hosts
+  become: true
+  tags:
+    - hosts
+  ansible.builtin.lineinfile:
+    dest: /etc/hosts
+    create: yes
+    state: present
+    line: "{{ item }}"
+    regexp: "{{ item }}"
+  loop:
+    - 127.0.0.1      youtube.com
+    - 127.0.0.1      www.youtube.com
+    - 127.0.0.1      hianime.to
+    - 127.0.0.1      www.hianime.to
+

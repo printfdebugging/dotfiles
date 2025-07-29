@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# ATM, awesome window manager is managing the wallpaper, and therefore no need for all this
+# status=$(xrandr -q | grep "^DP-1 connected")
+#
+# wallpaper="/home/printfdebugging/.local/share/wallpapers/cat.jpg"
+#
+# if [ -z $status ]
+# then
+#     # single display (set wallpaper and enable display)
+#     xwallpaper --zoom $wallpaper
+#     xrandr --output eDP-1 --primary --auto
+# else
+#     # if multiple displays are connected, then only use 
+#     # the external display
+#     xrandr --output eDP-1 --off
+#     xrandr --output DP-1 --auto --left-of eDP-1
+#     xwallpaper --output DP-1 --zoom $wallpaper
+# fi
+
+
+
+#----------------------------Currently using only one-----------------------------------
+
+# status=$(xrandr -q | grep "^DP-1 connected")
+
+wallpaper="$HOME/.local/share/wallpapers/greens.jpg"
+
+xrandr --output HDMI-A-0 --mode 1920x1080
+xrandr --output HDMI-A-1-1 --mode 1920x1080 --primary --right-of HDMI-A-0
+xwallpaper --zoom $wallpaper
+
+# if [ -z $status ]
+# then
+#     # single display
+#     xwallpaper --zoom $wallpaper
+#     xrandr --output eDP-1 --auto
+# else
+#     result=$(printf "left\nright\nnone" | dmenu -p "Orientation: " -l 4 -vi)
+#
+#     xwallpaper --output HDMI-1 --zoom $wallpaper
+#     case $result in 
+#         "left")     xrandr --output HDMI-1-2 --auto --left-of eDP-1 &;;
+#         "right")    xrandr --output HDMI-1-2 --auto --right-of eDP-1 &;;
+#         "none") ;;
+#     esac
+#
+#     # wallpaper
+#     xwallpaper --output eDP-1 --zoom $wallpaper
+#     xwallpaper --output DP-1 --zoom $wallpaper
+# fi

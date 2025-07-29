@@ -1,0 +1,10 @@
+--enable-dbgutil
+--with-jdk-home=/usr/lib/jvm/openjdk17
+--without-junit
+--without-doxygen
+--enable-ccache
+--enable-pch
+--enable-kf6
+--with-system-libxml=no
+--enable-odk
+

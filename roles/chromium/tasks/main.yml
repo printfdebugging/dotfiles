@@ -1,0 +1,40 @@
+- name: (chromium) install chromium
+  tags:
+    - chromium
+  community.general.xbps:
+    name:
+      - "{{ item }}"
+    state: latest
+  loop:
+    - chromium
+
+- name: (chromium) create /usr/share/chromium/extensions
+  become: true
+  tags:
+    - chromium
+  ansible.builtin.file:
+    path: "/usr/share/chromium/extensions"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0755"
+
+# for more details, see https://developer.chrome.com/docs/extensions/how-to/distribute/install-extensions
+- name: (chromium) add extension.json files
+  become: true
+  tags:
+    - chromium
+  ansible.builtin.copy:
+    src: extension.json
+    dest: "/usr/share/chromium/extensions/{{ item.id }}.json"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+  loop:
+    [
+      { name: "adblock plus",       id: "cfhdojbkjhnklbpkdaibdccddilifddb", },
+      { name: "vimium",             id: "dbepggeogbaibhgnhhndojpepiihcmeb", },
+      { name: "dark reader",        id: "eimadpbcbfnmbkopoojfekhnkhdbieeh", },
+      { name: "cookies don't care", id: "edibdbjcniadpccecjdfdjjppcpchdlm", },
+      { name: "clean home",         id: "dpjamkmjmigaoobjbekmfgabipmfilij", },
+    ]

@@ -1,0 +1,31 @@
+- name: (bluetooth) install packages
+  tags:
+    - bluetooth
+  community.general.xbps:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - bluez
+    - blueman
+
+- name: (bluetooth) enable and start neccessary services
+  tags:
+    - bluetooth
+  community.general.runit:
+    name: "{{ item }}"
+    state: started
+    enabled: true
+  loop:
+    - bluetoothd
+    - dbus
+
+- name: (bluetooth) add user to network group
+  tags:
+    - bluetooth
+  ansible.builtin.user:
+    name: "{{ ansible_user }}"
+    groups: bluetooth
+    append: true
+
+
+

@@ -1,0 +1,30 @@
+---
+- hosts: all
+  roles:
+    - creds
+    - git
+    - base
+    - bin
+    - ccache
+    - chromium
+    - cool
+    - dunst
+    - flameshot
+    - fonts
+    - gtk
+    - libreoffice-dev
+    - mpv
+    - neovim
+    - okular
+    - qemu
+    - services
+    - suckless
+    - tmux
+    - user
+    - wallpapers
+    - xorg
+    - yt-dlp
+    - zsh
+    - bluetooth
+    - hosts
+    - gdb

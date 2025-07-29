@@ -1,0 +1,42 @@
+- name: (dunst) install packages
+  tags:
+    - dunst
+  community.general.xbps:
+    name:
+      - "{{ item }}"
+    state: latest
+  loop:
+    - dunst
+
+- name: (dunst) create config directory
+  become: false
+  tags:
+    - dunst
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/.config/dunst"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: "0755"
+
+- name: (dunst) copy config file
+  become: false
+  tags:
+    - dunst
+  ansible.builtin.copy:
+    src: dunstrc
+    dest: /home/{{ ansible_user }}/.config/dunst/dunstrc
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+
+- name: (dunst) save config file
+  become: false
+  tags:
+    - save-dunst
+  ansible.builtin.copy:
+    src: /home/{{ ansible_user }}/.config/dunst/dunstrc
+    dest: /home/{{ ansible_user }}/repos/dotfiles/roles/dunst/files/dunstrc
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0644

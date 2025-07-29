@@ -1,0 +1,42 @@
+- name: (fonts) install fonts
+  become: false
+  tags:
+    - fonts
+  ansible.builtin.shell:
+    cmd: |
+      if [ ! -d "/home/{{ ansible_user }}/.local/share/fonts" ]; then
+        mkdir -p /home/{{ ansible_user }}/.local/share/fonts 
+      fi
+      cd /home/{{ ansible_user }}/.local/share/fonts/
+      if [ ! -d "/home/{{ ansible_user }}/.local/share/fonts/{{ item.font }}.zip" ]; then
+        curl -LO {{ item.url }}
+      fi
+      if [ ! -d "/home/{{ ansible_user }}/.local/share/fonts/{{ item.font }}" ]; then
+        unzip {{ item.font }}.zip -d {{ item.font }}
+      fi
+  loop:
+    [
+      { font: "JetBrainsMono",         url: "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/JetBrainsMono.zip", },
+    ]
+
+- name: (fonts) copy twemoji font file
+  become: true
+  tags:
+    - fonts
+  ansible.builtin.copy:
+    src: twemoji
+    dest: /usr/share/fonts
+    owner: root
+    group: root
+    mode: 0644
+
+- name: (fonts) copy twemoji fontconfig
+  become: true
+  tags:
+    - fonts
+  ansible.builtin.copy:
+    src: 75-twemoji.conf
+    dest: /etc/fonts/conf.d/75-twemoji.conf
+    owner: root
+    group: root
+    mode: 0644
