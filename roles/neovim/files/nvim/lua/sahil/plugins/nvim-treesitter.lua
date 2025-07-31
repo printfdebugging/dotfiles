@@ -15,6 +15,7 @@ return {
         "vim",
         "vimdoc",
         "go",
+        "gitcommit",
         "python",
         "java",
         "bash",

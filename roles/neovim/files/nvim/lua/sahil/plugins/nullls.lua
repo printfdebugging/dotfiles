@@ -10,7 +10,7 @@ return {
 
 		null_ls.setup({
 			sources = {
-				-- formatting.prettier.with({ disabled_filetypes = { "cpp", "c" } }), -- (see null-ls docs)
+				formatting.prettier.with({ disabled_filetypes = { "cpp", "c", "*" } }), -- (see null-ls docs)
 				-- formatting.prettier,
 				formatting.stylua,
 				formatting.black,
