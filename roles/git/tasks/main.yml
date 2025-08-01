@@ -33,8 +33,9 @@
     update: no
   loop:
     - dotfiles
-    - notes
+    - logs
     - website
+
     - sfml-blueprints
     - beautiful-code
     - coders-at-work
