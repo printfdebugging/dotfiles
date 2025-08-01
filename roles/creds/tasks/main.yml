@@ -90,7 +90,7 @@
     - creds
   ansible.builtin.copy:
     content: "{{ gpg_key_file }}"
-    dest: "/home/{{ ansible_user }}/.gpgkey"
+    dest: "/home/{{ ansible_user }}/.gpgkey.asc"
     group: "{{ ansible_user }}"
     owner: "{{ ansible_user }}"
     mode: "0644"
