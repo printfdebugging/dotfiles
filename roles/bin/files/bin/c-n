@@ -1,0 +1,3 @@
+#!/bin/bash
+
+tmux popup -w 80% -h 80% -EE "nvim ~/repos/logs/THIS.md"
