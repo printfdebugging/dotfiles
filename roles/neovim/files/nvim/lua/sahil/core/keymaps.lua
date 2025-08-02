@@ -68,9 +68,7 @@ end)
 G_telescope_last = 0
 
 vim.keymap.set("n", "<leader>ff", ":lua G_telescope_last=0 require('telescope.builtin').find_files()<CR>")
--- vim.keymap.set("n", "<leader>fb", ":lua require('telescope.builtin').buffers()<CR>")
 vim.keymap.set("n", "<leader>fh", ":lua G_telescope_last=0 require('telescope.builtin').help_tags()<CR>")
-vim.keymap.set("n", "<leader>fm", ":lua G_telescope_last=0 require('telescope.builtin').man_pages()<CR>")
 vim.keymap.set("n", "<leader>gs", ":lua G_telescope_last=1 require('telescope.builtin').git_status()<CR>")
 vim.keymap.set( "n", "<leader>ls", ":Telescope buffers<CR>")
 vim.keymap.set(
