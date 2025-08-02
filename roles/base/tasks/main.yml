@@ -91,6 +91,7 @@
     - python3-pip
     - cargo
     - zola
+    - tlp
 
 - name: (base) upgrade distribution
   tags:
