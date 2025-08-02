@@ -92,6 +92,7 @@
     - cargo
     - zola
     - tlp
+    - cbatticon
 
 - name: (base) upgrade distribution
   tags:

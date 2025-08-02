@@ -5,6 +5,7 @@ nm-applet &
 pasystray &
 blueman-applet &
 xcompmgr &
+cbatticon &
 dunst &
 
 exec dwm
