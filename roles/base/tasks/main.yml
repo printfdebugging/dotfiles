@@ -118,7 +118,6 @@
     mode: 0755
   loop:
     - downloads
-    - media
 
 - name: (base) create .config directory
   become: false
