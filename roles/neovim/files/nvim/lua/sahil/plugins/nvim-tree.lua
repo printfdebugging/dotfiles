@@ -11,7 +11,7 @@ return	{
         side = "left",
       },
       renderer = {
-        root_folder_label = false,
+        root_folder_label = ":~:s?$?/..?",
         icons = {
           glyphs = {
             folder = {
