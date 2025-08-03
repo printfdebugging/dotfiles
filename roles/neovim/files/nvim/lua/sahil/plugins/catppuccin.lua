@@ -140,6 +140,12 @@ return {
       highlight @label    gui=NONE guifg=#cba6f7 gui=underline
       highlight Comment             guifg=#5B6268
       highlight CmpNormal           guibg=#21242b
+      highlight NormalFloat         guibg=#00000000
+      highlight FloatFooter guibg=#00000000
+      highlight FloatTitle  guibg=#00000000
+      highlight FloatBorder guibg=#00000000
+      highlight TelescopeSelection guibg=#00000000
+      highlight TelescopeSelectionCaret guibg=#00000000
     ]])
 
     vim.cmd([[highlight! link CursorLineSign CursorLine]])
