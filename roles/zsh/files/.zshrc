@@ -96,7 +96,7 @@ cool_configure() {
     ./autogen.sh
     ./configure --enable-silent-rules --with-lokit-path=${LOCOREPATH}/include \
             --with-lo-path=${LOCOREPATH}/instdir \
-            --enable-debug --enable-cypress
+            --enable-debug --enable-cypress --without-system-nss
 }
 
 # program aliases

@@ -7,4 +7,4 @@
 --enable-kf6
 --with-system-libxml=no
 --enable-odk
-
+--without-system-nss
