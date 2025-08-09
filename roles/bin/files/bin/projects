@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Set the projects code directory
+projects_code_directory="$HOME/repos"
+
+# Customize fzf appearance
+export FZF_DEFAULT_OPTS="
+--color=marker:#d08770,fg+:#eceff4,prompt:#bf616a,hl+:#5e81ac
+--layout=reverse
+--border
+--info=inline
+--prompt='Select a project: '
+--height=20%
+"
+
+# Use fzf to select a project
+selection=$(ls "$projects_code_directory" | fzf)
+
+# Check if a selection was made
+if [[ -n "$selection" ]]; then
+    # Open the selected project in the editor
+    $EDITOR "$projects_code_directory/$selection"
+fi
