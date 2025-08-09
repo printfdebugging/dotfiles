@@ -12,7 +12,9 @@ fi
 
 if [ ${CURRENT_PANE} -eq 0 ]; then
   tmux select-pane -t:.-
-  tmux send-keys "$(echo ${@})" Enter
+  if [ "$(echo ${@})" != "" ]; then
+    tmux send-keys "$(echo ${@})" Enter
+  fi
 fi
 
 
