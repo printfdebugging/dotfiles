@@ -7,6 +7,10 @@ CURRENT_PANE="$(tmux display -p '#{pane_index}')"
 if [ "${PANE_COUNT}" = 1 ]; then
   tmux split-window -c "#{pane_current_path}"
   tmux resize-pane -y 30%
+
+  if [ "$(echo ${@})" != "" ]; then
+    tmux send-keys "$(echo ${@})" Enter
+  fi
   exit
 fi
 
