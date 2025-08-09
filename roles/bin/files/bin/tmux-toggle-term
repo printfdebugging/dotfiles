@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -uo pipefail
-
 LIST_PANES="$(tmux list-panes -F '#F' )"
 PANE_COUNT="$(echo "${LIST_PANES}" | wc -l | bc)"
 CURRENT_PANE="$(tmux display -p '#{pane_index}')"
@@ -12,8 +10,13 @@ if [ "${PANE_COUNT}" = 1 ]; then
   exit
 fi
 
-tmux select-pane -t:.-
+if [ ${CURRENT_PANE} -eq 0 ]; then
+  tmux select-pane -t:.-
+  tmux send-keys "$(echo ${@})" Enter
+fi
 
-if [ ! ${CURRENT_PANE} -eq 0 ]; then
+
+if [ ${CURRENT_PANE} -eq 1 ]; then
+  tmux select-pane -t:.-
   tmux resize-pane -Z
 fi
