@@ -22,7 +22,7 @@
     - github.com
     - gitlab.com
 
-- name: (git) clone git repositories
+- name: (git) clone projects
   become: false
   tags:
     - git
@@ -40,3 +40,22 @@
     - beautiful-code
     - coders-at-work
     - ipc
+
+- name: (git) clone forks
+  become: false
+  tags:
+    - git
+    - files
+  ansible.builtin.git:
+    repo: "{{ github }}/{{ item }}.git"
+    dest: "/home/{{ ansible_user }}/forks/{{ item }}"
+    update: no
+  loop:
+    - glfw
+    - linux
+    - binutils-gdb
+    - openssh-portable
+    - git
+    - sqlite
+    - httpd
+    - bash
