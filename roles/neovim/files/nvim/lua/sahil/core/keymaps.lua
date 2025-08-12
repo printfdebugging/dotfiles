@@ -49,7 +49,6 @@ local normal_mode_keymaps = {
   { 'm', ':MaximizerToggle!<CR>' },
   { 'J', 'mzJ`z' },
   { 's', ':source %<CR>' },
-  { 'z', ':ToggleTerm<CR>' },
   { '<', ':-tabmove<CR>' },
   { '>', ':+tabmove<CR>' },
   { 't', function() vim.fn.system("tmux-toggle-term make run") end },
