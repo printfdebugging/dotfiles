@@ -39,6 +39,7 @@
     - sfml-blueprints
     - beautiful-code
     - coders-at-work
+    - learn-opengl
     - ipc
 
 - name: (git) clone forks
