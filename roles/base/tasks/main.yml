@@ -93,6 +93,7 @@
     - zola
     - tlp
     - cbatticon
+    - tigervnc
 
 - name: (base) upgrade distribution
   tags:
