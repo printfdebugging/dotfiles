@@ -2,7 +2,7 @@ local options = {
 	relativenumber = false,
 	number = true,
 	ruler = false,
-	cmdheight = 1,
+	cmdheight = 0,
 	background = "dark",
 	fillchars = "fold: ",
 	tabstop = 4,
@@ -37,7 +37,7 @@ local globals = {
 	noswapfile = true,
 	nobackup = true,
 	nowritebackup = true,
-	laststatus = 2,
+	laststatus = 0,
 	mapleader = " ",
 	editorconfig_max_line_length = 100,
 }
