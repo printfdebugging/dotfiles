@@ -49,24 +49,9 @@
     - ipc
     - learn-opengl
 
-- name: (git) clone forks
-  become: false
-  tags:
-    - git
-    - files
-  ansible.builtin.git:
-    repo: "{{ github }}/{{ item }}.git"
-    dest: "/home/{{ ansible_user }}/forks/{{ item }}"
-    update: no
-  loop:
+    # forks
     - glfw
-    - linux
-    - binutils-gdb
-    - openssh-portable
-    - git
-    - sqlite
-    - httpd
-    - bash
+    - glad
     - Craft
-    - curl
     - libuv
+    - layman
