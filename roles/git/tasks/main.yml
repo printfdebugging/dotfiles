@@ -22,7 +22,7 @@
     - github.com
     - gitlab.com
 
-- name: (git) clone projects
+- name: (git) clone projects from gitlab
   become: false
   tags:
     - git
@@ -32,16 +32,22 @@
     dest: "/home/{{ ansible_user }}/repos/{{ item }}"
     update: no
   loop:
-    - dotfiles
-    - logs
     - website
+    - logs
 
-    - sfml-blueprints
-    - beautiful-code
-    - coders-at-work
-    - learn-opengl
+- name: (git) clone projects from github
+  become: false
+  tags:
+    - git
+    - files
+  ansible.builtin.git:
+    repo: "{{ github }}/{{ item }}.git"
+    dest: "/home/{{ ansible_user }}/repos/{{ item }}"
+    update: no
+  loop:
+    - dotfiles
     - ipc
-    - thin-matrix-opengl 
+    - learn-opengl
 
 - name: (git) clone forks
   become: false
