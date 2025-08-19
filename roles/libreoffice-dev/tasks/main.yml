@@ -119,7 +119,7 @@
     - qt6-base
     - gnupg
     - glib-devel
-    - openjdk17
+    - openjdk21
     - apache-ant
     - beanshell
     - rhino

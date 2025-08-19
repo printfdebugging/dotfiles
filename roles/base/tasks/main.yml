@@ -86,7 +86,7 @@
     - ctags
     - sxiv
     - feh
-    - openjdk
+    - openjdk21
     - google-fonts-ttf
     - python3-pip
     - cargo
