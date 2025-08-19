@@ -41,6 +41,7 @@
     - coders-at-work
     - learn-opengl
     - ipc
+    - thin-matrix-opengl 
 
 - name: (git) clone forks
   become: false
