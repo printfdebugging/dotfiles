@@ -8,7 +8,7 @@ function init_void() {
 
 clone_dotfiles() {
     mkdir -p "$HOME/repos" && cd "$HOME/repos" || exit
-    [ ! -d "$HOME/repos/dotfiles" ] && git clone https://gitlab.com/printfdebugging/dotfiles.git "$HOME/repos/dotfiles"
+    [ ! -d "$HOME/repos/dotfiles" ] && git clone https://github.com/printfdebugging/dotfiles.git "$HOME/repos/dotfiles"
     cd "$HOME/repos/dotfiles" || exit
 }
 
