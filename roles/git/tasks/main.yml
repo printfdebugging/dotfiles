@@ -48,10 +48,12 @@
     - dotfiles
     - ipc
     - learn-opengl
+    - themes
+    - sfml-blueprints
+    - keybindings
 
     # forks
     - glfw
-    - glad
     - Craft
     - libuv
     - layman
