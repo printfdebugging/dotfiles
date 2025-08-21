@@ -25,7 +25,7 @@ vim.cmd([[
 
 -- Set autoread
 vim.cmd("set autoread")
-vim.cmd("set laststatus=0")
+vim.cmd("set laststatus=3")
 
 -- Define an autocommand for CursorHold and CursorHoldI events
 vim.cmd([[

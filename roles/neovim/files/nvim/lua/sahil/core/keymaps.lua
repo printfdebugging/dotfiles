@@ -46,7 +46,12 @@ local normal_mode_leader_keymaps = {
 }
 
 local normal_mode_keymaps = {
+  { '<F1>', ':CMakeBuild<CR>' },
+  { '<F2>', ':CMakeRun<CR>' },
+  { '<F3>', ':CMakeClean<CR>' },
   { 'm', ':MaximizerToggle!<CR>' },
+  { 'm', ':MaximizerToggle!<CR>' },
+  { 'z', ':ToggleTerm<CR>' },
   { 'J', 'mzJ`z' },
   { 's', ':source %<CR>' },
   { '<', ':-tabmove<CR>' },
