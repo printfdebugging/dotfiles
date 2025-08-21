@@ -1,45 +1,14 @@
--- Set tabstop to 2 for Lua files
 vim.cmd([[
-  augroup LuaTabStop
+  augroup NoCursorLine
   autocmd!
-  autocmd FileType lua set tabstop=2
-  autocmd FileType lua set shiftwidth=2
-  augroup END
-]])
-
-vim.cmd([[
-  augroup JavaScriptTabStop
-  autocmd!
-  autocmd FileType javascript set tabstop=2
-  autocmd FileType javascript set shiftwidth=2
-  augroup END
-]])
-
-vim.cmd([[
-  augroup JavaScriptTabStop
-  autocmd!
-  autocmd FileType c set tabstop=2
-  autocmd FileType c set shiftwidth=2
+  autocmd FileType toggleterm setlocal nocursorline nonumber norelativenumber
+  autocmd FileType cmake_tools_terminal setlocal nocursorline nonumber norelativenumber
   augroup END
 ]])
 
 -- Set autoread
 vim.cmd("set autoread")
 vim.cmd("set laststatus=3")
-
--- Define an autocommand for CursorHold and CursorHoldI events
-vim.cmd([[
-  augroup AutoRead
-  autocmd!
-  autocmd CursorHold,CursorHoldI * checktime
-  augroup END
-]])
-
--- " define an autocommand group to avoid duplication
-vim.api.nvim_create_autocmd("TermOpen", {
-	pattern = "*",
-	command = "setlocal nonumber norelativenumber",
-})
 
 local markdown_no_warnings = vim.api.nvim_create_augroup("CppFormatingWithClangd", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
