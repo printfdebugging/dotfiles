@@ -94,6 +94,7 @@
     - tlp
     - cbatticon
     - tigervnc
+    - blender
 
 - name: (base) upgrade distribution
   tags:
