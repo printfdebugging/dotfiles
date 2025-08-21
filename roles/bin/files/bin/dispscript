@@ -1,11 +1,6 @@
 #!/bin/bash
 
-isLaptop=$(xrandr -q | grep "eDP" | wc -l)
-wallpaper="$HOME/.local/share/wallpapers/greens.jpg"
+xrandr --output HDMI-A-0  --mode 1920x1080 --primary
+xrandr --output HDMI-A-1-1 --mode 1920x1080 --right-of HDMI-A-0
 
-if [ $isLaptop -ne 0 ]; then
-    xrandr --output eDP --mode 1920x1080 
-    xrandr --output HDMI-1-1 --mode 1920x1080 --primary --left-of eDP
-fi
-
-xwallpaper --zoom $wallpaper
+xwallpaper --zoom "$HOME/.local/share/wallpapers/greens.jpg"
