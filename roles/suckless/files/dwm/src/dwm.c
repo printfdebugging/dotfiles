@@ -509,6 +509,7 @@ static const Key keys[] = {
 
     {MODKEY,             XK_w,      spawn,          SHCMD("chromium")      },
     {MODKEY,             XK_n,      spawn,          SHCMD("c-n")      },
+    {MODKEY,             XK_u,      spawn,          SHCMD("c-u")      },
     {MODKEY,             XK_g,      spawn,          SHCMD("getbookmark")  },
     {MODKEY,             XK_b,      spawn,          SHCMD("bookmark-dwm") },
     {MODKEY,             XK_c,      spawn,          SHCMD("quickemu-vms") },
