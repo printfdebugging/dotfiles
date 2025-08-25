@@ -1,0 +1,49 @@
+- name: (vscode) install packages
+  tags:
+    - vscode
+  community.general.xbps:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - vscode
+
+- name: (vscode) create config directory
+  become: false
+  tags:
+    - vscode
+  file:
+    path: /home/{{ ansible_user }}/.config/Code - OSS/User
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+
+- name: (vscode) copy config files
+  become: false
+  tags:
+    - vscode
+  ansible.builtin.copy:
+    src: '{{ item }}'
+    dest: '/home/{{ ansible_user }}/.config/Code - OSS/User/{{ item }}'
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+  loop:
+    - extensions.json
+    - keybindings.json
+    - settings.json
+
+- name: (vscode) save config files
+  become: false
+  tags:
+    - save-vscode
+  ansible.builtin.copy:
+    src: '{{ item }}'
+    dest: '/home/{{ ansible_user }}/.config/Code - OSS/User/{{ item }}'
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+  loop:
+    - extensions.json
+    - keybindings.json
+    - settings.json

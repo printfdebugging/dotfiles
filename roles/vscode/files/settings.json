@@ -1,0 +1,221 @@
+{
+    "platformSettings.autoLoad": true,
+    "platformSettings.condition": "os.release()",
+    "platformSettings.platforms": {
+        "default": {
+            "nodes": {
+                "keyboard.dispatch": "keyCode",
+                "vim.easymotion": true,
+                "vim.incsearch": true,
+                "vim.useSystemClipboard": true,
+                "vim.useCtrlKeys": true,
+                "vim.hlsearch": true,
+                "vim.leader": "<space>",
+                "vim.normalModeKeyBindings": [
+                    {
+                        "before": [
+                            "leader",
+                            "w"
+                        ],
+                        "commands": [
+                            "workbench.action.files.save",
+                        ]
+                    }
+                ],
+                "editor.formatOnSave": true,
+                "editor.cursorBlinking": "solid",
+                "editor.renderLineHighlight": "none",
+                "editor.fontFamily": "JetBrains Mono",
+                "editor.fontLigatures": true,
+                "terminal.integrated.fontFamily": "JetBrains Mono",
+                "editor.codeLensFontFamily": "JetBrains Mono",
+                "editor.inlayHints.fontFamily": "JetBrains Mono",
+                "editor.fontSize": 16,
+                "editor.rulers": [
+                    120
+                ],
+                "editor.inlayHints.enabled": "off",
+                "editor.inlineSuggest.enabled": true,
+                "editor.guides.bracketPairs": "off",
+                "editor.guides.bracketPairsHorizontal": false,
+                "editor.parameterHints.enabled": true,
+                "explorer.autoReveal": false,
+                "explorer.confirmDelete": false,
+                "explorer.confirmDragAndDrop": false,
+                "explorer.compactFolders": false,
+                "workbench.colorCustomizations": {
+                    "statusBar.background": "#1A1A1A",
+                    "statusBar.noFolderBackground": "#212121",
+                    "statusBar.debuggingBackground": "#263238",
+                    "focusBorder": "#ff000000",
+                },
+                "workbench.iconTheme": "vscode-great-icons",
+                "workbench.tree.indent": 16,
+                "workbench.colorTheme": "One Dark Pro",
+                "workbench.editor.wrapTabs": true,
+                "workbench.editor.highlightModifiedTabs": true,
+                "workbench.startupEditor": "none",
+                "workbench.editorAssociations": {
+                    "*.glb": "modelViewer.gltfPreview"
+                },
+                "debug.terminal.clearBeforeReusing": true,
+                "debug.openExplorerOnEnd": true,
+                "terminal.integrated.cwd": "${workspaceFolder}",
+                "chat.commandCenter.enabled": false,
+                "git.enableCommitSigning": false,
+                "git.autofetch": true,
+                "git.confirmSync": false,
+                "git.detectSubmodules": true,
+                "git.detectSubmodulesLimit": 30,
+                "git.autoRepositoryDetection": true,
+                "git.alwaysShowStagedChangesResourceGroup": true,
+                "git.showProgress": true,
+                "git.enableStatusBarSync": true,
+                "git.openRepositoryInParentFolders": "never",
+                "git-graph.repository.commits.showSignatureStatus": true,
+                "go.toolsManagement.autoUpdate": true,
+                "go.survey.prompt": false,
+                "gopls": {
+                    "linksInHover": false,
+                },
+                "[c]": {
+                    "editor.defaultFormatter": "xaver.clang-format"
+                },
+                "[cpp]": {
+                    "editor.defaultFormatter": "xaver.clang-format"
+                },
+                "C_Cpp.enhancedColorization": "disabled",
+                "C_Cpp.intelliSenseEngine": "disabled",
+                "yaml.format.singleQuote": true,
+                "clangd.arguments": [
+                    "-header-insertion=never"
+                ],
+                "github.copilot.enable": {
+                    "*": false,
+                    "plaintext": false,
+                    "markdown": false,
+                    "scminput": false
+                },
+                "github.copilot.editor.enableCodeActions": false,
+                "github.copilot.nextEditSuggestions.enabled": false,
+                "todo-tree.filtering.excludeGlobs": [
+                    "**/cmake/**",
+                    "**/vendor/**",
+                ],
+                "todo-tree.general.tags": [
+                    "BUG",
+                    "HACK",
+                    "FIXME",
+                    "TODO",
+                    "NOTE",
+                ],
+                "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
+                "todo-tree.filtering.ignoreGitSubmodules": true,
+                "todo-tree.tree.expanded": true,
+                "todo-tree.tree.scanMode": "workspace only",
+                "todo-tree.tree.showCountsInTree": true,
+                "todo-tree.tree.showBadges": true,
+                "findJump.positionAbsolute": false,
+                "findJump.dimWhenActive": true,
+                "findJump.excludeNextChars": 1,
+                "findJump.jumpChars": "123456789abcdefghijklmnopqrstuvwxyz",
+                "kanbn.showTaskNotifications": false,
+                "kanbn.showSprintButton": false,
+                "kanbn.showBurndownButton": false,
+                "discord.removeRemoteRepository": true,
+                "discord.removeDetails": true,
+                "discord.removeLowerDetails": true,
+                "discord.suppressNotifications": true,
+                "cmake.showConfigureWithDebuggerNotification": false,
+                "lldb.suppressUpdateNotifications": true,
+                "docker.extension.enableComposeLanguageServer": false,
+                "excalidraw.theme": "auto",
+            }
+        },
+        "win32": {
+            "inherits": "default",
+            "nodes": {
+                "cmake.generator": "Ninja",
+                "cmake.automaticReconfigure": true,
+                "cmake.autoSelectActiveFolder": true,
+                "cmake.buildBeforeRun": true,
+                "cmake.configureOnEdit": true,
+                "cmake.buildDirectory": "${workspaceRoot}/build/${buildType}",
+                "cmake.setBuildTypeOnMultiConfig": true,
+                "cmake.skipConfigureIfCachePresent": true,
+                "cmake.mergedCompileCommands": "${workspaceFolder}/build/compile_commands.json",
+                "cmake.options.statusBarVisibility": "visible",
+                "cmake.options.advanced": {
+                    "cpack": {
+                        "statusBarVisibility": "hidden"
+                    },
+                    "workflow": {
+                        "statusBarVisibility": "hidden"
+                    },
+                    "variant": {
+                        "statusBarVisibility": "compact"
+                    }
+                },
+                "cmake.configureOnOpen": false,
+                "cmake.debugConfig": {
+                    "cwd": "${workspaceFolder}",
+                    // Keep this, the default integrated debugger is infuriating.
+                    "miDebuggerPath": "C:\\msys64\\clang64\\bin\\gdb.exe",
+                },
+                "cmake.pinnedCommands": [
+                    "workbench.action.tasks.runTask",
+                    "workbench.action.tasks.configureTaskRunner"
+                ],
+                "cmake.additionalCompilerSearchDirs": [
+                    "C:/msys64/mingw32/bin",
+                    "C:/msys64/mingw64/bin",
+                    "C:/msys64/clang32/bin",
+                    "C:/msys64/clangarm64/bin",
+                    "C:/msys64/ucrt64/bin"
+                ],
+                "terminal.integrated.profiles.windows": {
+                    "PowerShell": {
+                        "source": "PowerShell",
+                        "icon": "terminal-powershell"
+                    },
+                    "Command Prompt": {
+                        "path": [
+                            "${env:windir}\\Sysnative\\cmd.exe",
+                            "${env:windir}\\System32\\cmd.exe"
+                        ],
+                        "args": [],
+                        "icon": "terminal-cmd"
+                    },
+                    "Git Bash": {
+                        "source": "Git Bash"
+                    },
+                    "bash (MSYS2)": {
+                        "path": "C:\\msys64\\usr\\bin\\bash.exe",
+                        "args": [
+                            "--login",
+                            "-i"
+                        ],
+                        "env": {
+                            "CHERE_INVOKING": "1"
+                        }
+                    }
+                },
+                "terminal.integrated.defaultProfile.windows": "bash (MSYS2)",
+                "clangd.path": "c:\\msys64\\clang64\\bin\\clangd.exe",
+            },
+            "remove": [
+                "platformSettings.placebo"
+            ]
+        },
+        "linux": {
+            "inherits": "default",
+            "nodes": {
+                "clangd.path": "/usr/bin/clangd",
+            }
+        },
+        "darwin": {
+            "inherits": "linux",
+            "nodes": {}
+        },
+    }
+}

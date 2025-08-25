@@ -1,0 +1,29 @@
+{
+    "recommendations": [
+        "llvm-vs-code-extensions.vscode-clangd",
+        "ms-vscode.cpptools",
+        "ms-vscode.cmake-tools",
+        "ms-vscode.hexeditor",
+        "ms-vscode.cpptools-extension-pack",
+        "wmaurer.change-case",
+        "xaver.clang-format",
+        "Guyutongxue.cpp-reference",
+        "NabeelValley.easyzoom",
+        "zhuangtongfa.material-theme",
+        "mksafi.find-jump",
+        "cloudedcat.vscode-model-viewer",
+        "cesium.gltf-vscode",
+        "NarasimaPandiyan.jetbrainsmono",
+        "antaalt.shader-validator",
+        "Gruntfuggly.todo-tree",
+        "emmanuelbeziat.vscode-great-icons",
+        "tomoki1207.pdf",
+        "christian-kohler.path-intellisense",
+        "golang.go",
+        "premparihar.gotestexplorer",
+        "runarsf.platform-settings",
+        "vscodevim.vim",
+        "pomdtr.excalidraw-editor",
+        "lachlansleight.lsio-projects"
+    ]
+}
