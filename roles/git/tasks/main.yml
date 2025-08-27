@@ -31,6 +31,7 @@
     repo: "{{ gitlab }}/{{ item }}.git"
     dest: "/home/{{ ansible_user }}/repos/{{ item }}"
     update: no
+    recursive: false
   loop:
     - website
     - logs
@@ -44,6 +45,7 @@
     repo: "{{ github }}/{{ item }}.git"
     dest: "/home/{{ ansible_user }}/repos/{{ item }}"
     update: no
+    recursive: false
   loop:
     - dotfiles
     - ipc
