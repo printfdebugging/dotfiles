@@ -73,6 +73,7 @@ local normal_mode_keymaps = {
       ]])
 		end,
 	},
+	{ "t", timelog_entry },
 	{ "m", ":MaximizerToggle!<CR>" },
 	{ "m", ":MaximizerToggle!<CR>" },
 	{ "z", ":ToggleTerm<CR>" },
