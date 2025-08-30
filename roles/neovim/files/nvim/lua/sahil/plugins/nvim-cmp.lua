@@ -121,6 +121,7 @@ return {
 		local capabilities = require("cmp_nvim_lsp").default_capabilities()
 		local servers = {
 			"clangd",
+			"cmake",
 			"glslls",
 			"ts_ls",
 			"lua_ls",
