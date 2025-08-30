@@ -80,18 +80,6 @@ local normal_mode_keymaps = {
 	{ "s", ":source %<CR>" },
 	{ "<", ":-tabmove<CR>" },
 	{ ">", ":+tabmove<CR>" },
-	{
-		"t",
-		function()
-			vim.fn.system("tmux-toggle-term make run")
-		end,
-	},
-	{
-		"T",
-		function()
-			vim.fn.system("tmux-toggle-term make clean")
-		end,
-	},
 	{ "K", "<cmd>Lspsaga hover_doc<CR>" },
 	{ "gf", ":Lspsaga lsp_finder<CR>" },
 	{ "gD", ":Lspsaga peek_definition<CR>" },
