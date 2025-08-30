@@ -6,6 +6,7 @@ return {
 			formatters_by_ft = {
 				lua = { "stylua" },
 				c = { "clang-format" },
+				cpp = { "clang-format" },
 				python = { "isort", "black" },
 			},
 			-- format_on_save = {
@@ -19,6 +20,7 @@ return {
 				current_file_path = vim.fn.expand("%:p")
 				excluded_strings = {
 					"online",
+					"libreoffice",
 				}
 				for _, str in ipairs(excluded_strings) do
 					if string.match(current_file_path, str) then
