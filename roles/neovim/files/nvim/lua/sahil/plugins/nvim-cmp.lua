@@ -83,7 +83,7 @@ return {
 		require("lspsaga").setup({
 			ui = {
 				border = "single",
-        code_action = " ";
+				code_action = "💡",
 			},
 			definition = {
 				keys = {
@@ -121,6 +121,7 @@ return {
 		local capabilities = require("cmp_nvim_lsp").default_capabilities()
 		local servers = {
 			"clangd",
+			"glslls",
 			"ts_ls",
 			"lua_ls",
 			"ansiblels",
