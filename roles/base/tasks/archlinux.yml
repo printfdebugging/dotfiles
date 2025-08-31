@@ -1,0 +1,141 @@
+- name: (base) install packages
+  tags:
+    - base
+  community.general.pacman:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - thunderbird
+    - vscode
+    - lua
+    - cmake
+    - extra-cmake-modules
+    - ansible
+    - fastfetch
+    - man-db
+    - man-pages
+    - btop
+    - pasystray
+    - pavucontrol
+    - pulseaudio
+    - unzip
+    - networkmanager
+    - network-manager-applet
+    - ripgrep
+    - thunar
+    - thunar-volman
+    - thunar-shares-plugin
+    - go
+    - xdotool
+    - netcat
+    - python-watchdog
+    - libreoffice
+    - loupe
+    - mtpfs
+    - mpv
+    - okular
+    - gdb
+    - perf
+    - ntfs-3g
+    - obs-studio
+    - glade
+    - luarocks
+    - qt5ct
+    - ruff
+    - i3lock
+    - vulkan-radeon
+    - vulkan-tools
+    - libxxf86vm
+    - glm
+    - shaderc
+    - gimp
+    - inkscape
+    - xf86-video-amdgpu
+    - xf86-video-ati
+    - xf86-input-libinput
+    - yarn
+    - wget
+    - curl
+    - fontconfig
+    - clang
+    - libnma
+    - ueberzug
+    - pyright
+    - fzf
+    - fd
+    - figlet
+    - seahorse
+    - valgrind
+    - ctags
+    - sxiv
+    - feh
+    - jre21-openjdk
+    - python-pip
+    - cargo
+    - zola
+    - tlp
+    - cbatticon
+    - tigervnc
+    - blender
+    - vinagre
+
+- name: (base) upgrade distribution
+  tags:
+    - base
+  community.general.pacman:
+    upgrade: true
+
+- name: (base) add user to network group
+  tags:
+    - base
+  ansible.builtin.user:
+    name: "{{ ansible_user }}"
+    groups: network
+    append: true
+
+- name: (base) create downloads directory
+  become: false
+  tags:
+    - base
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/{{ item }}"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+  loop:
+    - downloads
+
+- name: (base) create .config directory
+  become: false
+  tags:
+    - base
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/.config"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0755
+
+- name: (base) copy user-dirs.dirs file
+  tags:
+    - base
+  ansible.builtin.copy:
+    src: user-dirs.dirs
+    dest: /home/{{ ansible_user }}/.config/user-dirs.dirs
+    owner: root
+    group: root
+    mode: 0644
+
+
+- name: (base) enable multilib
+  become: true
+  tags:
+    - base
+  ansible.builtin.blockinfile:
+    path: /etc/pacman.conf
+    marker: "# {mark} ANSIBLE MANAGED BLOCK: MULTILIB"
+    block: |
+      [multilib]
+      Include = /etc/pacman.d/mirrorlist
+    insertbefore: EOF

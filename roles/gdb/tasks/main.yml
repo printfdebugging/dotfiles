@@ -1,12 +1,8 @@
-- name: (gdb) install packages
+- name: include distribution tasks
   tags:
     - gdb
-  community.general.xbps:
-    name:
-      - "{{ item }}"
-    state: latest
-  loop:
-    - gdb
+    - include
+  ansible.builtin.include_tasks: "{{ ansible_distribution | lower }}.yml"
 
 - name: (gdb) create config directory
   become: false

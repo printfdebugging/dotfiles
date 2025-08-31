@@ -1,0 +1,9 @@
+- name: (gdb) install packages
+  tags:
+    - gdb
+  community.general.pacman:
+    name:
+      - "{{ item }}"
+    state: latest
+  loop:
+    - gdb

@@ -1,9 +1,27 @@
 #!/bin/env bash
 
-function init_void() {
+function init_voidlinux() {
     sudo cp /usr/share/xbps.d/00-repository-main.conf /etc/xbps.d/00-repository-main.conf
     sudo xbps-install -Syu xbps
     sudo xbps-install -Syu git openssl ansible python3-watchdog neovim
+}
+
+function init_archlinux() {
+    sudo pacman -Syu --noconfirm
+    sudo pacman -S --noconfirm git openssl ansible python-watchdog neovim
+}
+
+function init() {
+    init_archlinux
+}
+
+function init() {
+    source /etc/os-release
+    case "$ID" in
+        void) init_voidlinux ;;
+        arch) init_archlinux ;;
+        *) exit "unsupported distribution" ;;
+    esac
 }
 
 clone_dotfiles() {
@@ -13,12 +31,12 @@ clone_dotfiles() {
 }
 
 function run_ansible_tasks_with_vault_pass() {
-    ansible-playbook main.yml --tags "$(printf '%s\n' "${@// /,}")" --become --ask-become-pass --ask-vault-pass
+    ansible-playbook main.yml --tags "$(printf '%s\n' "${@// /,}")" --become --ask-become-pass --ask-vault-pass -vvvv
 }
 
 function run_ansible_tasks_without_any_pass() {
     # save-* tagged tasks neither use any vault string nor have become: true
-    ansible-playbook main.yml --tags "$(printf '%s\n' "${@// /,}")"
+    ansible-playbook main.yml --tags "$(printf '%s\n' "${@// /,}")" -vvvv
 }
 
 function run_ansible_tasks_without_creds() {
@@ -28,10 +46,10 @@ function run_ansible_tasks_without_creds() {
         all_roles=${all_roles/$task}
     done
 
-    ansible-playbook main.yml --tags "$(printf '%s\n' "${all_roles// /,}")" --become --ask-become-pass
+    ansible-playbook main.yml --tags "$(printf '%s\n' "${all_roles// /,}")" --become --ask-become-pass -vvvv
 }
 
-[ ! "$(command -v ansible-playbook)" ] && init_void
+[ ! "$(command -v ansible-playbook)" ] && init
 clone_dotfiles
 
 case "$1" in 
@@ -40,5 +58,3 @@ case "$1" in
     "save-"*)   run_ansible_tasks_without_any_pass  "${@}";;
     *)          run_ansible_tasks_with_vault_pass   "${@}";;
 esac
-
-

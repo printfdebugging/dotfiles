@@ -1,3 +1,9 @@
+- name: include distribution tasks
+  tags:
+    - hosts
+    - include
+  ansible.builtin.include_tasks: "{{ ansible_distribution | lower }}.yml"
+
 - name: (hosts) block hosts
   become: true
   tags:

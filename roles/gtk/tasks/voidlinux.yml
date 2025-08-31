@@ -1,0 +1,10 @@
+- name: (gtk) install gtk related packages
+  tags:
+    - gtk
+  community.general.xbps:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - gdk-pixbuf
+    - lxappearance
+    - breeze-icons

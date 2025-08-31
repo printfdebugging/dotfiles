@@ -1,11 +1,8 @@
-- name: (vscode) install packages
+- name: include distribution tasks
   tags:
     - vscode
-  community.general.xbps:
-    name: "{{ item }}"
-    state: latest
-  loop:
-    - vscode
+    - include
+  ansible.builtin.include_tasks: "{{ ansible_distribution | lower }}.yml"
 
 - name: (vscode) create config directory
   become: false

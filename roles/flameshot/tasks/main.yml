@@ -1,11 +1,8 @@
-- name: (flameshot) install packages
+- name: include distribution tasks
   tags:
     - flameshot
-  community.general.xbps:
-    name: "{{ item }}"
-    state: latest
-  loop:
-    - flameshot
+    - include
+  ansible.builtin.include_tasks: "{{ ansible_distribution | lower }}.yml"
 
 - name: (flameshot) create config directory
   become: false

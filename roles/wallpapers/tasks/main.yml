@@ -1,3 +1,9 @@
+- name: include distribution tasks
+  tags:
+    - wallpapers
+    - include
+  ansible.builtin.include_tasks: "{{ ansible_distribution | lower }}.yml"
+
 - name: (wallpapers) copy walls and icons
   become: false
   tags:

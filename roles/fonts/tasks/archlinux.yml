@@ -1,0 +1,8 @@
+- name: (fonts) install packages
+  tags:
+    - fonts
+  community.general.pacman:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - ttf-jetbrains-mono-nerd

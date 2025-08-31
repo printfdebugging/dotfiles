@@ -1,3 +1,9 @@
+- name: include distribution tasks
+  tags:
+    - ccache
+    - include
+  ansible.builtin.include_tasks: "{{ ansible_distribution | lower }}.yml"
+
 - name: (ccache) create config directory
   become: false
   tags:

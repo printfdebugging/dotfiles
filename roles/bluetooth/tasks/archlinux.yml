@@ -1,0 +1,21 @@
+- name: (bluetooth) install packages
+  tags:
+    - bluetooth
+  community.general.pacman:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - bluez
+    - blueman
+
+- name: (bluetooth) enable and start neccessary services
+  tags:
+    - bluetooth
+  community.builtin.systemd:
+    name: "{{ item }}"
+    state: started
+    enabled: true
+  loop:
+    - bluetoothd
+    - dbus
+

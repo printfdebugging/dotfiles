@@ -1,0 +1,10 @@
+- name: (neovim) install packages
+  tags:
+    - neovim
+  community.general.pacman:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - neovim
+    - git
+    - nodejs

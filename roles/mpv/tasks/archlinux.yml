@@ -1,0 +1,8 @@
+- name: (mpv) install packages
+  tags:
+    - mpv
+  community.general.pacman:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - mpv

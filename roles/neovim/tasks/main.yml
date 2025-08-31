@@ -1,13 +1,8 @@
-- name: (neovim) install packages
+- name: include distribution tasks
   tags:
     - neovim
-  community.general.xbps:
-    name: "{{ item }}"
-    state: latest
-  loop:
-    - neovim
-    - git
-    - nodejs
+    - include
+  ansible.builtin.include_tasks: "{{ ansible_distribution | lower }}.yml"
 
 - name: (neovim) copy config files
   become: false

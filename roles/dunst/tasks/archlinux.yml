@@ -1,0 +1,10 @@
+- name: (dunst) install packages
+  tags:
+    - dunst
+  community.general.pacman:
+    name:
+      - "{{ item }}"
+    state: latest
+  loop:
+    - dunst
+

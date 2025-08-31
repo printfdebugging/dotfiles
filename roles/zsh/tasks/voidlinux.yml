@@ -1,0 +1,11 @@
+- name: (zsh) install packages
+  tags:
+    - zsh
+  community.general.xbps:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - zsh
+    - zsh-syntax-highlighting
+    - zsh-completions
+    - zsh-autosuggestions

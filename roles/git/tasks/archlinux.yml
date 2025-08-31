@@ -1,0 +1,9 @@
+- name: (git) install packages
+  tags:
+    - git
+  community.general.pacman:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - git
+    - openssh

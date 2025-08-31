@@ -1,16 +1,8 @@
-- name: (suckless) install packages
+- name: include distribution tasks
   tags:
     - suckless
-  community.general.xbps:
-    name: "{{ item }}"
-    state: latest
-  loop:
-    - base-devel
-    - libX11-devel
-    - libXft-devel
-    - libXinerama-devel
-    - harfbuzz-devel
-    - freetype
+    - include
+  ansible.builtin.include_tasks: "{{ ansible_distribution | lower }}.yml"
 
 - name: (suckless) remove src files
   become: true

@@ -1,0 +1,20 @@
+- name: (bluetooth) install packages
+  tags:
+    - bluetooth
+  community.general.xbps:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - bluez
+    - blueman
+
+- name: (bluetooth) enable and start neccessary services
+  tags:
+    - bluetooth
+  community.general.runit:
+    name: "{{ item }}"
+    state: started
+    enabled: true
+  loop:
+    - bluetoothd
+    - dbus

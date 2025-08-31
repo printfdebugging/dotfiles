@@ -1,0 +1,8 @@
+- name: (tmux) install packages
+  tags:
+    - tmux
+  community.general.pacman:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - tmux

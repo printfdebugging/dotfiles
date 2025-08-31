@@ -1,0 +1,9 @@
+- name: (dunst) install packages
+  tags:
+    - dunst
+  community.general.xbps:
+    name:
+      - "{{ item }}"
+    state: latest
+  loop:
+    - dunst

@@ -1,3 +1,9 @@
+- name: include distribution tasks
+  tags:
+    - bin
+    - include
+  ansible.builtin.include_tasks: "{{ ansible_distribution | lower }}.yml"
+
 - name: (bin) copy shell-scripts 
   become: false
   tags:

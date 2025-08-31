@@ -1,14 +1,8 @@
-- name: (zsh) install packages
+- name: include distribution tasks
   tags:
     - zsh
-  community.general.xbps:
-    name: "{{ item }}"
-    state: latest
-  loop:
-    - zsh
-    - zsh-syntax-highlighting
-    - zsh-completions
-    - zsh-autosuggestions
+    - include
+  ansible.builtin.include_tasks: "{{ ansible_distribution | lower }}.yml"
 
 - name: (zsh) setup zsh shell
   tags:

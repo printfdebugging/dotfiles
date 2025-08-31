@@ -1,23 +1,8 @@
-- name: (bluetooth) install packages
+- name: include distribution tasks
   tags:
     - bluetooth
-  community.general.xbps:
-    name: "{{ item }}"
-    state: latest
-  loop:
-    - bluez
-    - blueman
-
-- name: (bluetooth) enable and start neccessary services
-  tags:
-    - bluetooth
-  community.general.runit:
-    name: "{{ item }}"
-    state: started
-    enabled: true
-  loop:
-    - bluetoothd
-    - dbus
+    - include
+  ansible.builtin.include_tasks: "{{ ansible_distribution | lower }}.yml"
 
 - name: (bluetooth) add user to network group
   tags:
@@ -26,6 +11,3 @@
     name: "{{ ansible_user }}"
     groups: bluetooth
     append: true
-
-
-

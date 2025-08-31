@@ -1,13 +1,8 @@
-- name: (gtk) install gtk related packages
+- name: include distribution tasks
   tags:
     - gtk
-  community.general.xbps:
-    name: "{{ item }}"
-    state: latest
-  loop:
-    - gdk-pixbuf
-    - lxappearance
-    - breeze-icons
+    - include
+  ansible.builtin.include_tasks: "{{ ansible_distribution | lower }}.yml"
 
 - name: (gtk) copy Adwaita theme to default theme
   become: true

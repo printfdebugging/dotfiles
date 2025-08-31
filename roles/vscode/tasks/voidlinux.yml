@@ -1,0 +1,8 @@
+- name: (vscode) install packages
+  tags:
+    - vscode
+  community.general.xbps:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - vscode

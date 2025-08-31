@@ -1,0 +1,8 @@
+- name: (creds) install packages
+  tags:
+    - creds
+  community.general.pacman:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - gnupg

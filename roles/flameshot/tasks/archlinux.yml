@@ -1,0 +1,8 @@
+- name: (flameshot) install packages
+  tags:
+    - flameshot
+  community.general.pacman:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - flameshot

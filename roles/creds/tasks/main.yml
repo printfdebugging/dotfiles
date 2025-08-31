@@ -1,11 +1,8 @@
-- name: (creds) install packages
+- name: include distribution tasks
   tags:
     - creds
-  community.general.xbps:
-    name: "{{ item }}"
-    state: latest
-  loop:
-    - gnupg2
+    - include
+  ansible.builtin.include_tasks: "{{ ansible_distribution | lower }}.yml"
 
 - name: (creds) create ssh directory
   become: false

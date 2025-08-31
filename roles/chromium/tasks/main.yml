@@ -1,12 +1,8 @@
-- name: (chromium) install chromium
+- name: include distribution tasks
   tags:
     - chromium
-  community.general.xbps:
-    name:
-      - "{{ item }}"
-    state: latest
-  loop:
-    - chromium
+    - include
+  ansible.builtin.include_tasks: "{{ ansible_distribution | lower }}.yml"
 
 - name: (chromium) create /usr/share/chromium/extensions
   become: true

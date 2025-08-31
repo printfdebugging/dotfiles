@@ -1,0 +1,10 @@
+- name: (chromium) install chromium
+  tags:
+    - chromium
+  community.general.pacman:
+    name:
+      - "{{ item }}"
+    state: latest
+  loop:
+    - chromium
+

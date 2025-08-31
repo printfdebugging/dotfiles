@@ -1,27 +1,5 @@
-- name: (cool) install dependencies
+- name: include distribution tasks
   tags:
     - cool
-  community.general.xbps:
-    name: "{{ item }}"
-    state: latest
-  loop:
-    - libcap-devel
-    - libcap-ng-devel
-    - libpng-devel
-    - poco-devel
-    - cpputest
-    - nodejs
-    - chromium
-    - python3-lxml
-    - python3-polib
-    - pam-devel
-
-- name: (cool) clone the git repo
-  become: false
-  tags:
-    - cool
-  ansible.builtin.git:
-    repo: git@github.com:CollaboraOnline/online.git
-    dest: /home/{{ ansible_user }}/repos/online
-    update: no
-    recursive: false
+    - include
+  ansible.builtin.include_tasks: "{{ ansible_distribution | lower }}.yml"

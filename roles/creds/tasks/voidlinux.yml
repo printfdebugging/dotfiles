@@ -1,0 +1,8 @@
+- name: (creds) install packages
+  tags:
+    - creds
+  community.general.xbps:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - gnupg2

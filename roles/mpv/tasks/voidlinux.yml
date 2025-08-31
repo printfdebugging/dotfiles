@@ -1,0 +1,8 @@
+- name: (mpv) install packages
+  tags:
+    - mpv
+  community.general.xbps:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - mpv

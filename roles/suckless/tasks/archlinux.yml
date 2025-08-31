@@ -1,0 +1,13 @@
+- name: (suckless) install packages
+  tags:
+    - suckless
+  community.general.pacman:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - base-devel
+    - libx11
+    - libxft
+    - libxinerama
+    - harfbuzz
+    - freetype2

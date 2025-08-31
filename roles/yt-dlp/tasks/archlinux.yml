@@ -1,0 +1,8 @@
+- name: (yt-dlp) install packages
+  tags:
+    - yt-dlp
+  community.general.pacman:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - yt-dlp

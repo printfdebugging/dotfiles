@@ -1,19 +1,8 @@
-- name: (xorg) install packages
+- name: include distribution tasks
   tags:
     - xorg
-  community.general.xbps:
-    name: "{{ item }}"
-    state: latest
-  loop:
-    - xorg-server
-    - xinit
-    - xrandr
-    - setxkbmap
-    - xset
-    - xcompmgr
-    - xwallpaper
-    - xclip
-    - xsel
+    - include
+  ansible.builtin.include_tasks: "{{ ansible_distribution | lower }}.yml"
 
 - name: (xorg) copy xinitrc
   become: false

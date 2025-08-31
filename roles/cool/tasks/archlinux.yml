@@ -1,0 +1,28 @@
+- name: (cool) install dependencies
+  tags:
+    - cool
+  community.general.pacman:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - libcap
+    - libcap-ng
+    - lib32-libcap
+    - libpng
+    - poco
+    - cppunit
+    - nodejs
+    - npm
+    - chromium
+    - python-lxml
+    - python-polib
+
+- name: (cool) clone the git repo
+  become: false
+  tags:
+    - cool
+  ansible.builtin.git:
+    repo: git@github.com:CollaboraOnline/online.git
+    dest: /home/{{ ansible_user }}/repos/online
+    update: no
+    recursive: false

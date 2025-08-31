@@ -1,0 +1,48 @@
+- name: (qemu) install qemu packages
+  tags:
+    - qemu
+  community.general.pacman:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - qemu
+    - virt-manager
+    - virt-viewer
+    - dnsmasq
+    - vde2
+    - bridge-utils
+    - openbsd-netcat
+    - ebtables
+    - iptables
+    - libguestfs
+
+- name: (qemu)
+  tags:
+    - qemu
+  ansible.builtin.user:
+    name: "{{ ansible_user }}"
+    groups: 
+      - libvirt
+      - kvm
+    append: true
+
+- name: (qemu) enable and start neccessary services
+  tags:
+    - qemu
+  community.builtin.systemd:
+    name: "{{ item }}"
+    state: started
+    enabled: true
+  loop:
+    - dbus
+    - polkitd
+    - libvirtd
+
+- name: (qemu) enable and start network default
+  become: true
+  tags:
+    - qemu
+  ansible.builtin.shell:
+    cmd: |
+      virsh net-start default
+      virsh net-autostart default

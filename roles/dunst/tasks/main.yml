@@ -1,12 +1,8 @@
-- name: (dunst) install packages
+- name: include distribution tasks
   tags:
     - dunst
-  community.general.xbps:
-    name:
-      - "{{ item }}"
-    state: latest
-  loop:
-    - dunst
+    - include
+  ansible.builtin.include_tasks: "{{ ansible_distribution | lower }}.yml"
 
 - name: (dunst) create config directory
   become: false

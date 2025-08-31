@@ -1,3 +1,9 @@
+- name: include distribution tasks
+  tags:
+    - user
+    - include
+  ansible.builtin.include_tasks: "{{ ansible_distribution | lower }}.yml"
+
 - name: (user) add user to network group
   tags:
     - user

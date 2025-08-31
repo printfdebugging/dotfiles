@@ -1,0 +1,27 @@
+- name: (user) install aur
+  become: false
+  tags:
+    - user
+  ansible.builtin.shell:
+    cmd: |
+      if ! which yay > /dev/null; then
+        mkdir -p $HOME/.local/src && cd $HOME/.local/src
+        git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin
+        makepkg -si
+        cd .. && rm -rf yay-bin
+      fi
+
+- name: (user) install packages from aur
+  tags:
+    - user
+  ansible.builtin.shell:
+    cmd: 'yay -S {{ item }} --noconfirm'
+    responses:
+      'sudo:' : '{{ ansible_become_pass }}'
+  loop:
+    - brave-bin
+    - par
+    - opengl-man-pages
+    - gtypist
+
+
