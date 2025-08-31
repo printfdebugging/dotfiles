@@ -31,6 +31,7 @@ local options = {
 	concealcursor = "ncv",
 	-- mouse = "",
 	formatprg = "par w70",
+	splitkeep = "screen",
 }
 
 local globals = {
