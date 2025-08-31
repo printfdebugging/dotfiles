@@ -52,6 +52,7 @@ export SAL_DISABLEGL=1
 export SAL_DISABLE_OPENCL=1
 export SAL_NO_MOUSEGRABS=T
 export CMAKE_POLICY_VERSION_MINIMUM=3.5
+export MANWIDTH=80
 
 # use libreoffice logging utilities for printfdebugging
 export SAL_LOG="+INFO"
