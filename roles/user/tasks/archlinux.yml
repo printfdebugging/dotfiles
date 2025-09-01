@@ -16,8 +16,6 @@
     - user
   ansible.builtin.shell:
     cmd: 'yay -S {{ item }} --noconfirm'
-    responses:
-      'sudo:' : '{{ ansible_become_pass }}'
   loop:
     - brave-bin
     - par

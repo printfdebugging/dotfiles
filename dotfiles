@@ -31,12 +31,12 @@ clone_dotfiles() {
 }
 
 function run_ansible_tasks_with_vault_pass() {
-    ansible-playbook main.yml --tags "$(printf '%s\n' "${@// /,}")" --become --ask-become-pass --ask-vault-pass -vvvv
+    ansible-playbook main.yml --tags "$(printf '%s\n' "${@// /,}")" --become --ask-become-pass --ask-vault-pass
 }
 
 function run_ansible_tasks_without_any_pass() {
     # save-* tagged tasks neither use any vault string nor have become: true
-    ansible-playbook main.yml --tags "$(printf '%s\n' "${@// /,}")" -vvvv
+    ansible-playbook main.yml --tags "$(printf '%s\n' "${@// /,}")"
 }
 
 function run_ansible_tasks_without_creds() {
@@ -46,7 +46,7 @@ function run_ansible_tasks_without_creds() {
         all_roles=${all_roles/$task}
     done
 
-    ansible-playbook main.yml --tags "$(printf '%s\n' "${all_roles// /,}")" --become --ask-become-pass -vvvv
+    ansible-playbook main.yml --tags "$(printf '%s\n' "${all_roles// /,}")" --become --ask-become-pass
 }
 
 [ ! "$(command -v ansible-playbook)" ] && init
