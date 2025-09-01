@@ -5,7 +5,6 @@
     - git
     - base
     - bin
-    - ccache
     - chromium
     - cool
     - dunst
