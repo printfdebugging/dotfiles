@@ -1,3 +1,8 @@
+## NOTE:
+this repository has been archived. this is a really complicated solution for the problem.
+i now use a shell script to setup packages and files and all the files exist in a single
+git repository, configs with more than one file exist as github repositories. see [dots](https://github.com/printfdebugging/dots.git)
+
 ## introduction
 + i use ansible to manage my dotfiles
 + these currently work on void linux
