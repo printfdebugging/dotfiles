@@ -4,294 +4,270 @@ GRN='\033[1;32m'
 CYN='\033[1;36m'
 CLR='\033[0m'
 
-function setup_pacman_packages() {
-    pacman_packages=(
-        'abseil-cpp'
-        'ansible'
-        'nginx'
-        'ant'
-        'apr'
-        'base-devel'
-        'bazelisk'
-        'swtpm'
-        'chafa'
-        'ninja'
-        'stylua'
-        'beanshell'
-        'blender'
-        'pass'
-        'pass-otp'
-        'pam'
-        'zbar'
-        'blueman'
-        'bluez'
-        'bluez-libs'
-        'breeze'
-        'breeze-icons'
-        'breeze-gtk'
-        'bridge-utils'
-        'btop'
-        'cargo'
-        'cbatticon'
-        'ccache'
-        'chromium'
-        'clang'
-        'clucene'
-        'cmake'
-        'coin-or-mp'
-        'cppunit'
-        'ctags'
-        'curl'
-        'dbus-glib'
-        'shellcheck'
-        'desktop-file-utils'
-        'dnsmasq'
-        'docker'
-        'docker-compose'
-        'doxygen'
-        'dunst'
-        'ebtables'
-        'extra-cmake-modules'
-        'fastfetch'
-        'fd'
-        'feh'
-        'figlet'
-        'flameshot'
-        'flex'
-        'fontconfig'
-        'freetype2'
-        'fzf'
-        'gcc-libs'
-        'gdb'
-        'gdk-pixbuf2'
-        'gimp'
-        'git'
-        'glade'
-        'glm'
-        'go'
-        'gobject-introspection'
-        'gperf'
-        'gpgme'
-        'graphite'
-        'gst-plugins-base-libs'
-        'gtk3'
-        'gtk4'
-        'gvfs'
-        'gvfs-mtp'
-        'harfbuzz'
-        'harfbuzz-icu'
-        'hicolor-icon-theme'
-        'hunspell'
-        'hyphen'
-        'i3lock'
-        'icu'
-        'inkscape'
-        'iptables'
-        'java-environment'
-        'jdk-openjdk'
-        'jre21-openjdk'
-        'junit'
-        'lcms2'
-        'lib32-libcap'
-        'libabw'
-        'libatomic_ops'
-        'libcap'
-        'libcap-ng'
-        'libcdr'
-        'libcmis'
-        'libe-book'
-        'libepoxy'
-        'libepubgen'
-        'libetonyek'
-        'libexttextcat'
-        'libfreehand'
-        'libgl'
-        'libguestfs'
-        'libjpeg'
-        'liblangtag'
-        'libmspub'
-        'libmwaw'
-        'libmythes'
-        'libnma'
-        'libnumbertext'
-        'libodfgen'
-        'liborcus'
-        'libpagemaker'
-        'libpng'
-        'libqxp'
-        'libreoffice'
-        'libstaroffice'
-        'libtommath'
-        'libvisio'
-        'libwpd'
-        'libwpg'
-        'libwps'
-        'libx11'
-        'libxft'
-        'libxinerama'
-        'libxrandr'
-        'libxslt'
-        'libxxf86vm'
-        'libzmf'
-        'lld'
-        'loupe'
-        'lpsolve'
-        'lua'
-        'luarocks'
-        'lxappearance'
-        'man-db'
-        'man-pages'
-        'mariadb-libs'
-        'mdds'
-        'meson'
-        'mpv'
-        'mtpfs'
-        'nasm'
-        'neon'
-        'neovim'
-        'netcat'
-        'networkmanager'
-        'network-manager-applet'
-        'nodejs'
-        'npm'
-        'nspr'
-        'nss'
-        'ntfs-3g'
-        'obs-studio'
-        'okular'
-        'openbsd-netcat'
-        'pango'
-        'pasystray'
-        'pavucontrol'
-        'perf'
-        'plasma-framework5'
-        'poco'
-        'poppler'
-        'postgresql-libs'
-        'pulseaudio'
-        'pyright'
-        'python'
-        'python-lxml'
-        'python-pip'
-        'python-polib'
-        'python-watchdog'
-        'qemu'
-        'qt5-base'
-        'qt6ct'
-        'qt6-base'
-        'redland'
-        'ripgrep'
-        'ruff'
-        'sane'
-        'seahorse'
-        'serf'
-        'sh'
-        'shaderc'
-        'shared-mime-info'
-        'sxiv'
-        'thunar'
-        'thunar-media-tags-plugin'
-        'thunar-shares-plugin'
-        'webp-pixbuf-loader'
-        'thunar-volman'
-        'thunderbird'
-        'tigervnc'
-        'tlp'
-        'tmux'
-        'ttf-liberation'
-        'ttf-jetbrains-mono-nerd'
-        'ttf-iosevka-nerd'
-        'noto-fonts'
-        'tumbler'
-        'ueberzug'
-        'unixodbc'
-        'unzip'
-        'valgrind'
-        'vde2'
-        'vinagre'
-        'virt-manager'
-        'virt-viewer'
-        'vscode'
-        'vulkan-radeon'
-        'vulkan-tools'
-        'wget'
-        'xclip'
-        'xcompmgr'
-        'xdotool'
-        'xf86-input-libinput'
-        'xf86-video-amdgpu'
-        'xf86-video-ati'
-        'xmlsec'
-        'xorg-server'
-        'xorg-setxkbmap'
-        'xorg-xauth'
-        'xorg-xinit'
-        'xorg-xprop'
-        'xorg-xrandr'
-        'xorg-xset'
-        'xsel'
-        'xwallpaper'
-        'yarn'
-        'yt-dlp'
-        'zip'
-        'zola'
-        'zsh'
-        'zsh-autosuggestions'
-        'zsh-completions'
-        'zsh-syntax-highlighting'
+function packages() {
+    sudo pacman -S --noconfirm \
+        'abseil-cpp' \
+        'ansible' \
+        'nginx' \
+        'ant' \
+        'apr' \
+        'base-devel' \
+        'bazelisk' \
+        'swtpm' \
+        'chafa' \
+        'ninja' \
+        'stylua' \
+        'beanshell' \
+        'blender' \
+        'pass' \
+        'pass-otp' \
+        'pam' \
+        'zbar' \
+        'blueman' \
+        'bluez' \
+        'bluez-libs' \
+        'breeze' \
+        'breeze-icons' \
+        'breeze-gtk' \
+        'bridge-utils' \
+        'btop' \
+        'cargo' \
+        'cbatticon' \
+        'ccache' \
+        'chromium' \
+        'clang' \
+        'clucene' \
+        'cmake' \
+        'coin-or-mp' \
+        'cppunit' \
+        'ctags' \
+        'curl' \
+        'dbus-glib' \
+        'shellcheck' \
+        'desktop-file-utils' \
+        'dnsmasq' \
+        'docker' \
+        'docker-compose' \
+        'doxygen' \
+        'dunst' \
+        'ebtables' \
+        'extra-cmake-modules' \
+        'fastfetch' \
+        'fd' \
+        'feh' \
+        'figlet' \
+        'flameshot' \
+        'flex' \
+        'fontconfig' \
+        'freetype2' \
+        'fzf' \
+        'gcc-libs' \
+        'gdb' \
+        'gdk-pixbuf2' \
+        'gimp' \
+        'git' \
+        'glade' \
+        'glm' \
+        'go' \
+        'gobject-introspection' \
+        'gperf' \
+        'gpgme' \
+        'graphite' \
+        'gst-plugins-base-libs' \
+        'gtk3' \
+        'gtk4' \
+        'gvfs' \
+        'gvfs-mtp' \
+        'harfbuzz' \
+        'harfbuzz-icu' \
+        'hicolor-icon-theme' \
+        'hunspell' \
+        'hyphen' \
+        'i3lock' \
+        'icu' \
+        'inkscape' \
+        'iptables' \
+        'java-environment' \
+        'jdk-openjdk' \
+        'jre21-openjdk' \
+        'junit' \
+        'lcms2' \
+        'lib32-libcap' \
+        'libabw' \
+        'libatomic_ops' \
+        'libcap' \
+        'libcap-ng' \
+        'libcdr' \
+        'libcmis' \
+        'libe-book' \
+        'libepoxy' \
+        'libepubgen' \
+        'libetonyek' \
+        'libexttextcat' \
+        'libfreehand' \
+        'libgl' \
+        'libguestfs' \
+        'libjpeg' \
+        'liblangtag' \
+        'libmspub' \
+        'libmwaw' \
+        'libmythes' \
+        'libnma' \
+        'libnumbertext' \
+        'libodfgen' \
+        'liborcus' \
+        'libpagemaker' \
+        'libpng' \
+        'libqxp' \
+        'libreoffice' \
+        'libstaroffice' \
+        'libtommath' \
+        'libvisio' \
+        'libwpd' \
+        'libwpg' \
+        'libwps' \
+        'libx11' \
+        'libxft' \
+        'libxinerama' \
+        'libxrandr' \
+        'libxslt' \
+        'libxxf86vm' \
+        'libzmf' \
+        'lld' \
+        'loupe' \
+        'lpsolve' \
+        'lua' \
+        'luarocks' \
+        'lxappearance' \
+        'man-db' \
+        'man-pages' \
+        'mariadb-libs' \
+        'mdds' \
+        'meson' \
+        'mpv' \
+        'mtpfs' \
+        'nasm' \
+        'neon' \
+        'neovim' \
+        'netcat' \
+        'networkmanager' \
+        'network-manager-applet' \
+        'nodejs' \
+        'npm' \
+        'nspr' \
+        'nss' \
+        'ntfs-3g' \
+        'obs-studio' \
+        'okular' \
+        'openbsd-netcat' \
+        'pango' \
+        'pasystray' \
+        'pavucontrol' \
+        'perf' \
+        'plasma-framework5' \
+        'poco' \
+        'poppler' \
+        'postgresql-libs' \
+        'pulseaudio' \
+        'pyright' \
+        'python' \
+        'python-lxml' \
+        'python-pip' \
+        'python-polib' \
+        'python-watchdog' \
+        'qemu' \
+        'qt5-base' \
+        'qt6ct' \
+        'qt6-base' \
+        'redland' \
+        'ripgrep' \
+        'ruff' \
+        'sane' \
+        'seahorse' \
+        'serf' \
+        'sh' \
+        'shaderc' \
+        'shared-mime-info' \
+        'sxiv' \
+        'thunar' \
+        'thunar-media-tags-plugin' \
+        'thunar-shares-plugin' \
+        'webp-pixbuf-loader' \
+        'thunar-volman' \
+        'thunderbird' \
+        'tigervnc' \
+        'tlp' \
+        'tmux' \
+        'ttf-liberation' \
+        'ttf-jetbrains-mono-nerd' \
+        'ttf-iosevka-nerd' \
+        'noto-fonts' \
+        'tumbler' \
+        'ueberzug' \
+        'unixodbc' \
+        'unzip' \
+        'valgrind' \
+        'vde2' \
+        'vinagre' \
+        'virt-manager' \
+        'virt-viewer' \
+        'vscode' \
+        'vulkan-radeon' \
+        'vulkan-tools' \
+        'wget' \
+        'xclip' \
+        'xcompmgr' \
+        'xdotool' \
+        'xf86-input-libinput' \
+        'xf86-video-amdgpu' \
+        'xf86-video-ati' \
+        'xmlsec' \
+        'xorg-server' \
+        'xorg-setxkbmap' \
+        'xorg-xauth' \
+        'xorg-xinit' \
+        'xorg-xprop' \
+        'xorg-xrandr' \
+        'xorg-xset' \
+        'xsel' \
+        'xwallpaper' \
+        'yarn' \
+        'yt-dlp' \
+        'zip' \
+        'zola' \
+        'zsh' \
+        'zsh-autosuggestions' \
+        'zsh-completions' \
+        'zsh-syntax-highlighting' \
+        'opengl-man-pages' \
         'zxing-cpp'
-    )
-    # install pacman packages
-    for package in "${pacman_packages[@]}"; do
-        echo -e "$GRN==>$CLR installing $GRY$package$CLR"
-        sudo pacman -S --noconfirm "$package" >/dev/null 2>&1
-    done
-    return
 }
 
-function setup_aur_packages() {
-    aur_packages=(
-        'brave-bin'
-        'pam-gnupg'
-        'par'
-        'opengl-man-pages'
-        'gtypist'
-    )
-    # install yay if not already installed
+function aur() {
     if ! which yay >/dev/null 2>&1; then
         mkdir -p "$HOME/.local/src" && cd "$HOME/.local/src" || exit 1
-
-        echo -e "${CYN}==>${CLR} clonging yay-bin"
         git clone https://aur.archlinux.org/yay-bin.git >/dev/null 2>&1
-
-        echo -e "${CYN}==>${CLR} installing yay"
         cd yay-bin && makepkg -si --noconfirm >/dev/null 2>&1
     fi
-    # install aur packages
-    for package in "${aur_packages[@]}"; do
-        echo -e "${GRN}==>${CLR} installing $package"
-        yay -Sy --noconfirm "$package" >/dev/null 2>&1
-    done
+
+    yay -Sy --noconfirm \
+        'brave-bin' \
+        'pam-gnupg' \
+        'par' \
+        'gtypist'
 }
 
-function setup_services() {
-    services=(
-        'bluetooth.service'
-        'nginx.service'
-        'blueman-mechanism.service'
-        'libvirtd.service'
-        'docker.service'
+function services() {
+    sudo systemctl enable --now \
+        'bluetooth.service' \
+        'nginx.service' \
+        'blueman-mechanism.service' \
+        'libvirtd.service' \
+        'docker.service' \
         'tlp.service'
-    )
-    # enable and start services
-    for service in "${services[@]}"; do
-        echo -e "${GRN}==>${CLR} enabling and starting $service"
-        sudo systemctl enable "$service" >/dev/null 2>&1
-        sudo systemctl start "$service" >/dev/null 2>&1
-    done
 }
 
-function setup_user_groups() {
+function groups() {
     groups=(
         'libvirt'
         'kvm'
@@ -303,10 +279,8 @@ function setup_user_groups() {
     done
 }
 
-# NOTE: this function should be called after setup_drives as that
-# function mounts the drives if they are available, or creates
-# directories and sets user permissions.
-function setup_git_repositories() {
+# call after setup_drives
+function git() {
     git_repositories=(
         # various dotfiles attempts
         'https://github.com/printfdebugging/dotfiles'
@@ -377,7 +351,7 @@ function setup_git_repositories() {
     done
 }
 
-function setup_suckless() {
+function suckless() {
     suckless_projects=(
         'dwm'
         'st'
@@ -395,7 +369,7 @@ function setup_suckless() {
     done
 }
 
-function setup_chromium_extensions() {
+function browser() {
     chromium_extensions=(
         'bhlhnicpbhignbdhedgjhgdocnmhomnp'
         'cjpalhdlnbpafiamejdnhcphjbkeiagm'
@@ -413,22 +387,12 @@ function setup_chromium_extensions() {
     done
 }
 
-function setup_neovim_config() {
+function neovim() {
     mkdir -p "$HOME/.config/nvim/"
     cp ./init.lua "$HOME/.config/nvim/"
 }
 
-function setup_server_publickeys() {
-    servers=(
-        'github.com'
-        'gitlab.com'
-    )
-    for server in "${servers[@]}"; do
-        ssh-keyscan -t rsa "$server" >>"$HOME/.ssh/known_hosts"
-    done
-}
-
-function setup_pass_store() {
+function passwords() {
     if ! [ -d "$HOME/.password-store" ]; then
         echo -e "${CYN}==>${CLR} cloning .password-store"
         git clone git@github.com:printfdebugging/password-store "$HOME/.password-store" >/dev/null 2>&1
@@ -440,7 +404,7 @@ function setup_pass_store() {
     fi
 }
 
-function setup_pam_gnupg_config() {
+function pam() {
     system_login_file="/etc/pam.d/system-local-login"
     if [ -f "$system_login_file" ]; then
         lines=(
@@ -471,70 +435,70 @@ function setup_pam_gnupg_config() {
     fi
 }
 
-function disable_kwallet_config() {
+function disable_kwallet() {
     mkdir -p "$HOME/.config/"
     cp ./kwalletrc "$HOME/.config/kwalletrc"
 }
 
-function setup_mimeapps_config() {
+function mimeapps() {
     mkdir -p "$HOME/.config/nvim/"
     mkdir -p "$HOME/.local/share/applications"
     cp ./mimeapps.list "$HOME/.config/mimeapps.list"
     ln -s "$HOME/.config/mimeapps.list" "$HOME/.local/share/applications/mimeapps.list"
 }
 
-function setup_tmux_config() {
+function tmux() {
     mkdir -p "$HOME/.config/tmux/"
     cp ./tmux.conf "$HOME/.config/tmux/"
 }
 
-function setup_gdb_config() {
+function gdb() {
     mkdir -p "$HOME/.config/gdb/"
     cp ./gdbinit "$HOME/.config/gdb/"
 }
 
-function setup_gtk_config() {
+function gtk() {
     mkdir -p "$HOME/.config/gtk-3.0/"
     cp ./settings.ini "$HOME/.config/gtk-3.0/"
 }
 
-function setup_qt_config() {
+function qt() {
     mkdir -p "$HOME/.config/qt6ct/"
     cp ./qt6ct.conf "$HOME/.config/qt6ct/qt6ct.conf"
 }
 
-function setup_okular_config() {
+function okular() {
     mkdir -p "$HOME/.config"
     cp ./okularrc "$HOME/.config/okularrc"
 }
 
-function setup_flameshot_config() {
+function flameshot() {
     mkdir -p "$HOME/.config/flameshot/"
     cp ./flameshot.ini "$HOME/.config/flameshot/"
 }
 
-function setup_dunst_config() {
+function dunst() {
     mkdir -p "$HOME/.config/dunst/"
     cp ./dunstrc "$HOME/.config/dunst/"
 }
 
-function setup_ccache_config() {
+function ccache() {
     mkdir -p "$HOME/.config/ccache/"
     cp ./ccache.conf "$HOME/.config/ccache/"
 }
 
-function setup_glade_config() {
+function glade() {
     mkdir -p "$HOME/.config/"
     cp ./glade.conf "$HOME/.config/"
 }
 
-function setup_zsh_config() {
+function zsh() {
     cp ./.zshrc ./.zprofile "$HOME"
     chsh -s /usr/bin/zsh >/dev/null
     sudo chsh -s /usr/bin/zsh >/dev/null
 }
 
-function setup_vscode_config() {
+function vscode() {
     mkdir -p "$HOME/.config/Code - OSS/User/"
 
     cp ./extensions.json \
@@ -543,7 +507,7 @@ function setup_vscode_config() {
         "$HOME/.config/Code - OSS/User/"
 }
 
-function setup_xorg_config() {
+function xorg() {
     cp "./.xinitrc" "$HOME/.xinitrc"
 
     mkdir -p "/etc/X11/xorg.conf.d"
@@ -552,17 +516,17 @@ function setup_xorg_config() {
     sudo cp ./user-dirs.dirs "$HOME/.config/user-dirs.dirs"
 }
 
-function setup_mpv_config() {
+function mpv() {
     mkdir -p "$HOME/.config/mpv/"
     cp ./input.conf ./mpv.conf "$HOME/.config/mpv/"
 }
 
-function setup_wallpaper() {
+function wallpaper() {
     mkdir -p "$HOME/.local/share/wallpapers/"
     cp ./map.jpg "$HOME/.local/share/wallpapers/"
 }
 
-function setup_qemu_config() {
+function qemu() {
     if ! sudo virsh net-info --network default | grep "Active:.*yes" >/dev/null 2>&1; then
         echo -e "$GRN==>$CLR enabling virsh default"
         sudo virsh net-start default >/dev/null 2>&1
@@ -579,12 +543,12 @@ function setup_qemu_config() {
     done
 }
 
-function setup_emoji_font() {
+function emoji_font() {
     sudo cp ./twemoji.ttf /usr/share/fonts/
     sudo cp ./75-twemoji.conf /etc/fonts/conf.d/75-twemoji.conf
 }
 
-function setup_credentials() {
+function creds() {
     mkdir -p "$HOME/.ssh"
     mkdir -p "$HOME/.gnupg"
 
@@ -630,33 +594,36 @@ function setup_credentials() {
     chown -R "$(whoami)" "$HOME/.gnupg"
     find "$HOME/.gnupg" -type f -exec chmod 600 {} \;
     find "$HOME/.gnupg" -type d -exec chmod 700 {} \;
+
+    # get ssh keys for github and gitlab
+    servers=(
+        'github.com'
+        'gitlab.com'
+    )
+    for server in "${servers[@]}"; do
+        ssh-keyscan -t rsa "$server" >>"$HOME/.ssh/known_hosts"
+    done
 }
 
-# NOTE: this function should be run after the
-# setup_git_repositories() or else it won't do anything.
-function setup_libreoffice_autogen() {
+function autogen() {
     if [ -d "/media/projects/core" ]; then
         cp ./autogen.input "/media/projects/core/autogen.input"
     fi
 }
 
-# NOTE: this shouldn't be called while setting up a fresh system, but
-# after the fact, separately based on whether you have a local pacman
-# mirror on the system or not
-function setup_pacman_config() {
-    sudo cp ./mirrorlist /etc/pacman.d/mirrorlist
-    sudo cp ./pacman.conf /etc/pacman.conf
-    sudo systemctl mask reflector.service
+function mirrorlist() {
+    if curl -s http://127.0.0.1:9000/ | grep -qE 'core/|extra/|multilib/|lastsync|lastupdate'; then
+        sudo cp ./mirrorlist /etc/pacman.d/mirrorlist
+        sudo cp ./pacman.conf /etc/pacman.conf
+        sudo systemctl mask reflector.service
+    fi
 }
 
-function setup_nginx_config() {
+function nginx() {
     sudo cp ./nginx.conf /etc/nginx/nginx.conf
 }
 
-# NOTE: this function is not to be run as a part of the setup process,
-# it downloads around 100G of packages from a tier 1 archlinux mirror.
-# please source the file and run this after the server is setup properly.
-function setup_local_pacman_mirror() {
+function pacman_mirror() {
     local_folder=/media/external/archlinux
     remote_mirror=rsync://de.arch.mirror.kescher.at/mirror/arch/
 
@@ -696,7 +663,7 @@ function setup_local_pacman_mirror() {
         "${local_folder}"
 }
 
-function setup_drives() {
+function drives() {
     declare -A external=(
         [UUID]=6a90a7e3-3732-4b58-8a3a-fbc098a86b7e
         [PATH]=/media/external/
@@ -750,47 +717,35 @@ function setup_drives() {
     done
 }
 
-function print_help() {
-    echo "ERROR: usage
-    1. ./package allpack
-    2. source package; setup_<TAB> # execute individual functions
-NOTE:
-    setup_pacman_packages and setup_aur_packages are prerequisits, so
-    run those first before running any other setup_* function
-"
-}
-
-setup_pacman_packages &&
-    setup_aur_packages &&
-    setup_services &&
-    setup_credentials &&
-    setup_server_publickeys &&
-    setup_pass_store &&
-    setup_pam_gnupg_config &&
-    setup_drives &&
-    setup_git_repositories &&
-    setup_services &&
-    setup_user_groups &&
-    setup_suckless &&
-    setup_chromium_extensions &&
-    setup_neovim_config &&
-    setup_tmux_config &&
-    setup_gdb_config &&
-    setup_gtk_config &&
-    setup_qt_config &&
-    setup_okular_config &&
-    setup_flameshot_config &&
-    setup_dunst_config &&
-    setup_ccache_config &&
-    setup_glade_config &&
-    setup_zsh_config &&
-    setup_vscode_config &&
-    setup_xorg_config &&
-    setup_mpv_config &&
-    setup_wallpaper &&
-    setup_emoji_font &&
-    setup_libreoffice_autogen &&
-    setup_nginx_config &&
-    setup_qemu_config
-
-printf "installed dots successfully!\nplease run setup_pacman_config() if you have a local pacman server.\n"
+mirrorlist &&
+    packages &&
+    aur &&
+    services &&
+    groups &&
+    creds &&
+    passwords &&
+    pam &&
+    drives &&
+    git &&
+    autogen &&
+    suckless &&
+    browser &&
+    neovim &&
+    tmux &&
+    gdb &&
+    gtk &&
+    qt &&
+    okular &&
+    flameshot &&
+    dunst &&
+    ccache &&
+    glade &&
+    zsh &&
+    vscode &&
+    xorg &&
+    mpv &&
+    wallpaper &&
+    emoji_font &&
+    libreoffice_autogen &&
+    nginx &&
+    qemu
