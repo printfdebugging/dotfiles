@@ -605,24 +605,20 @@ function setup_credentials() {
 
     echo -e "$GRN==>$CLR decrypting credentials"
     while true; do
-        if
-            ansible-vault decrypt \
-                "$HOME/.gitconfig" \
-                "$HOME/.gpgkey.asc" \
-                "$HOME/.pgpkey.asc" \
-                "$HOME/.pam-gnupg" \
-                "$HOME/.gnupg/gpg-agent.conf" \
-                "$HOME/.gnupg/gpg.conf" \
-                "$HOME/.ssh/id_ed25519" \
-                "$HOME/.ssh/id_ed25519.pub" \
-                "$HOME/.ssh/printfdebugging" \
-                "$HOME/.ssh/printfdebugging.pub" \
-                "$HOME/.ssh/cool" \
-                "$HOME/.ssh/cool.pub" \
-                "$HOME/.ssh/config" >/dev/null 2>&1
-        then
-            break
-        fi
+        ansible-vault decrypt \
+            "$HOME/.gitconfig" \
+            "$HOME/.gpgkey.asc" \
+            "$HOME/.pgpkey.asc" \
+            "$HOME/.pam-gnupg" \
+            "$HOME/.gnupg/gpg-agent.conf" \
+            "$HOME/.gnupg/gpg.conf" \
+            "$HOME/.ssh/id_ed25519" \
+            "$HOME/.ssh/id_ed25519.pub" \
+            "$HOME/.ssh/printfdebugging" \
+            "$HOME/.ssh/printfdebugging.pub" \
+            "$HOME/.ssh/cool" \
+            "$HOME/.ssh/cool.pub" \
+            "$HOME/.ssh/config" >/dev/null 2>&1 && break
     done
 
     gpg --import "$HOME/.pgpkey.asc" >/dev/null 2>&1
