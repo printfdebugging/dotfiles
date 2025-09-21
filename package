@@ -289,7 +289,6 @@ function repos() {
 
         'https://gitlab.com/printfdebugging/logs'
         'https://gitlab.com/printfdebugging/website'
-        'https://gitlab.com/printfdebugging/dotfiles'
     )
     # clone git repositories
     for repository in "${git_repositories[@]}"; do
