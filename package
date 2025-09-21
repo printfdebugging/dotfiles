@@ -1,538 +1,85 @@
 #!/bin/bash
 
-GRN='\033[1;32m'
+RED='\033[1;31m'
 CYN='\033[1;36m'
 CLR='\033[0m'
 
-function packages() {
-    sudo pacman -S --noconfirm \
-        'abseil-cpp' \
-        'ansible' \
-        'nginx' \
-        'ant' \
-        'apr' \
-        'base-devel' \
-        'bazelisk' \
-        'swtpm' \
-        'chafa' \
-        'ninja' \
-        'stylua' \
-        'beanshell' \
-        'blender' \
-        'pass' \
-        'pass-otp' \
-        'pam' \
-        'zbar' \
-        'blueman' \
-        'bluez' \
-        'bluez-libs' \
-        'breeze' \
-        'breeze-icons' \
-        'breeze-gtk' \
-        'bridge-utils' \
-        'btop' \
-        'cargo' \
-        'cbatticon' \
-        'ccache' \
-        'chromium' \
-        'clang' \
-        'clucene' \
-        'cmake' \
-        'coin-or-mp' \
-        'cppunit' \
-        'ctags' \
-        'curl' \
-        'dbus-glib' \
-        'shellcheck' \
-        'desktop-file-utils' \
-        'dnsmasq' \
-        'docker' \
-        'docker-compose' \
-        'doxygen' \
-        'dunst' \
-        'ebtables' \
-        'extra-cmake-modules' \
-        'fastfetch' \
-        'fd' \
-        'feh' \
-        'figlet' \
-        'flameshot' \
-        'flex' \
-        'fontconfig' \
-        'freetype2' \
-        'fzf' \
-        'gcc-libs' \
-        'gdb' \
-        'gdk-pixbuf2' \
-        'gimp' \
-        'git' \
-        'glade' \
-        'glm' \
-        'go' \
-        'gobject-introspection' \
-        'gperf' \
-        'gpgme' \
-        'graphite' \
-        'gst-plugins-base-libs' \
-        'gtk3' \
-        'gtk4' \
-        'gvfs' \
-        'gvfs-mtp' \
-        'harfbuzz' \
-        'harfbuzz-icu' \
-        'hicolor-icon-theme' \
-        'hunspell' \
-        'hyphen' \
-        'i3lock' \
-        'icu' \
-        'inkscape' \
-        'iptables' \
-        'java-environment' \
-        'jdk-openjdk' \
-        'jre21-openjdk' \
-        'junit' \
-        'lcms2' \
-        'lib32-libcap' \
-        'libabw' \
-        'libatomic_ops' \
-        'libcap' \
-        'libcap-ng' \
-        'libcdr' \
-        'libcmis' \
-        'libe-book' \
-        'libepoxy' \
-        'libepubgen' \
-        'libetonyek' \
-        'libexttextcat' \
-        'libfreehand' \
-        'libgl' \
-        'libguestfs' \
-        'libjpeg' \
-        'liblangtag' \
-        'libmspub' \
-        'libmwaw' \
-        'libmythes' \
-        'libnma' \
-        'libnumbertext' \
-        'libodfgen' \
-        'liborcus' \
-        'libpagemaker' \
-        'libpng' \
-        'libqxp' \
-        'libreoffice' \
-        'libstaroffice' \
-        'libtommath' \
-        'libvisio' \
-        'libwpd' \
-        'libwpg' \
-        'libwps' \
-        'libx11' \
-        'libxft' \
-        'libxinerama' \
-        'libxrandr' \
-        'libxslt' \
-        'libxxf86vm' \
-        'libzmf' \
-        'lld' \
-        'loupe' \
-        'lpsolve' \
-        'lua' \
-        'luarocks' \
-        'lxappearance' \
-        'man-db' \
-        'man-pages' \
-        'mariadb-libs' \
-        'mdds' \
-        'meson' \
-        'mpv' \
-        'mtpfs' \
-        'nasm' \
-        'neon' \
-        'neovim' \
-        'netcat' \
-        'networkmanager' \
-        'network-manager-applet' \
-        'nodejs' \
-        'npm' \
-        'nspr' \
-        'nss' \
-        'ntfs-3g' \
-        'obs-studio' \
-        'okular' \
-        'openbsd-netcat' \
-        'pango' \
-        'pasystray' \
-        'pavucontrol' \
-        'perf' \
-        'plasma-framework5' \
-        'poco' \
-        'poppler' \
-        'postgresql-libs' \
-        'pulseaudio' \
-        'pyright' \
-        'python' \
-        'python-lxml' \
-        'python-pip' \
-        'python-polib' \
-        'python-watchdog' \
-        'qemu' \
-        'qt5-base' \
-        'qt6ct' \
-        'qt6-base' \
-        'redland' \
-        'ripgrep' \
-        'ruff' \
-        'sane' \
-        'seahorse' \
-        'serf' \
-        'sh' \
-        'shaderc' \
-        'shared-mime-info' \
-        'sxiv' \
-        'thunar' \
-        'thunar-media-tags-plugin' \
-        'thunar-shares-plugin' \
-        'webp-pixbuf-loader' \
-        'thunar-volman' \
-        'thunderbird' \
-        'tigervnc' \
-        'tlp' \
-        'tmux' \
-        'ttf-liberation' \
-        'ttf-jetbrains-mono-nerd' \
-        'ttf-iosevka-nerd' \
-        'noto-fonts' \
-        'tumbler' \
-        'ueberzug' \
-        'unixodbc' \
-        'unzip' \
-        'valgrind' \
-        'vde2' \
-        'vinagre' \
-        'virt-manager' \
-        'virt-viewer' \
-        'vscode' \
-        'vulkan-radeon' \
-        'vulkan-tools' \
-        'wget' \
-        'xclip' \
-        'xcompmgr' \
-        'xdotool' \
-        'xf86-input-libinput' \
-        'xf86-video-amdgpu' \
-        'xf86-video-ati' \
-        'xmlsec' \
-        'xorg-server' \
-        'xorg-setxkbmap' \
-        'xorg-xauth' \
-        'xorg-xinit' \
-        'xorg-xprop' \
-        'xorg-xrandr' \
-        'xorg-xset' \
-        'xsel' \
-        'xwallpaper' \
-        'yarn' \
-        'yt-dlp' \
-        'zip' \
-        'zola' \
-        'zsh' \
-        'zsh-autosuggestions' \
-        'zsh-completions' \
-        'zsh-syntax-highlighting' \
-        'opengl-man-pages' \
-        'zxing-cpp'
+# takes two arguments, first one is a file, second one
+# is path where to copy that file. if this is run as headless
+# then the files should be fetched from the internet using curl or something.
+# or else if local repo is being used, the files from here should be used
+# -s means copy as sudo
+function fcp() {
+    remote="https://gitlab.com/printfdebugging/dotfiles/-/raw/main"
+    as_sudo=false
+    [ "$1" == "-c" ] && as_sudo=true && shift
+    echo "$1"
 }
 
-function aur() {
-    if ! which yay >/dev/null 2>&1; then
-        mkdir -p "$HOME/.local/src" && cd "$HOME/.local/src" || exit 1
-        git clone https://aur.archlinux.org/yay-bin.git >/dev/null 2>&1
-        cd yay-bin && makepkg -si --noconfirm >/dev/null 2>&1
-    fi
+case "$1" in
+"files")
+    {
+        mkdir -p "$HOME/.local/share/wallpapers/"
+        mkdir -p "$HOME/.local/share/applications"
+        mkdir -p "$HOME/.ssh"
+        mkdir -p "$HOME/.gnupg"
+        mkdir -p "$HOME/.config"
+        mkdir -p "$HOME/.config/nvim"
+        mkdir -p "$HOME/.config/tmux"
+        mkdir -p "$HOME/.config/mpv"
+        mkdir -p "$HOME/.config/gdb"
+        mkdir -p "$HOME/.config/gtk-3.0"
+        mkdir -p "$HOME/.config/qt6ct"
+        mkdir -p "$HOME/.config/flameshot"
+        mkdir -p "$HOME/.config/dunst"
+        mkdir -p "$HOME/.config/ccache"
+        mkdir -p "$HOME/.config/Code - OSS/User/"
 
-    yay -Sy --noconfirm \
-        'brave-bin' \
-        'pam-gnupg' \
-        'par' \
-        'gtypist'
-}
+        # copy files
+        fcp .zshrc "$HOME"
+        fcp .zprofile "$HOME"
+        fcp .xinitrc "$HOME"
+        fcp .gitconfig "$HOME"
+        fcp .gpgkey.asc "$HOME"
+        fcp .pgpkey.asc "$HOME"
+        fcp .pam-gnupg "$HOME"
+        fcp id_ed25519 "$HOME/.ssh"
+        fcp id_ed25519.pub "$HOME/.ssh"
+        fcp printfdebugging "$HOME/.ssh"
+        fcp printfdebugging.pub "$HOME/.ssh"
+        fcp cool "$HOME/.ssh"
+        fcp cool.pub "$HOME/.ssh"
+        fcp config "$HOME/.ssh"
+        fcp gpg-agent.conf "$HOME/.gnupg"
+        fcp gpg.conf "$HOME/.gnupg"
+        fcp glade.conf "$HOME/.config"
+        fcp okularrc "$HOME/.config/okularrc"
+        fcp kwalletrc "$HOME/.config/kwalletrc"
+        fcp mimeapps.list "$HOME/.config/mimeapps.list"
+        fcp init.lua "$HOME/.config/nvim"
+        fcp tmux.conf "$HOME/.config/tmux"
+        fcp input.conf mpv.conf "$HOME/.config/mpv"
+        fcp gdbinit "$HOME/.config/gdb"
+        fcp settings.ini "$HOME/.config/gtk-3.0"
+        fcp qt6ct.conf "$HOME/.config/qt6ct/qt6ct.conf"
+        fcp flameshot.ini "$HOME/.config/flameshot"
+        fcp dunstrc "$HOME/.config/dunst"
+        fcp ccache.conf "$HOME/.config/ccache"
+        fcp map.jpg "$HOME/.local/share/wallpapers/"
+        fcp extensions.json "$HOME/.config/Code - OSS/User/"
+        fcp keybindings.json "$HOME/.config/Code - OSS/User/"
+        fcp settings.json "$HOME/.config/Code - OSS/User/"
 
-function services() {
-    sudo systemctl enable --now \
-        'bluetooth.service' \
-        'nginx.service' \
-        'blueman-mechanism.service' \
-        'libvirtd.service' \
-        'docker.service' \
-        'tlp.service'
-}
+        # copy files with root previliges
+        fcp -s twemoji.ttf /usr/share/fonts
+        fcp -s 75-twemoji.conf /etc/fonts/conf.d/75-twemoji.conf
+        fcp -s nginx.conf /etc/nginx/nginx.conf
+        fcp -s 00-keyboard.conf /etc/X11/xorg.conf.d
+        fcp -s 30-touchpad.conf /etc/X11/xorg.conf.d
+        fcp -s user-dirs.dirs "$HOME/.config/user-dirs.dirs"
 
-function groups() {
-    groups=(
-        'libvirt'
-        'kvm'
-        'docker'
-    )
-    # append user to groups
-    for group in "${groups[@]}"; do
-        sudo usermod -aG "$group" "$(whoami)"
-    done
-}
-
-# call after setup_drives
-function repos() {
-    git_repositories=(
-        'https://gerrit.libreoffice.org/core'
-        'https://github.com/CollaboraOnline/online'
-        'https://github.com/printfdebugging/skia'
-        'https://github.com/printfdebugging/learn-opengl'
-
-        'https://gitlab.com/printfdebugging/logs'
-        'https://gitlab.com/printfdebugging/website'
-    )
-    # clone git repositories
-    for repository in "${git_repositories[@]}"; do
-        projects_dir="/media/projects"
-        repo_name="$(echo "$repository" | sed 's#.*/##')"
-        if ! [ -d "$projects_dir/$repo_name" ]; then
-            git clone "$repository" "$projects_dir/$repo_name"
-        fi
-    done
-}
-
-function suckless() {
-    suckless_projects=(
-        'dwm'
-        'st'
-        'dmenu'
-    )
-    for suckless in "${suckless_projects[@]}"; do
-        suckless_dir="$HOME/.local/src/$suckless"
-        if ! [ -d "$suckless_dir" ]; then
-            mkdir -p "$suckless_dir"
-            git clone "https://gitlab.com/printfdebugging/$suckless.git" "$suckless_dir"
-        fi
-
-        echo -e "$CYN==>$CLR compiling $GRN$suckless$CLR"
-        sudo make -C "$suckless_dir" install >/dev/null 2>&1
-    done
-}
-
-function browser() {
-    chromium_extensions=(
-        'bhlhnicpbhignbdhedgjhgdocnmhomnp'
-        'cjpalhdlnbpafiamejdnhcphjbkeiagm'
-        'dbepggeogbaibhgnhhndojpepiihcmeb'
-        'dpjamkmjmigaoobjbekmfgabipmfilij'
-        'eimadpbcbfnmbkopoojfekhnkhdbieeh'
-        'kchgllkpfcggmdaoopkhlkbcokngahlg'
-    )
-    # create the extension files
-    for extension in "${chromium_extensions[@]}"; do
-        if ! [ -f "/usr/share/chromium/extensions/$extension.json" ]; then
-            sudo mkdir -p "/usr/share/chromium/extensions/"
-            echo '{ "external_update_url": "https://clients2.google.com/service/update2/crx" }' | sudo tee "/usr/share/chromium/extensions/$extension.json" >/dev/null 2>&1
-        fi
-    done
-}
-
-function nvimConf() {
-    mkdir -p "$HOME/.config/nvim/"
-    cp ./init.lua "$HOME/.config/nvim/"
-}
-
-function passwords() {
-    if ! [ -d "$HOME/.password-store" ]; then
-        echo -e "${CYN}==>${CLR} cloning .password-store"
-        git clone git@gitlab.com:printfdebugging/password-store "$HOME/.password-store" >/dev/null 2>&1
-    fi
-
-    if ! [ -f "$HOME/.password-store/.git/hooks/post-commit" ]; then
-        echo -e "${CYN}==>${CLR} installing post-commit hook"
-        printf "#\!/bin/bash\n\ngit push" | tee "$HOME/.password-store/.git/hooks/post-commit" >/dev/null 2>&1
-    fi
-}
-
-function pam() {
-    system_login_file="/etc/pam.d/system-local-login"
-    if [ -f "$system_login_file" ]; then
-        lines=(
-            'auth     optional  pam_gnupg.so store-only'
-            'session  optional  pam_gnupg.so'
-        )
-        for line in "${lines[@]}"; do
-            if [ "$(grep -c "$line" "$system_login_file")" -eq 0 ]; then
-                echo "$line" | sudo tee -a "$system_login_file" >/dev/null 2>&1
-            fi
-        done
-    else
-        echo "$system_login_file file not found" && exit 1
-    fi
-
-    i3lock_file="/etc/pam.d/i3lock"
-    if [ -f "$i3lock_file" ]; then
-        lines=(
-            'auth     optional  pam_gnupg.so'
-        )
-        for line in "${lines[@]}"; do
-            if [ "$(grep -c "$line" "$i3lock_file")" -eq 0 ]; then
-                echo "$line" | sudo tee -a "$i3lock_file" >/dev/null 2>&1
-            fi
-        done
-    else
-        echo "$i3lock_file file not found" && exit 1
-    fi
-}
-
-function disable_kwallet() {
-    mkdir -p "$HOME/.config/"
-    cp ./kwalletrc "$HOME/.config/kwalletrc"
-}
-
-function mimeapps() {
-    mkdir -p "$HOME/.config/nvim/"
-    mkdir -p "$HOME/.local/share/applications"
-    cp ./mimeapps.list "$HOME/.config/mimeapps.list"
-    ln -s "$HOME/.config/mimeapps.list" "$HOME/.local/share/applications/mimeapps.list"
-}
-
-function tmuxConf() {
-    mkdir -p "$HOME/.config/tmux/"
-    cp ./tmux.conf "$HOME/.config/tmux/"
-}
-
-function gdbConf() {
-    mkdir -p "$HOME/.config/gdb/"
-    cp ./gdbinit "$HOME/.config/gdb/"
-}
-
-function gtkConf() {
-    mkdir -p "$HOME/.config/gtk-3.0/"
-    cp ./settings.ini "$HOME/.config/gtk-3.0/"
-}
-
-function qtConf() {
-    mkdir -p "$HOME/.config/qt6ct/"
-    cp ./qt6ct.conf "$HOME/.config/qt6ct/qt6ct.conf"
-}
-
-function okularConf() {
-    mkdir -p "$HOME/.config"
-    cp ./okularrc "$HOME/.config/okularrc"
-}
-
-function flameshotConf() {
-    mkdir -p "$HOME/.config/flameshot/"
-    cp ./flameshot.ini "$HOME/.config/flameshot/"
-}
-
-function dunstConf() {
-    mkdir -p "$HOME/.config/dunst/"
-    cp ./dunstrc "$HOME/.config/dunst/"
-}
-
-function ccacheConf() {
-    mkdir -p "$HOME/.config/ccache/"
-    cp ./ccache.conf "$HOME/.config/ccache/"
-}
-
-function gladeConf() {
-    mkdir -p "$HOME/.config/"
-    cp ./glade.conf "$HOME/.config/"
-}
-
-function zshConf() {
-    cp ./.zshrc ./.zprofile "$HOME"
-    chsh -s /usr/bin/zsh >/dev/null
-    sudo chsh -s /usr/bin/zsh >/dev/null
-}
-
-function scripts() {
-    bin_dir="$HOME/.local/bin"
-    if ! [ -d "$bin_dir" ]; then
-        mkdir -p "$bin_dir"
-        git clone "https://gitlab.com/printfdebugging/bin.git" "$bin_dir"
-    fi
-}
-
-function vscodeConf() {
-    mkdir -p "$HOME/.config/Code - OSS/User/"
-
-    cp ./extensions.json \
-        ./keybindings.json \
-        ./settings.json \
-        "$HOME/.config/Code - OSS/User/"
-}
-
-function xorgConf() {
-    echo -e "$CYN==>$CLR installing xorg config"
-    cp "./.xinitrc" "$HOME/.xinitrc"
-
-    mkdir -p "/etc/X11/xorg.conf.d"
-    sudo cp "./00-keyboard.conf" "/etc/X11/xorg.conf.d"
-    sudo cp "./30-touchpad.conf" "/etc/X11/xorg.conf.d"
-    sudo cp ./user-dirs.dirs "$HOME/.config/user-dirs.dirs"
-}
-
-function mpvConf() {
-    mkdir -p "$HOME/.config/mpv/"
-    cp ./input.conf ./mpv.conf "$HOME/.config/mpv/"
-}
-
-function wallpaper() {
-    mkdir -p "$HOME/.local/share/wallpapers/"
-    cp ./map.jpg "$HOME/.local/share/wallpapers/"
-}
-
-function qemuConf() {
-    if ! sudo virsh net-info --network default | grep "Active:.*yes" >/dev/null 2>&1; then
-        echo -e "$GRN==>$CLR enabling virsh default"
-        sudo virsh net-start default >/dev/null 2>&1
-        sudo virsh net-autostart default >/dev/null 2>&1
-    fi
-
-    # uncomment lines in libvirtd.conf
-    lines=(
-        'unix_sock_group = "libvirt"'
-        'unix_sock_rw_perms = "0770"'
-    )
-    for line in "${lines[@]}"; do
-        sudo sed -i "/$line/s/^#//" /etc/libvirt/libvirtd.conf
-    done
-}
-
-function emojiFontConf() {
-    echo -e "$CYN==>$CLR installing emoji font"
-    sudo cp ./twemoji.ttf /usr/share/fonts/
-    sudo cp ./75-twemoji.conf /etc/fonts/conf.d/75-twemoji.conf
-}
-
-function creds() {
-    mkdir -p "$HOME/.ssh"
-    mkdir -p "$HOME/.gnupg"
-
-    cp ./.gitconfig \
-        ./.gpgkey.asc \
-        ./.pgpkey.asc \
-        ./.pam-gnupg \
-        "$HOME/"
-
-    cp ./id_ed25519 \
-        ./id_ed25519.pub \
-        ./printfdebugging \
-        ./printfdebugging.pub \
-        ./cool \
-        ./cool.pub \
-        ./config \
-        "$HOME/.ssh"
-
-    cp ./gpg-agent.conf \
-        ./gpg.conf \
-        "$HOME/.gnupg"
-
-    echo -e "$GRN==>$CLR decrypting credentials"
-    while true; do
-        ansible-vault decrypt \
+        # decrypt secrets after copy
+        while ! ansible-vault decrypt \
             "$HOME/.gitconfig" \
             "$HOME/.gpgkey.asc" \
             "$HOME/.pgpkey.asc" \
@@ -545,166 +92,503 @@ function creds() {
             "$HOME/.ssh/printfdebugging.pub" \
             "$HOME/.ssh/cool" \
             "$HOME/.ssh/cool.pub" \
-            "$HOME/.ssh/config" >/dev/null 2>&1 && break
-    done
+            "$HOME/.ssh/config"; do
+            echo -e "$RED==>$CLR wrong password, please try again!!"
+        done
 
-    gpg --import "$HOME/.pgpkey.asc" >/dev/null 2>&1
+        # import encryption gpg key
+        while ! gpg --import "$HOME/.pgpkey.asc"; do
+            echo -e "$RED==>$CLR wrong password, please try again!!"
+        done
 
-    chown -R "$(whoami)" "$HOME/.gnupg"
-    find "$HOME/.gnupg" -type f -exec chmod 600 {} \;
-    find "$HOME/.gnupg" -type d -exec chmod 700 {} \;
+        # setup stricter file permissions in $HOME/.ssh
+        chown -R "$(whoami)" "$HOME/.ssh"
+        find "$HOME/.ssh" -type f -exec chmod 600 {} \;
+        find "$HOME/.ssh" -type d -exec chmod 700 {} \;
 
-    # get ssh keys for github and gitlab
-    servers=(
-        'github.com'
-        'gitlab.com'
-    )
-    for server in "${servers[@]}"; do
-        ssh-keyscan -t rsa "$server" >>"$HOME/.ssh/known_hosts"
-    done
-}
+        # setup stricter file permissions in $HOME/.gnupg
+        chown -R "$(whoami)" "$HOME/.gnupg"
+        find "$HOME/.gnupg" -type f -exec chmod 600 {} \;
+        find "$HOME/.gnupg" -type d -exec chmod 700 {} \;
 
-function autogen() {
-    if [ -d "/media/projects/core" ]; then
-        cp ./autogen.input "/media/projects/core/autogen.input"
-    fi
-}
+        # get ssh keys for github and gitlab
+        ssh-keyscan -t rsa "github.com" >>"$HOME/.ssh/known_hosts"
+        ssh-keyscan -t rsa "gitlab.com" >>"$HOME/.ssh/known_hosts"
+    }
+    ;;
 
-function mirrorlist() {
-    if curl -s http://127.0.0.1:9000/ | grep -qE 'core/|extra/|multilib/|lastsync|lastupdate'; then
-        sudo cp ./mirrorlist /etc/pacman.d/mirrorlist
-        sudo cp ./pacman.conf /etc/pacman.conf
-        sudo systemctl mask reflector.service
-    fi
-}
+"packages")
+    {
+        sudo pacman -S --noconfirm \
+            'abseil-cpp' \
+            'ansible' \
+            'nginx' \
+            'ant' \
+            'apr' \
+            'base-devel' \
+            'bazelisk' \
+            'swtpm' \
+            'chafa' \
+            'ninja' \
+            'stylua' \
+            'beanshell' \
+            'blender' \
+            'pass' \
+            'pass-otp' \
+            'pam' \
+            'zbar' \
+            'blueman' \
+            'bluez' \
+            'bluez-libs' \
+            'breeze' \
+            'breeze-icons' \
+            'breeze-gtk' \
+            'bridge-utils' \
+            'btop' \
+            'cargo' \
+            'cbatticon' \
+            'ccache' \
+            'chromium' \
+            'clang' \
+            'clucene' \
+            'cmake' \
+            'coin-or-mp' \
+            'cppunit' \
+            'ctags' \
+            'curl' \
+            'dbus-glib' \
+            'shellcheck' \
+            'desktop-file-utils' \
+            'dnsmasq' \
+            'docker' \
+            'docker-compose' \
+            'doxygen' \
+            'dunst' \
+            'ebtables' \
+            'extra-cmake-modules' \
+            'fastfetch' \
+            'fd' \
+            'feh' \
+            'figlet' \
+            'flameshot' \
+            'flex' \
+            'fontconfig' \
+            'freetype2' \
+            'fzf' \
+            'gcc-libs' \
+            'gdb' \
+            'gdk-pixbuf2' \
+            'gimp' \
+            'git' \
+            'glade' \
+            'glm' \
+            'go' \
+            'gobject-introspection' \
+            'gperf' \
+            'gpgme' \
+            'graphite' \
+            'gst-plugins-base-libs' \
+            'gtk3' \
+            'gtk4' \
+            'gvfs' \
+            'gvfs-mtp' \
+            'harfbuzz' \
+            'harfbuzz-icu' \
+            'hicolor-icon-theme' \
+            'hunspell' \
+            'hyphen' \
+            'i3lock' \
+            'icu' \
+            'inkscape' \
+            'iptables' \
+            'java-environment' \
+            'jdk-openjdk' \
+            'jre21-openjdk' \
+            'junit' \
+            'lcms2' \
+            'lib32-libcap' \
+            'libabw' \
+            'libatomic_ops' \
+            'libcap' \
+            'libcap-ng' \
+            'libcdr' \
+            'libcmis' \
+            'libe-book' \
+            'libepoxy' \
+            'libepubgen' \
+            'libetonyek' \
+            'libexttextcat' \
+            'libfreehand' \
+            'libgl' \
+            'libguestfs' \
+            'libjpeg' \
+            'liblangtag' \
+            'libmspub' \
+            'libmwaw' \
+            'libmythes' \
+            'libnma' \
+            'libnumbertext' \
+            'libodfgen' \
+            'liborcus' \
+            'libpagemaker' \
+            'libpng' \
+            'libqxp' \
+            'libreoffice' \
+            'libstaroffice' \
+            'libtommath' \
+            'libvisio' \
+            'libwpd' \
+            'libwpg' \
+            'libwps' \
+            'libx11' \
+            'libxft' \
+            'libxinerama' \
+            'libxrandr' \
+            'libxslt' \
+            'libxxf86vm' \
+            'libzmf' \
+            'lld' \
+            'loupe' \
+            'lpsolve' \
+            'lua' \
+            'luarocks' \
+            'lxappearance' \
+            'man-db' \
+            'man-pages' \
+            'mariadb-libs' \
+            'mdds' \
+            'meson' \
+            'mpv' \
+            'mtpfs' \
+            'nasm' \
+            'neon' \
+            'neovim' \
+            'netcat' \
+            'networkmanager' \
+            'network-manager-applet' \
+            'nodejs' \
+            'npm' \
+            'nspr' \
+            'nss' \
+            'ntfs-3g' \
+            'obs-studio' \
+            'okular' \
+            'openbsd-netcat' \
+            'pango' \
+            'pasystray' \
+            'pavucontrol' \
+            'perf' \
+            'plasma-framework5' \
+            'poco' \
+            'poppler' \
+            'postgresql-libs' \
+            'pulseaudio' \
+            'pyright' \
+            'python' \
+            'python-lxml' \
+            'python-pip' \
+            'python-polib' \
+            'python-watchdog' \
+            'qemu' \
+            'qt5-base' \
+            'qt6ct' \
+            'qt6-base' \
+            'redland' \
+            'ripgrep' \
+            'ruff' \
+            'sane' \
+            'seahorse' \
+            'serf' \
+            'sh' \
+            'shaderc' \
+            'shared-mime-info' \
+            'sxiv' \
+            'thunar' \
+            'thunar-media-tags-plugin' \
+            'thunar-shares-plugin' \
+            'webp-pixbuf-loader' \
+            'thunar-volman' \
+            'thunderbird' \
+            'tigervnc' \
+            'tlp' \
+            'tmux' \
+            'ttf-liberation' \
+            'ttf-jetbrains-mono-nerd' \
+            'ttf-iosevka-nerd' \
+            'noto-fonts' \
+            'tumbler' \
+            'ueberzug' \
+            'unixodbc' \
+            'unzip' \
+            'valgrind' \
+            'vde2' \
+            'vinagre' \
+            'virt-manager' \
+            'virt-viewer' \
+            'vscode' \
+            'vulkan-radeon' \
+            'vulkan-tools' \
+            'wget' \
+            'xclip' \
+            'xcompmgr' \
+            'xdotool' \
+            'xf86-input-libinput' \
+            'xf86-video-amdgpu' \
+            'xf86-video-ati' \
+            'xmlsec' \
+            'xorg-server' \
+            'xorg-setxkbmap' \
+            'xorg-xauth' \
+            'xorg-xinit' \
+            'xorg-xprop' \
+            'xorg-xrandr' \
+            'xorg-xset' \
+            'xsel' \
+            'xwallpaper' \
+            'yarn' \
+            'yt-dlp' \
+            'zip' \
+            'zola' \
+            'zsh' \
+            'zsh-autosuggestions' \
+            'zsh-completions' \
+            'zsh-syntax-highlighting' \
+            'opengl-man-pages' \
+            'zxing-cpp'
 
-function nginxConf() {
-    sudo cp ./nginx.conf /etc/nginx/nginx.conf
-}
-
-function pacman_mirror() {
-    local_folder=/media/external/archlinux
-    remote_mirror=rsync://de.arch.mirror.kescher.at/mirror/arch/
-
-    rsync -rlv \
-        --exclude '/archive' \
-        --exclude '/community' \
-        --exclude '/community-staging' \
-        --exclude '/community-testing' \
-        --exclude '/core-debug' \
-        --exclude '/core-staging' \
-        --exclude '/core-staging-debug' \
-        --exclude '/core-testing' \
-        --exclude '/core-testing-debug' \
-        --exclude '/extra-debug' \
-        --exclude '/extra-staging' \
-        --exclude '/extra-staging-debug' \
-        --exclude '/extra-testing' \
-        --exclude '/extra-testing-debug' \
-        --exclude '/gnome-unstable' \
-        --exclude '/gnome-unstable-debug' \
-        --exclude '/images' \
-        --exclude '/iso' \
-        --exclude '/kde-unstable' \
-        --exclude '/kde-unstable-debug' \
-        --exclude '/latest' \
-        --exclude '/multilib-debug' \
-        --exclude '/multilib-staging' \
-        --exclude '/multilib-staging-debug' \
-        --exclude '/multilib-testing' \
-        --exclude '/multilib-testing-debug' \
-        --exclude '/other' \
-        --exclude '/pool/packages-debug' \
-        --exclude '/staging' \
-        --exclude '/testing' \
-        --exclude '/wsl' \
-        "${remote_mirror}" \
-        "${local_folder}"
-}
-
-function drives() {
-    declare -A external=(
-        [UUID]=6a90a7e3-3732-4b58-8a3a-fbc098a86b7e
-        [PATH]=/media/external/
-        [TYPE]=ext4
-        [OPTIONS]='defaults 0 0'
-    )
-
-    declare -A personal=(
-        [UUID]=18bd0da1-8e29-4d5a-a3bf-4cf8a012699d
-        [PATH]=/media/personal/
-        [TYPE]=ext4
-        [OPTIONS]='defaults 0 0'
-    )
-
-    declare -A projects=(
-        [UUID]=379872b5-a96a-4d1f-ad83-231cc27b7c6a
-        [PATH]=/media/projects/
-        [TYPE]=ext4
-        [OPTIONS]='defaults 0 0'
-    )
-
-    declare -A archive=(
-        [UUID]=4313c35d-7d9e-4e77-871e-7c70fdd1e01d
-        [PATH]=/media/archive/
-        [TYPE]=ext4
-        [OPTIONS]='defaults 0 0'
-    )
-
-    drives=(
-        external
-        projects
-        personal
-        archive
-    )
-
-    modified=false
-    for drive_name in "${drives[@]}"; do
-        declare -n drive="$drive_name"
-        if ! [ -d "${drive[PATH]}" ]; then
-            sudo mkdir -p "${drive[PATH]}"
-            sudo chown "$(whoami):$(whoami)" "${drive[PATH]}"
+        if ! which yay >/dev/null 2>&1; then
+            mkdir -p "$HOME/.local/src" && cd "$HOME/.local/src" || exit 1
+            git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si --noconfirm
         fi
 
-        [ "$(lsblk -f | grep -c "${drive[UUID]}")" -eq 0 ] && continue
-        if [ "$(grep -e "${drive[UUID]}" /etc/fstab)" == "" ]; then
-            echo "UUID=${drive[UUID]}    ${drive[PATH]}     ${drive[TYPE]}     ${drive[OPTIONS]}" | sudo tee -a /etc/fstab
-            modified=true
-        fi
+        yay -Sy --noconfirm \
+            'brave-bin' \
+            'pam-gnupg' \
+            'par' \
+            'gtypist'
+    }
+    ;;
 
+"services")
+    {
+        sudo systemctl enable --now \
+            'bluetooth.service' \
+            'nginx.service' \
+            'blueman-mechanism.service' \
+            'libvirtd.service' \
+            'docker.service' \
+            'tlp.service'
+    }
+    ;;
+
+"groups")
+    {
+        groups=(
+            'libvirt'
+            'kvm'
+            'docker'
+        )
+        # append user to groups
+        for group in "${groups[@]}"; do
+            sudo usermod -aG "$group" "$(whoami)"
+        done
+    }
+    ;;
+
+"drives")
+    {
+        declare -A external=(
+            [UUID]=6a90a7e3-3732-4b58-8a3a-fbc098a86b7e
+            [PATH]=/media/external/
+            [TYPE]=ext4
+            [OPTIONS]='defaults 0 0'
+        )
+
+        declare -A personal=(
+            [UUID]=18bd0da1-8e29-4d5a-a3bf-4cf8a012699d
+            [PATH]=/media/personal/
+            [TYPE]=ext4
+            [OPTIONS]='defaults 0 0'
+        )
+
+        declare -A projects=(
+            [UUID]=379872b5-a96a-4d1f-ad83-231cc27b7c6a
+            [PATH]=/media/projects/
+            [TYPE]=ext4
+            [OPTIONS]='defaults 0 0'
+        )
+
+        declare -A archive=(
+            [UUID]=4313c35d-7d9e-4e77-871e-7c70fdd1e01d
+            [PATH]=/media/archive/
+            [TYPE]=ext4
+            [OPTIONS]='defaults 0 0'
+        )
+
+        drives=(
+            external
+            projects
+            personal
+            archive
+        )
+
+        modified=false
+        for drive_name in "${drives[@]}"; do
+            declare -n drive="$drive_name"
+            [ -d "${drive[PATH]}" ] || sudo mkdir -p "${drive[PATH]}" && sudo chown "$(whoami):$(whoami)" "${drive[PATH]}"
+            [ "$(lsblk -f | grep -c "${drive[UUID]}")" -eq 0 ] && continue
+            [ "$(grep -e "${drive[UUID]}" /etc/fstab)" == "" ] && echo "UUID=${drive[UUID]} ${drive[PATH]} ${drive[TYPE]} ${drive[OPTIONS]}" | sudo tee -a /etc/fstab && modified=true
+        done
         [ "$modified" ] && sudo mount -a
-    done
-}
+    }
+    ;;
 
-mirrorlist &&
-    packages &&
-    aur &&
-    services &&
-    groups &&
-    creds &&
-    passwords &&
-    pam &&
-    drives &&
-    repos &&
-    autogen &&
-    suckless &&
-    browser &&
-    nvimConf &&
-    tmuxConf &&
-    gdbConf &&
-    gtkConf &&
-    qtConf &&
-    okularConf &&
-    flameshotConf &&
-    dunstConf &&
-    ccacheConf &&
-    gladeConf &&
-    zshConf &&
-    scripts &&
-    vscodeConf &&
-    xorgConf &&
-    mpvConf &&
-    wallpaper &&
-    emojiFontConf &&
-    nginxConf &&
-    qemuConf
+"pacman")
+    {
+        local_folder=/media/external/archlinux
+        remote_mirror=rsync://de.arch.mirror.kescher.at/mirror/arch/
+        rsync -rlv \
+            --exclude '/archive' \
+            --exclude '/community' \
+            --exclude '/community-staging' \
+            --exclude '/community-testing' \
+            --exclude '/core-debug' \
+            --exclude '/core-staging' \
+            --exclude '/core-staging-debug' \
+            --exclude '/core-testing' \
+            --exclude '/core-testing-debug' \
+            --exclude '/extra-debug' \
+            --exclude '/extra-staging' \
+            --exclude '/extra-staging-debug' \
+            --exclude '/extra-testing' \
+            --exclude '/extra-testing-debug' \
+            --exclude '/gnome-unstable' \
+            --exclude '/gnome-unstable-debug' \
+            --exclude '/images' \
+            --exclude '/iso' \
+            --exclude '/kde-unstable' \
+            --exclude '/kde-unstable-debug' \
+            --exclude '/latest' \
+            --exclude '/multilib-debug' \
+            --exclude '/multilib-staging' \
+            --exclude '/multilib-staging-debug' \
+            --exclude '/multilib-testing' \
+            --exclude '/multilib-testing-debug' \
+            --exclude '/other' \
+            --exclude '/pool/packages-debug' \
+            --exclude '/staging' \
+            --exclude '/testing' \
+            --exclude '/wsl' \
+            "${remote_mirror}" \
+            "${local_folder}"
+    }
+    ;;
+
+"mirrorlist")
+    {
+        if curl -s http://127.0.0.1:9000/ | grep -qE 'core/|extra/|multilib/|lastsync|lastupdate'; then
+            sudo cp ./mirrorlist /etc/pacman.d/mirrorlist
+            sudo cp ./pacman.conf /etc/pacman.conf
+            sudo systemctl mask reflector.service
+        fi
+    }
+    ;;
+
+"browser")
+    {
+        chromium_extensions=(
+            'bhlhnicpbhignbdhedgjhgdocnmhomnp'
+            'cjpalhdlnbpafiamejdnhcphjbkeiagm'
+            'dbepggeogbaibhgnhhndojpepiihcmeb'
+            'dpjamkmjmigaoobjbekmfgabipmfilij'
+            'eimadpbcbfnmbkopoojfekhnkhdbieeh'
+            'kchgllkpfcggmdaoopkhlkbcokngahlg'
+        )
+        # create the extension files
+        sudo mkdir -p "/usr/share/chromium/extensions/"
+        for extension in "${chromium_extensions[@]}"; do
+            if ! [ -f "/usr/share/chromium/extensions/$extension.json" ]; then
+                echo '{ "external_update_url": "https://clients2.google.com/service/update2/crx" }' | sudo tee "/usr/share/chromium/extensions/$extension.json" >/dev/null 2>&1
+            fi
+        done
+    }
+    ;;
+
+"suckless")
+    {
+        # clean previous clone
+        source_dir="$HOME/.local/src"
+        sudo rm -rf "$source_dir" && mkdir -p "$source_dir"
+
+        # clone and compile from source
+        for suckless in 'dwm' 'st' 'dmenu'; do
+            git clone "https://gitlab.com/printfdebugging/$suckless.git" "$source_dir/$suckless"
+            sudo make -C "$source_dir/$suckless" install >/dev/null 2>&1
+        done
+    }
+    ;;
+
+"passwords")
+    {
+        [ -d "$HOME/.password-store" ] || git clone git@gitlab.com:printfdebugging/password-store "$HOME/.password-store" >/dev/null 2>&1
+        [ -f "$HOME/.password-store/.git/hooks/post-commit" ] || printf "#\!/bin/bash\n\ngit push" | tee "$HOME/.password-store/.git/hooks/post-commit" >/dev/null 2>&1
+    }
+    ;;
+
+"git")
+    {
+        # create project directory
+        directory=/media/projects
+        [ -d "$directory" ] || { sudo mkdir -p "$directory" && sudo chown "$(whoami):$(whoami)" "$directory"; }
+
+        git_repositories=(
+            'https://gerrit.libreoffice.org/core'
+            'https://github.com/CollaboraOnline/online'
+            'https://github.com/printfdebugging/skia'
+            'https://github.com/printfdebugging/learn-opengl'
+            'https://gitlab.com/printfdebugging/logs'
+            'https://gitlab.com/printfdebugging/website'
+            'https://gitlab.com/printfdebugging/bin'
+        )
+        # clone git repositories
+        for repository in "${git_repositories[@]}"; do
+            name=$(echo "$repository" | awk -F'/' '{print $NF}')
+            [ -d "$directory/$name" ] || git clone "$repository" "$directory/$name"
+        done
+    }
+    ;;
+
+"shell")
+    {
+        chsh -s /usr/bin/zsh && sudo chsh -s /usr/bin/zsh
+    }
+    ;;
+
+"pam-gnupg")
+    {
+        sysloginfile="/etc/pam.d/system-local-login"
+        sysloginline_a='auth     optional  pam_gnupg.so store-only'
+        sysloginline_b='session  optional  pam_gnupg.so'
+        [ -f "$sysloginfile" ] && [ "$(grep -c "$sysloginline_a" "$sysloginfile")" -eq 0 ] && echo "$sysloginline_a" | sudo tee -a "$sysloginfile"
+        [ -f "$sysloginfile" ] && [ "$(grep -c "$sysloginline_b" "$sysloginfile")" -eq 0 ] && echo "$sysloginline_b" | sudo tee -a "$sysloginfile"
+        i3lokfile="/etc/pam.d/i3lock"
+        i3line='auth     optional  pam_gnupg.so'
+        [ -f "$i3lokfile" ] && [ "$(grep -c "$i3line" "$i3lokfile")" -eq 0 ] && echo "$i3line" | sudo tee -a "$i3lokfile"
+    }
+    ;;
+
+"qemu")
+    {
+        [ "$(sudo virsh net-info --network default | grep -c "Active:.*yes")" -ne 0 ] || sudo virsh net-start default
+        [ "$(sudo virsh net-info --network default | grep -c "Autostart:.*yes")" -ne 0 ] || sudo virsh net-autostart default
+        line_a='unix_sock_group = "libvirt"'
+        line_b='unix_sock_rw_perms = "0770"'
+        sudo sed -i "/$line_a/s/^#//" /etc/libvirt/libvirtd.conf
+        sudo sed -i "/$line_b/s/^#//" /etc/libvirt/libvirtd.conf
+    }
+    ;;
+
+*)
+    command ...
+    ;;
+esac

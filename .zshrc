@@ -54,7 +54,7 @@ export SAL_LOG_FILE=~/downloads/logfile
 
 
 # system exports
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="/media/projects/bin:$PATH"
 export PATH="$PATH:/home/printfdebugging/.cargo/bin"
 export EDITOR=nvim
 export GPG_TTY=$(tty)
