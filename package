@@ -366,15 +366,6 @@ function setup_git_repositories() {
         'https://github.com/skx/kilua'
         'https://github.com/bakkeby/dwm-commented'
     )
-    # add server public keys
-    servers=(
-        'github.com'
-        'gitlab.com'
-    )
-    for server in "${servers[@]}"; do
-        ssh-keyscan -t rsa "$server" >>"$HOME/.ssh/known_hosts"
-    done
-
     # clone git repositories
     for repository in "${git_repositories[@]}"; do
         projects_dir="/media/projects"
@@ -425,6 +416,16 @@ function setup_chromium_extensions() {
 function setup_neovim_config() {
     mkdir -p "$HOME/.config/nvim/"
     cp ./init.lua "$HOME/.config/nvim/"
+}
+
+function setup_server_publickeys() {
+    servers=(
+        'github.com'
+        'gitlab.com'
+    )
+    for server in "${servers[@]}"; do
+        ssh-keyscan -t rsa "$server" >>"$HOME/.ssh/known_hosts"
+    done
 }
 
 function setup_pass_store() {
@@ -760,6 +761,7 @@ setup_pacman_packages &&
     setup_aur_packages &&
     setup_services &&
     setup_credentials &&
+    setup_server_publickeys &&
     setup_pass_store &&
     setup_pam_gnupg_config &&
     setup_drives &&
