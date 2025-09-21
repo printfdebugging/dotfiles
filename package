@@ -256,7 +256,6 @@ function setup_aur_packages() {
         'par'
         'opengl-man-pages'
         'gtypist'
-        'arc-darkest-theme-git'
     )
     # install yay if not already installed
     if ! which yay >/dev/null 2>&1; then
@@ -266,7 +265,7 @@ function setup_aur_packages() {
         git clone https://aur.archlinux.org/yay-bin.git >/dev/null 2>&1
 
         echo -e "${CYN}==>${CLR} installing yay"
-        cd yay-bin && makepkg -si >/dev/null 2>&1
+        cd yay-bin && makepkg -si --noconfirm >/dev/null 2>&1
     fi
     # install aur packages
     for package in "${aur_packages[@]}"; do
@@ -286,8 +285,9 @@ function setup_services() {
     )
     # enable and start services
     for service in "${services[@]}"; do
-        sudo systemctl enable "$service"
-        sudo systemctl start "$service"
+        echo -e "${GRN}==>${CLR} enabling and starting $service"
+        sudo systemctl enable "$service" >/dev/null 2>&1
+        sudo systemctl start "$service" >/dev/null 2>&1
     done
 }
 
@@ -366,6 +366,15 @@ function setup_git_repositories() {
         'https://github.com/skx/kilua'
         'https://github.com/bakkeby/dwm-commented'
     )
+    # add server public keys
+    servers=(
+        'github.com'
+        'gitlab.com'
+    )
+    for server in "${servers[@]}"; do
+        ssh-keyscan -t rsa "$server" >>"$HOME/.ssh/known_hosts"
+    done
+
     # clone git repositories
     for repository in "${git_repositories[@]}"; do
         projects_dir="/media/projects"
@@ -408,7 +417,7 @@ function setup_chromium_extensions() {
     for extension in "${chromium_extensions[@]}"; do
         if ! [ -f "/usr/share/chromium/extensions/$extension.json" ]; then
             sudo mkdir -p "/usr/share/chromium/extensions/"
-            echo '{ "external_update_url": "https://clients2.google.com/service/update2/crx" }' | sudo tee "/usr/share/chromium/extensions/$extension.json"
+            echo '{ "external_update_url": "https://clients2.google.com/service/update2/crx" }' | sudo tee "/usr/share/chromium/extensions/$extension.json" >/dev/null 2>&1
         fi
     done
 }
@@ -420,11 +429,11 @@ function setup_neovim_config() {
 
 function setup_pass_store() {
     if ! [ -d "$HOME/.password-store" ]; then
-        git clone git@github.com:printfdebugging/password-store "$HOME/.password-store"
+        git clone git@github.com:printfdebugging/password-store "$HOME/.password-store" >/dev/null 2>&1
     fi
 
     if ! [ -f "$HOME/.password-store/.git/hooks/post-commit" ]; then
-        printf "#\!/bin/bash\n\ngit push" | tee "$HOME/.password-store/.git/hooks/post-commit"
+        printf "#\!/bin/bash\n\ngit push" | tee "$HOME/.password-store/.git/hooks/post-commit" >/dev/null 2>&1
     fi
 }
 
@@ -437,7 +446,7 @@ function setup_pam_gnupg_config() {
         )
         for line in "${lines[@]}"; do
             if [ "$(grep -c "$line" "$system_login_file")" -eq 0 ]; then
-                echo "$line" | sudo tee -a "$system_login_file"
+                echo "$line" | sudo tee -a "$system_login_file" >/dev/null 2>&1
             fi
         done
     else
@@ -451,7 +460,7 @@ function setup_pam_gnupg_config() {
         )
         for line in "${lines[@]}"; do
             if [ "$(grep -c "$line" "$i3lock_file")" -eq 0 ]; then
-                echo "$line" | sudo tee -a "$i3lock_file"
+                echo "$line" | sudo tee -a "$i3lock_file" >/dev/null 2>&1
             fi
         done
     else
