@@ -564,8 +564,9 @@ function setup_wallpaper() {
 
 function setup_qemu_config() {
     if ! sudo virsh net-info --network default | grep "Active:.*yes" >/dev/null 2>&1; then
-        sudo virsh net-start default
-        sudo virsh net-autostart default
+        echo -e "$GRN==>$CLR enabling virsh default"
+        sudo virsh net-start default >/dev/null 2>&1
+        sudo virsh net-autostart default >/dev/null 2>&1
     fi
 
     # uncomment lines in libvirtd.conf
