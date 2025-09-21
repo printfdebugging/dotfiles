@@ -430,10 +430,12 @@ function setup_server_publickeys() {
 
 function setup_pass_store() {
     if ! [ -d "$HOME/.password-store" ]; then
+        echo -e "${CYN}==>${CLR} cloning .password-store"
         git clone git@github.com:printfdebugging/password-store "$HOME/.password-store" >/dev/null 2>&1
     fi
 
     if ! [ -f "$HOME/.password-store/.git/hooks/post-commit" ]; then
+        echo -e "${CYN}==>${CLR} installing post-commit hook"
         printf "#\!/bin/bash\n\ngit push" | tee "$HOME/.password-store/.git/hooks/post-commit" >/dev/null 2>&1
     fi
 }
