@@ -336,7 +336,7 @@ function browser() {
     done
 }
 
-function neovim() {
+function nvimConf() {
     mkdir -p "$HOME/.config/nvim/"
     cp ./init.lua "$HOME/.config/nvim/"
 }
@@ -396,52 +396,52 @@ function mimeapps() {
     ln -s "$HOME/.config/mimeapps.list" "$HOME/.local/share/applications/mimeapps.list"
 }
 
-function tmux() {
+function tmuxConf() {
     mkdir -p "$HOME/.config/tmux/"
     cp ./tmux.conf "$HOME/.config/tmux/"
 }
 
-function gdb() {
+function gdbConf() {
     mkdir -p "$HOME/.config/gdb/"
     cp ./gdbinit "$HOME/.config/gdb/"
 }
 
-function gtk() {
+function gtkConf() {
     mkdir -p "$HOME/.config/gtk-3.0/"
     cp ./settings.ini "$HOME/.config/gtk-3.0/"
 }
 
-function qt() {
+function qtConf() {
     mkdir -p "$HOME/.config/qt6ct/"
     cp ./qt6ct.conf "$HOME/.config/qt6ct/qt6ct.conf"
 }
 
-function okular() {
+function okularConf() {
     mkdir -p "$HOME/.config"
     cp ./okularrc "$HOME/.config/okularrc"
 }
 
-function flameshot() {
+function flameshotConf() {
     mkdir -p "$HOME/.config/flameshot/"
     cp ./flameshot.ini "$HOME/.config/flameshot/"
 }
 
-function dunst() {
+function dunstConf() {
     mkdir -p "$HOME/.config/dunst/"
     cp ./dunstrc "$HOME/.config/dunst/"
 }
 
-function ccache() {
+function ccacheConf() {
     mkdir -p "$HOME/.config/ccache/"
     cp ./ccache.conf "$HOME/.config/ccache/"
 }
 
-function glade() {
+function gladeConf() {
     mkdir -p "$HOME/.config/"
     cp ./glade.conf "$HOME/.config/"
 }
 
-function zsh() {
+function zshConf() {
     cp ./.zshrc ./.zprofile "$HOME"
     chsh -s /usr/bin/zsh >/dev/null
     sudo chsh -s /usr/bin/zsh >/dev/null
@@ -455,7 +455,7 @@ function scripts() {
     fi
 }
 
-function vscode() {
+function vscodeConf() {
     mkdir -p "$HOME/.config/Code - OSS/User/"
 
     cp ./extensions.json \
@@ -464,7 +464,7 @@ function vscode() {
         "$HOME/.config/Code - OSS/User/"
 }
 
-function xorg() {
+function xorgConf() {
     echo -e "$CYN==>$CLR installing xorg config"
     cp "./.xinitrc" "$HOME/.xinitrc"
 
@@ -474,7 +474,7 @@ function xorg() {
     sudo cp ./user-dirs.dirs "$HOME/.config/user-dirs.dirs"
 }
 
-function mpv() {
+function mpvConf() {
     mkdir -p "$HOME/.config/mpv/"
     cp ./input.conf ./mpv.conf "$HOME/.config/mpv/"
 }
@@ -484,7 +484,7 @@ function wallpaper() {
     cp ./map.jpg "$HOME/.local/share/wallpapers/"
 }
 
-function qemu() {
+function qemuConf() {
     if ! sudo virsh net-info --network default | grep "Active:.*yes" >/dev/null 2>&1; then
         echo -e "$GRN==>$CLR enabling virsh default"
         sudo virsh net-start default >/dev/null 2>&1
@@ -501,7 +501,7 @@ function qemu() {
     done
 }
 
-function emoji_font() {
+function emojiFontConf() {
     echo -e "$CYN==>$CLR installing emoji font"
     sudo cp ./twemoji.ttf /usr/share/fonts/
     sudo cp ./75-twemoji.conf /etc/fonts/conf.d/75-twemoji.conf
@@ -578,7 +578,7 @@ function mirrorlist() {
     fi
 }
 
-function nginx() {
+function nginxConf() {
     sudo cp ./nginx.conf /etc/nginx/nginx.conf
 }
 
@@ -689,22 +689,22 @@ mirrorlist &&
     autogen &&
     suckless &&
     browser &&
-    neovim &&
-    tmux &&
-    gdb &&
-    gtk &&
-    qt &&
-    okular &&
-    flameshot &&
-    dunst &&
-    ccache &&
-    glade &&
-    zsh &&
+    nvimConf &&
+    tmuxConf &&
+    gdbConf &&
+    gtkConf &&
+    qtConf &&
+    okularConf &&
+    flameshotConf &&
+    dunstConf &&
+    ccacheConf &&
+    gladeConf &&
+    zshConf &&
     scripts &&
-    vscode &&
-    xorg &&
-    mpv &&
+    vscodeConf &&
+    xorgConf &&
+    mpvConf &&
     wallpaper &&
-    emoji_font &&
-    nginx &&
-    qemu
+    emojiFontConf &&
+    nginxConf &&
+    qemuConf
