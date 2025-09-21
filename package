@@ -280,73 +280,23 @@ function groups() {
 }
 
 # call after setup_drives
-function git() {
+function repos() {
     git_repositories=(
-        # various dotfiles attempts
-        'https://github.com/printfdebugging/dotfiles'
-        'https://github.com/printfdebugging/pkgbuild-like-dotfiles'
-        'https://github.com/printfdebugging/dots'
-
-        # private writings
-        'https://github.com/printfdebugging/logs'
-        'https://github.com/printfdebugging/journal'
-
-        # window manager and scripts
-        'https://github.com/printfdebugging/bin'
-        'https://github.com/printfdebugging/dwm'
-        'https://github.com/printfdebugging/st'
-        'https://github.com/printfdebugging/dmenu'
-
-        # graphics programming projects
-        'https://github.com/printfdebugging/sfml-blueprints'
-        'https://github.com/printfdebugging/skia'
-        'https://github.com/printfdebugging/learn-opengl'
-        'https://github.com/printfdebugging/layman'
-
-        # books
-        'https://github.com/printfdebugging/unix-network-programming'
-
-        # misc software projects
-        'https://github.com/printfdebugging/whiteboard'
-        'https://github.com/printfdebugging/chat'
-        'https://github.com/printfdebugging/chronophage'
-        'https://github.com/printfdebugging/music-player'
-        'https://github.com/printfdebugging/neat-search-results'
-
-        # nvim plugins
-        'https://github.com/printfdebugging/chat.nvim'
-        'https://github.com/printfdebugging/mail.nvim'
-
-        # gitlab projects
-        'https://gitlab.com/printfdebugging/website'
-
-        # libreoffice projects
-        'https://github.com/printfdebugging/themes'
-        'https://github.com/printfdebugging/keybindings'
         'https://gerrit.libreoffice.org/core'
         'https://github.com/CollaboraOnline/online'
+        'https://github.com/printfdebugging/skia'
+        'https://github.com/printfdebugging/learn-opengl'
 
-        # other intersting projects from the internet
-        'https://github.com/glfw/glfw'
-        'https://github.com/nicbarker/clay'
-        'https://github.com/pongasoft/emscripten-glfw'
-        'https://github.com/TinyCC/tinycc'
-        'https://github.com/nginx/nginx'
-        'https://github.com/nitrix/glad'
-        'https://github.com/universal-ctags/ctags'
-        'https://github.com/mpv-player/mpv'
-        'https://github.com/fogleman/Craft'
-        'https://github.com/antirez/kilo'
-        'https://github.com/skx/kilua'
-        'https://github.com/bakkeby/dwm-commented'
+        'https://gitlab.com/printfdebugging/logs'
+        'https://gitlab.com/printfdebugging/website'
+        'https://gitlab.com/printfdebugging/dotfiles'
     )
     # clone git repositories
     for repository in "${git_repositories[@]}"; do
         projects_dir="/media/projects"
         repo_name="$(echo "$repository" | sed 's#.*/##')"
         if ! [ -d "$projects_dir/$repo_name" ]; then
-            echo -e "${CYN}==>${CLR} cloning $repo_name"
-            git clone "$repository" "$projects_dir/$repo_name" >/dev/null 2>&1
+            git clone "$repository" "$projects_dir/$repo_name"
         fi
     done
 }
@@ -357,11 +307,11 @@ function suckless() {
         'st'
         'dmenu'
     )
-    # clone and build suckless
     for suckless in "${suckless_projects[@]}"; do
-        suckless_dir="/media/projects/$suckless"
+        suckless_dir="$HOME/.local/src/$suckless"
         if ! [ -d "$suckless_dir" ]; then
-            git clone "https://github.com/printfdebugging/$suckless.git" "$suckless_dir"
+            mkdir -p "$suckless_dir"
+            git clone "https://gitlab.com/printfdebugging/$suckless.git" "$suckless_dir"
         fi
 
         echo -e "$CYN==>$CLR compiling $GRN$suckless$CLR"
@@ -395,7 +345,7 @@ function neovim() {
 function passwords() {
     if ! [ -d "$HOME/.password-store" ]; then
         echo -e "${CYN}==>${CLR} cloning .password-store"
-        git clone git@github.com:printfdebugging/password-store "$HOME/.password-store" >/dev/null 2>&1
+        git clone git@gitlab.com:printfdebugging/password-store "$HOME/.password-store" >/dev/null 2>&1
     fi
 
     if ! [ -f "$HOME/.password-store/.git/hooks/post-commit" ]; then
@@ -498,6 +448,14 @@ function zsh() {
     sudo chsh -s /usr/bin/zsh >/dev/null
 }
 
+function scripts() {
+    bin_dir="$HOME/.local/bin"
+    if ! [ -d "$bin_dir" ]; then
+        mkdir -p "$bin_dir"
+        git clone "https://gitlab.com/printfdebugging/bin.git" "$bin_dir"
+    fi
+}
+
 function vscode() {
     mkdir -p "$HOME/.config/Code - OSS/User/"
 
@@ -508,6 +466,7 @@ function vscode() {
 }
 
 function xorg() {
+    echo -e "$CYN==>$CLR installing xorg config"
     cp "./.xinitrc" "$HOME/.xinitrc"
 
     mkdir -p "/etc/X11/xorg.conf.d"
@@ -544,6 +503,7 @@ function qemu() {
 }
 
 function emoji_font() {
+    echo -e "$CYN==>$CLR installing emoji font"
     sudo cp ./twemoji.ttf /usr/share/fonts/
     sudo cp ./75-twemoji.conf /etc/fonts/conf.d/75-twemoji.conf
 }
@@ -726,7 +686,7 @@ mirrorlist &&
     passwords &&
     pam &&
     drives &&
-    git &&
+    repos &&
     autogen &&
     suckless &&
     browser &&
@@ -741,11 +701,11 @@ mirrorlist &&
     ccache &&
     glade &&
     zsh &&
+    scripts &&
     vscode &&
     xorg &&
     mpv &&
     wallpaper &&
     emoji_font &&
-    libreoffice_autogen &&
     nginx &&
     qemu

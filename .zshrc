@@ -54,7 +54,7 @@ export SAL_LOG_FILE=~/downloads/logfile
 
 
 # system exports
-export PATH="/media/projects/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 export PATH="$PATH:/home/printfdebugging/.cargo/bin"
 export EDITOR=nvim
 export GPG_TTY=$(tty)
@@ -109,7 +109,7 @@ alias  c="cd"
 alias cr="cd /media/projects/"
 alias  l="cd /media/projects/core/"
 alias  o="cd /media/projects/online"
-alias  b="cd /media/projects/bin"
+alias  b="cd $HOME/.local/bin"
 alias  n="cd /media/projects/notes/ && nvim"
 
 
