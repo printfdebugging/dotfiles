@@ -15,7 +15,7 @@ function sfcp() {
     sudo curl -s -L "$remote/$1" -o "$2/$1" && echo -e "$GRN==>$CLR fetched $2/$1"
 }
 
-[ "$#" -eq 0 ] && set -- packages files services groups drives mirrorlist browser suckless passwords git shell pam-gnupg qemu # pacman
+[ "$#" -eq 0 ] && set -- packages files services groups drives mirrorlist browser suckless passwords git pam-gnupg shell qemu # pacman
 
 for arg in "$@"; do
     case "$arg" in
