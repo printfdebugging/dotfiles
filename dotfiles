@@ -167,7 +167,6 @@ for arg in "$@"; do
                 'docker-compose' \
                 'doxygen' \
                 'dunst' \
-                'ebtables' \
                 'extra-cmake-modules' \
                 'fastfetch' \
                 'fd' \
