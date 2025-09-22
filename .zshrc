@@ -109,14 +109,14 @@ alias  c="cd"
 alias cr="cd /media/projects/"
 alias  l="cd /media/projects/core/"
 alias  o="cd /media/projects/online"
-alias  b="cd $HOME/.local/bin"
+alias  b="cd /media/projects/bin"
 alias  n="cd /media/projects/notes/ && nvim"
 
 
 # git aliases
 alias stat="git status"
 alias  gca="git commit --amend"
-# alias   tr="git log --all --oneline --graph --decorate"
+alias  gtr="git log --all --oneline --graph --decorate"
 alias   br="git branch"
 alias   gc="git clone"
 
