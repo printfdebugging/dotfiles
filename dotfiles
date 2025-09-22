@@ -203,7 +203,6 @@ for arg in "$@"; do
                 'i3lock' \
                 'icu' \
                 'inkscape' \
-                'iptables' \
                 'java-environment' \
                 'jdk-openjdk' \
                 'jre21-openjdk' \
