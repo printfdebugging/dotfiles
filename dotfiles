@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# TODO:
+# 1. categorize packages in the list
+# 2. replace grep -c with grep -q
+# 3. test things on a new vm
+# 4. add more visual flare wherever possible
+# 5. have just one gpg key
+
 RED='\033[1;31m'
 GRN='\033[1;32m'
 CLR='\033[0m'
@@ -519,8 +526,8 @@ for arg in "$@"; do
     "suckless")
         {
             # clean previous clone
-            source_dir="$HOME/.local/src"
-            sudo rm -rf "$source_dir" && mkdir -p "$source_dir"
+            source_dir="/media/projects"
+            [ -d "$source_dir" ] || sudo mkdir -p "$source_dir" && sudo chown "$(whoami):$(whoami)" "$source_dir"
 
             # clone and compile from source
             for suckless in 'dwm' 'st' 'dmenu'; do
@@ -548,9 +555,14 @@ for arg in "$@"; do
                 'https://github.com/CollaboraOnline/online'
                 'https://github.com/printfdebugging/skia'
                 'https://github.com/printfdebugging/learn-opengl'
+
                 'https://gitlab.com/printfdebugging/logs'
                 'https://gitlab.com/printfdebugging/website'
+
                 'https://gitlab.com/printfdebugging/bin'
+                'https://gitlab.com/printfdebugging/dwm'
+                'https://gitlab.com/printfdebugging/st'
+                'https://gitlab.com/printfdebugging/dmenu'
             )
             # clone git repositories
             for repository in "${git_repositories[@]}"; do
