@@ -1152,7 +1152,7 @@ end
 
 function timelog_entry()
   local date_time_stamp = vim.fn.system('date "+%F %r"')
-  local log_file_path = "/media/projects/logs/timelog.md"
+  local log_file_path = "/media/projects/journal/logs/timelog.txt"
   date_time_stamp = string.gsub(date_time_stamp, "\n", "")
   local log = vim.fn.input("log: ")
   if log == "" then
