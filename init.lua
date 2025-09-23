@@ -564,7 +564,7 @@ require("lazy").setup({
           local current_file_path = vim.fn.expand("%:p")
           local excluded_strings = {
             "online",
-            "libreoffice",
+            "core",
           }
           for _, str in ipairs(excluded_strings) do
             if string.match(current_file_path, str) then
