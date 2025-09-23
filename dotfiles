@@ -550,22 +550,46 @@ for arg in "$@"; do
             directory=/media/projects
             [ -d "$directory" ] || { sudo mkdir -p "$directory" && sudo chown "$(whoami):$(whoami)" "$directory"; }
 
-            git_repositories=(
+            repositories=(
+                # libreoffice
                 'https://gerrit.libreoffice.org/core'
                 'https://github.com/CollaboraOnline/online'
+                'https://github.com/printfdebugging/themes'
+                'https://github.com/printfdebugging/keybindings'
+
+                # graphics
                 'https://github.com/printfdebugging/skia'
                 'https://github.com/printfdebugging/learn-opengl'
+                'https://github.com/printfdebugging/sfml-blueprints'
+                'https://github.com/nitrix/layman.git'
 
+                # other's projects
+                'https://github.com/glfw/glfw'
+                'https://github.com/nicbarker/clay'
+                'https://github.com/pongasoft/emscripten-glfw'
+                'https://github.com/TinyCC/tinycc'
+                'https://github.com/nginx/nginx'
+                'https://github.com/nitrix/glad'
+                'https://github.com/universal-ctags/ctags'
+                'https://github.com/mpv-player/mpv'
+                'https://github.com/fogleman/Craft'
+                'https://github.com/antirez/kilo'
+                'https://github.com/skx/kilua'
+                'https://github.com/bakkeby/dwm-commented'
+
+                # system
                 'https://gitlab.com/printfdebugging/logs'
+                'https://gitlab.com/printfdebugging/journal'
                 'https://gitlab.com/printfdebugging/website'
-
                 'https://gitlab.com/printfdebugging/bin'
                 'https://gitlab.com/printfdebugging/dwm'
                 'https://gitlab.com/printfdebugging/st'
                 'https://gitlab.com/printfdebugging/dmenu'
+                'https://gitlab.com/printfdebugging/dotfiles'
+                #'https://gitlab.com/printfdebugging/password-store'
             )
             # clone git repositories
-            for repository in "${git_repositories[@]}"; do
+            for repository in "${repositories[@]}"; do
                 name=$(echo "$repository" | awk -F'/' '{print $NF}')
                 [ -d "$directory/$name" ] || git clone "$repository" "$directory/$name"
             done
