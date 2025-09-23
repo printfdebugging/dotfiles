@@ -578,7 +578,6 @@ for arg in "$@"; do
                 'https://github.com/bakkeby/dwm-commented'
 
                 # system
-                'https://gitlab.com/printfdebugging/logs'
                 'https://gitlab.com/printfdebugging/journal'
                 'https://gitlab.com/printfdebugging/website'
                 'https://gitlab.com/printfdebugging/bin'
