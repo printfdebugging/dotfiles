@@ -22,7 +22,7 @@ function sfcp() {
     sudo curl -s -L "$remote/$1" -o "$2/$1" && echo -e "$GRN==>$CLR fetched $2/$1"
 }
 
-[ "$#" -eq 0 ] && set -- packages files services groups drives mirrorlist browser suckless passwords git pam-gnupg shell qemu # pacman
+[ "$#" -eq 0 ] && set -- packages files services groups drives mirrorlist suckless passwords git pam-gnupg shell qemu # pacman
 
 for arg in "$@"; do
     case "$arg" in
@@ -500,26 +500,6 @@ for arg in "$@"; do
                 sfcp pacman.conf /etc
                 sudo systemctl mask reflector.service
             fi
-        }
-        ;;
-
-    "browser")
-        {
-            chromium_extensions=(
-                'bhlhnicpbhignbdhedgjhgdocnmhomnp'
-                'cjpalhdlnbpafiamejdnhcphjbkeiagm'
-                'dbepggeogbaibhgnhhndojpepiihcmeb'
-                'dpjamkmjmigaoobjbekmfgabipmfilij'
-                'eimadpbcbfnmbkopoojfekhnkhdbieeh'
-                'kchgllkpfcggmdaoopkhlkbcokngahlg'
-            )
-            # create the extension files
-            sudo mkdir -p "/usr/share/chromium/extensions/"
-            for extension in "${chromium_extensions[@]}"; do
-                if ! [ -f "/usr/share/chromium/extensions/$extension.json" ]; then
-                    echo '{ "external_update_url": "https://clients2.google.com/service/update2/crx" }' | sudo tee "/usr/share/chromium/extensions/$extension.json" >/dev/null 2>&1
-                fi
-            done
         }
         ;;
 
