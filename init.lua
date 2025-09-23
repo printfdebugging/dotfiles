@@ -5,6 +5,7 @@ vim.deprecate = function() end
 local options = {
   relativenumber = false,
   number = false,
+  fixendofline = false,
   ruler = false,
   cmdheight = 1,
   background = "dark",
