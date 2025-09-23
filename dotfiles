@@ -362,7 +362,9 @@ for arg in "$@"; do
                 'zsh-completions' \
                 'zsh-syntax-highlighting' \
                 'opengl-man-pages' \
-                'zxing-cpp'
+                'zxing-cpp' \
+                'firefox-dark-reader' \
+                'firefox-ublock-origin'
 
             if ! which yay >/dev/null 2>&1; then
                 mkdir -p "$HOME/.local/src" && cd "$HOME/.local/src" || exit 1
