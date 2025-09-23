@@ -158,7 +158,7 @@ for arg in "$@"; do
                 'cargo' \
                 'cbatticon' \
                 'ccache' \
-                'chromium' \
+                'firefox' \
                 'clang' \
                 'clucene' \
                 'cmake' \
@@ -370,7 +370,6 @@ for arg in "$@"; do
             fi
 
             yay -Sy --noconfirm \
-                'brave-bin' \
                 'pam-gnupg' \
                 'par' \
                 'gtypist' \
