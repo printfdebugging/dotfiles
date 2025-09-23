@@ -364,7 +364,11 @@ for arg in "$@"; do
                 'opengl-man-pages' \
                 'zxing-cpp' \
                 'firefox-dark-reader' \
-                'firefox-ublock-origin'
+                'firefox-ublock-origin' \
+                'thunderbird-ublock-origin' \
+                'thunderbird-dark-reader' \
+                'ublock-origin' \
+                'dark-reader'
 
             if ! which yay >/dev/null 2>&1; then
                 mkdir -p "$HOME/.local/src" && cd "$HOME/.local/src" || exit 1
