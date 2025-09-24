@@ -49,8 +49,8 @@ for arg in "$@"; do
             fcp .zprofile "$HOME"
             fcp .xinitrc "$HOME"
             fcp .gitconfig "$HOME"
-            fcp .gpgkey.asc "$HOME"
-            fcp .pgpkey.asc "$HOME"
+            fcp .gmail.asc "$HOME"
+            fcp .proton.asc "$HOME"
             fcp .pam-gnupg "$HOME"
             fcp id_ed25519 "$HOME/.ssh"
             fcp id_ed25519.pub "$HOME/.ssh"
@@ -91,8 +91,8 @@ for arg in "$@"; do
             # decrypt secrets after copy
             while ! ansible-vault decrypt \
                 "$HOME/.gitconfig" \
-                "$HOME/.gpgkey.asc" \
-                "$HOME/.pgpkey.asc" \
+                "$HOME/.gmail.asc" \
+                "$HOME/.proton.asc" \
                 "$HOME/.pam-gnupg" \
                 "$HOME/.gnupg/gpg-agent.conf" \
                 "$HOME/.gnupg/gpg.conf" \
@@ -107,7 +107,7 @@ for arg in "$@"; do
             done
 
             # import encryption gpg key
-            while ! gpg --import "$HOME/.pgpkey.asc"; do
+            while ! gpg --import "$HOME/.gmail.asc"; do
                 echo -e "$RED==>$CLR wrong password, please try again!!"
             done
 
