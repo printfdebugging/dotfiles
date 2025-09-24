@@ -155,7 +155,6 @@ for arg in "$@"; do
                 'breeze-gtk' \
                 'bridge-utils' \
                 'btop' \
-                'cargo' \
                 'cbatticon' \
                 'ccache' \
                 'firefox' \
