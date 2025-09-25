@@ -28,21 +28,22 @@ for arg in "$@"; do
     case "$arg" in
     "files")
         {
-            mkdir -p "$HOME/.local/share/wallpapers/"
-            mkdir -p "$HOME/.local/share/applications"
-            mkdir -p "$HOME/.ssh"
-            mkdir -p "$HOME/.gnupg"
-            mkdir -p "$HOME/.config"
-            mkdir -p "$HOME/.config/nvim"
-            mkdir -p "$HOME/.config/tmux"
-            mkdir -p "$HOME/.config/mpv"
-            mkdir -p "$HOME/.config/gdb"
-            mkdir -p "$HOME/.config/gtk-3.0"
-            mkdir -p "$HOME/.config/qt6ct"
-            mkdir -p "$HOME/.config/flameshot"
-            mkdir -p "$HOME/.config/dunst"
-            mkdir -p "$HOME/.config/ccache"
-            mkdir -p "$HOME/.config/Code - OSS/User/"
+            mkdir -p \
+                "$HOME/.local/share/wallpapers/" \
+                "$HOME/.local/share/applications" \
+                "$HOME/.ssh" \
+                "$HOME/.gnupg" \
+                "$HOME/.config" \
+                "$HOME/.config/nvim" \
+                "$HOME/.config/tmux" \
+                "$HOME/.config/mpv" \
+                "$HOME/.config/gdb" \
+                "$HOME/.config/gtk-3.0" \
+                "$HOME/.config/qt6ct" \
+                "$HOME/.config/flameshot" \
+                "$HOME/.config/dunst" \
+                "$HOME/.config/ccache" \
+                "$HOME/.config/Code - OSS/User/"
 
             # copy files
             fcp .zshrc "$HOME"
