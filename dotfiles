@@ -546,8 +546,20 @@ for arg in "$@"; do
 
     "passwords")
         {
-            [ -d "$HOME/.password-store" ] || git clone git@gitlab.com:printfdebugging/password-store "$HOME/.password-store" >/dev/null 2>&1
-            [ -f "$HOME/.password-store/.git/hooks/post-commit" ] || printf "#\!/bin/bash\n\ngit push" | tee "$HOME/.password-store/.git/hooks/post-commit" >/dev/null 2>&1
+            [ -d "$HOME/.password-store" ] ||
+                git clone git@gitlab.com:printfdebugging/password-store \
+                    "$HOME/.password-store" >/dev/null 2>&1
+
+            (
+                cd "$HOME/.password-store" || exit 1
+                git remote remove origin
+                git remote add origin git@gitlab.com:printfdebugging/password-store.git
+                git remote set-url --add --push origin git@gitlab.com:printfdebugging/password-store.git
+                git remote set-url --add --push origin git@github.com:printfdebugging/password-store.git
+            )
+
+            [ -f "$HOME/.password-store/.git/hooks/post-commit" ] ||
+                printf "#\!/bin/bash\n\ngit push" | tee "$HOME/.password-store/.git/hooks/post-commit" >/dev/null 2>&1
         }
         ;;
 
@@ -557,34 +569,12 @@ for arg in "$@"; do
             directory=/media/projects
             [ -d "$directory" ] || { sudo mkdir -p "$directory" && sudo chown "$(whoami):$(whoami)" "$directory"; }
 
-            repositories=(
-                # libreoffice
-                'https://gerrit.libreoffice.org/core'
-                'https://github.com/CollaboraOnline/online'
+            personal_repositories=(
                 'https://github.com/printfdebugging/themes'
                 'https://github.com/printfdebugging/keybindings'
-
-                # graphics
                 'https://github.com/printfdebugging/skia'
                 'https://github.com/printfdebugging/learn-opengl'
                 'https://github.com/printfdebugging/sfml-blueprints'
-                'https://github.com/nitrix/layman.git'
-
-                # other's projects
-                'https://github.com/glfw/glfw'
-                'https://github.com/nicbarker/clay'
-                'https://github.com/pongasoft/emscripten-glfw'
-                'https://github.com/TinyCC/tinycc'
-                'https://github.com/nginx/nginx'
-                'https://github.com/nitrix/glad'
-                'https://github.com/universal-ctags/ctags'
-                'https://github.com/mpv-player/mpv'
-                'https://github.com/fogleman/Craft'
-                'https://github.com/antirez/kilo'
-                'https://github.com/skx/kilua'
-                'https://github.com/bakkeby/dwm-commented'
-
-                # system
                 'https://gitlab.com/printfdebugging/journal'
                 'https://gitlab.com/printfdebugging/website'
                 'https://gitlab.com/printfdebugging/bin'
@@ -592,9 +582,25 @@ for arg in "$@"; do
                 'https://gitlab.com/printfdebugging/st'
                 'https://gitlab.com/printfdebugging/dmenu'
                 'https://gitlab.com/printfdebugging/dotfiles'
-                #'https://gitlab.com/printfdebugging/password-store'
+                'https://gitlab.com/printfdebugging/password-store'
             )
-            # clone git repositories
+            for repository in "${personal_repositories[@]}"; do
+                name=$(echo "$repository" | awk -F'/' '{print $NF}')
+                [ -d "$directory/$name" ] || git clone "$repository" "$directory/$name"
+                (
+                    cd "$directory/$name" || exit 1
+                    git remote remove origin
+                    git remote add origin "git@gitlab.com:printfdebugging/$name.git"
+                    git remote set-url --add --push origin "git@gitlab.com:printfdebugging/$name.git"
+                    git remote set-url --add --push origin "git@github.com:printfdebugging/$name.git"
+                )
+            done
+
+            repositories=(
+                'https://gerrit.libreoffice.org/core'
+                'https://github.com/CollaboraOnline/online'
+                'https://github.com/nitrix/layman'
+            )
             for repository in "${repositories[@]}"; do
                 name=$(echo "$repository" | awk -F'/' '{print $NF}')
                 [ -d "$directory/$name" ] || git clone "$repository" "$directory/$name"
