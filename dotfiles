@@ -391,6 +391,9 @@ for arg in "$@"; do
                 'libvirtd.service' \
                 'docker.service' \
                 'tlp.service'
+
+            sudo systemctl disable --now \
+                'sshd.service'
         }
         ;;
 
