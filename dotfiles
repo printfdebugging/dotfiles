@@ -293,7 +293,7 @@ for arg in "$@"; do
                 'python-pip' \
                 'python-polib' \
                 'python-watchdog' \
-                'qemu' \
+                'qemu-full' \
                 'qt5-base' \
                 'qt6ct' \
                 'qt6-base' \
