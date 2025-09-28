@@ -213,6 +213,7 @@ for arg in "$@"; do
                 'junit' \
                 'lcms2' \
                 'lib32-libcap' \
+                'chromium' \
                 'libabw' \
                 'libatomic_ops' \
                 'libcap' \
