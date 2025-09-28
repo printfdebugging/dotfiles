@@ -569,6 +569,7 @@ for arg in "$@"; do
             {
                 if ! [ -f "$PASSWORD_STORE_DIR/.git/hooks/post-commit" ]; then
                     printf "#\!/bin/bash\n\ngit push" | tee "$PASSWORD_STORE_DIR/.git/hooks/post-commit" >/dev/null 2>&1
+                    chmod +x "$PASSWORD_STORE_DIR/.git/hooks/post-commit"
                 fi
             }
 
