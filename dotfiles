@@ -567,14 +567,14 @@ for arg in "$@"; do
             done
 
             {
-                # for password-store, add a push  on commit hook
-                [ -f "$PASSWORD_STORE_DIR/.git/hooks/post-commit" ] || printf "#\!/bin/bash\n\ngit push" | tee "$PASSWORD_STORE_DIR/.git/hooks/post-commit" >/dev/null 2>&1
+                if ! [ -f "$PASSWORD_STORE_DIR/.git/hooks/post-commit" ]; then
+                    printf "#\!/bin/bash\n\ngit push" | tee "$PASSWORD_STORE_DIR/.git/hooks/post-commit" >/dev/null 2>&1
+                fi
             }
 
             {
-                source_dir="$HOME/repos"
                 for suckless in 'dwm' 'st' 'dmenu'; do
-                    sudo make -C "$source_dir/$suckless" install >/dev/null 2>&1
+                    sudo make -C "$directory/$suckless" install >/dev/null 2>&1
                 done
             }
 
