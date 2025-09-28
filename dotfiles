@@ -408,58 +408,61 @@ for arg in "$@"; do
         }
         ;;
 
-    "drives")
-        {
-            declare -A external=(
-                [UUID]=6a90a7e3-3732-4b58-8a3a-fbc098a86b7e
-                [PATH]=/media/external/
-                [TYPE]=ext4
-                [OPTIONS]='defaults 0 0'
-            )
-
-            declare -A personal=(
-                [UUID]=18bd0da1-8e29-4d5a-a3bf-4cf8a012699d
-                [PATH]=/media/personal/
-                [TYPE]=ext4
-                [OPTIONS]='defaults 0 0'
-            )
-
-            declare -A projects=(
-                [UUID]=379872b5-a96a-4d1f-ad83-231cc27b7c6a
-                [PATH]=/media/projects/
-                [TYPE]=ext4
-                [OPTIONS]='defaults 0 0'
-            )
-
-            declare -A archive=(
-                [UUID]=4313c35d-7d9e-4e77-871e-7c70fdd1e01d
-                [PATH]=/media/archive/
-                [TYPE]=ext4
-                [OPTIONS]='defaults 0 0'
-            )
-
-            drives=(
-                external
-                projects
-                personal
-                archive
-            )
-
-            modified=false
-            for drive_name in "${drives[@]}"; do
-                declare -n drive="$drive_name"
-                [ -d "${drive[PATH]}" ] || sudo mkdir -p "${drive[PATH]}" && sudo chown "$(whoami):$(whoami)" "${drive[PATH]}"
-                [ "$(lsblk -f | grep -c "${drive[UUID]}")" -eq 0 ] && continue
-                [ "$(grep -e "${drive[UUID]}" /etc/fstab)" == "" ] && echo "UUID=${drive[UUID]} ${drive[PATH]} ${drive[TYPE]} ${drive[OPTIONS]}" | sudo tee -a /etc/fstab && modified=true
-            done
-            [ "$modified" ] && sudo mount -a
-        }
-        ;;
+        # "drives")
+        #     {
+        #         declare -A external=(
+        #             [UUID]=6a90a7e3-3732-4b58-8a3a-fbc098a86b7e
+        #             [PATH]=/media/external/
+        #             [TYPE]=ext4
+        #             [OPTIONS]='defaults 0 0'
+        #         )
+        #
+        #         declare -A personal=(
+        #             [UUID]=18bd0da1-8e29-4d5a-a3bf-4cf8a012699d
+        #             [PATH]=/media/personal/
+        #             [TYPE]=ext4
+        #             [OPTIONS]='defaults 0 0'
+        #         )
+        #
+        #         declare -A projects=(
+        #             [UUID]=379872b5-a96a-4d1f-ad83-231cc27b7c6a
+        #             [PATH]=/media/projects/
+        #             [TYPE]=ext4
+        #             [OPTIONS]='defaults 0 0'
+        #         )
+        #
+        #         declare -A archive=(
+        #             [UUID]=4313c35d-7d9e-4e77-871e-7c70fdd1e01d
+        #             [PATH]=/media/archive/
+        #             [TYPE]=ext4
+        #             [OPTIONS]='defaults 0 0'
+        #         )
+        #
+        #         drives=(
+        #             external
+        #             projects
+        #             personal
+        #             archive
+        #         )
+        #
+        #         modified=false
+        #         for drive_name in "${drives[@]}"; do
+        #             declare -n drive="$drive_name"
+        #             [ -d "${drive[PATH]}" ] || sudo mkdir -p "${drive[PATH]}" && sudo chown "$(whoami):$(whoami)" "${drive[PATH]}"
+        #             [ "$(lsblk -f | grep -c "${drive[UUID]}")" -eq 0 ] && continue
+        #             [ "$(grep -e "${drive[UUID]}" /etc/fstab)" == "" ] && echo "UUID=${drive[UUID]} ${drive[PATH]} ${drive[TYPE]} ${drive[OPTIONS]}" | sudo tee -a /etc/fstab && modified=true
+        #         done
+        #         [ "$modified" ] && sudo mount -a
+        #     }
+        # ;;
 
     "pacman")
         {
-            local_folder=/media/external/archlinux
+            local_folder="$HOME/.local/archlinux"
             remote_mirror=rsync://de.arch.mirror.kescher.at/mirror/arch/
+
+            [ -d "$local_folder" ] || mkdir -p "$local_folder"
+
             rsync -rlv \
                 --exclude '/archive' \
                 --exclude '/community' \
@@ -530,8 +533,8 @@ for arg in "$@"; do
     "suckless")
         {
             # clean previous clone
-            source_dir="/media/projects"
-            [ -d "$source_dir" ] || sudo mkdir -p "$source_dir" && sudo chown "$(whoami):$(whoami)" "$source_dir"
+            source_dir="$HOME/repos"
+            [ -d "$source_dir" ] || mkdir -p "$source_dir"
 
             # clone and compile from source
             for suckless in 'dwm' 'st' 'dmenu'; do
@@ -541,29 +544,10 @@ for arg in "$@"; do
         }
         ;;
 
-    "passwords")
-        {
-            [ -d "$HOME/.password-store" ] ||
-                git clone git@gitlab.com:printfdebugging/password-store \
-                    "$HOME/.password-store" >/dev/null 2>&1
-
-            (
-                cd "$HOME/.password-store" || exit 1
-                git remote remove origin
-                git remote add origin git@gitlab.com:printfdebugging/password-store.git
-                git remote set-url --add --push origin git@gitlab.com:printfdebugging/password-store.git
-                git remote set-url --add --push origin git@github.com:printfdebugging/password-store.git
-            )
-
-            [ -f "$HOME/.password-store/.git/hooks/post-commit" ] ||
-                printf "#\!/bin/bash\n\ngit push" | tee "$HOME/.password-store/.git/hooks/post-commit" >/dev/null 2>&1
-        }
-        ;;
-
     "git")
         {
             # create project directory
-            directory=/media/projects
+            directory="$HOME/repos"
             [ -d "$directory" ] || { sudo mkdir -p "$directory" && sudo chown "$(whoami):$(whoami)" "$directory"; }
 
             personal_repositories=(
@@ -579,7 +563,10 @@ for arg in "$@"; do
                 'https://gitlab.com/printfdebugging/st'
                 'https://gitlab.com/printfdebugging/dmenu'
                 'https://gitlab.com/printfdebugging/dotfiles'
+                'https://gitlab.com/printfdebugging/dotfiles'
                 'https://gitlab.com/printfdebugging/password-store'
+                'https://gitlab.com/printfdebugging/the-world-beyond'
+
             )
             for repository in "${personal_repositories[@]}"; do
                 name=$(echo "$repository" | awk -F'/' '{print $NF}')
@@ -592,6 +579,9 @@ for arg in "$@"; do
                     git remote set-url --add --push origin "git@github.com:printfdebugging/$name.git"
                 )
             done
+
+            # for password-store, add a push  on commit hook
+            [ -f "$HOME/.password-store/.git/hooks/post-commit" ] || printf "#\!/bin/bash\n\ngit push" | tee "$HOME/.password-store/.git/hooks/post-commit" >/dev/null 2>&1
 
             repositories=(
                 'https://gerrit.libreoffice.org/core'

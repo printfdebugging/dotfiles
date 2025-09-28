@@ -469,8 +469,8 @@ require("lazy").setup({
       vim.cmd.colorscheme("catppuccin")
       vim.cmd([[
       highlight TabLineSel    guifg=#00222b guibg=#59c2ff
-      highlight TabLineFill   guibg=#242b38
-      highlight TabLine       guibg=#242b38
+      highlight TabLineFill   guibg=#00000000
+      highlight TabLine       guibg=#00000000
       highlight LineNr        guifg=#3f444a
       highlight LineNrAbove   guifg=#3f444a
       highlight LineNrBelow   guifg=#3f444a
@@ -674,7 +674,6 @@ require("lazy").setup({
     config = function()
       require("lualine").setup({
         options = {
-          theme = "ayu_mirage",
           section_separators = { left = "|", right = "|" },
           component_separators = { left = "|", right = "|" },
         },
@@ -1152,7 +1151,8 @@ end
 
 function timelog_entry()
   local date_time_stamp = vim.fn.system('date "+%F %r"')
-  local log_file_path = "/media/projects/journal/logs/timelog.txt"
+  local journal_dir = os.getenv("JOURNAL_DIR") or os.getenv("HOME")
+  local log_file_path = journal_dir .. "/logs/timelog.txt"
   date_time_stamp = string.gsub(date_time_stamp, "\n", "")
   local log = vim.fn.input("log: ")
   if log == "" then
