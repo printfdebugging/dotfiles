@@ -12,12 +12,6 @@ dunst &
 dispscript
 xcompmgr &
 
-# start neccessary programs
-thunderbird &
-thunar &
-browser &
-st &
-
 session=${1:-dwm}
 
 case $session in

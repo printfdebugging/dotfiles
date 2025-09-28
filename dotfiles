@@ -22,7 +22,7 @@ function sfcp() {
     sudo curl -s -L "$remote/$1" -o "$2/$1" && echo -e "$GRN==>$CLR fetched $2/$1"
 }
 
-[ "$#" -eq 0 ] && set -- packages files services groups drives mirrorlist chromium suckless passwords git pam-gnupg shell qemu # pacman
+[ "$#" -eq 0 ] && set -- packages files services groups mirrorlist chromium git pam-gnupg shell qemu # pacman
 
 for arg in "$@"; do
     case "$arg" in
@@ -530,20 +530,6 @@ for arg in "$@"; do
         }
         ;;
 
-    "suckless")
-        {
-            # clean previous clone
-            source_dir="$HOME/repos"
-            [ -d "$source_dir" ] || mkdir -p "$source_dir"
-
-            # clone and compile from source
-            for suckless in 'dwm' 'st' 'dmenu'; do
-                git clone "https://gitlab.com/printfdebugging/$suckless.git" "$source_dir/$suckless"
-                sudo make -C "$source_dir/$suckless" install >/dev/null 2>&1
-            done
-        }
-        ;;
-
     "git")
         {
             # create project directory
@@ -580,8 +566,17 @@ for arg in "$@"; do
                 )
             done
 
-            # for password-store, add a push  on commit hook
-            [ -f "$HOME/.password-store/.git/hooks/post-commit" ] || printf "#\!/bin/bash\n\ngit push" | tee "$HOME/.password-store/.git/hooks/post-commit" >/dev/null 2>&1
+            {
+                # for password-store, add a push  on commit hook
+                [ -f "$PASSWORD_STORE_DIR/.git/hooks/post-commit" ] || printf "#\!/bin/bash\n\ngit push" | tee "$PASSWORD_STORE_DIR/.git/hooks/post-commit" >/dev/null 2>&1
+            }
+
+            {
+                source_dir="$HOME/repos"
+                for suckless in 'dwm' 'st' 'dmenu'; do
+                    sudo make -C "$source_dir/$suckless" install >/dev/null 2>&1
+                done
+            }
 
             repositories=(
                 'https://gerrit.libreoffice.org/core'
