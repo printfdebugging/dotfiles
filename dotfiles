@@ -22,7 +22,7 @@ function sfcp() {
     sudo curl -s -L "$remote/$1" -o "$2/$1" && echo -e "$GRN==>$CLR fetched $2/$1"
 }
 
-[ "$#" -eq 0 ] && set -- packages files services groups mirrorlist chromium git pam-gnupg shell qemu # pacman
+[ "$#" -eq 0 ] && set -- packages files services groups chromium git pam-gnupg shell qemu # pacman
 
 for arg in "$@"; do
     case "$arg" in
@@ -282,7 +282,6 @@ for arg in "$@"; do
                 'pasystray' \
                 'pavucontrol' \
                 'perf' \
-                'plasma-framework5' \
                 'poco' \
                 'poppler' \
                 'postgresql-libs' \
@@ -408,57 +407,9 @@ for arg in "$@"; do
         }
         ;;
 
-        # "drives")
-        #     {
-        #         declare -A external=(
-        #             [UUID]=6a90a7e3-3732-4b58-8a3a-fbc098a86b7e
-        #             [PATH]=/media/external/
-        #             [TYPE]=ext4
-        #             [OPTIONS]='defaults 0 0'
-        #         )
-        #
-        #         declare -A personal=(
-        #             [UUID]=18bd0da1-8e29-4d5a-a3bf-4cf8a012699d
-        #             [PATH]=/media/personal/
-        #             [TYPE]=ext4
-        #             [OPTIONS]='defaults 0 0'
-        #         )
-        #
-        #         declare -A projects=(
-        #             [UUID]=379872b5-a96a-4d1f-ad83-231cc27b7c6a
-        #             [PATH]=/media/projects/
-        #             [TYPE]=ext4
-        #             [OPTIONS]='defaults 0 0'
-        #         )
-        #
-        #         declare -A archive=(
-        #             [UUID]=4313c35d-7d9e-4e77-871e-7c70fdd1e01d
-        #             [PATH]=/media/archive/
-        #             [TYPE]=ext4
-        #             [OPTIONS]='defaults 0 0'
-        #         )
-        #
-        #         drives=(
-        #             external
-        #             projects
-        #             personal
-        #             archive
-        #         )
-        #
-        #         modified=false
-        #         for drive_name in "${drives[@]}"; do
-        #             declare -n drive="$drive_name"
-        #             [ -d "${drive[PATH]}" ] || sudo mkdir -p "${drive[PATH]}" && sudo chown "$(whoami):$(whoami)" "${drive[PATH]}"
-        #             [ "$(lsblk -f | grep -c "${drive[UUID]}")" -eq 0 ] && continue
-        #             [ "$(grep -e "${drive[UUID]}" /etc/fstab)" == "" ] && echo "UUID=${drive[UUID]} ${drive[PATH]} ${drive[TYPE]} ${drive[OPTIONS]}" | sudo tee -a /etc/fstab && modified=true
-        #         done
-        #         [ "$modified" ] && sudo mount -a
-        #     }
-        # ;;
-
     "pacman")
         {
-            local_folder="$HOME/.local/archlinux"
+            local_folder="$HOME/downloads/archlinux"
             remote_mirror=rsync://de.arch.mirror.kescher.at/mirror/arch/
 
             [ -d "$local_folder" ] || mkdir -p "$local_folder"
