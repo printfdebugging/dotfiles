@@ -468,6 +468,11 @@ for arg in "$@"; do
                 name=$(echo "$repository" | awk -F'/' '{print $NF}')
                 [ -d "$directory/$name" ] || git clone "$repository" "$directory/$name"
             done
+
+            {
+                # libreoffice autogen.input setup
+                fcp autogen.input "$HOME/repos/core"
+            }
         }
         ;;
 

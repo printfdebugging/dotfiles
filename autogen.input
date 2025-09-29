@@ -1,10 +1,11 @@
 --enable-dbgutil
---with-jdk-home=/usr/lib/jvm/java-17-openjdk
+--with-jdk-home=/usr/lib/jvm/java-25-openjdk
 --without-junit
 --without-doxygen
 --enable-ccache
 --enable-pch
 --enable-kf6
+--enable-gtk4
 --with-system-libxml=no
 --enable-odk
 --without-system-nss
