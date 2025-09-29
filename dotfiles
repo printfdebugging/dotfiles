@@ -24,7 +24,7 @@ function sfcp() {
 
 [ "$#" -eq 0 ] && set -- \
     packages files services groups \
-    git pam-gnupg shell qemu # pacman mirrorlist
+    git pam-gnupg drives shell qemu # pacman mirrorlist
 
 for arg in "$@"; do
     case "$arg" in
@@ -553,6 +553,50 @@ for arg in "$@"; do
                 sfcp pacman.conf /etc
                 sudo systemctl mask reflector.service
             fi
+        }
+        ;;
+
+    "drives")
+        {
+            declare -A media=(
+                [UUID]=6a90a7e3-3732-4b58-8a3a-fbc098a86b7e
+                [PATH]="$HOME/media"
+                [TYPE]=ext4
+                [OPTIONS]='defaults 0 0'
+            )
+            declare -A archive=(
+                [UUID]=4313c35d-7d9e-4e77-871e-7c70fdd1e01d
+                [PATH]="$HOME/archive"
+                [TYPE]=ext4
+                [OPTIONS]='defaults 0 0'
+            )
+            declare -A documents=(
+                [UUID]=18bd0da1-8e29-4d5a-a3bf-4cf8a012699d
+                [PATH]="$HOME/documents"
+                [TYPE]=ext4
+                [OPTIONS]='defaults 0 0'
+            )
+            declare -A downloads=(
+                [UUID]=379872b5-a96a-4d1f-ad83-231cc27b7c6a
+                [PATH]="$HOME/downloads"
+                [TYPE]=ext4
+                [OPTIONS]='defaults 0 0'
+            )
+            drives=(
+                media
+                archive
+                documents
+                downloads
+            )
+
+            modified=false
+            for drive_name in "${drives[@]}"; do
+                declare -n drive="$drive_name"
+                [ -d "${drive[PATH]}" ] || mkdir -p "${drive[PATH]}" && chown "$(whoami):$(whoami)" "${drive[PATH]}"
+                [ "$(lsblk -f | grep -c "${drive[UUID]}")" -eq 0 ] && continue
+                [ "$(grep -e "${drive[UUID]}" /etc/fstab)" == "" ] && echo "UUID=${drive[UUID]} ${drive[PATH]} ${drive[TYPE]} ${drive[OPTIONS]}" | sudo tee -a /etc/fstab && modified=true
+            done
+            [ "$modified" ] && sudo mount -a
         }
         ;;
 
