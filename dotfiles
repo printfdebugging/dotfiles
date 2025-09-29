@@ -365,7 +365,8 @@ for arg in "$@"; do
                 'thunderbird-ublock-origin' \
                 'thunderbird-dark-reader' \
                 'ublock-origin' \
-                'dark-reader'
+                'dark-reader' \
+                'os-prober'
 
             if ! which yay >/dev/null 2>&1; then
                 mkdir -p "$HOME/.local/src" && cd "$HOME/.local/src" || exit 1
