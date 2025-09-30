@@ -40,9 +40,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; face customizations ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;
-(set-face-attribute 'default nil :family "Iosevka Nerd Font" :height 210)
-(set-face-attribute 'fixed-pitch nil :family "Iosevka Nerd Font" :height 210)
-(set-face-attribute 'variable-pitch nil :family "Iosevka Nerd Font" :height 210)
+(set-face-attribute 'default nil :family "JetBrainsMono Nerd Font" :height 210)
+(set-face-attribute 'fixed-pitch nil :family "JetBrainsMono Nerd Font" :height 210)
+(set-face-attribute 'variable-pitch nil :family "JetBrainsMono Nerd Font" :height 210)
 
 
 
