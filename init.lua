@@ -3,8 +3,8 @@ vim.deprecate = function() end
 
 --------------- options ---------------------
 local options = {
-  relativenumber = false,
-  number = false,
+  relativenumber = true,
+  number = true,
   fixendofline = false,
   ruler = false,
   cmdheight = 1,
@@ -20,7 +20,7 @@ local options = {
   smartcase = true,
   cursorline = false,
   termguicolors = true,
-  signcolumn = "no",
+  signcolumn = "yes",
   backspace = "indent,eol,start",
   splitright = true,
   splitbelow = true,
