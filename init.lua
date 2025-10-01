@@ -471,7 +471,7 @@ require("lazy").setup({
       highlight TabLineSel    guifg=#00222b guibg=#59c2ff
       highlight TabLineFill   guibg=#00000000
       highlight TabLine       guibg=#00000000
-      highlight LineNr        guifg=#3f444a
+      highlight LineNr        guifg=#d8dee9
       highlight LineNrAbove   guifg=#3f444a
       highlight LineNrBelow   guifg=#3f444a
       highlight CursorLine    guibg=#21242b
