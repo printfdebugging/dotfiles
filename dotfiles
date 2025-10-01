@@ -484,7 +484,7 @@ for arg in "$@"; do
 
     "pam-gnupg")
         {
-            sysloginfile="/etc/pam.d/system-local-login"
+            sysloginfile="/etc/pam.d/system-auth"
             sysloginline_a='auth     optional  pam_gnupg.so store-only'
             sysloginline_b='session  optional  pam_gnupg.so'
             [ -f "$sysloginfile" ] && [ "$(grep -c "$sysloginline_a" "$sysloginfile")" -eq 0 ] && echo "$sysloginline_a" | sudo tee -a "$sysloginfile"
