@@ -49,6 +49,7 @@ for arg in "$@"; do
 
             # copy files
             fcp .zshrc "$HOME"
+            fcp .zshenv "$HOME"
             fcp .zprofile "$HOME"
             fcp .xinitrc "$HOME"
             fcp .gitconfig "$HOME"
