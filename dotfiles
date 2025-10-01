@@ -450,7 +450,7 @@ for arg in "$@"; do
             done
 
             {
-                PASSWORD_STORE_DIR="$HOME/repos/password-store"
+                PASSWORD_STORE_DIR="$directory/password-store"
                 [ -d "$PASSWORD_STORE_DIR" ] && {
                     printf "#!/bin/bash\n\ngit push && notify-send \"pushed password-store updates\"" | tee "$PASSWORD_STORE_DIR/.git/hooks/post-commit" >/dev/null 2>&1
                     chmod +x "$PASSWORD_STORE_DIR/.git/hooks/post-commit"
@@ -474,7 +474,7 @@ for arg in "$@"; do
             done
 
             {
-                LIBOCORE_DIR="$HOME/repos/core"
+                LIBOCORE_DIR="$directory/core"
                 [ -d "$LIBOCORE_DIR" ] && fcp autogen.input "$LIBOCORE_DIR"
             }
         }
