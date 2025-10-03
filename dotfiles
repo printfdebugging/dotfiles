@@ -321,6 +321,7 @@ for arg in "$@"; do
                 'tlp' \
                 'tmux' \
                 'ttf-liberation' \
+                'godot' \
                 'ttf-jetbrains-mono-nerd' \
                 'ttf-iosevka-nerd' \
                 'noto-fonts' \
