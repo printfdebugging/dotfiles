@@ -1,5 +1,7 @@
 ## dotfiles
 
+![dotfiles](assets/dotfiles.png)
+
 it's simple. just one shell script `./package` which creates bash functions.
 single file configs are stored in this repository without any folder
 hierarchy (`eg. dunst, flameshot, gtk, gdb, zsh...`) and multi file configs
