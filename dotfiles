@@ -38,6 +38,7 @@ for arg in "$@"; do
                 "$HOME/.gnupg" \
                 "$HOME/.config" \
                 "$HOME/.config/nvim" \
+                "$HOME/.config/emacs" \
                 "$HOME/.config/tmux" \
                 "$HOME/.config/mpv" \
                 "$HOME/.config/gdb" \
@@ -69,6 +70,8 @@ for arg in "$@"; do
             fcp kwalletrc "$HOME/.config"
             fcp mimeapps.list "$HOME/.config"
             fcp init.lua "$HOME/.config/nvim"
+            fcp init.el "$HOME/.config/emacs"
+            fcp config.org "$HOME/.config/emacs"
             fcp tmux.conf "$HOME/.config/tmux"
             fcp input.conf "$HOME/.config/mpv"
             fcp mpv.conf "$HOME/.config/mpv"
@@ -272,6 +275,7 @@ for arg in "$@"; do
                 'nasm' \
                 'neon' \
                 'neovim' \
+                'emacs' \
                 'netcat' \
                 'networkmanager' \
                 'network-manager-applet' \
