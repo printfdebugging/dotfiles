@@ -1,37 +1,37 @@
+#+TITLE:  Emacs Configuration
+#+AUTHOR: Sahil Gautam
+#+EMAIL:  printfdebugging@gmail.com
 
-* package repositories
+* Package Repositories
 
 #+BEGIN_SRC emacs-lisp
   (setq
    package-archives '(("GNU ELPA"     . "https://elpa.gnu.org/packages/")
-                      ("MELPA"        . "https://melpa.org/packages/")
-                      ("ORG"          . "https://orgmode.org/elpa/")
-                      ("MELPA Stable" . "https://stable.melpa.org/packages/")
-                      ("nongnu"       . "https://elpa.nongnu.org/nongnu/"))
+              ("MELPA"        . "https://melpa.org/packages/")
+              ("ORG"          . "https://orgmode.org/elpa/")
+              ("MELPA Stable" . "https://stable.melpa.org/packages/")
+              ("nongnu"       . "https://elpa.nongnu.org/nongnu/"))
    package-archive-priorities '(("GNU ELPA"     . 20)
-                                ("MELPA"        . 15)
-                                ("ORG"          . 10)
-                                ("MELPA Stable" . 5)
-                                ("nongnu"       . 0)))
+                ("MELPA"        . 15)
+                ("ORG"          . 10)
+                ("MELPA Stable" . 5)
+                ("nongnu"       . 0)))
 #+END_SRC
 
-* vim tab
+* Tabs
 
 #+BEGIN_SRC emacs-lisp
-  (use-package vim-tab-bar
-    :ensure t
-    :config
-    (vim-tab-bar-mode 1))
+;;  (use-package vim-tab-bar :ensure t :config (vim-tab-bar-mode 1))
 #+END_SRC
 
-* doom themes
+* Doom Themes
 
 #+BEGIN_SRC emacs-lisp
   (use-package doom-themes
     :ensure t
     :init
     (setq doom-themes-enable-bold t)
-    (setq	doom-themes-enable-italic t)
+    (setq    doom-themes-enable-italic t)
     :config
     (load-theme 'doom-one t))
 
@@ -42,7 +42,7 @@
     :hook (after-init . doom-modeline-mode))
 #+END_SRC
 
-* minimalist user interface
+* Minimalist User Interface
 
 #+BEGIN_SRC emacs-lisp
   (menu-bar-mode   -1)
@@ -53,28 +53,62 @@
   (defun display-startup-echo-area-message () (message ""))
 
   (setq inhibit-startup-screen  t
-        inhibit-splash-screen   t
-        inhibit-startup-message t
-        initial-scratch-message "")
+    inhibit-splash-screen   t
+    inhibit-startup-message t
+    make-backup-files       nil
+    initial-scratch-message ""
+    org-fontify-whole-heading-line nil)
 #+END_SRC
 
-* font configuration
+* Face Customization
+
+** Primary Faces
 
 #+BEGIN_SRC emacs-lisp
-  (set-face-attribute 'default nil
-  		    :family "JetBrainsMono Nerd Font"
-  		    :height 130)
-
-  (set-face-attribute 'fixed-pitch nil
-  		    :family "JetBrainsMono Nerd Font"
-  		    :height 130)
-
-  (set-face-attribute 'variable-pitch nil
-  		    :family "JetBrainsMono Nerd Font"
-  		    :height 130)
+  (dolist (face '((default        . 130)
+          (fixed-pitch    . 130)
+          (variable-pitch . 130)))
+  (set-face-attribute (car face) nil
+              :font "JetBrainsMono Nerd Font"
+              :weight 'medium
+              :height (cdr face)))
 #+END_SRC
 
-* evil mode
+** Org Mode Faces
+
+#+BEGIN_SRC emacs-lisp
+  (set-face-attribute 'org-document-title nil
+              :font "Iosevka Nerd Font"
+              :weight 'medium
+              :underline nil
+              :extend nil
+              :foreground "#51afef"
+              :height 260)
+
+  (set-face-attribute 'org-level-1 nil
+              :font "Iosevka Nerd Font"
+              :weight 'medium
+              :underline t
+              :extend t
+              :foreground "#51afef"
+              :height 260)
+
+  (set-face-attribute 'org-level-2 nil
+              :font "Iosevka Nerd Font"
+              :weight 'medium
+              :underline t
+              :extend t
+              :foreground "#a9a1e1"
+              :height 200)
+
+  (set-face-attribute 'org-level-3 nil
+              :font "Iosevka Nerd Font"
+              :weight 'medium
+              :foreground "#a9a1e1"
+              :height 140)
+#+END_SRC
+
+* Evil Mode
 
 #+BEGIN_SRC emacs-lisp
   (use-package evil
@@ -103,12 +137,13 @@
      "ls" 'consult-buffer
      "."  'find-file
      "mf" 'make-frame
+     "gh" 'magit 
      "w"  'save-buffer
      "ls"  'switch-to-buffer
      "bk"  'kill-buffer))
 #+END_SRC
 
-* emacs global keymaps
+* Emacs Global Keymaps
 
 #+BEGIN_SRC emacs-lisp
   (global-unset-key   (kbd "C-t"))
@@ -116,14 +151,7 @@
   (global-set-key     (kbd "C-c x") 'tab-close)
 #+END_SRC
 
-* hooks
-
-#+BEGIN_SRC emacs-lisp
-  (add-hook 'org-mode-hook (lambda ()
-                             (org-indent-mode)))
-#+END_SRC
-
-* vertico
+* Vertico
 
 #+BEGIN_SRC emacs-lisp
   (use-package vertico
@@ -140,9 +168,15 @@
     :after vertico
     :ensure t
     :custom
-    (marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
+    (marginalia-align 'left)
     :init
     (marginalia-mode))
+
+  (use-package nerd-icons-completion
+    :after marginalia
+    :config
+    (nerd-icons-completion-mode)
+    (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
 
   (use-package savehist
     :ensure t
@@ -160,9 +194,10 @@
   (use-package orderless
     :ensure t
     :custom
-    (completion-styles '(orderless partial-completion))
+    (completion-styles '(basic orderless partial-completion))
     (completion-category-overrides '((file (styles partial-completion))))
     (completion-category-defaults nil)
+    (orderless-component-separator "")
     (completion-pcm-leading-wildcard t))
 
   (setq window-resize-pixelwise t
@@ -170,50 +205,86 @@
 
   (use-package consult
     :ensure t)
+
+  (setq completion-in-region-function #'consult-completion-in-region)
 #+END_SRC
 
-* org bullets
+* Org Mode
+
+** Hide The Asterisk
 
 #+BEGIN_SRC emacs-lisp
-  (use-package org-bullets
-    :ensure t
-    :after org
-    :hook (org-mode . org-bullets-mode)
-    :custom
-    (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+  (defun me-org-mode-remove-stars ()
+    (font-lock-add-keywords
+    nil
+    '(("^\\*+ "
+        (0
+        (prog1 nil
+            (put-text-property (match-beginning 0) (match-end 0)
+                                'invisible t)))))))
 
-  (font-lock-add-keywords 'org-mode
-                          '(("^ *\\([-]\\) "
-                            (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+    (add-hook 'org-mode-hook #'me-org-mode-remove-stars)
 #+END_SRC
 
-* source block face customization
+** Org Source Block Indentation
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-src-tab-acts-natively nil)
+  (setq org-src-preserve-indentation nil)
+#+END_SRC
+
+** Visual Fill Column Mode
+
+#+BEGIN_SRC emacs-lisp
+  (use-package visual-fill-column
+    :init
+    (setq visual-fill-column-width 140
+        visual-fill-column-center-text t)
+    :ensure t)
+
+  (defun my/org-visual-fill ()
+    (visual-fill-column-mode 1)
+    (visual-line-mode 1))
+
+  (add-hook 'org-mode-hook 'my/org-visual-fill)
+#+END_SRC
+
+* Dired
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'dired-mode-hook (lambda ()
+    (dired-hide-details-mode)))
+#+END_SRC
+
+* Nerd Icons Dired
+
+#+BEGIN_SRC emacs-lisp
+  (use-package nerd-icons-dired
+    :ensure t
+    :preface
+    (defun my/nerd-icons-icon-for-file (file)
+        (nerd-icons-icon-for-file file
+            :height 0.9
+            :v-adjust 0.45))
+
+    (defun my/nerd-icons-icon-for-dir (dir)
+        (nerd-icons-icon-for-dir dir
+            :height 0.9
+            :v-adjust 0.45))
+    :custom
+    (nerd-icons-dired-file-icon-function #'my/nerd-icons-icon-for-file)
+    (nerd-icons-dired-dir-icon-function #'my/nerd-icons-icon-for-dir)
+    :hook ((dired-mode . nerd-icons-dired-mode)))
+#+END_SRC
+
+* Source Block Face Customization
 
 #+BEGIN_SRC emacs-lisp
   (set-face-attribute 'org-block-begin-line nil
                       :foreground "#23272e")
 #+END_SRC
 
-* TODO erc
-
-#+BEGIN_SRC emacs-lisp
-  (setq erc-server "irc.libera.chat"
-        erc-nick   "printfdebugging"
-        erc-user-full-name "Sahil Gautam"
-        erc-track-shorten-start 8
-        erc-autojoin-channels-alist '(("irc.libera.chat" "#emacs" ))
-        erc-hide-list '("JOIN" "PART" "QUIT")
-        erc-kill-buffer-on-part t
-        erc-auto-query 'bury)
-
-  (add-hook 'erc-mode-hook (lambda ()
-                             (local-set-key (kbd "C-<tab>") 'erc-track-switch-buffer)))
-
-  ;; read erc auth-source info page
-  ;; org-edit-src-content-indentation
-#+END_SRC
-
-* ligatures
+* Ligatures
 
 #+BEGIN_SRC emacs-lisp
   ;; This assumes you've installed the package via MELPA.
@@ -238,7 +309,16 @@
     (global-ligature-mode t))
 #+END_SRC
 
-* programming seutp
+* Programming Seutp
+
+** Magit
+
+#+BEGIN_SRC emacs-lisp
+  (use-package magit
+    :ensure t)
+#+END_SRC
+
+** Lsp Setup
 
 #+BEGIN_SRC emacs-lisp
   (use-package lsp-mode
@@ -250,7 +330,48 @@
     :commands (lsp lsp-deferred))
 #+END_SRC
 
-* minibuffer on top
+** Indent On <TAB>
+
+#+BEGIN_SRC emacs-lisp
+  (defun my/evil-insert-tab-or-complete ()
+    "In Evil insert mode, insert a tab if at beginning of line or before whitespace.
+     Otherwise, try completion at point."
+    (interactive)
+    (if (or (bolp)                          ;; at beginning of line
+        (looking-back "[ \t\n]" 1))     ;; or just after whitespace
+    (insert "    ")
+    (completion-at-point)))
+
+    ;; Bind it to TAB key in Evil Insert Mode
+  (with-eval-after-load 'evil
+    (define-key evil-insert-state-map (kbd "TAB") #'my/evil-insert-tab-or-complete))
+#+END_SRC
+
+** comment with 'gc'
+
+#+BEGIN_SRC emacs-lisp
+  (use-package evil-commentary
+    :ensure t
+    :config
+    (evil-commentary-mode))
+#+END_SRC
+
+** Auto Pair Open '{...}, '(...)' etc.
+
+#+BEGIN_SRC emacs-lisp
+  (electric-pair-mode)
+#+END_SRC
+
+** Snippet Engine
+
+#+BEGIN_SRC emacs-lisp
+  (use-package yasnippet
+    :ensure t
+    :config
+    (yas-global-mode))
+#+END_SRC
+
+* Minibuffer On Top
 
 #+BEGIN_SRC emacs-lisp
   ;;; mini-ontop.el --- Prevent windows from jumping on minibuffer activation -*- lexical-binding: t; -*-
