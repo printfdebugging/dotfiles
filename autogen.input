@@ -1,5 +1,5 @@
 --enable-dbgutil
---with-jdk-home=/usr/lib/jvm/java-25-openjdk
+--with-jdk-home=/usr/lib/jvm/java-17-openjdk
 --without-junit
 --without-doxygen
 --enable-ccache

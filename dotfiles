@@ -212,9 +212,7 @@ for arg in "$@"; do
                 'i3lock' \
                 'icu' \
                 'inkscape' \
-                'java-environment' \
-                'jdk-openjdk' \
-                'jre21-openjdk' \
+                'jdk17-openjdk' \
                 'junit' \
                 'lcms2' \
                 'lib32-libcap' \
