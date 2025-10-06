@@ -25,7 +25,7 @@ local options = {
   splitright = true,
   splitbelow = true,
   pumheight = 12,
-  conceallevel = 0,
+  conceallevel = 3,
   guicursor = "a:block",
   hlsearch = true,
   incsearch = true,
@@ -1295,7 +1295,6 @@ local normal_mode_keymaps = {
   { "[d", ":Lspsaga diagnostic_jump_prev<CR>" },
   { "]d", ":Lspsaga diagnostic_jump_next<CR>" },
   { "gr", ":lua vim.lsp.buf.references()<CR>" },
-
   { "<C-n>", ":cnext<CR>" },
   { "<C-p>", ":cprev<CR>" },
   { "<C-e>", ':lua require("harpoon.ui").toggle_quick_menu()<CR>' },

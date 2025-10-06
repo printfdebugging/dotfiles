@@ -38,6 +38,8 @@ for arg in "$@"; do
                 "$HOME/.gnupg" \
                 "$HOME/.config" \
                 "$HOME/.config/nvim" \
+                "$HOME/.config/nvim/after/queries/c" \
+                "$HOME/.config/nvim/after/queries/cpp" \
                 "$HOME/.config/tmux" \
                 "$HOME/.config/mpv" \
                 "$HOME/.config/gdb" \
@@ -69,6 +71,8 @@ for arg in "$@"; do
             fcp kwalletrc "$HOME/.config"
             fcp mimeapps.list "$HOME/.config"
             fcp init.lua "$HOME/.config/nvim"
+            fcp injections.scm "$HOME/.config/nvim/after/queries/c"
+            fcp injections.scm "$HOME/.config/nvim/after/queries/cpp"
             fcp tmux.conf "$HOME/.config/tmux"
             fcp input.conf "$HOME/.config/mpv"
             fcp mpv.conf "$HOME/.config/mpv"
