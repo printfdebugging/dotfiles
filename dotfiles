@@ -127,8 +127,11 @@ for arg in "$@"; do
             find "$HOME/.gnupg" -type d -exec chmod 700 {} \;
 
             # get ssh keys for github and gitlab
-            ssh-keyscan -t rsa "github.com" >>"$HOME/.ssh/known_hosts"
-            ssh-keyscan -t rsa "gitlab.com" >>"$HOME/.ssh/known_hosts"
+            {
+                ssh-keyscan -t rsa "github.com"
+                ssh-keyscan -t rsa "gitlab.com"
+                ssh-keyscan -t rsa "codeberg.org"
+            } >>"$HOME/.ssh/known_hosts"
         }
         ;;
 
@@ -435,10 +438,8 @@ for arg in "$@"; do
                 'https://gitlab.com/printfdebugging/st'
                 'https://gitlab.com/printfdebugging/dmenu'
                 'https://gitlab.com/printfdebugging/dotfiles'
-                'https://gitlab.com/printfdebugging/dotfiles'
                 'https://gitlab.com/printfdebugging/password-store'
                 'https://gitlab.com/printfdebugging/the-world-beyond'
-
             )
             for repository in "${personal_repositories[@]}"; do
                 name=$(echo "$repository" | awk -F'/' '{print $NF}')
@@ -449,6 +450,7 @@ for arg in "$@"; do
                     git remote add origin "git@gitlab.com:printfdebugging/$name.git"
                     git remote set-url --add --push origin "git@gitlab.com:printfdebugging/$name.git"
                     git remote set-url --add --push origin "git@github.com:printfdebugging/$name.git"
+                    git remote set-url --add --push origin "git@codeberg.org:printfdebugging/$name.git"
                 )
             done
 
