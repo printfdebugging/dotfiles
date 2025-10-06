@@ -37,7 +37,7 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 # system exports
 export PROJECTS_DIR="$HOME/repos"
 export PATH="$PROJECTS_DIR/bin:$PATH"
-export PASSWORD_STORE_DIR="$PROJECTS_DIR/password-store"
+export PASSWORD_STORE_DIR="$PROJECTS_DIR/passstore"
 export JOURNAL_DIR="$PROJECTS_DIR/journal"
 export PATH="$PATH:$HOME/.cargo/bin"
 export EDITOR=nvim

@@ -41,6 +41,7 @@ for arg in "$@"; do
                 "$HOME/.config/nvim/after/queries/c" \
                 "$HOME/.config/nvim/after/queries/cpp" \
                 "$HOME/.config/nvim/after/queries/glsl" \
+                "$HOME/.config/xfce4/xfconf/xfce-perchannel-xml" \
                 "$HOME/.config/tmux" \
                 "$HOME/.config/mpv" \
                 "$HOME/.config/gdb" \
@@ -66,6 +67,8 @@ for arg in "$@"; do
             fcp cool.pub "$HOME/.ssh"
             fcp config "$HOME/.ssh"
             fcp gpg-agent.conf "$HOME/.gnupg"
+            fcp thunar.xml "$HOME/.config/xfce4/xfconf/xfce-perchannel-xml"
+            fcp thunar-shares-plugin.xml "$HOME/.config/xfce4/xfconf/xfce-perchannel-xml"
             fcp gpg.conf "$HOME/.gnupg"
             fcp glade.conf "$HOME/.config"
             fcp okularrc "$HOME/.config"
@@ -431,8 +434,8 @@ for arg in "$@"; do
                 'https://github.com/printfdebugging/themes'
                 'https://github.com/printfdebugging/keybindings'
                 'https://github.com/printfdebugging/skia'
-                'https://github.com/printfdebugging/learn-opengl'
-                'https://github.com/printfdebugging/sfml-blueprints'
+                'https://github.com/printfdebugging/learngl'
+                'https://github.com/printfdebugging/nosfml'
                 'https://gitlab.com/printfdebugging/journal'
                 'https://gitlab.com/printfdebugging/website'
                 'https://gitlab.com/printfdebugging/bin'
@@ -440,8 +443,8 @@ for arg in "$@"; do
                 'https://gitlab.com/printfdebugging/st'
                 'https://gitlab.com/printfdebugging/dmenu'
                 'https://gitlab.com/printfdebugging/dotfiles'
-                'https://gitlab.com/printfdebugging/password-store'
-                'https://gitlab.com/printfdebugging/the-world-beyond'
+                'https://gitlab.com/printfdebugging/passstore'
+                'https://gitlab.com/printfdebugging/kohi'
             )
             for repository in "${personal_repositories[@]}"; do
                 name=$(echo "$repository" | awk -F'/' '{print $NF}')
@@ -457,9 +460,9 @@ for arg in "$@"; do
             done
 
             {
-                PASSWORD_STORE_DIR="$directory/password-store"
+                PASSWORD_STORE_DIR="$directory/passstore"
                 [ -d "$PASSWORD_STORE_DIR" ] && {
-                    printf "#!/bin/bash\n\ngit push && notify-send \"pushed password-store updates\"" | tee "$PASSWORD_STORE_DIR/.git/hooks/post-commit" >/dev/null 2>&1
+                    printf "#!/bin/bash\n\ngit push && notify-send \"pushed passstore updates\"" | tee "$PASSWORD_STORE_DIR/.git/hooks/post-commit" >/dev/null 2>&1
                     chmod +x "$PASSWORD_STORE_DIR/.git/hooks/post-commit"
                 }
             }
