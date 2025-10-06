@@ -18,10 +18,10 @@
                 ("nongnu"       . 0)))
 #+END_SRC
 
-* Tabs
+* TODO Tabs
 
 #+BEGIN_SRC emacs-lisp
-;;  (use-package vim-tab-bar :ensure t :config (vim-tab-bar-mode 1))
+  ;;  (use-package vim-tab-bar :ensure t :config (vim-tab-bar-mode 1))
 #+END_SRC
 
 * Doom Themes
@@ -61,7 +61,6 @@
 #+END_SRC
 
 * Face Customization
-
 ** Primary Faces
 
 #+BEGIN_SRC emacs-lisp
@@ -139,8 +138,10 @@
      "mf" 'make-frame
      "gh" 'magit 
      "w"  'save-buffer
-     "ls"  'switch-to-buffer
-     "bk"  'kill-buffer))
+     "ls" 'switch-to-buffer
+     "of" 'org-roam-node-find
+     "oi" 'org-roam-node-insert
+     "bk" 'kill-buffer))
 #+END_SRC
 
 * Emacs Global Keymaps
@@ -210,6 +211,34 @@
 #+END_SRC
 
 * Org Mode
+** List Bullets in Org Mode
+
+#+BEGIN_SRC emacs-lisp
+  ;; some lisp code to replace '-' with some unicode character.
+#+END_SRC
+
+** Org Roam
+
+#+BEGIN_SRC emacs-lisp
+  (use-package org-roam
+    :ensure t
+    :init
+    (setq org-roam-v2-ack t)
+    :custom
+    (org-roam-directory "~/repos/journal/roam")
+    :config
+    (org-roam-setup))
+
+  (setq org-roam-capture-templates '(("d" "default" plain "%?"
+        :target (file+head "${slug}.org" "#+title: ${title}\n#+email: printfdebugging@gmail.com\n")
+        :unnarrowed t)))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (use-package org-tidy
+    :ensure t
+    :hook ((org-mode . org-tidy-mode)))
+#+END_SRC
 
 ** Hide The Asterisk
 
@@ -310,7 +339,6 @@
 #+END_SRC
 
 * Programming Seutp
-
 ** Magit
 
 #+BEGIN_SRC emacs-lisp
@@ -542,3 +570,4 @@
   (mini-ontop-mode)
   ;;; mini-ontop.el ends here
 #+END_SRC
+
