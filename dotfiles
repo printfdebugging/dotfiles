@@ -87,7 +87,7 @@ for arg in "$@"; do
             fcp flameshot.ini "$HOME/.config/flameshot"
             fcp dunstrc "$HOME/.config/dunst"
             fcp ccache.conf "$HOME/.config/ccache"
-            fcp map.jpg "$HOME/.local/share/wallpapers"
+            fcp map.png "$HOME/.local/share/wallpapers"
             fcp extensions.json "$HOME/.config/Code - OSS/User"
             fcp keybindings.json "$HOME/.config/Code - OSS/User"
             fcp settings.json "$HOME/.config/Code - OSS/User"
