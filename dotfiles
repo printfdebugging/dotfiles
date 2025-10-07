@@ -447,6 +447,7 @@ for arg in "$@"; do
                 'https://gitlab.com/printfdebugging/kohi'
             )
             for repository in "${personal_repositories[@]}"; do
+                echo -e "$GRN==>$CLR cloning $repository"
                 name=$(echo "$repository" | awk -F'/' '{print $NF}')
                 [ -d "$directory/$name" ] || git clone "$repository" "$directory/$name"
                 (
@@ -462,13 +463,14 @@ for arg in "$@"; do
             {
                 PASSWORD_STORE_DIR="$directory/passstore"
                 [ -d "$PASSWORD_STORE_DIR" ] && {
-                    printf "#!/bin/bash\n\ngit push && notify-send \"pushed passstore updates\"" | tee "$PASSWORD_STORE_DIR/.git/hooks/post-commit" >/dev/null 2>&1
+                    printf "#!/bin/bash\n\ngit push origin main && notify-send \"pushed passstore updates\"" | tee "$PASSWORD_STORE_DIR/.git/hooks/post-commit" >/dev/null 2>&1
                     chmod +x "$PASSWORD_STORE_DIR/.git/hooks/post-commit"
                 }
             }
 
             {
                 for suckless in 'dwm' 'st' 'dmenu'; do
+                    echo -e "$GRN==>$CLR building $suckless"
                     sudo make -C "$directory/$suckless" install >/dev/null 2>&1
                 done
             }
