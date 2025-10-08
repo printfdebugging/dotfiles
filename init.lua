@@ -1176,6 +1176,39 @@ function man_or_hover_doc()
   vim.cmd("Lspsaga hover_doc")
 end
 
+function follow_wiki_link()
+  -- get the current word under cursor
+  local word = vim.fn.expand("<cword>")
+  if word == nil then
+    return
+  end
+
+  -- check if a link exists
+  pcall(cmd, "helptags .")
+  if pcall(cmd, "tag " .. word) then
+    return
+  end
+
+  -- link destination
+  local sep = package.config:sub(1, 1)
+  local date = os.date("%Y" .. sep .. "%m")
+  local path = date .. sep .. word
+
+  if vim.fn.filereadable(path) == 0 then
+    local dir = vim.fn.fnamemodify(path, ":h")
+    if vim.fn.isdirectory(dir) == 0 then
+      vim.fn.mkdir(dir, "p")
+    end
+    local file = io.open(path, "w")
+    if file then
+      file:write("*" .. word .. "*\n\n\n")
+      file:write("vim:tw=70:ts=4:sw=4:et:ft=help:norl:iskeyword+=-,.:")
+      file:close()
+    end
+  end
+  vim.cmd("edit " .. vim.fn.fnameescape(path))
+end
+
 vim.g.mapleader = " "
 
 local normal_mode_leader_keymaps = {
@@ -1374,3 +1407,10 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_user_command("Help", function(opts)
   vim.cmd("tab help " .. opts.args)
 end, { nargs = "*" })
+
+vim.api.nvim_create_autocmd("Filetype", {
+  pattern = { "help" },
+  callback = function()
+    vim.keymap.set("n", "<leader>oo", follow_wiki_link)
+  end,
+})
