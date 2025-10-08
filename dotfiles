@@ -479,10 +479,17 @@ for arg in "$@"; do
                 [ -d "$directory/$name" ] || git clone "$repository" "$directory/$name"
             done
 
-            {
+            (
                 LIBOCORE_DIR="$directory/core"
                 [ -d "$LIBOCORE_DIR" ] && cp autogen.input "$LIBOCORE_DIR"
-            }
+
+                LIBOCORE_WGET_DIR="$HOME/downloads/core"
+                [ ! -d "$LIBOCORE_WGET_DIR" ] && {
+                    mkdir -p "$LIBOCORE_WGET_DIR" && cd "$LIBOCORE_WGET_DIR" || exit 1
+                    wget https://github.com/CollaboraOnline/online/releases/download/for-code-assets/core-co-25.04-assets.tar.gz
+                    tar xvf core-co-25.04-assets.tar.gz
+                }
+            )
         }
         ;;
 
