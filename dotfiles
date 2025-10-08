@@ -446,6 +446,7 @@ for arg in "$@"; do
                 'https://gitlab.com/printfdebugging/dotfiles'
                 'https://gitlab.com/printfdebugging/passstore'
                 'https://gitlab.com/printfdebugging/kohi'
+                'https://gitlab.com/printfdebugging/lox'
             )
             for repository in "${personal_repositories[@]}"; do
                 echo -e "$GRN==>$CLR cloning $repository"
