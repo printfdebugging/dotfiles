@@ -67,7 +67,6 @@ for arg in "$@"; do
             cp injections.scm "$HOME/.config/nvim/after/queries/c"
             cp injections.scm "$HOME/.config/nvim/after/queries/cpp"
             cp injections.scm "$HOME/.config/nvim/after/queries/glsl"
-            cp injections-java.scm "$HOME/.config/nvim/after/queries/java/injections.scm"
             cp tmux.conf "$HOME/.config/tmux"
             cp input.conf "$HOME/.config/mpv"
             cp mpv.conf "$HOME/.config/mpv"
