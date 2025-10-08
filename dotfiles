@@ -188,6 +188,8 @@ for arg in "$@"; do
                 'freetype2' \
                 'fzf' \
                 'gcc-libs' \
+                'bear' \
+                'maven' \
                 'gdb' \
                 'gdk-pixbuf2' \
                 'gimp' \
