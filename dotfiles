@@ -132,6 +132,7 @@ for arg in "$@"; do
 
     "packages")
         {
+            sudo cp mirrorlist /etc/pacman.d
             sudo pacman -S --noconfirm \
                 'abseil-cpp' \
                 'ansible' \
@@ -558,8 +559,7 @@ for arg in "$@"; do
     "mirrorlist")
         {
             if curl -s http://127.0.0.1:9000/ | grep -qE 'core/|extra/|multilib/|lastsync|lastupdate'; then
-                sfcp mirrorlist /etc/pacman.d
-                sfcp pacman.conf /etc
+                sudo cp pacman.conf /etc
                 sudo systemctl mask reflector.service
             fi
         }
