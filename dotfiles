@@ -10,17 +10,6 @@
 RED='\033[1;31m'
 GRN='\033[1;32m'
 CLR='\033[0m'
-remote="https://gitlab.com/printfdebugging/dotfiles/-/raw/main"
-
-function fcp() {
-    [ -f "./$1" ] && cp ./"$1" "$2/$1" && echo -e "$GRN==>$CLR copied $2/$1" && return
-    curl -s -L "$remote/$1" -o "$2/$1" && echo -e "$GRN==>$CLR fetched $2/$1"
-}
-
-function sfcp() {
-    [ -f "./$1" ] && sudo cp ./"$1" "$2/$1" && echo -e "$GRN==>$CLR copied $2/$1" && return
-    sudo curl -s -L "$remote/$1" -o "$2/$1" && echo -e "$GRN==>$CLR fetched $2/$1"
-}
 
 [ "$#" -eq 0 ] && set -- \
     drives \
@@ -53,53 +42,54 @@ for arg in "$@"; do
                 "$HOME/.config/Code - OSS/User/"
 
             # copy files
-            fcp .zshrc "$HOME"
-            fcp .zshenv "$HOME"
-            fcp .zprofile "$HOME"
-            fcp .xinitrc "$HOME"
-            fcp .gitconfig "$HOME"
-            fcp .gmail.asc "$HOME"
-            fcp .proton.asc "$HOME"
-            fcp .pam-gnupg "$HOME"
-            fcp printfdebugging "$HOME/.ssh"
-            fcp printfdebugging.pub "$HOME/.ssh"
-            fcp cool "$HOME/.ssh"
-            fcp cool.pub "$HOME/.ssh"
-            fcp config "$HOME/.ssh"
-            fcp gpg-agent.conf "$HOME/.gnupg"
-            fcp thunar.xml "$HOME/.config/xfce4/xfconf/xfce-perchannel-xml"
-            fcp thunar-shares-plugin.xml "$HOME/.config/xfce4/xfconf/xfce-perchannel-xml"
-            fcp gpg.conf "$HOME/.gnupg"
-            fcp glade.conf "$HOME/.config"
-            fcp okularrc "$HOME/.config"
-            fcp kwalletrc "$HOME/.config"
-            fcp mimeapps.list "$HOME/.config"
-            fcp init.lua "$HOME/.config/nvim"
-            fcp injections.scm "$HOME/.config/nvim/after/queries/c"
-            fcp injections.scm "$HOME/.config/nvim/after/queries/cpp"
-            fcp injections.scm "$HOME/.config/nvim/after/queries/glsl"
-            fcp tmux.conf "$HOME/.config/tmux"
-            fcp input.conf "$HOME/.config/mpv"
-            fcp mpv.conf "$HOME/.config/mpv"
-            fcp gdbinit "$HOME/.config/gdb"
-            fcp settings.ini "$HOME/.config/gtk-3.0"
-            fcp qt6ct.conf "$HOME/.config/qt6ct"
-            fcp flameshot.ini "$HOME/.config/flameshot"
-            fcp dunstrc "$HOME/.config/dunst"
-            fcp ccache.conf "$HOME/.config/ccache"
-            fcp map.png "$HOME/.local/share/wallpapers"
-            fcp second.jpg "$HOME/.local/share/wallpapers"
-            fcp extensions.json "$HOME/.config/Code - OSS/User"
-            fcp keybindings.json "$HOME/.config/Code - OSS/User"
-            fcp settings.json "$HOME/.config/Code - OSS/User"
+            cp .zshrc "$HOME"
+            cp .zshenv "$HOME"
+            cp .zprofile "$HOME"
+            cp .xinitrc "$HOME"
+            cp .gitconfig "$HOME"
+            cp .gmail.asc "$HOME"
+            cp .proton.asc "$HOME"
+            cp .pam-gnupg "$HOME"
+            cp printfdebugging "$HOME/.ssh"
+            cp printfdebugging.pub "$HOME/.ssh"
+            cp cool "$HOME/.ssh"
+            cp cool.pub "$HOME/.ssh"
+            cp config "$HOME/.ssh"
+            cp gpg-agent.conf "$HOME/.gnupg"
+            cp thunar.xml "$HOME/.config/xfce4/xfconf/xfce-perchannel-xml"
+            cp thunar-shares-plugin.xml "$HOME/.config/xfce4/xfconf/xfce-perchannel-xml"
+            cp gpg.conf "$HOME/.gnupg"
+            cp glade.conf "$HOME/.config"
+            cp okularrc "$HOME/.config"
+            cp kwalletrc "$HOME/.config"
+            cp mimeapps.list "$HOME/.config"
+            cp init.lua "$HOME/.config/nvim"
+            cp injections.scm "$HOME/.config/nvim/after/queries/c"
+            cp injections.scm "$HOME/.config/nvim/after/queries/cpp"
+            cp injections.scm "$HOME/.config/nvim/after/queries/glsl"
+            cp injections-java.scm "$HOME/.config/nvim/after/queries/java/injections.scm"
+            cp tmux.conf "$HOME/.config/tmux"
+            cp input.conf "$HOME/.config/mpv"
+            cp mpv.conf "$HOME/.config/mpv"
+            cp gdbinit "$HOME/.config/gdb"
+            cp settings.ini "$HOME/.config/gtk-3.0"
+            cp qt6ct.conf "$HOME/.config/qt6ct"
+            cp flameshot.ini "$HOME/.config/flameshot"
+            cp dunstrc "$HOME/.config/dunst"
+            cp ccache.conf "$HOME/.config/ccache"
+            cp map.png "$HOME/.local/share/wallpapers"
+            cp second.jpg "$HOME/.local/share/wallpapers"
+            cp extensions.json "$HOME/.config/Code - OSS/User"
+            cp keybindings.json "$HOME/.config/Code - OSS/User"
+            cp settings.json "$HOME/.config/Code - OSS/User"
 
             # copy files with root previliges
-            sfcp twemoji.ttf /usr/share/fonts
-            sfcp 75-twemoji.conf /etc/fonts/conf.d
-            sfcp nginx.conf /etc/nginx
-            sfcp 00-keyboard.conf /etc/X11/xorg.conf.d
-            sfcp 30-touchpad.conf /etc/X11/xorg.conf.d
-            sfcp user-dirs.dirs "$HOME/.config"
+            sudo cp twemoji.ttf /usr/share/fonts
+            sudo cp 75-twemoji.conf /etc/fonts/conf.d
+            sudo cp nginx.conf /etc/nginx
+            sudo cp 00-keyboard.conf /etc/X11/xorg.conf.d
+            sudo cp 30-touchpad.conf /etc/X11/xorg.conf.d
+            sudo cp user-dirs.dirs "$HOME/.config"
 
             # decrypt secrets after copy
             while ! ansible-vault decrypt \
