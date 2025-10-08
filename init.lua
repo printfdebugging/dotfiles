@@ -889,10 +889,6 @@ require("lazy").setup({
           ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.confirm({ select = true })
-              -- elseif luasnip.expandable() then
-              -- 	luasnip.expand()
-              -- elseif luasnip.expand_or_jumpable() then
-              -- 	luasnip.expand_or_jump()
             else
               fallback()
             end
@@ -903,8 +899,6 @@ require("lazy").setup({
           ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_prev_item()
-              -- elseif luasnip.jumpable(-1) then
-              -- 	luasnip.jump(-1)
             else
               fallback()
             end
@@ -1180,12 +1174,20 @@ function follow_wiki_link()
   -- get the current word under cursor
   local word = vim.fn.expand("<cword>")
   if word == nil then
+    print("word under cursor nil")
     return
   end
 
   -- check if a link exists
-  pcall(cmd, "helptags .")
-  if pcall(cmd, "tag " .. word) then
+  local ok = pcall(vim.cmd, "helptags .")
+  if not ok then
+    print("helptags failed ")
+    return
+  end
+
+  ok = pcall(vim.cmd, "tag " .. word)
+  if ok then
+    print("found tag " .. word)
     return
   end
 
