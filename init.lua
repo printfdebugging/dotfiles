@@ -84,8 +84,13 @@ require("lazy").setup({
     tag = "0.1.5",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
+      local actions = require("telescope.actions")
       require("telescope").setup({
         defaults = {
+          mappings = {
+            n = { ["<C-q>"] = actions.send_to_loclist + actions.open_loclist },
+            i = { ["<C-q>"] = actions.send_to_loclist + actions.open_loclist },
+          },
           layout_strategy = "vertical",
           layout_config = {
             bottom_pane = {
@@ -1356,6 +1361,8 @@ local normal_mode_keymaps = {
   { "gr", ":lua vim.lsp.buf.references()<CR>" },
   { "<C-n>", ":cnext<CR>" },
   { "<C-p>", ":cprev<CR>" },
+  { "<M-n>", ":lnext<CR>" },
+  { "<M-p>", ":lprev<CR>" },
   { "<C-e>", ':lua require("harpoon.ui").toggle_quick_menu()<CR>' },
   { "<C-t>", ":tabnew<CR>" },
   { "<C-q>", custom_tabclose },
