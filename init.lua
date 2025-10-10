@@ -37,6 +37,8 @@ local options = {
   formatprg = "par w70",
   splitkeep = "screen",
   equalalways = true,
+  list = true,
+  listchars = "tab:⋅⋅⋅,space:⋅,trail:·",
 }
 
 local globals = {
@@ -491,38 +493,39 @@ require("lazy").setup({
       })
       vim.cmd.colorscheme("catppuccin")
       vim.cmd([[
-      highlight TabLineSel    guifg=#00222b guibg=#59c2ff
-      highlight TabLineFill   guibg=#00000000
-      highlight TabLine       guibg=#00000000
-      highlight LineNr        guifg=#d8dee9
-      highlight LineNrAbove   guifg=#3f444a
-      highlight LineNrBelow   guifg=#3f444a
-      highlight CursorLine    guibg=#21242b
-      highlight CursorLineNr  guibg=#21242b
-      highlight GitSignsAddCul guibg=#21242b guifg=#98be65
-      highlight GitSignsChangeCul guibg=#21242b guifg=#ecb37b
-      highlight GitSignsDeleteCul guibg=#21242b guifg=#f38ba8
-      highlight GitSignsChangedeleteCul guibg=#21242b guifg=#f38ba8
-      highlight GitSignsTopdeleteCul guibg=#21242b guifg=#f38ba8
-      highlight GitSignsUntrackedCul guibg=#21242b guifg=#98be65
-      highlight Visual               guibg=#3f444a guifg=none gui=bold
-      highlight @function.builtin   guifg=#51afef
-      highlight @markup.link    gui=NONE guifg=#51afef gui=underline
-      highlight @label    gui=NONE guifg=#cba6f7 gui=underline
-      highlight Comment             guifg=#5B6268
-      highlight CmpNormal           guibg=#21242b
-      highlight NormalFloat         guibg=#00000000
-      highlight FloatFooter guibg=#00000000
-      highlight FloatTitle  guibg=#00000000
-      highlight FloatBorder guibg=#00000000
-      highlight TelescopeSelection guibg=#00000000
-      highlight TelescopeSelectionCaret guibg=#00000000
-      highlight QuickFixLine guibg=#3f444a gui=BOLD
-      highlight TreesitterContextBottom gui=none guibg=#1d2126
-      highlight TreesitterContext gui=none guibg=#1d2126
-      highlight TreesitterContextLineNumberBottom gui=none guifg=#3f444a
-      highlight TreesitterContextLineNumber gui=none guifg=#3f444a
-      ]])
+        highlight TabLineSel    guifg=#00222b guibg=#59c2ff
+        highlight TabLineFill   guibg=#00000000
+        highlight TabLine       guibg=#00000000
+        highlight LineNr        guifg=#d8dee9
+        highlight LineNrAbove   guifg=#3f444a
+        highlight LineNrBelow   guifg=#3f444a
+        highlight CursorLine    guibg=#21242b
+        highlight CursorLineNr  guibg=#21242b
+        highlight GitSignsAddCul guibg=#21242b guifg=#98be65
+        highlight GitSignsChangeCul guibg=#21242b guifg=#ecb37b
+        highlight GitSignsDeleteCul guibg=#21242b guifg=#f38ba8
+        highlight GitSignsChangedeleteCul guibg=#21242b guifg=#f38ba8
+        highlight GitSignsTopdeleteCul guibg=#21242b guifg=#f38ba8
+        highlight GitSignsUntrackedCul guibg=#21242b guifg=#98be65
+        highlight Visual               guibg=#3f444a guifg=none gui=bold
+        highlight @function.builtin   guifg=#51afef
+        highlight @markup.link    gui=NONE guifg=#51afef gui=underline
+        highlight @label    gui=NONE guifg=#cba6f7 gui=underline
+        highlight Comment             guifg=#5B6268
+        highlight CmpNormal           guibg=#21242b
+        highlight NormalFloat         guibg=#00000000
+        highlight FloatFooter guibg=#00000000
+        highlight FloatTitle  guibg=#00000000
+        highlight FloatBorder guibg=#00000000
+        highlight TelescopeSelection guibg=#00000000
+        highlight TelescopeSelectionCaret guibg=#00000000
+        highlight QuickFixLine guibg=#3f444a gui=BOLD
+        highlight TreesitterContextBottom gui=none guibg=#1d2126
+        highlight TreesitterContext gui=none guibg=#1d2126
+        highlight TreesitterContextLineNumberBottom gui=none guifg=#3f444a
+        highlight TreesitterContextLineNumber gui=none guifg=#3f444a
+        highlight Whitespace guifg=#2D3952
+        ]])
       vim.cmd([[highlight! link CursorLineSign CursorLine]])
     end,
   },
@@ -1311,12 +1314,12 @@ local normal_mode_keymaps = {
         vim.cmd([[
           :cgetexpr systemlist('make -C build run')
           :copen
-        ]])
+          ]])
       elseif vim.uv.fs_stat(pwd .. "/Makefile") or vim.uv.fs_stat(pwd .. "/makefile") then
         vim.cmd([[
           :cgetexpr systemlist('make run')
           :copen
-        ]])
+          ]])
       else
         print("ERROR: neither CMakeLists.txt nor Makefile found")
       end
@@ -1330,12 +1333,12 @@ local normal_mode_keymaps = {
         vim.cmd([[
           :cgetexpr systemlist('rm -rf build')
           :copen
-        ]])
+          ]])
       elseif vim.uv.fs_stat(pwd .. "/Makefile") or vim.uv.fs_stat(pwd .. "/makefile") then
         vim.cmd([[
           :cgetexpr systemlist('make clean')
           :copen
-        ]])
+          ]])
       else
         print("ERROR: neither CMakeLists.txt nor Makefile found")
       end
