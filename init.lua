@@ -1256,7 +1256,6 @@ local normal_mode_leader_keymaps = {
   { "4", ':lua require("harpoon.ui").nav_file(4)<CR>' },
   { "5", ':lua require("harpoon.ui").nav_file(5)<CR>' },
 
-  { "oo", ":Outline<CR>" },
   { "nh", ":nohlsearch<CR>" },
   { "mp", ":MarkdownPreviewToggle<CR>" },
   { "ca", ":Lspsaga code_action<CR>" },
@@ -1442,8 +1441,13 @@ vim.api.nvim_create_user_command("Help", function(opts)
 end, { nargs = "*" })
 
 vim.api.nvim_create_autocmd("Filetype", {
-  pattern = { "help" },
   callback = function()
-    vim.keymap.set("n", "<leader>oo", follow_wiki_link)
+    if vim.bo.filetype == "help" then
+      vim.keymap.set("n", "<leader>oo", follow_wiki_link)
+    else
+      vim.keymap.set("n", "<leader>oo", function()
+        vim.cmd([[ :Outline ]])
+      end)
+    end
   end,
 })
