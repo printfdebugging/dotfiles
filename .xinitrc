@@ -5,6 +5,7 @@ flameshot &
 nm-applet &
 pasystray &
 blueman-applet &
+alarm-clock-applet &
 dunst &
 [ "$(find /sys/class/power_supply | grep -c "BAT.*")" -ne 0 ] && cbatticon &
 

@@ -381,6 +381,7 @@ for arg in "$@"; do
 
             yay -Sy --noconfirm \
                 'visual-studio-code-bin' \
+                'alarm-clock-applet' \
                 'pam-gnupg' \
                 'par' \
                 'gtypist' \
