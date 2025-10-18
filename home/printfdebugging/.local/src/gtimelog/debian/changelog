@@ -1,0 +1,218 @@
+collabora-gtimelog (0.6.0~2015.03.05~2) unstable; urgency=medium
+
+  * [7b4b586] Replace python-gnomekeyring with gir1.2-gnomekeyring-1.0.
+  * [7e29a66] Add dh-python to Build-Depends.
+  * [fb6c72c] Update Uploaders list.
+  * [cb3b9ad] Fix symlink to gtimelog.png.
+
+ -- Jordi Mallach <jordi.mallach@collabora.co.uk>  Thu, 05 Mar 2015 13:24:00 +0100
+
+collabora-gtimelog (0.6.0~2015.03.05~1) unstable; urgency=medium
+
+  [ Jack Leigh ]
+  * [c7dfece] Set a Content-Type on the timelog submission
+  * [5eb28ce] redmine#2857: Strip multiple spaces after separators
+
+  [ Olivier Crête ]
+  * [3b2b7cf] Add MANIFEST.in to include NEWS.txt in tarball
+
+  [ Jonny Lamb ]
+  * [176be9e] port to new GNOME-Keyring API from gobject-introspection
+
+ -- Jonny Lamb <jonny.lamb@collabora.co.uk>  Thu, 05 Mar 2015 10:32:04 +0100
+
+collabora-gtimelog (0.6.0~2012.10.03~1) unstable; urgency=low
+
+  [ Simon McVittie ]
+  * Rename source and binary package to collabora-gtimelog
+  * Remove patch system, which interferes with how it's maintained in practice
+
+  [ Gustavo Noronha Silva ]
+  * [de564a9] Print the error message if the file is not found, when downloading tasks
+  * [83291e8] Also leave critical region in case an exception is raised in keyring call
+  * [3d18ab6] Make sure the task list UI is updated after download
+  * [ed855bb] Replace M2Crypto usage with pygi and Soup
+  * [194821d] Fix validation of number of parts in a task description
+  * [992ecf6] Fix mislogging when work goes past the virtual midnight
+
+  [ Marco Barisione ]
+  * [85cf13e] Hide the progress window from an idle to avoid mixing threads and UI
+  * [9626343] Show how much time is left for the week if less than 7 hours
+  * [aa4b612] Ignore the very old entries for the suggestions
+
+  [ Danielle Madeley ]
+  * [9e866ba] Fix escaping for tasks containing an ampersand
+  * [34cea5f] Initial work on a gtk3 port
+  * [a093d1a] Remove threading locks
+  * [72bbaff] Fix function with wrong number of arguments
+  * [12ca77a] Reenable status icon
+  * [58e6ba3] Remove old properties from UI file
+  * [9b0d2ea] Fix another callback
+  * [4a59a09] Fix Submit Advanced Selection toggle renderers
+  * [8138e90] Remove unrequired modules
+  * [6270fd5] Pass right number of arguments to function
+
+  [ Jonny Lamb ]
+  * [e04b36e] gtimelog.ui: give the main entry focus
+  * [30110fb] make quitting the app work again with GtkApplication API
+
+  [ Lars Wirzenius ]
+  * [8abc01d] Fix build on Ubuntu 10.04.
+  * [c85aa01] Add control-q for file/quit.
+  * [0b43c1c] Revert "Add control-q for file/quit."
+
+  [ Will Thompson ]
+  * [4aff822] Add constants for task tree model
+  * [7da9d97] Add an “unavailable” column to the task model.
+  * [5ee7b82] Clarify iterating across task hierarchy
+  * [e730716] Grey out nodes in tree prefixed by '*'
+  * [f435615] Grey out all tasks below unavailable parents.
+  * [0f8d686] Grey out task nodes if all children are grey
+  * [1010da3] Hide '*'s marking unavailable tasks in task tree
+  * [05cbb5a] Add a tickybox to show/hide grey things.
+  * [94ebce1] Titlecase All Menu Items as Philip Himself Dictated
+  * [9793db1] Make double-clicking a category expand/contract it.
+  * [1d5dfec] Fix "welcome back" notifications
+  * [ba77c65] Fix a typo in a comment
+  * [f9f9020] Single-instance-ify using GtkApplication.
+  * [eee79cf] Handle Soup transport errors
+  * [7fb9fcc] Make About dialog attach to main window
+  * [e42c3fd] Remove unnecessary re-parsing of URIs
+  * [d97dbc1] Make sure error messages are valid Pango
+  * [91b0a45] “Port” password request dialog to Gtk3
+  * [3067805] Bundle up HTTP auth callback in a class
+  * [3aa4d01] Split keyring access into separate methods
+  * [72a8b1b] Split prompting for username/password to a separate method
+  * [8a6fdc0] Asyncify running password prompt dialog.
+  * [968433a] Restructure for async keyringing.
+  * [b2a8823] If the user hits cancel, don't try username/password anyway.
+  * [51cb90e] Reduce duplicate checking for gnomekeyring module
+  * [163da29] Don't associate passwords with a single path
+  * [117dd8a] Only show one password prompt at a time
+  * [31039e6] GtkGrid-ify password prompt dialog
+  * [1f75abd] Remove weird activate logic from password prompt.
+  * [5595d05] Make sure auth dialog is presented from UI thread
+  * [20929a0] Only show one Welcome Back bubble at a time
+  * [0616757] Show days worked this month (and number of weekdays)
+  * [befdfa7] Format days worked as d/h/m
+  * [ef66af6] Add a spinner to the task pane.
+  * [f009c4a] Handle unsuccessfully retrieving task list.
+  * [2e6786d] Remove edit item from task list's right-click menu
+  * [79719a0] de-duplicate code to spawn an editor
+  * [7468921] Default to LibreOffice, not OpenOffice
+  * [96e2242] Refactor spawning spreadsheet
+  * [15d212f] Create temporary files securely.
+  * [2decb99] Remove cruft from Glade file.
+  * [5c9665e] Fix test I broke when refactoring csv code
+  * [9d240e8] fix a test that's been broken for years
+
+  [ Senko Rasic ]
+  * [40eef75] don't crash if gnome keyring is not available
+
+  [ Arun Raghavan ]
+  * [d2e3d9c] Fix incorrect minute calculation in timezone
+
+  [ Nirbheek Chauhan ]
+  * [933ce33] Un-break gtimelog gnome-keyring integration for new users
+
+ -- Jo Shields <directhex@apebox.org>  Wed, 03 Oct 2012 13:09:22 +0100
+
+gtimelog (0.0+svn88-3+collabora0+jonny0+kov0) unstable; urgency=low
+
+  * Update glade patch and the rules file to match the new glade file name
+
+ -- Gustavo Noronha Silva <kov@debian.org>  Fri, 28 May 2010 11:36:02 -0300
+
+gtimelog (0.0+svn88-3+collabora0+jonny0) unstable; urgency=low
+
+  * Include my patch.
+  * Include Davyd's patch.
+
+ -- Jonny Lamb <jonny@debian.org>  Wed, 21 Jan 2009 19:36:23 +0000
+
+gtimelog (0.0+svn88-3) unstable; urgency=low
+
+  * Use my debian.org address
+  * Depend on python-eggtrayicon in preference to python-gnome2-extras
+    (closes: #485317, #418885)
+
+ -- Simon McVittie <smcv@debian.org>  Tue, 24 Jun 2008 01:35:56 +0100
+
+gtimelog (0.0+svn88-2) unstable; urgency=low
+
+  * Correctly depend on python-gnome2-extras
+
+ -- Simon McVittie <smcv@ianadd.pseudorandom.co.uk>  Thu, 20 Mar 2008 21:21:05 +0000
+
+gtimelog (0.0+svn88-1) unstable; urgency=low
+
+  * New maintainers Simon McVittie and Dafydd Harries (closes: #459596)
+  * New VCS (moved to collab-maint bzr)
+  * Incorporate bigon's changes from Ubuntu into Debian, see below
+    - Edit menu entry has an accelerator (closes: #455549)
+    - No longer depends on vim-gnome (closes: #438858)
+  * Move python and python-support to Build-Depends-Indep (not needed for
+    clean)
+  * Add debian/pyversions, which python-support wants for versioning (*sigh*)
+  * Set XS-Dm-Upload-Allowed: yes so I can upload it
+
+ -- Simon McVittie <smcv@ianadd.pseudorandom.co.uk>  Thu, 10 Jan 2008 09:22:39 +0000
+
+gtimelog (0.0+svn88-0ubuntu1) hardy; urgency=low
+
+  * New svn snapshot (LP: #124911)
+    - add accelerator to the edit menu entry
+      (thanks to Kees Cook <kees@ubuntu.com>) (Closes: #455549)
+  * Add dpatch magic in debian/patches/01-glade.dpatch and refresh
+  * Drop debian/patches/02-gtimelog.dpatch: not needed any more
+  * Drop debian/patches/03-wrap_fix.dpatch: merged upstream
+  * debian/control:
+    - Bump Standards-Version
+    - Add Homepage field
+    - Add Vcs-Svn field
+    - Drop vim-gnome dependency to Suggests (Closes: #438858)
+  * Switch to dh_pysupport instead of dh_python
+
+ -- Laurent Bigonville <bigon@ubuntu.com>  Sun, 06 Jan 2008 22:34:47 +0100
+
+gtimelog (0.0+svn65-1debian2) unstable; urgency=low
+
+  * debian/control:
+    - Depends on vim-gnome. (Closes: #357826)
+    - Set Utnubu Team as Maintainer.
+    - Update Standards-Version to 3.7.2.
+    - Set debhelper dependency to 5.
+    - Add python as Build-Depends.
+    - Depends on ${python:Depends} and not python anymore.
+  * debian/rules: add dh_python call to replace ${python:Depends}  
+  * debian/copyright: license (GPL) disclaimer added.
+  * debian/changelog:
+    - Replace gdebi word with gtimelog.
+  * debian/patches/03-wrap_fix.patch: added to improve the
+    activity mail output. Thanks mvo. (Closes: #364916)
+
+ -- Gustavo Franco <stratus@debian.org>  Sat,  8 Jul 2006 21:28:11 -0300
+
+gtimelog (0.0+svn65-1debian1) unstable; urgency=low
+
+  * First Debian release (Closes: #351075)
+  * debian/control:
+    - Standards-Version bumped up
+    - Suggests on gvim and mutt
+    - Build-Depends on dpatch added
+  * debian/gtimelog.1: manpage added.
+  * debian/patches: two patches added (icon handling related)
+  
+ -- Gustavo Franco <stratus@debian.org>  Thu,  2 Feb 2006 11:32:24 -0200
+
+gtimelog (0.0+svn42-2) hoary; urgency=low
+
+  * Fix double build problem and copyright
+
+ -- Thom May <thom@ubuntu.com>  Wed,  9 Feb 2005 14:33:39 +0000
+
+gtimelog (0.0+svn42-1) hoary; urgency=low
+
+  * First upload.
+
+ -- Thom May <thom@ubuntu.com>  Wed, 09 Feb 2005 13:43:16 +0000

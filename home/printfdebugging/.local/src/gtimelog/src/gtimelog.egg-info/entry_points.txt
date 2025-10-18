@@ -1,0 +1,5 @@
+[console_scripts]
+rltimelog = gtimelog.rltimelog:main
+
+[gui_scripts]
+gtimelog = gtimelog.main:main

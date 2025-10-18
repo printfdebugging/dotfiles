@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# GNU GPLv2, June 1991
+# Copyright (c) 2025 Sahil Gautam <printfdebugging@gmail.com>
+# See LICENSE for full license declaration
+
+dependencies=(
+    tmux
+)
+
+for dependency in "${dependencies[@]}"; do
+    if ! which "$dependency" >/dev/null 2>&1; then
+        echo "${dependency} not found" && exit 1
+    fi
+done
+
+LIST_PANES="$(tmux list-panes -F '#F')"
+PANE_COUNT="$(echo "${LIST_PANES}" | wc -l)"
+CURRENT_PANE="$(tmux display -p '#{pane_index}')"
+
+if [ "${PANE_COUNT}" = 1 ]; then
+    tmux split-window -c "#{pane_current_path}"
+    tmux resize-pane -y 30%
+    exit
+fi
+
+if [ "$CURRENT_PANE" -eq 0 ]; then
+    tmux select-pane -t:.-
+fi
+
+if [ "$CURRENT_PANE" -eq 1 ]; then
+    tmux select-pane -t:.-
+    tmux resize-pane -Z
+fi

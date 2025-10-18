@@ -1,0 +1,7 @@
+[Document]
+ChangeColors=true
+PaperColor=183,181,179
+RenderMode=Paper
+
+[Main View]
+ShowLeftPanel=false

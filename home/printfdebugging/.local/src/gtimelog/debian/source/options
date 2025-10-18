@@ -1,0 +1,5 @@
+## This file was written by cme command.
+## You can run 'cme edit dpkg' to modify this file.
+## You may also modify the content of this file with your favorite editor.
+
+extend-diff-ignore="^[^/]*[.]egg-info/"

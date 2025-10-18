@@ -1,0 +1,6 @@
+$if gdb
+    "\C-o": "finish\n"
+    "\C-i": "step\n"
+    "\C-n": "next\n"
+    "\C-r": "run\n"
+$endif

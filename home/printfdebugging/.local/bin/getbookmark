@@ -1,0 +1,56 @@
+#!/bin/bash
+
+# GNU GPLv2, June 1991
+# Copyright (c) 2025 Sahil Gautam <printfdebugging@gmail.com>
+# See LICENSE for full license declaration
+
+dependencies=(
+    notify-send
+    dmenu
+    awk
+    xclip
+    grep
+)
+
+for dependency in "${dependencies[@]}"; do
+    if ! which "$dependency" >/dev/null 2>&1; then
+        echo "${dependency} not found" && exit 1
+    fi
+done
+
+bookmark_dir=${JOURNAL_DIR-"$HOME"}
+bookmark_file="${bookmark_dir}/bookmarks.txt"
+[ -f "$bookmark_file" ] || {
+    notify-send "bookmarks" "file not found"
+    exit 1
+}
+
+# extract labels and map back to full lines
+mapfile -t labels < <(
+    awk -F'[][]' '
+        match($0, /\[[^]]+\]/) {
+            label = substr($0, RSTART + 1, RLENGTH - 2)
+            print label
+        }
+    ' "$bookmark_file"
+)
+
+# show in dmenu
+selection=$(printf "%s\n" "${labels[@]}" | dmenu -i -l 10 -vi -p "GoTo:")
+
+# exit if no selection
+[ -z "$selection" ] && exit 0
+
+# find the matching full line from the original file
+fullLine=$(grep -F "[$selection]" "$bookmark_file")
+
+# extract url inside ( )
+url=$(echo "$fullLine" | awk -F'[()]' '{print $(NF-1)}')
+
+# notify and copy
+notify-send "opening bookmark" "$url"
+echo "$url" | xclip -selection clipboard
+echo "$url" | xclip -selection primary
+
+# open in browser if url found
+[ -n "$url" ] && browser "$url"

@@ -1,0 +1,447 @@
+#!/bin/env bash
+
+home="${HOME//\/home/home}"
+
+function setup-user-directories() {
+    find "${home}" -mindepth 1 -type d -print0 | while read -r -d $'\0' dir; do
+        mkdir -p "/${dir}"
+    done
+}
+
+function setup-user-files() {
+    find "${home}" -type f -print0 | while read -r -d $'\0' file; do
+        cp "${file}" "/${file}"
+    done
+}
+
+function setup-system-directories() {
+    find etc/* -type d -print0 | while read -r -d $'\0' dir; do
+        sudo mkdir -p "/${dir}"
+    done
+}
+
+function setup-system-files() {
+    find etc/* -type f -print0 | while read -r -d $'\0' file; do
+        sudo cp "${file}" "/${file}"
+    done
+}
+
+function ensure-installed() {
+    for package in "${@}"; do
+        if ! command -v "${package}" >/dev/null 2>&1; then
+            echo "package ${package} not found!" && exit 1
+        fi
+    done
+}
+
+function unencrypt-secret-files() {
+    files=("${home}"/.ssh/* "${home}"/.{gitconfig,gmail.asc,proton.asc,pam-gnupg} "${home}"/.gnupg/*)
+    ensure-installed ansible-vault gpg
+    ansible-vault decrypt "${files[@]//home/\/home}"
+    gpg --import "/${home}/.gmail.asc"
+}
+
+function setup-system-services() {
+    sudo systemctl enable --now 'bluetooth.service' 'nginx.service' 'blueman-mechanism.service' 'libvirtd.service' 'docker.service' 'tlp.service'
+    sudo systemctl disable --now 'sshd.service'
+    sudo systemctl mask --now 'reflector.service'
+}
+
+function setup-user-groups() {
+    sudo usermod -aG libvirt,kvm,docker,network printfdebugging
+}
+
+# split into smaller  functions like install-libreoffice-dependencies etc
+function install-pacman-packages() {
+    sudo pacman -S --noconfirm \
+        'abseil-cpp' \
+        'ansible' \
+        'nginx' \
+        'ant' \
+        'apr' \
+        'base-devel' \
+        'bazelisk' \
+        'swtpm' \
+        'chafa' \
+        'ninja' \
+        'stylua' \
+        'beanshell' \
+        'blender' \
+        'pass' \
+        'pass-otp' \
+        'pam' \
+        'zbar' \
+        'blueman' \
+        'bluez' \
+        'bluez-libs' \
+        'breeze' \
+        'breeze-icons' \
+        'libsoup' \
+        'breeze-gtk' \
+        'bridge-utils' \
+        'btop' \
+        'cbatticon' \
+        'ccache' \
+        'firefox' \
+        'clang' \
+        'clucene' \
+        'cmake' \
+        'coin-or-mp' \
+        'cppunit' \
+        'ctags' \
+        'curl' \
+        'dbus-glib' \
+        'shellcheck' \
+        'desktop-file-utils' \
+        'dnsmasq' \
+        'docker' \
+        'docker-compose' \
+        'doxygen' \
+        'dunst' \
+        'extra-cmake-modules' \
+        'fastfetch' \
+        'fd' \
+        'feh' \
+        'figlet' \
+        'flameshot' \
+        'flex' \
+        'fontconfig' \
+        'freetype2' \
+        'fzf' \
+        'gcc-libs' \
+        'bear' \
+        'maven' \
+        'gdb' \
+        'gdk-pixbuf2' \
+        'gimp' \
+        'git' \
+        'glade' \
+        'glm' \
+        'go' \
+        'gobject-introspection' \
+        'gperf' \
+        'gpgme' \
+        'graphite' \
+        'gst-plugins-base-libs' \
+        'gtk3' \
+        'gtk4' \
+        'gvfs' \
+        'gvfs-mtp' \
+        'harfbuzz' \
+        'harfbuzz-icu' \
+        'hicolor-icon-theme' \
+        'hunspell' \
+        'hyphen' \
+        'i3lock' \
+        'icu' \
+        'inkscape' \
+        'jdk17-openjdk' \
+        'junit' \
+        'lcms2' \
+        'lib32-libcap' \
+        'chromium' \
+        'libabw' \
+        'libatomic_ops' \
+        'libcap' \
+        'libcap-ng' \
+        'libcdr' \
+        'libcmis' \
+        'libe-book' \
+        'libepoxy' \
+        'libepubgen' \
+        'libetonyek' \
+        'libexttextcat' \
+        'libfreehand' \
+        'libgl' \
+        'libguestfs' \
+        'libjpeg' \
+        'liblangtag' \
+        'libmspub' \
+        'libmwaw' \
+        'libmythes' \
+        'libnma' \
+        'libnumbertext' \
+        'libodfgen' \
+        'liborcus' \
+        'libpagemaker' \
+        'libpng' \
+        'libqxp' \
+        'libreoffice' \
+        'libstaroffice' \
+        'libtommath' \
+        'libvisio' \
+        'libwpd' \
+        'libwpg' \
+        'libwps' \
+        'libx11' \
+        'libxft' \
+        'libxinerama' \
+        'libxrandr' \
+        'libxslt' \
+        'libxxf86vm' \
+        'libzmf' \
+        'lld' \
+        'loupe' \
+        'lpsolve' \
+        'lua' \
+        'luarocks' \
+        'lxappearance' \
+        'man-db' \
+        'man-pages' \
+        'mariadb-libs' \
+        'mdds' \
+        'meson' \
+        'mpv' \
+        'mtpfs' \
+        'nasm' \
+        'neon' \
+        'neovim' \
+        'netcat' \
+        'networkmanager' \
+        'network-manager-applet' \
+        'nodejs' \
+        'npm' \
+        'nspr' \
+        'nss' \
+        'ntfs-3g' \
+        'obs-studio' \
+        'okular' \
+        'openbsd-netcat' \
+        'pango' \
+        'pasystray' \
+        'pavucontrol' \
+        'perf' \
+        'poco' \
+        'poppler' \
+        'postgresql-libs' \
+        'pulseaudio' \
+        'pyright' \
+        'python' \
+        'python-lxml' \
+        'python-pip' \
+        'python-polib' \
+        'python-watchdog' \
+        'qemu-full' \
+        'qt5-base' \
+        'qt6ct' \
+        'qt6-base' \
+        'redland' \
+        'ripgrep' \
+        'ruff' \
+        'sane' \
+        'seahorse' \
+        'serf' \
+        'sh' \
+        'shaderc' \
+        'shared-mime-info' \
+        'sxiv' \
+        'thunar' \
+        'thunar-media-tags-plugin' \
+        'thunar-shares-plugin' \
+        'webp-pixbuf-loader' \
+        'thunar-volman' \
+        'thunderbird' \
+        'tigervnc' \
+        'tlp' \
+        'tmux' \
+        'ttf-liberation' \
+        'godot' \
+        'ttf-jetbrains-mono-nerd' \
+        'ttf-iosevka-nerd' \
+        'noto-fonts' \
+        'tumbler' \
+        'ueberzug' \
+        'unixodbc' \
+        'unzip' \
+        'valgrind' \
+        'vde2' \
+        'vinagre' \
+        'virt-manager' \
+        'virt-viewer' \
+        'vulkan-radeon' \
+        'vulkan-tools' \
+        'wget' \
+        'xclip' \
+        'xcompmgr' \
+        'xdotool' \
+        'xf86-input-libinput' \
+        'xf86-video-amdgpu' \
+        'xf86-video-ati' \
+        'xmlsec' \
+        'xorg-server' \
+        'xorg-setxkbmap' \
+        'xorg-xauth' \
+        'xorg-xinit' \
+        'xorg-xprop' \
+        'xorg-xrandr' \
+        'xorg-xset' \
+        'xsel' \
+        'xwallpaper' \
+        'yarn' \
+        'yt-dlp' \
+        'zip' \
+        'zola' \
+        'zsh' \
+        'zsh-autosuggestions' \
+        'zsh-completions' \
+        'zsh-syntax-highlighting' \
+        'opengl-man-pages' \
+        'zxing-cpp' \
+        'firefox-dark-reader' \
+        'firefox-ublock-origin' \
+        'thunderbird-ublock-origin' \
+        'thunderbird-dark-reader' \
+        'ublock-origin' \
+        'dark-reader' \
+        'os-prober'
+}
+
+function install-aur-helper() {
+    if ! which yay >/dev/null 2>&1; then
+        mkdir -p "$HOME/.local/src" && cd "$HOME/.local/src" || exit 1
+        git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si --noconfirm
+    fi
+}
+
+function install-aur-packages() {
+    yay -Sy --noconfirm \
+        'visual-studio-code-bin' \
+        'pam-gnupg' \
+        'par' \
+        'gtypist' \
+        'light'
+}
+
+function install-collabora-gtimelog() {
+    cd "$HOME/.local/src/gtimelog" || echo "gtimelog not found!" && exit 1
+    sudo ./setup.py install
+}
+
+function install-suckless() {
+    for suckless in 'dwm' 'st' 'dmenu'; do
+        make -C "$HOME/.local/src/$suckless" install >/dev/null 2>&1
+    done
+}
+
+function setup-chormium-extensions() {
+    extensions=(
+        'cfhdojbkjhnklbpkdaibdccddilifddb'
+        'dbepggeogbaibhgnhhndojpepiihcmeb'
+        'eimadpbcbfnmbkopoojfekhnkhdbieeh'
+        'dpjamkmjmigaoobjbekmfgabipmfilij'
+        'kchgllkpfcggmdaoopkhlkbcokngahlg'
+    )
+    chromium_extensions_dir="/usr/share/chromium/extensions"
+    sudo mkdir -p "$chromium_extensions_dir"
+    for extension in "${extensions[@]}"; do
+        echo '{ "external_update_url": "https://clients2.google.com/service/update2/crx" }' | sudo tee "${chromium_extensions_dir}/${extension}.json"
+    done
+}
+
+function setup-pacman-mirror() {
+    local_folder="$HOME/downloads/archlinux"
+    remote_mirror=rsync://de.arch.mirror.kescher.at/mirror/arch/
+    [ -d "$local_folder" ] || mkdir -p "$local_folder"
+    rsync -rlv \
+        --exclude '/archive' \
+        --exclude '/community' \
+        --exclude '/community-staging' \
+        --exclude '/community-testing' \
+        --exclude '/core-debug' \
+        --exclude '/core-staging' \
+        --exclude '/core-staging-debug' \
+        --exclude '/core-testing' \
+        --exclude '/core-testing-debug' \
+        --exclude '/extra-debug' \
+        --exclude '/extra-staging' \
+        --exclude '/extra-staging-debug' \
+        --exclude '/extra-testing' \
+        --exclude '/extra-testing-debug' \
+        --exclude '/gnome-unstable' \
+        --exclude '/gnome-unstable-debug' \
+        --exclude '/images' \
+        --exclude '/iso' \
+        --exclude '/kde-unstable' \
+        --exclude '/kde-unstable-debug' \
+        --exclude '/latest' \
+        --exclude '/multilib-debug' \
+        --exclude '/multilib-staging' \
+        --exclude '/multilib-staging-debug' \
+        --exclude '/multilib-testing' \
+        --exclude '/multilib-testing-debug' \
+        --exclude '/other' \
+        --exclude '/pool/packages-debug' \
+        --exclude '/staging' \
+        --exclude '/testing' \
+        --exclude '/wsl' \
+        "${remote_mirror}" \
+        "${local_folder}"
+}
+
+function setup-zshell() {
+    chsh -s /usr/bin/zsh
+    sudo chsh -s /usr/bin/zsh
+}
+
+function setup-qemu-config() {
+    line_a='unix_sock_group = "libvirt"'
+    line_b='unix_sock_rw_perms = "0770"'
+    sudo sed -i "/$line_a/s/^#//" /etc/libvirt/libvirtd.conf
+    sudo sed -i "/$line_b/s/^#//" /etc/libvirt/libvirtd.conf
+    [ "$(sudo virsh net-info --network default | grep -c "Active:.*yes")" -ne 0 ] || sudo virsh net-start default
+    [ "$(sudo virsh net-info --network default | grep -c "Autostart:.*yes")" -ne 0 ] || sudo virsh net-autostart default
+}
+
+function setup-pam-gnupg-config() {
+    sysloginfile="/etc/pam.d/system-local-login"
+    i3lokfile="/etc/pam.d/i3lock"
+    sysloginline_a='auth     optional  pam_gnupg.so store-only'
+    sysloginline_b='session  optional  pam_gnupg.so'
+    i3line='auth     optional  pam_gnupg.so'
+    [ -f "$sysloginfile" ] && [ "$(grep -c "$sysloginline_a" "$sysloginfile")" -eq 0 ] && echo "$sysloginline_a" | sudo tee -a "$sysloginfile"
+    [ -f "$sysloginfile" ] && [ "$(grep -c "$sysloginline_b" "$sysloginfile")" -eq 0 ] && echo "$sysloginline_b" | sudo tee -a "$sysloginfile"
+    [ -f "$i3lokfile" ] && [ "$(grep -c "$i3line" "$i3lokfile")" -eq 0 ] && echo "$i3line" | sudo tee -a "$i3lokfile"
+}
+
+setup-git-known-hosts() {
+    ssh-keyscan -t rsa "github.com" "gitlab.com" "codeberg.org" >>"$HOME/.ssh/known_hosts"
+}
+
+function setup-git-repositories() {
+    declare -A passstore=(  [LOCAL]="$HOME/.password-store"   [REMOTE]='https://github.com/printfdebugging/passstore'    [PUSH_ON_COMMIT]=true)
+    declare -A vault=(      [LOCAL]="$HOME/repos/vault"       [REMOTE]='https://github.com/printfdebugging/vault')
+    declare -A playground=( [LOCAL]="$HOME/repos/playground"  [REMOTE]='https://github.com/printfdebugging/playground')
+    declare -A dotfiles=(   [LOCAL]="$HOME/repos/dotfiles"    [REMOTE]='https://github.com/printfdebugging/dotfiles')
+    declare -A themes=(     [LOCAL]="$HOME/repos/themes"      [REMOTE]='https://github.com/printfdebugging/themes')
+    declare -A keybindings=([LOCAL]="$HOME/repos/keybindings" [REMOTE]='https://github.com/printfdebugging/keybindings')
+
+    declare -A core=(       [LOCAL]="$HOME/repos/core"        [REMOTE]='https://gerrit.libreoffice.org/core'             [CHANGE_REMOTE]=false)
+    declare -A online=(     [LOCAL]="$HOME/repos/online"      [REMOTE]='https://github.com/CollaboraOnline/online'       [CHANGE_REMOTE]=false)
+    declare -A layman=(     [LOCAL]="$HOME/repos/layman"      [REMOTE]='https://github.com/nitrix/layman'                [CHANGE_REMOTE]=false)
+
+    repos=( 
+        vault playground dotfiles passstore
+        core online themes keybindings
+        layman
+    )
+
+    for repo_name in "${repos[@]}"; do
+        declare -n repo="$repo_name"
+        [ ! -d "${repo[LOCAL]}" ] && git clone "${repo[REMOTE]}" "${repo[LOCAL]}"
+        [ "${repo[CHANGE_REMOTE]}" != "false" ] && (
+            cd "${repo[LOCAL]}" || exit 1
+            name=$(echo "${repo[REMOTE]}" | awk -F'/' '{print $NF}')
+            git remote remove origin
+            git remote add origin                  "git@gitlab.com:printfdebugging/${name}.git"
+            git remote set-url --add --push origin "git@gitlab.com:printfdebugging/${name}.git"
+            git remote set-url --add --push origin "git@github.com:printfdebugging/${name}.git"
+            git remote set-url --add --push origin "git@codeberg.org:printfdebugging/${name}.git"
+        )
+        [ "${repo[PUSH_ON_COMMIT]}" == "true" ] && {
+            printf "#!/bin/bash\n\ngit push origin main && notify-send \"pushed updates\"" | tee "${repo[LOCAL]}/.git/hooks/post-commit" >/dev/null 2>&1
+            chmod +x "${repo[LOCAL]}/.git/hooks/post-commit"
+        }
+    done
+}
+
+setup-git-repositories

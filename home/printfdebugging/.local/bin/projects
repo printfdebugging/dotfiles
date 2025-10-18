@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# GNU GPLv2, June 1991
+# Copyright (c) 2025 Sahil Gautam <printfdebugging@gmail.com>
+# See LICENSE for full license declaration
+
+dependencies=(
+    fzf
+    tmux
+    "$EDITOR"
+)
+
+for dependency in "${dependencies[@]}"; do
+    if ! which "$dependency" >/dev/null 2>&1; then
+        echo "${dependency} not found" && exit 1
+    fi
+done
+
+# set the projects code directory
+projects_directory="$HOME/repos"
+
+# Customize fzf appearance
+export FZF_DEFAULT_OPTS="
+--color=marker:#d08770,fg+:#eceff4,prompt:#bf616a,hl+:#5e81ac
+--layout=reverse
+--border sharp
+--margin=0,40%,0,0
+--info=inline
+--prompt='Select a project: '
+--height=20%
+"
+
+# use fzf to select a project
+project=$(cd "$projects_directory" && ls | fzf)
+
+# Check if a selection was made
+if [[ -n "$project" ]]; then
+    # open the selected project in the editor
+    if [ "$TMUX" == "" ]; then
+        cd "$projects_directory/$project" || exit 1
+        tmux new-session "cd $projects_directory/$project && $EDITOR"
+    else
+        cd "$projects_directory/$project" || exit 1
+        $EDITOR
+    fi
+fi

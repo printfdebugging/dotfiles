@@ -1,0 +1,86 @@
+#!/bin/bash
+
+# GNU GPLv2, June 1991
+# Copyright (c) 2025 Sahil Gautam <printfdebugging@gmail.com>
+# See LICENSE for full license declaration
+
+dependencies=(
+    xdg-open
+    gpg
+)
+
+for dependency in "${dependencies[@]}"; do
+    if ! which "$dependency" >/dev/null 2>&1; then
+        echo "${dependency} not found" && exit 1
+    fi
+done
+
+XO_VAULT_DIR="$HOME/repos/vault"
+XO_VAULT_RECIPIENT="printfdebugging@gmail.com"
+XO_DECRYPTION_DIR="/tmp"
+
+function usage() {
+    echo "usage:"
+    echo "  xo open     <file>    - open an encrypted file"
+    echo "  xo add path <file>... - encrypt the file and add it to the vault"
+    echo ""
+    echo "env:"
+    echo "  XO_VAULT_DIR          -  vault location"
+    echo "  XO_VAULT_RECIPIENT    -  gpg mail"
+    echo "  XO_DECRYPTION_DIR     -  temporary decryption dir"
+    exit 0
+}
+
+[ -z "$XO_VAULT_DIR" ] && echo "XO_VAULT_DIR not defined" && usage
+[ -z "$XO_VAULT_RECIPIENT" ] && echo "XO_VAULT_RECIPIENT not defined" && usage
+[ -z "$XO_DECRYPTION_DIR" ] && echo "XO_DECRYPTION_DIR not defined" && usage
+
+function add_file() {
+    destdir="$1"
+    filepath=$(realpath "$2")
+    destpath="${destdir}/$(basename "${filepath}").gpg"
+    [ -f "${destdir}/$(basename "${filepath}")" ] && echo "${destdir}/$(basename "${filepath}.gpg") already exists." && usage
+    [ ! -f "$filepath" ] && echo "only file paths are accepted" && usage
+    [ ! -d "${destdir}" ] && mkdir -p "${destdir}"
+    gpg --encrypt --output "${destpath}" --recipient "$XO_VAULT_RECIPIENT" "$filepath"
+}
+
+function open_file() {
+    filepath=$(realpath "$1")
+    filepath=${filepath/.gpg/}
+    dest_filepath="$XO_DECRYPTION_DIR/$(basename "${filepath}")"
+    [ -f "${dest_filepath}" ] && rm "${dest_filepath}"
+    gpg --output "${dest_filepath}" --decrypt "${filepath}.gpg" && xdg-open "${dest_filepath}" && rm -rf "${dest_filepath}"
+}
+
+[ "$#" -lt 2 ] && usage
+[ ! -d "$XO_VAULT_DIR" ] && echo "vault directory not found." && usage
+
+case "$1" in
+add)
+    {
+        shift
+        directory="${1}"
+        [ -f "$(pwd)/${directory}" ] && echo "path required instead of filename." && usage
+        directory="${XO_VAULT_DIR}/${directory}"
+        [ -f "${directory}" ] && echo "${directory} already exists, and is a file." && usage
+
+        shift
+        [ "$#" -eq 0 ] && echo "filename[s] required." && usage
+
+        added_files="${*}"
+        for file in "${@}"; do
+            add_file "${directory}" "${file}"
+        done
+
+        (
+            cd "${directory}" || exit
+            git add .
+            git commit -m "added files ${added_files}"
+            git push
+        )
+    }
+    ;;
+open) shift && open_file "$@" ;;
+*) usage ;;
+esac

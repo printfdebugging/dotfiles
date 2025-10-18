@@ -1,0 +1,41 @@
+#!/bin/bash
+
+local_folder="$HOME/downloads/archlinux"
+remote_mirror=rsync://de.arch.mirror.kescher.at/mirror/arch/
+
+[ -d "$local_folder" ] || mkdir -p "$local_folder"
+
+rsync -rlv \
+    --exclude '/archive' \
+    --exclude '/community' \
+    --exclude '/community-staging' \
+    --exclude '/community-testing' \
+    --exclude '/core-debug' \
+    --exclude '/core-staging' \
+    --exclude '/core-staging-debug' \
+    --exclude '/core-testing' \
+    --exclude '/core-testing-debug' \
+    --exclude '/extra-debug' \
+    --exclude '/extra-staging' \
+    --exclude '/extra-staging-debug' \
+    --exclude '/extra-testing' \
+    --exclude '/extra-testing-debug' \
+    --exclude '/gnome-unstable' \
+    --exclude '/gnome-unstable-debug' \
+    --exclude '/images' \
+    --exclude '/iso' \
+    --exclude '/kde-unstable' \
+    --exclude '/kde-unstable-debug' \
+    --exclude '/latest' \
+    --exclude '/multilib-debug' \
+    --exclude '/multilib-staging' \
+    --exclude '/multilib-staging-debug' \
+    --exclude '/multilib-testing' \
+    --exclude '/multilib-testing-debug' \
+    --exclude '/other' \
+    --exclude '/pool/packages-debug' \
+    --exclude '/staging' \
+    --exclude '/testing' \
+    --exclude '/wsl' \
+    "${remote_mirror}" \
+    "${local_folder}"

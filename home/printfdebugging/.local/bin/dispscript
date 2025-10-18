@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# GNU GPLv2, June 1991
+# Copyright (c) 2025 Sahil Gautam <printfdebugging@gmail.com>
+# See LICENSE for full license declaration
+
+dependencies=(
+    xwallpaper
+)
+
+for dependency in "${dependencies[@]}"; do
+    if ! which "$dependency" >/dev/null 2>&1; then
+        echo "${dependency} not found" && exit 1
+    fi
+done
+
+xwallpaper --zoom "$HOME/.local/share/wallpapers/second.jpg"

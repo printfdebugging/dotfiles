@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# GNU GPLv2, June 1991
+# Copyright (c) 2025 Sahil Gautam <printfdebugging@gmail.com>
+# See LICENSE for full license declaration
+
+if [ "$OSTYPE" == "linux-gnu" ]; then
+    command -v firefox >/dev/null && firefox "$@" && exit
+    command -v chromium >/dev/null && chromium "$@" && exit
+    command -v brave >/dev/null && brave "$@" && exit
+    echo "no browser found" && exit
+fi

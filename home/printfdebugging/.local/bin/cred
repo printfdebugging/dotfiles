@@ -1,0 +1,105 @@
+#!/usr/bin/env bash
+
+# GNU GPLv2, June 1991
+# Copyright (c) 2025 Sahil Gautam <printfdebugging@gmail.com>
+# See LICENSE for full license declaration
+
+shopt -s nullglob globstar
+
+dependencies=(
+    flameshot
+    pass
+    gpg
+    dmenu
+    notify-send
+    xdotool
+    zbarimg
+)
+
+for dependency in "${dependencies[@]}"; do
+    if ! which "$dependency" >/dev/null 2>&1; then
+        echo "${dependency} not found" && exit 1
+    fi
+done
+
+function add-qr() {
+    output_file_name="/tmp/fetched-qr.png"
+    function cleanup-image() {
+        [ -f "$output_file_name" ] && rm "$output_file_name"
+    }
+
+    # take a screenshot and extract the url
+    flameshot gui --path "$output_file_name"
+    url=$(zbarimg -q "$output_file_name" | sed 's/QR-Code://')
+    if [ "$url" == "" ]; then
+        notify-send "url is required, make sure the qr is valid!"
+        cleanup-image
+        exit 1
+    fi
+
+    # ask the user for password name
+    name="$(dmenu -p "otp/" </dev/null)"
+    if [ "$name" == "" ]; then
+        notify-send "password name is required!"
+        cleanup-image
+        exit 1
+    fi
+
+    # add the password to pass
+    pass otp insert "otp/$name" <<<"$url"
+    notify-send "added $name to passwords"
+    cleanup-image
+}
+
+function type-pass() {
+    # list the password files
+    prefix=${PASSWORD_STORE_DIR-~/.password-store}
+    password_files=("$prefix"/**/*.gpg)
+    password_files=("${password_files[@]#"$prefix"/}")
+    password_files=("${password_files[@]%.gpg}")
+
+    # ask user to select password name from dmenu
+    password=$(printf '%s\n' "${password_files[@]}" | dmenu -l 10 -p "Account: ")
+    if ! [[ -n "$password" ]]; then
+        notify-send "need to select an account!"
+        exit
+    fi
+
+    # check if it's an otp or just regular password
+    pass_cmd=show
+    if pass show "$password" | grep -q '^otpauth://'; then
+        pass_cmd=otp
+    fi
+
+    # type it using xdotool
+    pass "$pass_cmd" "$password" | {
+        IFS= read -r pass
+        printf %s "$pass"
+    } | xdotool type --clearmodifiers --file -
+}
+
+function gen-pass() {
+    # ask user for password name
+    name="$(dmenu -p "generate: password/" </dev/null)"
+    if ! [[ -n "$name" ]]; then
+        notify-send "need to specify password name"
+        exit
+    fi
+
+    # generate password
+    pass generate "password/$name"
+    notify-send "successfully generated password for $name"
+}
+
+case "$1" in
+"--type") type-pass ;;
+"--add-qr") add-qr ;;
+"--gen-pass") gen-pass ;;
+*)
+    notify-send "wrong usage of cred" \
+        "use one of the following:
+1. --type: to type the password
+2. --add-qr: to add 2fa code from qr
+3. --gen-pass: to generate password"
+    ;;
+esac

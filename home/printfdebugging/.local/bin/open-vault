@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+# GNU GPLv2, June 1991
+# Copyright (c) 2025 Sahil Gautam <printfdebugging@gmail.com>
+# See LICENSE for full license declaration
+
+shopt -s nullglob globstar
+
+dependencies=(
+    xo
+    notify-send
+)
+
+for dependency in "${dependencies[@]}"; do
+    if ! which "$dependency" >/dev/null 2>&1; then
+        echo "${dependency} not found" && exit 1
+    fi
+done
+
+[ -z "$XO_VAULT_DIR" ] && echo "XO_VAULT_DIR not defined" && exit 1
+[ -z "$XO_VAULT_RECIPIENT" ] && echo "XO_VAULT_RECIPIENT not defined" && exit 1
+[ -z "$XO_DECRYPTION_DIR" ] && echo "XO_DECRYPTION_DIR not defined" && exit 1
+
+prefix=${XO_VAULT_DIR}
+encrypted_files=("$prefix"/**/*.gpg)
+encrypted_files=("${encrypted_files[@]#"$prefix"/}")
+encrypted_files=("${encrypted_files[@]%.gpg}")
+
+selected_file=$(printf '%s\n' "${encrypted_files[@]}" | dmenu -l 10 -p "Account: ")
+[ -z "$selected_file" ] && notify-send "nothing selected!" && exit 0
+
+notify-send "opening ${selected_file}" &&
+    xo open "${XO_VAULT_DIR}/${selected_file}.gpg"

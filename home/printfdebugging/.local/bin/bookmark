@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# GNU GPLv2, June 1991
+# Copyright (c) 2025 Sahil Gautam <printfdebugging@gmail.com>
+# See LICENSE for full license declaration
+
+dependencies=(
+    xdotool
+    xprop
+    awk
+    grep
+    xclip
+    notify-send
+)
+
+for dependency in "${dependencies[@]}"; do
+    if ! which "$dependency" >/dev/null 2>&1; then
+        echo "${dependency} not found" && exit 1
+    fi
+done
+
+bookmark_dir=${JOURNAL_DIR-"$HOME"}
+bookmark_file="${bookmark_dir}/bookmarks.txt"
+if [ ! -f "$bookmark_file" ]; then
+    touch "$bookmark_file"
+fi
+
+focused_window_id=$(xdotool getwindowfocus)
+window_title=$(xprop -id "$focused_window_id" | awk -F '"' '/^WM_NAME/{$2=$2; print $2}')
+window_class=$(xprop -id "$focused_window_id" | grep "WM_CLASS" | awk '{print $4}')
+
+if grep -iE "brave-browser|firefox|chromium" <<<"$window_class"; then
+    xdotool key --clearmodifiers ctrl+l key ctrl+c key Escape
+    url=$(xclip -sel clipboard -o)
+    if [ -n "$url" ]; then
+        echo "- [$window_title]($url)" >>"$bookmark_file" && notify-send -r 123455 -t 800 "Bookmarks" "$window_title\n\n$url"
+        echo "$url" | xclip -selection clipboard
+        echo "$url" | xclip -selection primary
+    fi
+fi

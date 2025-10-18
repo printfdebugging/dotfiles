@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# GNU GPLv2, June 1991
+# Copyright (c) 2025 Sahil Gautam <printfdebugging@gmail.com>
+# See LICENSE for full license declaration
+
+dependencies=(
+    xclip
+    notify-send
+    nc
+)
+
+for dependency in "${dependencies[@]}"; do
+    if ! which "$dependency" >/dev/null 2>&1; then
+        echo "${dependency} not found" && exit 1
+    fi
+done
+
+clipboard=$(xclip -o -selection clipboard)
+
+if [ -n "$clipboard" ]; then
+    notify-send "uploading from clipboard" "$clipboard"
+    url=$(echo "$clipboard" | nc termbin.com 9999)
+
+    notify-send "paste url" "$url"
+    echo "$url" | xclip -selection clipboard
+    echo "$url" | xclip -selection primary
+else
+    notify-send "clipboard empty"
+fi

@@ -1,0 +1,719 @@
+#+TITLE:  Emacs Configuration
+#+AUTHOR: Sahil Gautam
+#+EMAIL:  printfdebugging@gmail.com
+
+* Package Repositories
+
+#+BEGIN_SRC emacs-lisp
+(setq
+ package-archives '(("GNU ELPA"     . "https://elpa.gnu.org/packages/")
+          ("MELPA"        . "https://melpa.org/packages/")
+          ("ORG"          . "https://orgmode.org/elpa/")
+          ("MELPA Stable" . "https://stable.melpa.org/packages/")
+          ("nongnu"       . "https://elpa.nongnu.org/nongnu/"))
+ package-archive-priorities '(("GNU ELPA"     . 20)
+            ("MELPA"        . 15)
+            ("ORG"          . 10)
+            ("MELPA Stable" . 5)
+            ("nongnu"       . 0)))
+#+END_SRC
+
+* TODO Tabs
+
+#+BEGIN_SRC emacs-lisp
+;; (use-package vim-tab-bar
+;;   :ensure t
+;;   :config
+;;   (vim-tab-bar-mode 0))
+#+END_SRC
+
+* Doom Themes
+
+#+BEGIN_SRC emacs-lisp
+(use-package doom-themes
+  :ensure t
+  :init
+  (setq doom-themes-enable-bold t)
+  (setq    doom-themes-enable-italic t)
+  :config
+  (load-theme 'doom-one t))
+
+(use-package doom-modeline
+  :ensure t
+  :init
+  (setq doom-modeline-height 38)
+  :hook (after-init . doom-modeline-mode))
+#+END_SRC
+
+* Minimalist User Interface
+
+#+BEGIN_SRC emacs-lisp
+(menu-bar-mode   -1)
+(tool-bar-mode   -1)
+(scroll-bar-mode -1)
+(fringe-mode      8)
+(global-hl-line-mode)
+(global-display-line-numbers-mode)
+
+(defun display-startup-echo-area-message () (message ""))
+
+(setq inhibit-startup-screen  t
+  display-line-numbers-grow-only t
+  display-line-numbers-width-start t
+  inhibit-splash-screen   t
+  inhibit-startup-message t
+  make-backup-files       nil
+  initial-scratch-message ""
+  org-fontify-whole-heading-line nil)
+#+END_SRC
+
+* Face Customization
+** Primary Faces
+
+#+BEGIN_SRC emacs-lisp
+(dolist (face '((default . 130)
+        (fixed-pitch     . 130)
+        (variable-pitch  . 130)))
+(set-face-attribute (car face) nil
+            :font "JetBrainsMono Nerd Font"
+            :weight 'medium
+            :height (cdr face)))
+#+END_SRC
+
+** Org Mode Faces
+
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute 'org-document-title nil
+                    :font "JetBrainsMono Nerd Font"
+                    :foreground "#51afef"
+                    :height 270)
+(set-face-attribute 'org-level-1 nil
+                    :font "JetBrainsMono Nerd Font"
+                    :foreground "#51afef"
+                    :height 230)
+(set-face-attribute 'org-level-2 nil
+                    :font "JetBrainsMono Nerd Font"
+                    :foreground "#a9a1e1"
+                    :height 190)
+(set-face-attribute 'org-level-3 nil
+                    :font "JetBrainsMono Nerd Font"
+                    :foreground "#a9a1e1"
+                    :height 150)
+#+END_SRC
+
+* Evil Mode
+
+#+BEGIN_SRC emacs-lisp
+(use-package evil
+  :ensure t
+  :init
+  (setq evil-want-integration t)
+  (setq evil-want-keybinding nil)
+  :config
+  (evil-mode 1))
+
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :config
+  (evil-collection-init))
+
+(use-package evil-leader
+  :ensure t
+  :config
+  (evil-leader/set-leader "<SPC>")
+  (global-evil-leader-mode)
+  (evil-leader/set-key
+   ;; TODO fix this
+   "sh" 'split-window-vertically
+   "sv" 'split-window-horizontally
+   "ls" 'consult-buffer
+   "."  'find-file
+   "mf" 'make-frame
+   "gh" 'magit 
+   "w"  'save-buffer
+   "ls" 'switch-to-buffer
+   "fs" 'consult-ripgrep
+   ;; "ff" 'consult
+   ;; TODO: magit keymaps
+   ;; TODO: mail keybindings
+   ;; TODO: mail setup
+   "of" 'org-roam-node-find
+   "oi" 'org-roam-node-insert
+   "bk" 'kill-buffer))
+#+END_SRC
+
+* Emacs Global Keymaps
+
+#+BEGIN_SRC emacs-lisp
+(global-unset-key   (kbd "C-t"))
+(global-set-key     (kbd "C-c t") 'tab-new)
+(global-set-key     (kbd "C-c x") 'tab-close)
+#+END_SRC
+
+* Vertico
+
+#+BEGIN_SRC emacs-lisp
+(use-package vertico
+  :ensure t
+  :custom
+  (vertico-scroll-margin 0)
+  (vertico-count 8)
+  (vertico-resize nil)
+  (vertico-cycle t)
+  :init
+  (vertico-mode))
+
+(use-package marginalia
+  :after vertico
+  :ensure t
+  :custom
+  (marginalia-align 'left)
+  :init
+  (marginalia-mode))
+
+(use-package nerd-icons-completion
+  :after marginalia
+  :config
+  (nerd-icons-completion-mode)
+  (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
+
+(use-package savehist
+  :ensure t
+  :init
+  (savehist-mode))
+
+(use-package emacs
+  :ensure t
+  :custom
+  (context-menu-mode t)
+  (enable-recursive-minibuffers t)
+  (read-extended-command-predicate #'command-completion-default-include-p)
+  (minibuffer-prompt-properties '(read-only t cursor-intangible t face minibuffer-prompt)))
+
+(use-package orderless
+  :ensure t
+  :custom
+  (completion-styles '(basic orderless partial-completion))
+  (completion-category-overrides '((file (styles partial-completion))))
+  (completion-category-defaults nil)
+  (orderless-component-separator "")
+  (completion-pcm-leading-wildcard t))
+
+(setq window-resize-pixelwise t
+      frame-resize-pixelwise  t)
+
+(use-package consult
+  :ensure t)
+
+(setq completion-in-region-function #'consult-completion-in-region)
+#+END_SRC
+
+* Org Mode
+** Org Mode Hooks
+#+BEGIN_SRC emacs-lisp
+(add-hook 'org-mode-hook (lambda ()
+  (global-display-line-numbers-mode 0)))
+#+END_SRC
+
+** Inline Images
+
+#+BEGIN_SRC emacs-lisp
+(setq org-image-actual-width nil)
+(setq org-image-actual-width 800)
+#+END_SRC
+
+** Org Bullets
+
+#+BEGIN_SRC emacs-lisp
+(use-package org-bullets
+  :ensure t
+  :hook (org-mode . org-bullets-mode)
+        (org-mode . org-indent-mode))
+#+END_SRC
+
+** TODO List Bullets in Org Mode
+
+#+BEGIN_SRC emacs-lisp
+;; some lisp code to replace '-' with some unicode character.
+#+END_SRC
+
+** Org Roam
+
+#+BEGIN_SRC emacs-lisp
+;; (use-package org-roam
+;;   :ensure t
+;;   :init
+;;   (setq org-roam-v2-ack t)
+;;   :custom
+;;   (org-roam-directory "~/repos/journal/roam")
+;;   :config
+;;   (org-roam-setup))
+;;
+;; (setq org-roam-capture-templates '(("d" "default" plain "%?"
+;;       :target (file+head "${slug}.org" "#+title: ${title}\n#+email: printfdebugging@gmail.com\n")
+;;       :unnarrowed t)))
+#+END_SRC
+
+** Org Tidy
+
+#+BEGIN_SRC emacs-lisp
+(use-package org-tidy
+  :ensure t
+  :hook ((org-mode . org-tidy-mode)))
+#+END_SRC
+
+** Hide The Asterisk
+
+#+BEGIN_SRC emacs-lisp
+(defun me-org-mode-remove-stars ()
+  (font-lock-add-keywords
+  nil
+  '(("^\\*+ "
+      (0
+      (prog1 nil
+          (put-text-property (match-beginning 0) (match-end 0)
+                              'invisible t)))))))
+
+  ;; (add-hook 'org-mode-hook #'me-org-mode-remove-stars)
+#+END_SRC
+
+** Org Source Block Indentation
+
+#+BEGIN_SRC emacs-lisp
+(setq org-src-tab-acts-natively nil)
+(setq org-src-preserve-indentation nil)
+#+END_SRC
+
+** Visual Fill Column Mode
+
+#+BEGIN_SRC emacs-lisp
+(use-package visual-fill-column
+  :init
+  (setq visual-fill-column-width 140
+      visual-fill-column-center-text t)
+  :ensure t)
+
+(defun my/org-visual-fill ()
+  (visual-fill-column-mode 1)
+  (visual-line-mode 1))
+
+;; (add-hook 'org-mode-hook 'my/org-visual-fill)
+#+END_SRC
+
+* Dired
+
+#+BEGIN_SRC emacs-lisp
+(add-hook 'dired-mode-hook (lambda ()
+  (dired-hide-details-mode)))
+#+END_SRC
+
+* Nerd Icons Dired
+
+#+BEGIN_SRC emacs-lisp
+(use-package nerd-icons-dired
+  :ensure t
+  :preface
+  (defun my/nerd-icons-icon-for-file (file)
+      (nerd-icons-icon-for-file file
+          :height 0.9
+          :v-adjust 0.45))
+
+  (defun my/nerd-icons-icon-for-dir (dir)
+      (nerd-icons-icon-for-dir dir
+          :height 0.9
+          :v-adjust 0.45))
+  :custom
+  (nerd-icons-dired-file-icon-function #'my/nerd-icons-icon-for-file)
+  (nerd-icons-dired-dir-icon-function #'my/nerd-icons-icon-for-dir)
+  :hook ((dired-mode . nerd-icons-dired-mode)))
+#+END_SRC
+
+* Source Block Face Customization
+
+#+BEGIN_SRC emacs-lisp
+(set-face-attribute 'org-block-begin-line nil
+                    :foreground "#23272e")
+#+END_SRC
+
+* Ligatures
+
+#+BEGIN_SRC emacs-lisp
+;; This assumes you've installed the package via MELPA.
+(use-package ligature
+  :ensure t
+  :config
+  (ligature-set-ligatures 't         '("www"))
+  (ligature-set-ligatures 'eww-mode  '("ff" "fi" "ffi"))
+  (ligature-set-ligatures 'prog-mode '("|||>" "<|||" "<==>" "<!--" "####" "~~>" "***" "||=" "||>"
+                                       ":::" "::=" "=:=" "===" "==>" "=!=" "=>>" "=<<" "=/=" "!=="
+                                       "!!." ">=>" ">>=" ">>>" ">>-" ">->" "->>" "-->" "---" "-<<"
+                                       "<~~" "<~>" "<*>" "<||" "<|>" "<$>" "<==" "<=>" "<=<" "<->"
+                                       "<--" "<-<" "<<=" "<<-" "<<<" "<+>" "</>" "###" "#_(" "..<"
+                                       "..." "+++" "/==" "///" "_|_" "www" "&&" "^=" "~~" "~@" "~="
+                                       "~>" "~-" "**" "*>" "*/" "||" "|}" "|]" "|=" "|>" "|-" "{|"
+                                       "[|" "]#" "::" ":=" ":>" ":<" "$>" "==" "=>" "!=" "!!" ">:"
+                                       ">=" ">>" ">-" "-~" "-|" "->" "--" "-<" "<~" "<*" "<|" "<:"
+                                       "<$" "<=" "<>" "<-" "<<" "<+" "</" "#{" "#[" "#:" "#=" "#!"
+                                       "##" "#(" "#?" "#_" "%%" ".=" ".-" ".." ".?" "+>" "++" "?:"
+                                       "?=" "?." "??" ";;" "/*" "/=" "/>" "//" "__" "~~" "(*" "*)"
+                                       "\\\\" "://"))
+  (global-ligature-mode t))
+#+END_SRC
+
+* TODO IRC
+
+#+BEGIN_SRC emacs-lisp
+;; add channels
+#+END_SRC
+
+* Mail
+
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e/")
+(require 'mu4e)
+
+;; list of your email adresses:
+(setq mu4e-personal-addresses '("printfdebugging@gmail.com"))
+
+(setq mu4e-contexts
+    `(,(make-mu4e-context
+        :name "Gmail" ;; Give it a unique name. I recommend they start with a different letter than the second one.
+        :enter-func (lambda () (mu4e-message "Entering gmail context"))
+        :leave-func (lambda () (mu4e-message "Leaving gmail context"))
+        :match-func (lambda (msg)
+                      (when msg
+                        (string= (mu4e-message-field msg :maildir) "/printfdebugging@gmail")))
+        :vars '((user-mail-address . "printfdebugging@gmail.com")
+                (user-full-name . "Sahil Gautam")
+                (mu4e-drafts-folder . "/printfdebugging@gmail/[Gmail].Drafts")
+                (mu4e-refile-folder . "/printfdebugging@gmail/[Gmail].All Mail")
+                (mu4e-sent-folder . "/printfdebugging@gmail/[Gmail].Sent Mail")
+                (mu4e-trash-folder . "/printfdebugging@gmail/[Gmail].Trash")
+                ;; SMTP configuration
+                (starttls-use-gnutls . t)
+                (smtpmail-starttls-credentials . '(("smtp.gmail.com" 587 nil nil)))
+                (smtpmail-smtp-user . "printfdebugging@gmail.com")
+                (smtpmail-auth-credentials .
+                                           '(("smtp.gmail.com" 587 "printfdebugging@gmail.com" nil)))
+                (smtpmail-default-smtp-server . "smtp.gmail.com")
+                (smtpmail-smtp-server . "smtp.gmail.com")
+                (smtpmail-smtp-service . 587)))
+      ,(make-mu4e-context
+        :name "Business Address" ;; Or any other name you like.
+        :enter-func (lambda () (mu4e-message "Entering cablecar context"))
+        :leave-func (lambda () (mu4e-message "Leaving cablecar context"))
+
+        :match-func (lambda (msg)
+                      (when msg
+                        (string= (mu4e-message-field msg :maildir) "/address2@gmail")))
+        :vars '((user-mail-address . "address2@gmail.com")
+                (user-full-name . "Your Name Here")
+                (mu4e-drafts-folder . "/address2@gmail/[Gmail].Drafts")
+                (mu4e-refile-folder . "/address2@gmail/[Gmail].All Mail")
+                (mu4e-sent-folder . "/address2@gmail/[Gmail].Sent Mail")
+                (mu4e-trash-folder . "/address2@gmail/[Gmail].Trash")
+                ;; SMTP configuration
+                (starttls-use-gnutls . t)
+                (smtpmail-starttls-credentials . '(("smtp.gmail.com" 587 nil nil)))
+                (smtpmail-smtp-user . "address2@gmail.com")
+                (smtpmail-auth-credentials .
+                                           '(("smtp.gmail.com" 587 "address2@gmail.com" nil)))
+                (smtpmail-default-smtp-server . "smtp.gmail.com")
+                (smtpmail-smtp-server . "smtp.gmail.com")
+                (smtpmail-smtp-service . 587)))
+      ))
+
+(setq mu4e-maildir-shortcuts  '((:maildir "/address2@gmail/INBOX"               :key ?i)
+                              (:maildir "/address2@gmail/[Gmail].Sent Mail"   :key ?s)
+                              (:maildir "/address2@gmail/[Gmail].Drafts"      :key ?d)
+                              (:maildir "/address2@gmail/[Gmail].Trash"       :key ?t)
+                              (:maildir "/address2@gmail/[Gmail].All Mail"    :key ?a)
+                              (:maildir "/printfdebugging@gmail/INBOX"               :key ?I)
+                              (:maildir "/printfdebugging@gmail/[Gmail].Sent Mail"   :key ?S)
+                              (:maildir "/printfdebugging@gmail/[Gmail].Drafts"      :key ?D)
+                              (:maildir "/printfdebugging@gmail/[Gmail].Trash"       :key ?T)
+                              (:maildir "/printfdebugging@gmail/[Gmail].All Mail"    :key ?A)))
+#+END_SRC
+
+* Programming Seutp
+** TODO Embark
+
+#+BEGIN_SRC emacs-lisp
+;; install embark
+#+END_SRC
+
+** TODO TreeSitter
+
+#+BEGIN_SRC emacs-lisp
+;; install treesitter and treesitter-indent and langs
+#+END_SRC
+
+** Indent Bars
+
+#+BEGIN_SRC emacs-lisp
+(use-package indent-bars
+:custom
+(indent-bars-no-descend-lists t)
+(indent-bars-treesit-support t)
+(indent-bars-pad-frac 0.4)
+(indent-bars-highlight-current-depth '(:face default :blend 0.4))
+(indent-bars-zigzag nil)
+(indent-bars-display-on-blank-lines t)
+(indent-bars-pattern ".")
+(indent-bars-color-by-depth nil)
+(indent-bars-starting-column 0)
+(indent-bars-treesit-ignore-blank-lines-types '("module"))
+(indent-bars-treesit-scope '((python function_definition class_definition for_statement
+	  if_statement with_statement while_statement)))
+:hook ((python-base-mode yaml-mode prog-mode) . indent-bars-mode))
+#+END_SRC
+
+** Git Gutter
+
+#+BEGIN_SRC emacs-lisp
+(use-package git-gutter
+  :hook ((text-mode . git-gutter-mode)
+         (prog-mode . git-gutter-mode)
+         (org-mode  . git-gutter-mode))
+  :config
+  (setq git-gutter:update-interval 0.02))
+
+(use-package git-gutter-fringe
+  :config
+  (define-fringe-bitmap 'git-gutter-fr:added [224] nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:modified [224] nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240] nil nil 'bottom))
+#+END_SRC
+
+** Magit
+
+#+BEGIN_SRC emacs-lisp
+(use-package magit
+:ensure t)
+#+END_SRC
+
+** Lsp Setup
+
+#+BEGIN_SRC emacs-lisp
+(use-package lsp-mode
+:ensure t
+:init
+:hook ((python-mode . lsp-deferred)
+       (c-mode . lsp-deferred)
+       (c++-mode . lsp-deferred))
+:commands (lsp lsp-deferred))
+#+END_SRC
+
+** Indent On <TAB>
+
+#+BEGIN_SRC emacs-lisp
+(defun my/evil-insert-tab-or-complete ()
+  "In Evil insert mode, insert a tab if at beginning of line or before whitespace.
+   Otherwise, try completion at point."
+  (interactive)
+  (if (or (bolp)                          ;; at beginning of line
+      (looking-back "[ \t\n]" 1))     ;; or just after whitespace
+  (insert "    ")
+  (completion-at-point)))
+
+  ;; Bind it to TAB key in Evil Insert Mode
+(with-eval-after-load 'evil
+  (define-key evil-insert-state-map (kbd "TAB") #'my/evil-insert-tab-or-complete))
+#+END_SRC
+
+** comment with 'gc'
+
+#+BEGIN_SRC emacs-lisp
+(use-package evil-commentary
+  :ensure t
+  :config
+  (evil-commentary-mode))
+#+END_SRC
+
+** Auto Pair Open '{...}, '(...)' etc.
+
+#+BEGIN_SRC emacs-lisp
+(electric-pair-mode)
+#+END_SRC
+
+** Snippet Engine
+
+#+BEGIN_SRC emacs-lisp
+(use-package yasnippet
+  :ensure t
+  :config
+  (yas-global-mode))
+#+END_SRC
+
+* Minibuffer On Top
+
+#+BEGIN_SRC emacs-lisp
+;;; mini-ontop.el --- Prevent windows from jumping on minibuffer activation -*- lexical-binding: t; -*-
+;;
+;; Author: Henrik Kjerringvåg <henrik@kjerringvag.no>
+;; URL: https://github.com/hkjels/mini-ontop.el
+;; Version: 0.3
+;; Package-Requires: ((emacs "26.1") cl-lib)
+;; Keywords: convenience
+;;
+;; This file is not part of GNU Emacs.
+;;
+;;; Commentary:
+;;
+;; mini-ontop-mode is a minor mode that prevents Emacs from scrolling the main
+;; editing window when a multi-line minibuffer (e.g., icomplete-vertical)
+;; appears. It automatically adjusts point just enough so that Emacs doesn't
+;; force a jump in the visible buffer. Once the minibuffer session is complete,
+;; point is restored if it hasn’t been moved manually by the user.
+;;
+;; Usage:
+;;
+;;   (require 'mini-ontop)
+;;   (mini-ontop-mode 1)
+;;
+;; That’s it! With `mini-ontop-mode` enabled, your main buffer will no longer
+;; jump when you press M-x or other commands that open multi-line minibuffers,
+;; and there’s no extra configuration necessary.
+;;
+;; If you'd like to tweak its behavior, consult the code or customize the user
+;; options. But for most people, the default settings “just work.”
+;;
+;; License:
+;;
+;;  This program is free software: you can redistribute it and/or modify
+;;  it under the terms of the GNU General Public License as published by
+;;  the Free Software Foundation, either version 3 of the License, or
+;;  (at your option) any later version.
+;;
+;;  This program is distributed in the hope that it will be useful,
+;;  but WITHOUT ANY WARRANTY; without even the implied warranty of
+;;  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;;  GNU General Public License for more details.
+;;
+;;  You should have received a copy of the GNU General Public License
+;;  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+;;
+;;; Code:
+
+(require 'cl-lib)
+
+(defgroup mini-ontop nil
+  "Preempt scrolling by moving point up before the minibuffer is used."
+  :group 'convenience)
+
+(defcustom mini-ontop-ignore-predicates nil
+  "List of predicates to prevent mini-ontop behavior.
+If *any* of them returns non-nil, `mini-ontop-mode' will skip moving point up.
+
+For example, you could add a predicate that checks if `ivy-yasnippet' is active,
+or any custom condition you want to exclude from this behavior."
+  :type '(repeat function)
+  :group 'mini-ontop)
+
+(defcustom mini-ontop-lines
+  (let* ((fraction (if (floatp max-mini-window-height)
+                       max-mini-window-height
+                     (/ (float max-mini-window-height) (frame-height))))
+         (approx-lines (round (* (frame-height) fraction))))
+    (max 10 (+ 2 approx-lines)))
+  "Number of lines to jump to make sure scroll does not occur.
+
+This default attempts to estimate a good value by looking at
+`max-mini-window-height`.  If you're using a specialized completion
+framework (e.g. Ivy, Vertico, icomplete-vertical) that can
+show many lines, you may need to set this higher.
+
+Set this to a comfortably larger number than your typical
+minibuffer height to avoid any jump/flicker."
+  :type 'integer
+  :group 'mini-ontop)
+
+(defvar mini-ontop--saved-positions-stack nil
+  "Stack of saved positions.
+Each element is a list of entries for a minibuffer or which-key session.
+An entry is a list of the form (WINDOW BUFFER POINT).")
+
+(defun mini-ontop--any-predicate-p ()
+  "Return non-nil if any predicate in `mini-ontop-ignore-predicates' returns non-nil."
+  (cl-some (lambda (pred) (funcall pred)) mini-ontop-ignore-predicates))
+
+(defun mini-ontop--distance-to-bottom (win)
+  "Return the number of buffer lines between point and WIN's bottom."
+  (with-selected-window win
+    (save-excursion
+      (let ((current (line-number-at-pos (point)))
+            (bottom (progn
+                      (goto-char (window-end win t))
+                      (line-number-at-pos (point)))))
+        (max 0 (- bottom current))))))
+
+(defun mini-ontop--move-point-up-for-window (win)
+  "If WIN’s point is too close to the bottom, move it up.
+Return a cons cell (WIN . OLD-POINT) if moved, or nil otherwise."
+  (with-selected-window win
+    (let ((buf (window-buffer win)))
+      (unless (or (region-active-p)
+                  (minibufferp buf)
+                  (mini-ontop--any-predicate-p)
+                  (< (count-screen-lines (window-start) (window-end nil t) nil win)
+                     mini-ontop-lines))
+        (let ((dist (mini-ontop--distance-to-bottom win)))
+          (when (< dist mini-ontop-lines)
+            (let ((needed (- mini-ontop-lines dist))
+                  (old (point)))
+              (forward-line (- needed))
+              (cons win old))))))))
+
+(defun mini-ontop--move-point-up-for-all-windows ()
+  "Move point up in all eligible windows and return a list of saved positions.
+Each saved position is a list of the form (WINDOW BUFFER OLD-POINT)."
+  (let (saved)
+    (dolist (win (window-list))
+      (let ((res (mini-ontop--move-point-up-for-window win)))
+        (when res
+          (push (list (car res) (window-buffer win) (cdr res)) saved))))
+    saved))
+
+(defun mini-ontop--restore-points (saved)
+  "Restore points in windows using SAVED, a list of (WINDOW BUFFER POINT) entries."
+  (dolist (entry saved)
+    (cl-destructuring-bind (win buf pt) entry
+      (when (and (window-live-p win) (buffer-live-p buf))
+        (with-selected-window win
+          (with-current-buffer buf
+            (goto-char pt)))))))
+
+(defun mini-ontop--push-and-adjust (&rest _args)
+  "Push a new saved positions entry onto the stack and adjust windows."
+  (push (mini-ontop--move-point-up-for-all-windows)
+        mini-ontop--saved-positions-stack))
+
+(defun mini-ontop--pop-and-restore ()
+  "Pop the latest saved positions and restore window points."
+  (when mini-ontop--saved-positions-stack
+    (let ((saved (pop mini-ontop--saved-positions-stack)))
+      (mini-ontop--restore-points saved))))
+
+;;;###autoload
+(define-minor-mode mini-ontop-mode
+  "Global minor mode to prevent windows from jumping on minibuffer activation."
+  :global t
+  (if mini-ontop-mode
+      (progn
+        (add-hook 'minibuffer-setup-hook #'mini-ontop--push-and-adjust)
+        (add-hook 'minibuffer-exit-hook #'mini-ontop--pop-and-restore)
+        (when (featurep 'which-key)
+          (advice-add 'which-key--show-popup :before #'mini-ontop--push-and-adjust)
+          (advice-add 'which-key--hide-popup :after #'mini-ontop--pop-and-restore)))
+    (remove-hook 'minibuffer-setup-hook #'mini-ontop--push-and-adjust)
+    (remove-hook 'minibuffer-exit-hook #'mini-ontop--pop-and-restore)
+    (when (featurep 'which-key)
+      (advice-remove 'which-key--show-popup #'mini-ontop--push-and-adjust)
+      (advice-remove 'which-key--hide-popup #'mini-ontop--pop-and-restore))
+    (setq mini-ontop--saved-positions-stack nil)))
+
+(provide 'mini-ontop)
+(mini-ontop-mode)
+;;; mini-ontop.el ends here
+#+END_SRC

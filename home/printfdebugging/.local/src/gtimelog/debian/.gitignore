@@ -1,0 +1,6 @@
+.debhelper/
+debhelper-build-stamp
+collabora-gtimelog
+*.substvars
+*.debhelper
+files
