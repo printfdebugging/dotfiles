@@ -5,24 +5,28 @@ home="${HOME//\/home/home}"
 function setup-user-directories() {
     find "${home}" -mindepth 1 -type d -print0 | while read -r -d $'\0' dir; do
         mkdir -p "/${dir}"
+        echo "created /${dir}"
     done
 }
 
 function setup-user-files() {
     find "${home}" -type f -print0 | while read -r -d $'\0' file; do
         cp "${file}" "/${file}"
+        echo "copied ${file} -> /${file}"
     done
 }
 
 function setup-system-directories() {
     find etc/* usr/* -type d -print0 | while read -r -d $'\0' dir; do
         sudo mkdir -p "/${dir}"
+        echo "created /${dir}"
     done
 }
 
 function setup-system-files() {
     find etc/* usr/* -type f -print0 | while read -r -d $'\0' file; do
         sudo cp "${file}" "/${file}"
+        echo "copied ${file} -> /${file}"
     done
 }
 
@@ -36,10 +40,12 @@ function setup-system-services() {
     sudo systemctl enable --now 'bluetooth.service' 'nginx.service' 'blueman-mechanism.service' 'libvirtd.service' 'docker.service' 'tlp.service'
     sudo systemctl disable --now 'sshd.service'
     sudo systemctl mask --now 'reflector.service'
+    echo "setup-system-services"
 }
 
 function setup-user-groups() {
     sudo usermod -aG libvirt,kvm,docker,network printfdebugging
+    echo "setup-user-groups"
 }
 
 function install-pacman-packages() {
@@ -287,6 +293,7 @@ function install-pacman-packages() {
 }
 
 function install-aur-helper() {
+    echo "install-aur-helper"
     if ! which yay >/dev/null 2>&1; then
         mkdir -p "$HOME/.local/src" && cd "$HOME/.local/src" || exit 1
         git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si --noconfirm
@@ -303,12 +310,16 @@ function install-aur-packages() {
 }
 
 function install-collabora-gtimelog() {
-    cd "$HOME/.local/src/gtimelog" || echo "gtimelog not found!" && exit 1
-    sudo ./setup.py install
+    echo "install collabora gtimelog"
+    if ! command -v gtimelog > /dev/null 2>&1; then
+        cd "$HOME/.local/src/gtimelog" || echo "gtimelog not found!" && exit 1
+        sudo ./setup.py install
+    fi
 }
 
 function install-suckless() {
     for suckless in 'dwm' 'st' 'dmenu'; do
+        echo "install ${suckless}"
         make -C "$HOME/.local/src/$suckless" install >/dev/null 2>&1
     done
 }
@@ -356,6 +367,7 @@ function setup-pacman-mirror() {
 function setup-zshell() {
     chsh -s /usr/bin/zsh
     sudo chsh -s /usr/bin/zsh
+    echo "setup-zshell"
 }
 
 function setup-qemu-config() {
@@ -365,6 +377,7 @@ function setup-qemu-config() {
     sudo sed -i "/$line_b/s/^#//" /etc/libvirt/libvirtd.conf
     [ "$(sudo virsh net-info --network default | grep -c "Active:.*yes")" -ne 0 ] || sudo virsh net-start default
     [ "$(sudo virsh net-info --network default | grep -c "Autostart:.*yes")" -ne 0 ] || sudo virsh net-autostart default
+    echo "setup-qemu-config"
 }
 
 function setup-pam-gnupg-config() {
@@ -376,10 +389,12 @@ function setup-pam-gnupg-config() {
     [ -f "$sysloginfile" ] && [ "$(grep -c "$sysloginline_a" "$sysloginfile")" -eq 0 ] && echo "$sysloginline_a" | sudo tee -a "$sysloginfile"
     [ -f "$sysloginfile" ] && [ "$(grep -c "$sysloginline_b" "$sysloginfile")" -eq 0 ] && echo "$sysloginline_b" | sudo tee -a "$sysloginfile"
     [ -f "$i3lokfile" ] && [ "$(grep -c "$i3line" "$i3lokfile")" -eq 0 ] && echo "$i3line" | sudo tee -a "$i3lokfile"
+    echo "setup-pam-gnupg-config"
 }
 
 setup-git-known-hosts() {
     ssh-keyscan -t rsa "github.com" "gitlab.com" "codeberg.org" >>"$HOME/.ssh/known_hosts"
+    echo "setup-git-known-hosts"
 }
 
 function setup-git-repositories() {
@@ -400,8 +415,10 @@ function setup-git-repositories() {
         layman
     )
 
+    echo "setup git repositories"
     for repo_name in "${repos[@]}"; do
         declare -n repo="$repo_name"
+        echo "setup ${repo[LOCAL]}"
         [ ! -d "${repo[LOCAL]}" ] && git clone "${repo[REMOTE]}" "${repo[LOCAL]}"
         [ "${repo[CHANGE_REMOTE]}" != "false" ] && (
             cd "${repo[LOCAL]}" || exit 1
@@ -425,10 +442,8 @@ setup-user-directories && setup-user-files
 
 # system packages
 install-pacman-packages 
-install-aur-helper && install-aur-packages
-
-# decrypt secerts
 decrypt-secret-files
+install-aur-helper && install-aur-packages
 
 # system configuration
 setup-system-services
@@ -444,4 +459,3 @@ setup-git-known-hosts && setup-git-repositories
 install-collabora-gtimelog
 install-suckless
 # setup-pacman-mirror
-
