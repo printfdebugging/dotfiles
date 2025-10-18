@@ -15,28 +15,19 @@ function setup-user-files() {
 }
 
 function setup-system-directories() {
-    find etc/* -type d -print0 | while read -r -d $'\0' dir; do
+    find etc/* usr/* -type d -print0 | while read -r -d $'\0' dir; do
         sudo mkdir -p "/${dir}"
     done
 }
 
 function setup-system-files() {
-    find etc/* -type f -print0 | while read -r -d $'\0' file; do
+    find etc/* usr/* -type f -print0 | while read -r -d $'\0' file; do
         sudo cp "${file}" "/${file}"
     done
 }
 
-function ensure-installed() {
-    for package in "${@}"; do
-        if ! command -v "${package}" >/dev/null 2>&1; then
-            echo "package ${package} not found!" && exit 1
-        fi
-    done
-}
-
-function unencrypt-secret-files() {
+function decrypt-secret-files() {
     files=("${home}"/.ssh/* "${home}"/.{gitconfig,gmail.asc,proton.asc,pam-gnupg} "${home}"/.gnupg/*)
-    ensure-installed ansible-vault gpg
     ansible-vault decrypt "${files[@]//home/\/home}"
     gpg --import "/${home}/.gmail.asc"
 }
@@ -51,7 +42,6 @@ function setup-user-groups() {
     sudo usermod -aG libvirt,kvm,docker,network printfdebugging
 }
 
-# split into smaller  functions like install-libreoffice-dependencies etc
 function install-pacman-packages() {
     sudo pacman -S --noconfirm \
         'abseil-cpp' \
@@ -323,21 +313,6 @@ function install-suckless() {
     done
 }
 
-function setup-chormium-extensions() {
-    extensions=(
-        'cfhdojbkjhnklbpkdaibdccddilifddb'
-        'dbepggeogbaibhgnhhndojpepiihcmeb'
-        'eimadpbcbfnmbkopoojfekhnkhdbieeh'
-        'dpjamkmjmigaoobjbekmfgabipmfilij'
-        'kchgllkpfcggmdaoopkhlkbcokngahlg'
-    )
-    chromium_extensions_dir="/usr/share/chromium/extensions"
-    sudo mkdir -p "$chromium_extensions_dir"
-    for extension in "${extensions[@]}"; do
-        echo '{ "external_update_url": "https://clients2.google.com/service/update2/crx" }' | sudo tee "${chromium_extensions_dir}/${extension}.json"
-    done
-}
-
 function setup-pacman-mirror() {
     local_folder="$HOME/downloads/archlinux"
     remote_mirror=rsync://de.arch.mirror.kescher.at/mirror/arch/
@@ -444,4 +419,29 @@ function setup-git-repositories() {
     done
 }
 
-setup-git-repositories
+# files and directories
+setup-system-directories && setup-system-files
+setup-user-directories && setup-user-files
+
+# system packages
+install-pacman-packages 
+install-aur-helper && install-aur-packages
+
+# decrypt secerts
+decrypt-secret-files
+
+# system configuration
+setup-system-services
+setup-user-groups
+setup-zshell
+setup-qemu-config
+setup-pam-gnupg-config
+
+# my git repositories
+setup-git-known-hosts && setup-git-repositories
+
+# build/install user projects
+install-collabora-gtimelog
+install-suckless
+# setup-pacman-mirror
+
