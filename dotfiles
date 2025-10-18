@@ -1,54 +1,62 @@
 #!/bin/env bash
 
 home="${HOME//\/home/home}"
+arrow="\033[1;32m==>\033[0m"
+small_arrow="    \033[1;32m->\033[0m"
 
 function setup-user-directories() {
+    echo -e "${arrow} setup-user-directories"
     find "${home}" -mindepth 1 -type d -print0 | while read -r -d $'\0' dir; do
         mkdir -p "/${dir}"
-        echo "created /${dir}"
+        echo -e "${small_arrow} /${dir}"
     done
 }
 
 function setup-user-files() {
+    echo -e "${arrow} setup-user-files"
     find "${home}" -type f -print0 | while read -r -d $'\0' file; do
         cp "${file}" "/${file}"
-        echo "copied ${file} -> /${file}"
+        echo -e "${small_arrow} /${file}"
     done
 }
 
 function setup-system-directories() {
+    echo -e "${arrow} setup-system-directories"
     find etc/* usr/* -type d -print0 | while read -r -d $'\0' dir; do
         sudo mkdir -p "/${dir}"
-        echo "created /${dir}"
+        echo -e "${small_arrow} /${dir}"
     done
 }
 
 function setup-system-files() {
+    echo -e "${arrow} setup-system-files"
     find etc/* usr/* -type f -print0 | while read -r -d $'\0' file; do
         sudo cp "${file}" "/${file}"
-        echo "copied ${file} -> /${file}"
+        echo -e "${small_arrow} /${file}"
     done
 }
 
 function decrypt-secret-files() {
+    echo -e "${arrow} decrypt-secret-files"
     files=("${home}"/.ssh/* "${home}"/.{gitconfig,gmail.asc,proton.asc,pam-gnupg} "${home}"/.gnupg/*)
     ansible-vault decrypt "${files[@]//home/\/home}"
     gpg --import "/${home}/.gmail.asc"
 }
 
 function setup-system-services() {
+    echo -e "${arrow} setup-system-services"
     sudo systemctl enable --now 'bluetooth.service' 'nginx.service' 'blueman-mechanism.service' 'libvirtd.service' 'docker.service' 'tlp.service'
     sudo systemctl disable --now 'sshd.service'
     sudo systemctl mask --now 'reflector.service'
-    echo "setup-system-services"
 }
 
 function setup-user-groups() {
+    echo -e "${arrow} setup-user-groups"
     sudo usermod -aG libvirt,kvm,docker,network printfdebugging
-    echo "setup-user-groups"
 }
 
 function install-pacman-packages() {
+    echo -e "${arrow} install-pacman-packages"
     sudo pacman -S --noconfirm \
         'abseil-cpp' \
         'ansible' \
@@ -293,7 +301,7 @@ function install-pacman-packages() {
 }
 
 function install-aur-helper() {
-    echo "install-aur-helper"
+    echo -e "${arrow} install-aur-helper"
     if ! which yay >/dev/null 2>&1; then
         mkdir -p "$HOME/.local/src" && cd "$HOME/.local/src" || exit 1
         git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -si --noconfirm
@@ -301,6 +309,7 @@ function install-aur-helper() {
 }
 
 function install-aur-packages() {
+    echo -e "${arrow} install-aur-packages"
     yay -Sy --noconfirm \
         'visual-studio-code-bin' \
         'pam-gnupg' \
@@ -310,16 +319,14 @@ function install-aur-packages() {
 }
 
 function install-collabora-gtimelog() {
-    echo "install collabora gtimelog"
-    if ! command -v gtimelog > /dev/null 2>&1; then
-        cd "$HOME/.local/src/gtimelog" || echo "gtimelog not found!" && exit 1
-        sudo ./setup.py install
-    fi
+    echo -e "${arrow} install-collabora-gtimelog"
+    cd "$HOME/.local/src/gtimelog" && sudo ./setup.py install > /dev/null 2>&1;
 }
 
 function install-suckless() {
+    echo -e "${arrow} install-suckless"
     for suckless in 'dwm' 'st' 'dmenu'; do
-        echo "install ${suckless}"
+        echo -e "${small_arrow} ${suckless}"
         make -C "$HOME/.local/src/$suckless" install >/dev/null 2>&1
     done
 }
@@ -365,9 +372,9 @@ function setup-pacman-mirror() {
 }
 
 function setup-zshell() {
+    echo -e "${arrow} setup-zshell"
     chsh -s /usr/bin/zsh
     sudo chsh -s /usr/bin/zsh
-    echo "setup-zshell"
 }
 
 function setup-qemu-config() {
@@ -377,7 +384,7 @@ function setup-qemu-config() {
     sudo sed -i "/$line_b/s/^#//" /etc/libvirt/libvirtd.conf
     [ "$(sudo virsh net-info --network default | grep -c "Active:.*yes")" -ne 0 ] || sudo virsh net-start default
     [ "$(sudo virsh net-info --network default | grep -c "Autostart:.*yes")" -ne 0 ] || sudo virsh net-autostart default
-    echo "setup-qemu-config"
+    echo -e "${arrow} setup-qemu-config"
 }
 
 function setup-pam-gnupg-config() {
@@ -389,12 +396,12 @@ function setup-pam-gnupg-config() {
     [ -f "$sysloginfile" ] && [ "$(grep -c "$sysloginline_a" "$sysloginfile")" -eq 0 ] && echo "$sysloginline_a" | sudo tee -a "$sysloginfile"
     [ -f "$sysloginfile" ] && [ "$(grep -c "$sysloginline_b" "$sysloginfile")" -eq 0 ] && echo "$sysloginline_b" | sudo tee -a "$sysloginfile"
     [ -f "$i3lokfile" ] && [ "$(grep -c "$i3line" "$i3lokfile")" -eq 0 ] && echo "$i3line" | sudo tee -a "$i3lokfile"
-    echo "setup-pam-gnupg-config"
+    echo -e "${arrow} setup-pam-gnupg-config"
 }
 
 setup-git-known-hosts() {
     ssh-keyscan -t rsa "github.com" "gitlab.com" "codeberg.org" >>"$HOME/.ssh/known_hosts"
-    echo "setup-git-known-hosts"
+    echo -e "${arrow} setup-git-known-hosts"
 }
 
 function setup-git-repositories() {
@@ -411,18 +418,19 @@ function setup-git-repositories() {
 
     repos=( 
         vault playground dotfiles passstore
-        core online themes keybindings
+        # core online themes keybindings
         layman
     )
 
-    echo "setup git repositories"
+    echo -e "${arrow} setup-git-repositories"
     for repo_name in "${repos[@]}"; do
-        declare -n repo="$repo_name"
-        echo "setup ${repo[LOCAL]}"
-        [ ! -d "${repo[LOCAL]}" ] && git clone "${repo[REMOTE]}" "${repo[LOCAL]}"
+        declare -n repo="${repo_name}"
+        name=$(echo "${repo[REMOTE]}" | awk -F'/' '{print $NF}')
+        [ -d "${repo[LOCAL]}" ] && echo -e "${small_arrow} ${name} exists"
+        [ ! -d "${repo[LOCAL]}" ] && git clone "${repo[REMOTE]}" "${repo[LOCAL]}" > /dev/null 2>&1 && echo -e "${small_arrow} ${name} cloned"
         [ "${repo[CHANGE_REMOTE]}" != "false" ] && (
             cd "${repo[LOCAL]}" || exit 1
-            name=$(echo "${repo[REMOTE]}" | awk -F'/' '{print $NF}')
+            echo -e "${small_arrow} ${name} setup remotes"
             git remote remove origin
             git remote add origin                  "git@gitlab.com:printfdebugging/${name}.git"
             git remote set-url --add --push origin "git@gitlab.com:printfdebugging/${name}.git"
@@ -430,6 +438,7 @@ function setup-git-repositories() {
             git remote set-url --add --push origin "git@codeberg.org:printfdebugging/${name}.git"
         )
         [ "${repo[PUSH_ON_COMMIT]}" == "true" ] && {
+            echo -e "${small_arrow} ${name} setup hooks/post-commit -> push"
             printf "#!/bin/bash\n\ngit push origin main && notify-send \"pushed updates\"" | tee "${repo[LOCAL]}/.git/hooks/post-commit" >/dev/null 2>&1
             chmod +x "${repo[LOCAL]}/.git/hooks/post-commit"
         }
@@ -437,7 +446,7 @@ function setup-git-repositories() {
 }
 
 # files and directories
-setup-system-directories && setup-system-files
+# setup-system-directories && setup-system-files
 setup-user-directories && setup-user-files
 
 # system packages
@@ -452,7 +461,7 @@ setup-zshell
 setup-qemu-config
 setup-pam-gnupg-config
 
-# my git repositories
+# git repositories
 setup-git-known-hosts && setup-git-repositories
 
 # build/install user projects
